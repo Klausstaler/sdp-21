@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.9375532289243634 -0.33697687306867474 0.08625850653911339 0.31694835436806573
-  position 3.1138695377493075 0.9625341120744277 3.6700586441370966
+  orientation -0.9550950786789378 -0.279793718775017 0.0975134124996169 0.3107750244801718
+  position 3.160576109627826 0.962534112074428 3.6642027378944113
 }
 TexturedBackground {
 }
@@ -63,6 +63,8 @@ Robot {
         }
         PositionSensor {
           name "joint_1_sensor"
+          noise 0.000349066
+          resolution 9.58252e-05
         }
       ]
       endPoint Solid {
@@ -101,6 +103,8 @@ Robot {
               }
               PositionSensor {
                 name "joint_2_sensor"
+                noise 0.000349066
+                resolution 9.58252e-05
               }
             ]
             endPoint Solid {
@@ -140,6 +144,8 @@ Robot {
                     }
                     PositionSensor {
                       name "joint_3_sensor"
+                      noise 0.000349066
+                      resolution 9.58252e-05
                     }
                   ]
                   endPoint Solid {
@@ -178,6 +184,8 @@ Robot {
                           }
                           PositionSensor {
                             name "joint_4_sensor"
+                            noise 0.000349066
+                            resolution 9.58252e-05
                           }
                         ]
                         endPoint Solid {
@@ -262,6 +270,8 @@ Robot {
                                       }
                                       PositionSensor {
                                         name "joint_6_sensor"
+                                        noise 0.000349066
+                                        resolution 9.58252e-05
                                       }
                                     ]
                                     endPoint Solid {
