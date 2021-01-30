@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.910962099229757 -0.4108471327987458 -0.03677889663875115 0.5889270913167581
-  position 2.979967040599811 1.927554025784385 3.1812211275747293
+  orientation -0.9375532289243634 -0.33697687306867474 0.08625850653911339 0.31694835436806573
+  position 3.1138695377493075 0.9625341120744277 3.6700586441370966
 }
 TexturedBackground {
 }
@@ -184,6 +184,13 @@ Robot {
                           translation 0.258 0 0.135
                           rotation -0.9999999999999999 0 0 5.647112306971761e-05
                           children [
+                            Camera {
+                              translation 0.48 0.082 0
+                              rotation 0 1 0 -1.5707953071795862
+                              name "arm_camera"
+                              width 512
+                              height 512
+                            }
                             Shape {
                               appearance PBRAppearance {
                                 baseColor 0.737255 0.34902 0.160784
@@ -264,9 +271,10 @@ Robot {
                                         DEF ROBOT_BOX_CONNECTOR Connector {
                                           rotation 0 1 0 1.5708
                                           name "robot_box_connector"
+                                          model "suction"
                                           locked TRUE
                                           type "active"
-                                          distanceTolerance 0.015
+                                          distanceTolerance 0.03
                                           snap FALSE
                                         }
                                         Shape {
@@ -405,48 +413,57 @@ Robot {
   supervisor TRUE
 }
 DEF BOX Solid {
-  translation 3.6794 0.199608 0.999896
+  translation 3.6794 0.199608 0.9999
   rotation 1.3876184289500429e-05 -1.3876184289489106e-05 0.9999999998074516 -1.5707963269874456
   children [
+    Transform {
+      translation -0.08 -0.2 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0.8
+            }
+            texture ImageTexture {
+              url [
+                "textures/qrcode_42.png"
+              ]
+            }
+          }
+          geometry Box {
+            size 0.1 0.01 0.1
+          }
+        }
+      ]
+    }
     DEF CONNECTOR_BOX1 Connector {
       translation 0 -0.195 -6.97908e-07
       rotation 1 0 0 1.5708
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 -1.00837e-06 0.195
-      rotation -1 0 0 -5.307179586466759e-06
+      translation -0.1 -0.195648 0.0899974
+      rotation -1 0 0 -1.578
       name "connector(1)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 0.195 7.3464e-07
-      rotation 1 0 0 -1.5707953071795862
+      translation 0.07 -0.195 0
+      rotation 1 0 0 1.5708
       name "connector(2)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 2.69848e-13 -0.195
-      rotation 1 0 0 -3.1415853071795863
+      translation -0.08 -0.195 0
+      rotation 1 0 0 1.578
       name "connector(3)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
