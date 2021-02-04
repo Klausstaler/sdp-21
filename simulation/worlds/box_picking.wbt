@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.910962099229757 -0.4108471327987458 -0.03677889663875115 0.5889270913167581
-  position 2.979967040599811 1.927554025784385 3.1812211275747293
+  orientation -0.9550950786789378 -0.279793718775017 0.0975134124996169 0.3107750244801718
+  position 3.160576109627826 0.962534112074428 3.6642027378944113
 }
 TexturedBackground {
 }
@@ -63,6 +63,8 @@ Robot {
         }
         PositionSensor {
           name "joint_1_sensor"
+          noise 0.000349066
+          resolution 9.58252e-05
         }
       ]
       endPoint Solid {
@@ -101,6 +103,8 @@ Robot {
               }
               PositionSensor {
                 name "joint_2_sensor"
+                noise 0.000349066
+                resolution 9.58252e-05
               }
             ]
             endPoint Solid {
@@ -140,6 +144,8 @@ Robot {
                     }
                     PositionSensor {
                       name "joint_3_sensor"
+                      noise 0.000349066
+                      resolution 9.58252e-05
                     }
                   ]
                   endPoint Solid {
@@ -178,6 +184,8 @@ Robot {
                           }
                           PositionSensor {
                             name "joint_4_sensor"
+                            noise 0.000349066
+                            resolution 9.58252e-05
                           }
                         ]
                         endPoint Solid {
@@ -255,6 +263,8 @@ Robot {
                                       }
                                       PositionSensor {
                                         name "joint_6_sensor"
+                                        noise 0.000349066
+                                        resolution 9.58252e-05
                                       }
                                     ]
                                     endPoint Solid {
@@ -405,48 +415,37 @@ Robot {
   supervisor TRUE
 }
 DEF BOX Solid {
-  translation 3.6794 0.199608 0.999896
+  translation 3.6794 0.199608 0.9999
   rotation 1.3876184289500429e-05 -1.3876184289489106e-05 0.9999999998074516 -1.5707963269874456
   children [
     DEF CONNECTOR_BOX1 Connector {
       translation 0 -0.195 -6.97908e-07
       rotation 1 0 0 1.5708
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 -1.00837e-06 0.195
-      rotation -1 0 0 -5.307179586466759e-06
+      translation -0.1 -0.195648 0.0899974
+      rotation -1 0 0 -1.578
       name "connector(1)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 0.195 7.3464e-07
-      rotation 1 0 0 -1.5707953071795862
+      translation 0.07 -0.195 0
+      rotation 1 0 0 1.5708
       name "connector(2)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 2.69848e-13 -0.195
-      rotation 1 0 0 -3.1415853071795863
+      translation -0.08 -0.195 0
+      rotation 1 0 0 1.578
       name "connector(3)"
-      boundingObject Box {
-        size 0.4 0.4 0.01
-      }
-      locked TRUE
+      model "suction"
       type "passive"
       snap FALSE
     }
