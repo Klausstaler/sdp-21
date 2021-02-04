@@ -26,20 +26,6 @@ PROTO irb2400 [
     synchronization IS synchronization
     selfCollision IS selfCollision
     children [
-    Solid {
-      translation -0.06 -0.1 -0.03
-      children [
-        DEF base_connector Shape {
-          appearance PBRAppearance {
-            baseColor 0.737255 0.34902 0.160784
-          }
-          geometry Box {
-            size 0.8 0.8 0.1
-          }
-        }
-      ]
-      boundingObject USE base_connector
-    }
     Shape {
       appearance PBRAppearance {
         baseColor 0.737255 0.34902 0.160784
@@ -409,7 +395,7 @@ PROTO irb2400 [
       name "base"
     }
   ]
-  name "irb2400"
+  name IS name
   boundingObject DEF base_link IndexedFaceSet {
     coord Coordinate {
       point [
