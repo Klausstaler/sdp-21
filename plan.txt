@@ -1,0 +1,7 @@
+1. Client Connects to server
+2. Client waits to recieve command
+3. Server sends command
+4. client carries out command
+5. client returns status to server
+6. server processes status
+7. go back to 2
