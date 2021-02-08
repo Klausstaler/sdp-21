@@ -1,4 +1,4 @@
-from controller import Supervisor
+from controller import Supervisor, Robot
 import numpy as np
 import sys, tempfile
 from typing import Union
@@ -23,7 +23,7 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
 
 
 
-class RobotController(Supervisor):
+class RobotController(Robot):
 
 
 
@@ -49,7 +49,6 @@ class RobotController(Supervisor):
             self.arm_chain.active_links_mask[i] = False
 
     def get_armchain(self) -> Chain:
-        filename = None
         with tempfile.NamedTemporaryFile(suffix='.urdf', delete=False) as file:
             filename = file.name
             file.write(self.getUrdf().encode('utf-8'))

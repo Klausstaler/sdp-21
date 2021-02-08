@@ -1,7 +1,5 @@
 from RobotController import RobotController
 import numpy as np
-import time
-from ikpy.utils import geometry
 IKPY_MAX_ITERATIONS = 4
 TIMESTEP = 128
 
@@ -16,7 +14,7 @@ while robot_controller.step(TIMESTEP) != -1:
     is_present = robot_controller.suction_cup.getPresence()
     is_locked = robot_controller.suction_cup.isLocked()
 
-    # lock the parcel, set the next target as the transport position for the parcel
+
     if is_present and not was_released and not is_locked:
         robot_controller.suction_cup.lock()
     if is_locked:
