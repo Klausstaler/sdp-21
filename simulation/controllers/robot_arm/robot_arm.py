@@ -8,7 +8,6 @@ robot_controller = RobotController(timestep=TIMESTEP)
 
 was_released = False
 
-relative_target = np.array([0, 0.1678, 0.04])
 x_pos = -.5 # go close to target in increments of .01
 while robot_controller.step(TIMESTEP) != -1:
     is_present = robot_controller.suction_cup.getPresence()
