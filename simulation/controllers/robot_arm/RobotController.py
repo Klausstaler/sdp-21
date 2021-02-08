@@ -20,7 +20,7 @@ class RobotController(Supervisor):
         for link in self.arm_chain.links:
             if any(joint_name in link.name for joint_name in ["arm", "linear_actuator"]):
                 motor = self.getDevice(link.name)
-                motor.setVelocity(1.0)
+                motor.setVelocity(.4)
                 position_sensor = motor.getPositionSensor()
                 position_sensor.enable(self.timestep)
                 self.motors.append(motor)

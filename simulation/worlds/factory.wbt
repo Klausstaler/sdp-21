@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.025496056776736126 -0.9759576024091514 -0.21646410646714173 3.5683991382991884
-  position 5.283388683878302 1.6498753856758086 -1.190767775380361
+  orientation -0.014586716292769905 -0.9914924578376461 -0.12934424517100787 3.2440211206794984
+  position 2.625348689142228 1.9418619794526712 -2.689337636045617
 }
 TexturedBackground {
   texture "empty_office"
@@ -442,18 +442,18 @@ Solid {
   name "warehouse.obj"
 }
 Solid {
-  translation 4.282282891006311 1.1644248358596005 -0.13995339835663415
-  rotation 0.0007917162394276328 0.0008659303498728356 0.9999993116747758 1.572068571434219
+  translation 3.17227 1.1744 -0.13977
+  rotation 0.7066560049579306 0.7075570049642521 -0.0006126850042986258 -3.140475307179586
   children [
     DEF CONNECTOR_BOX1 Connector {
-      translation 0 -0.195 -6.97908e-07
+      translation 0 -0.175 0.0199993
       rotation 1 0 0 1.5708
       model "suction"
       type "passive"
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation -0.1 -0.195648 0.0899974
+      translation -0.1 -0.175 0.0899974
       rotation -1 0 0 -1.578
       name "connector(1)"
       model "suction"
@@ -461,7 +461,7 @@ Solid {
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0.07 -0.195 0
+      translation 0.07 -0.175 0
       rotation 1 0 0 1.5708
       name "connector(2)"
       model "suction"
@@ -469,7 +469,7 @@ Solid {
       snap FALSE
     }
     DEF CONNECTOR_BOX4 Connector {
-      translation -0.08 -0.195 0
+      translation -0.08 -0.175 0
       rotation 1 0 0 1.578
       name "connector(3)"
       model "suction"
@@ -477,7 +477,7 @@ Solid {
       snap FALSE
     }
     Transform {
-      scale 0.4 0.4 0.4
+      scale 0.35 0.35 0.35
       children [
         Shape {
           appearance PBRAppearance {
@@ -530,24 +530,31 @@ Solid {
   name "cardboard box(2)"
   model "cardboard box"
   boundingObject Box {
-    size 0.4 0.4 0.4
+    size 0.35 0.35 0.35
+  }
+  physics Physics {
+    density 125
   }
 }
 Robot {
-  translation 5.02 0.97 -0.12
-  rotation 0 -0.9999999999999999 0 0
+  translation 2.48 0.97 -0.12
+  rotation 0 1 0 3.14159
   children [
+    InertialUnit {
+      name "robot_imu"
+    }
     Solid {
       translation -0.24 -0.01 0
       rotation 0 -1 0 1.5708
       children [
-        Shape {
+        DEF PLATFORM Shape {
           geometry Box {
             size 0.7 0.01 0.5
           }
         }
       ]
       name "platform"
+      boundingObject USE PLATFORM
       locked TRUE
     }
     Solid {
@@ -555,6 +562,7 @@ Robot {
       children [
         SliderJoint {
           jointParameters JointParameters {
+            minStop -0.0001
             maxStop 0.4
           }
           device [
@@ -564,6 +572,7 @@ Robot {
             LinearMotor {
               name "linear_actuator"
               maxPosition 0.4
+              maxForce 180
             }
           ]
           endPoint DEF ROBOT_ARM Solid {
@@ -809,7 +818,7 @@ Robot {
                                 maxVelocity 1.5708
                                 minPosition -1.78024
                                 maxPosition 1.78024
-                                maxTorque 2
+                                maxTorque 6
                               }
                               PositionSensor {
                                 name "arm4sensor"
@@ -879,7 +888,7 @@ Robot {
                                       maxVelocity 1.5708
                                       minPosition -2.92343
                                       maxPosition 2.92343
-                                      maxTorque 1
+                                      maxTorque 2.23
                                     }
                                     PositionSensor {
                                       name "arm5sensor"
@@ -893,6 +902,8 @@ Robot {
                                         name "robot_box_connector"
                                         model "suction"
                                         type "active"
+                                        axisTolerance 0.1
+                                        rotationTolerance 0.1
                                       }
                                     ]
                                     name "link_5"
@@ -1023,5 +1034,5 @@ Robot {
   supervisor TRUE
 }
 Transform {
-  translation 4.6905 1.118 -0.1299
+  translation 2.48 0.97 -0.12
 }
