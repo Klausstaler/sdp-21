@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.014586716292769905 -0.9914924578376461 -0.12934424517100787 3.2440211206794984
-  position 2.625348689142228 1.9418619794526712 -2.689337636045617
+  orientation -0.06130999197375456 -0.9906950954135464 -0.12150848862413759 2.5402080881030065
+  position 1.802661078080829 1.5478950708485841 -1.4426848261946867
 }
 TexturedBackground {
   texture "empty_office"
@@ -453,7 +453,7 @@ Solid {
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation -0.1 -0.175 0.0899974
+      translation 0 -0.175 0
       rotation -1 0 0 -1.578
       name "connector(1)"
       model "suction"
@@ -461,7 +461,7 @@ Solid {
       snap FALSE
     }
     DEF CONNECTOR_BOX1 Connector {
-      translation 0.07 -0.175 0
+      translation 0 -0.175 0.01
       rotation 1 0 0 1.5708
       name "connector(2)"
       model "suction"
@@ -469,7 +469,7 @@ Solid {
       snap FALSE
     }
     DEF CONNECTOR_BOX4 Connector {
-      translation -0.08 -0.175 0
+      translation 0 -0.175 -0.02
       rotation 1 0 0 1.578
       name "connector(3)"
       model "suction"
@@ -1034,5 +1034,5 @@ Robot {
   supervisor TRUE
 }
 Transform {
-  translation 2.48 0.97 -0.12
+  translation 2.48 0 -0.12
 }
