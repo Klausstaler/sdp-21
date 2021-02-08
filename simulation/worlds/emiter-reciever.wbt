@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9337562282822647 -0.35790962893421724 -6.0499999658128775e-05 5.69332792145791
-  position 0.3962697069939549 1.0100661740269092 1.5843295922870038
+  orientation 0.6195282225157832 -0.7791518903824385 0.09543119626153121 5.955337722651926
+  position 0.44893096185877635 0.7071464529824024 1.6984623848687237
 }
 PointLight {
   attenuation 0 0 1
@@ -21,11 +21,10 @@ PointLight {
 Floor {
 }
 Robot {
-  translation -0.2 0.11 0
+  translation -0.2 0.11 -0.93
   children [
     Receiver {
       type "infra-red"
-      baudRate 8
       bufferSize 8
     }
     Shape {
@@ -49,13 +48,11 @@ DEF RFID Robot {
     Emitter {
       translation 0 0.05 0
       recognitionColors [
-        1 0 0
+        0 0 0
       ]
       type "infra-red"
-      range 3
-      maxRange 3
-      channel -1
-      baudRate 8
+      range 0.3
+      maxRange 0.5
       bufferSize 8
     }
     Shape {
