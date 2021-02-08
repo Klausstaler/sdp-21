@@ -1,0 +1,47 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.9337562282822647 -0.35790962893421724 -6.0499999658128775e-05 5.69332792145791
+  position 0.3962697069939549 1.0100661740269092 1.5843295922870038
+}
+PointLight {
+  attenuation 0 0 1
+  intensity 10
+  location 4 3 -2
+  castShadows TRUE
+}
+PointLight {
+  attenuation 0 0 1
+  intensity 10
+  location -4 3 2
+  castShadows TRUE
+}
+Floor {
+}
+DEF RFID Robot {
+  translation 0 0.01 0
+  children [
+    Emitter {
+      translation 0 0.05 0
+      recognitionColors [
+        0 0 0
+      ]
+      type "infra-red"
+      range 0.3
+      maxRange 3
+    }
+    Shape {
+      appearance PBRAppearance {
+        roughness 1
+        metalness 0
+      }
+      geometry DEF chip_shape Box {
+        size 0.06 0.02 0.12
+      }
+    }
+  ]
+  boundingObject USE chip_shape
+  controller "RFID_emit"
+}
