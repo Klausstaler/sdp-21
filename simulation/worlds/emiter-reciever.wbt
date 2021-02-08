@@ -20,13 +20,33 @@ PointLight {
 }
 Floor {
 }
+Robot {
+  translation -0.2 0.11 0
+  children [
+    Receiver {
+    }
+    Shape {
+      appearance PBRAppearance {
+        roughness 1
+        metalness 0.5
+      }
+      geometry DEF shape Sphere {
+        radius 0.1
+        subdivision 2
+      }
+    }
+  ]
+  name "reciever_robot"
+  boundingObject USE shape
+  controller "RFID_recieve"
+}
 DEF RFID Robot {
   translation 0 0.01 0
   children [
     Emitter {
       translation 0 0.05 0
       recognitionColors [
-        0 0 0
+        1 0 0
       ]
       type "infra-red"
       range 0.3
