@@ -1,5 +1,5 @@
 from controller import Robot, Emitter
-
+import struct
 robot = Robot()
 
 TIME_STEP = 1
@@ -13,10 +13,10 @@ receiver.enable(TIME_STEP)
 i = 0
 while robot.step(TIME_STEP) != -1:
 
-    print("recieved:", receiver.getQueueLength(), "i:",i)
-    i+=1
-    # message=receiver.getData()
-    # print("Whatt")
-    # print(message)
-    # dataList=struct.unpack("h",message)
-    # print(dataList)
+    queLen = receiver.getQueueLength()
+    if (queLen>0):
+        message=receiver.getData()
+        # print(message)
+        dataList=struct.unpack("5s",message)
+        val = dataList[0].decode("utf-8") 
+        print("message is", val)

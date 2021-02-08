@@ -14,7 +14,7 @@ emitter.setChannel(0)
 # emitter.enable(TIME_STEP)
 i = 0
 while robot.step(32) != -1:
-    message = struct.pack("h",2)
+    message = struct.pack("5s",b"abcde")
     val = emitter.send(message)
     print("emitted", val, i)
     i+=1
