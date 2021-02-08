@@ -8,14 +8,16 @@ TIME_STEP = 32
 emitter = robot.getDevice("emitter")
 
 # All channels
-emitter.setChannel(Emitter.CHANNEL_BROADCAST)
+emitter.setChannel(0)
 
 # print("what", emitter)
 # emitter.enable(TIME_STEP)
-message = struct.pack("h",2)
-emitter.send(message)
-# while robot.step(32) != -1:
-    # print("Not Hello World!")
+i = 0
+while robot.step(32) != -1:
+    message = struct.pack("h",2)
+    val = emitter.send(message)
+    print("emitted", val, i)
+    i+=1
     # print(emitter.getChannel())
     # pass
     
