@@ -35,13 +35,13 @@ class RobotController(Supervisor):
         self.imu.enable(timestep)
         self.suction_cup.enablePresence(timestep)
         self.motors = []
-        self.timestep = timestep
+
         for link in self.arm_chain.links:
             if any(joint_name in link.name for joint_name in ["arm", "linear_actuator"]):
                 motor = self.getDevice(link.name)
                 motor.setVelocity(.4)
                 position_sensor = motor.getPositionSensor()
-                position_sensor.enable(self.timestep)
+                position_sensor.enable(timestep)
                 self.motors.append(motor)
 
         # Deactivate fixed joints
@@ -63,14 +63,30 @@ class RobotController(Supervisor):
         :return:
         """
         # 0's for fixed joints, rest of the links have a joint associated with them
-        initial_joints = [0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
-        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]),
+        initial_joints = self.get_joint_config()
+        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]), # no idea why this is the correct target_orientation
                                                                    orientation_mode="Z",
                                                                    max_iter=4,
                                                                    initial_position=initial_joints)
 
         for i, motor in enumerate(self.motors):
             motor.setPosition(ik_results[i+2]) # ignore first two joints as it does not have an associated motor
+
+
+    def get_joint_config(self) -> list:
+        return [0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
+
+    def park_parcel(self):
+        parking_location = np.array([-.1, .1678, .04])
+        self.move_endeffector(parking_location)
+
+    def try_pickup(self, x_pos):
+        relative_target = np.array([x_pos, .1678, 0.04])
+        self.move_endeffector(relative_target)
+        curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
+        if np.linalg.norm(relative_target - curr_pos) < 0.045: # if we are close to the target location but still had no pickup, move forward for pickup
+            x_pos -= .01
+        return x_pos
 
     def convert_relative(self, global_coord: np.array) -> np.array:
         """
@@ -84,7 +100,7 @@ class RobotController(Supervisor):
         relative_pos = rot_mat @ relative_pos
         return relative_pos
 
-    def get_rpy(self):
+    def get_rpy(self) -> Union[list, np.array]:
         return convert_rpy(self.imu.getRollPitchYaw())
 
 
