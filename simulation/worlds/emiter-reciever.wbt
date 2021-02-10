@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.7788411941299158 -0.5997842543792063 -0.18348090506934586 5.454191684903176
-  position 1.6312124002343562 1.9657179201836983 1.4801277506690835
+  orientation 0.7857755175375553 -0.6015203525937103 -0.1439795174812218 5.594321919087347
+  position 1.2573691904002453 1.5070573553132314 1.5260345967942945
 }
 PointLight {
   attenuation 0 0 1
@@ -54,7 +54,7 @@ Robot {
   controller "RFID_recieve"
 }
 DEF NFC Robot {
-  translation 0.05 0 -0.11
+  translation -0.16 0 -0.11
   children [
     Emitter {
       translation 0 0.05 0
@@ -62,8 +62,8 @@ DEF NFC Robot {
         0 0 0
       ]
       type "infra-red"
-      range 0.1
-      maxRange 0.1
+      range 0.15
+      maxRange 0.3
       bufferSize 16
     }
     Shape {
@@ -77,6 +77,33 @@ DEF NFC Robot {
     }
   ]
   name "nfc_tag_1"
+  boundingObject USE chip_shape
+  controller "RFID_emit"
+}
+DEF NFC Robot {
+  translation 0.62 0 -0.37
+  children [
+    Emitter {
+      translation 0 0.05 0
+      recognitionColors [
+        0 0 0
+      ]
+      type "infra-red"
+      range 0.15
+      maxRange 0.3
+      bufferSize 16
+    }
+    Shape {
+      appearance PBRAppearance {
+        roughness 1
+        metalness 0
+      }
+      geometry DEF chip_shape Box {
+        size 0.01 0.001 0.02
+      }
+    }
+  ]
+  name "nfc_tag_2"
   boundingObject USE chip_shape
   controller "RFID_emit"
 }
