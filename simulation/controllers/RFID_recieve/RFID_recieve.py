@@ -20,8 +20,10 @@ class NFC_reader():
         if (queLen>0):
             self.LED.set(value=1)
             message=self.__receiver.getData()
-            dataList=struct.unpack("l",message)
-            message_str = self.convertFromNumber(dataList[0])
+            size = self.__receiver.getDataSize()
+            strucutre = str(size)+"s"
+            dataList=struct.unpack(strucutre, message)
+            message_str = dataList[0].decode()
             self.__receiver.nextPacket()
         else:
             self.LED.set(value=0)
@@ -46,7 +48,7 @@ def main():
     nfc_reader.setChannel(0)
     
     while robot.step(TIME_STEP) != -1:
-        message = nfc_reader.read() 
+        message = nfc_reader.read()
         if message is not None:
             print("The message is: ", message)
 

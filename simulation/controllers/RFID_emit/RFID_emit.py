@@ -2,11 +2,18 @@ from controller import LED, Robot, Emitter
 import struct
 import math
 
+TIME_STEP = 32
+
 class NFC():
-    def __init__(self, robot, name):
+    def __init__(self, robot, name, message=None):
         self.__emitter  = robot.getDevice(name)
-        robotId    = self.convertToNumber(name)
-        self.message    = struct.pack("l", robotId)
+        if message is None:
+            message = name
+        self.packMessage(message)
+        
+    def packMessage(self, s):
+        structure = str(len(s))+"s"
+        self.message = struct.pack(structure, s.encode('utf-8'))
 
     def send(self):
         return self.__emitter.send(self.message)
@@ -29,16 +36,14 @@ class NFC():
     def getChannel(self,):
         return self.__emitter.getChannel()
 
-TIME_STEP = 32
-
 def main():
     robot = Robot()
-
-    nfc = NFC(robot, "emitter")
+    message = robot.getName()
+    nfc = NFC(robot, "emitter", message = message)
     nfc.setChannel(0)
 
     while robot.step(32) != -1:
-
+        nfc.send()
 
 if __name__ == '__main__':
     main()
