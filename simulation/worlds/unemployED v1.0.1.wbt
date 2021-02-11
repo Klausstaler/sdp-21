@@ -1,0 +1,921 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.9139346269704827 0.4011407254216129 0.061722087072188694 5.442213939794518
+  position -1.2430513718238452 0.6914615800433969 -1.3648677330594157
+  followType "None"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 3 0.01 -4
+  rotation 0 -1 0 1.57
+  name "road(7)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 3 0.01 4
+  rotation 0 -1 0 1.57
+  name "road(10)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 4 0.01 -2
+  rotation 0 -1 0 1.57
+  name "road(11)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 4 0.01 2
+  rotation 0 -1 0 1.57
+  name "road(15)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 2 0.01 2
+  rotation 0 -1 0 1.57
+  name "road(16)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 0 0.01 2
+  rotation 0 -1 0 1.57
+  name "road(19)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -3 0.01 0
+  rotation 0 -1 0 1.57
+  name "road(29)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -1 0.01 -2
+  rotation 0 -1 0 1.57
+  name "road(23)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 4 0.01 -3
+  rotation 0 -1 0 0
+  name "road(9)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -4 0.01 -3
+  rotation 0 -1 0 0
+  name "road(24)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -2 0.01 -3
+  rotation 0 -1 0 0
+  name "road(27)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -4 0.01 -1
+  rotation 0 -1 0 0
+  name "road(25)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation -4 0.01 1
+  rotation 0 -1 0 0
+  name "road(30)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 4 0.01 -1
+  rotation 0 -1 0 0
+  name "road(2)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 4 0.01 1
+  rotation 0 -1 0 0
+  name "road(4)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+StraightRoadSegment {
+  translation 0 0.01 1
+  rotation 0 -1 0 0
+  name "road(17)"
+  width 0.08
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  startingRoadBorderWidth 0.2
+  endingRoadBorderWidth 0.2
+  length 2
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+  bottomTexture [
+    ""
+  ]
+}
+PlasticCrate {
+  translation -0.93 0 -4.01
+  size 0.3 0.3 0.3
+}
+Robot {
+  translation -1.0670569819239462 0.03791364653308549 -1.9971672596253722
+  rotation 0.0003791189919791768 -0.9999998816748217 0.0003048263970664935 -1.717661682015081
+  children [
+    DEF ds_left DistanceSensor {
+      translation 0.0199749 -0.00500011 0.109975
+      rotation 0.5773449358439909 -0.577351935843213 -0.5773539358429908 2.09
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_left"
+      type "infra-red"
+    }
+    DEF ds_left_intersect DistanceSensor {
+      translation 0.0796953 -0.00512845 -0.000174965
+      rotation 0.5773449358439909 -0.577351935843213 -0.5773539358429908 2.09
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_left_intersect"
+      type "infra-red"
+    }
+    DEF ds_right DistanceSensor {
+      translation -0.0200026 -0.00496077 0.109924
+      rotation -0.5770167435544861 0.5770167435544861 0.5780167431100529 -2.089995307179586
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_right"
+      type "infra-red"
+    }
+    DEF ds_right_intersect DistanceSensor {
+      translation -0.0804079 -0.00529474 0.000146903
+      rotation -0.5770167435544861 0.5770167435544861 0.5780167431100529 -2.089995307179586
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_right_intersect"
+      type "infra-red"
+    }
+    DEF ds_top_right DistanceSensor {
+      translation -0.0500589 0.00496072 0.100015
+      rotation 2.3974401550343564e-09 -0.999998064666497 0.0019674001272251204 1.5671
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_top_right"
+      type "infra-red"
+    }
+    DEF ds_top_left DistanceSensor {
+      translation 0.0499401 0.00515672 0.0996452
+      rotation 2.3974401550343564e-09 -0.999998064666497 0.0019674001272251204 1.5671
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.02
+          }
+        }
+      ]
+      name "ds_top_left"
+      type "infra-red"
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 9375.950047829687
+        anchor 0.06 0 0.05
+      }
+      device [
+        DEF motor1 RotationalMotor {
+          name "motor1"
+        }
+      ]
+      endPoint DEF wheel1 Solid {
+        translation 0.070071 -7.923085231468684e-05 0.050012877501374446
+        rotation 0.5438339686848666 -0.5436650614928581 0.6392753048698459 2.0047749218043487
+        children [
+          DEF Wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE Wheel
+        physics DEF WHEEL_PH Physics {
+        }
+        linearVelocity 1.451403006756917e-07 2.636008295685459e-07 5.506493134626154e-09
+        angularVelocity -6.008421806009859e-07 -2.065717297203149e-06 -4.135673322475084e-06
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 9231.117276013087
+        anchor -0.06 0 0.05
+      }
+      device [
+        DEF motor2 RotationalMotor {
+          name "motor2"
+        }
+      ]
+      endPoint DEF wheel2 Solid {
+        translation -0.07993600000000001 8.105735134066309e-05 0.04996537076788541
+        rotation 0.46365135873983115 -0.46389755615389594 0.7548685149965861 1.8477530972576184
+        children [
+          DEF Wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE Wheel
+        physics DEF WHEEL_PH Physics {
+        }
+        linearVelocity -2.6581756115511357e-07 2.297655963759548e-07 7.739216887024911e-08
+        angularVelocity 1.0938572985331288e-06 -2.0576641106244397e-06 7.372164768454958e-06
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 9375.742642668294
+        anchor 0.06 0 -0.05
+      }
+      device [
+        DEF motor3 RotationalMotor {
+          name "motor3"
+        }
+      ]
+      endPoint DEF wheel3 Solid {
+        translation 0.069936 -7.164982061745114e-05 -0.049998791783472565
+        rotation 0.492419291113092 -0.4921934059991566 0.71782232678472 1.8971532414954964
+        children [
+          DEF Wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE Wheel
+        physics DEF WHEEL_PH Physics {
+        }
+        linearVelocity 1.3384404599718888e-07 2.546001040866281e-07 -5.753811179350347e-08
+        angularVelocity -5.967983437389581e-07 -2.0656451643332097e-06 -4.06910466654549e-06
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 9230.941881275156
+        anchor -0.06 0 -0.05
+      }
+      device [
+        DEF motor4 RotationalMotor {
+          name "motor4"
+        }
+      ]
+      endPoint DEF wheel4 Solid {
+        translation -0.080071 7.985763841507997e-05 -0.05002057315993364
+        rotation 0.4078083649566818 -0.4080868726806245 0.8167970628112625 1.7712030745104763
+        children [
+          DEF Wheel Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+            }
+          }
+        ]
+        boundingObject USE Wheel
+        physics DEF WHEEL_PH Physics {
+        }
+        linearVelocity -2.770184327643873e-07 2.2205329861149842e-07 1.4346671294397213e-08
+        angularVelocity 1.097688190106511e-06 -2.057651415341639e-06 7.437132285987994e-06
+      }
+    }
+    DEF Body Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0.498039
+      }
+      geometry Box {
+        size 0.15 0.05 0.2
+      }
+    }
+  ]
+  boundingObject USE Body
+  physics Physics {
+    density -1
+    mass 10
+  }
+  controller "one_object_task_py"
+  linearVelocity -5.524713571588846e-08 -2.9679481485800355e-10 8.36317969471201e-09
+  angularVelocity 1.758664970582918e-08 -2.062488485478122e-06 8.37061597447848e-08
+}
+CurvedRoadSegment {
+  translation 3 0.01 -3
+  rotation 0 1 0 1.57
+  name "road(3)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -3 0.01 -3
+  rotation 0 1 0 1.57
+  name "road(26)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -3 0.01 -3
+  rotation 0 1 0 3.14
+  name "road(6)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 1 0.01 -3
+  rotation 0 1 0 3.14
+  name "road(1)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 3 0.01 -1
+  rotation 0 1 0 3.14
+  name "road(12)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -1 0.01 3
+  rotation 0 1 0 3.14
+  name "road(20)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 1 0.01 1
+  rotation 0 1 0 3.14
+  name "road(14)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 3 0.01 3
+  name "road(8)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 1 0.01 3
+  rotation 0 1 0 -1.57
+  name "road(18)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -3 0.01 3
+  rotation 0 1 0 -1.57
+  name "road(22)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation 1 0.01 -1
+  name "road(13)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -3 0.01 3
+  name "road(21)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -1 0.01 -3
+  name "road(5)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+CurvedRoadSegment {
+  translation -3 0.01 -1
+  name "road(28)"
+  width 0.07
+  lines [
+    RoadLine {
+      type "continuous"
+      width 0.1
+    }
+  ]
+  roadBorderHeight 0
+  roadBorderWidth [
+    0.2
+  ]
+  curvatureRadius 1
+  pavementAppearance Pavement {
+    type "grid"
+    colorOverride 0 0 0
+  }
+}
+Floor {
+}
