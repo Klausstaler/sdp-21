@@ -2,6 +2,7 @@ from controller import Supervisor, Robot
 import numpy as np
 import sys, tempfile
 from typing import Union
+
 try:
     import ikpy
     from ikpy.chain import Chain
@@ -22,37 +23,38 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
     return rpy
 
 
+class ArmController:
 
-class RobotController(Robot):
-
-
-
-    def __init__(self, timestep=128):
+    def __init__(self, robot: Robot, timestep=128):
         # Initialize the arm motors and encoders.
-        super().__init__()
         self.arm_chain = self.get_armchain()
-        self.imu, self.suction_cup = self.getDevice("robot_imu"), self.getDevice("robot_box_connector")
-        self.imu.enable(timestep)
+        self.suction_cup = robot.getDevice("robot_box_connector")
         self.suction_cup.enablePresence(timestep)
         self.motors = []
 
         for link in self.arm_chain.links:
             if any(joint_name in link.name for joint_name in ["arm", "linear_actuator"]):
-                motor = self.getDevice(link.name)
+                motor = robot.getDevice(link.name)
                 motor.setVelocity(.4)
                 position_sensor = motor.getPositionSensor()
                 position_sensor.enable(timestep)
                 self.motors.append(motor)
 
         # Deactivate fixed joints
-        for i in [0, 1]:
+        for i in [0, 1, 2]:
             self.arm_chain.active_links_mask[i] = False
 
     def get_armchain(self) -> Chain:
+        """
         with tempfile.NamedTemporaryFile(suffix='.urdf', delete=False) as file:
             filename = file.name
             file.write(self.getUrdf().encode('utf-8'))
-        arm_chain = Chain.from_urdf_file(filename)
+        """
+        """
+        with open("robot.urdf","w") as f:
+            f.write(self.getUrdf())
+        #"""
+        arm_chain = Chain.from_urdf_file("../robot_control/robot.urdf")
         return arm_chain
 
     def move_endeffector(self, coordinate: np.array):
@@ -63,27 +65,27 @@ class RobotController(Robot):
         """
         # 0's for fixed joints, rest of the links have a joint associated with them
         initial_joints = self.get_joint_config()
-        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]), # no idea why this is the correct target_orientation
-                                                                   orientation_mode="Z",
-                                                                   max_iter=4,
-                                                                   initial_position=initial_joints)
-
+        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]),
+                                                       # no idea why this is the correct target_orientation
+                                                       orientation_mode="Z",
+                                                       max_iter=4,
+                                                       initial_position=initial_joints)
         for i, motor in enumerate(self.motors):
-            motor.setPosition(ik_results[i+2]) # ignore first two joints as it does not have an associated motor
-
+            motor.setPosition(ik_results[i + 3])  # ignore first three joints as they are fixed
 
     def get_joint_config(self) -> list:
-        return [0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
+        return [0, 0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
 
     def park_parcel(self):
-        parking_location = np.array([-.1, .1678, .04])
+        parking_location = np.array([-.1, .18, .04])
         self.move_endeffector(parking_location)
 
     def try_pickup(self, x_pos):
         relative_target = np.array([x_pos, .1678, 0.04])
         self.move_endeffector(relative_target)
         curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
-        if np.linalg.norm(relative_target - curr_pos) < 0.045: # if we are close to the target location but still had no pickup, move forward for pickup
+        if np.linalg.norm(
+                relative_target - curr_pos) < 0.045:  # if we are close to the target location but still had no pickup, move forward for pickup
             x_pos -= .01
         return x_pos
 
@@ -101,5 +103,3 @@ class RobotController(Robot):
 
     def get_rpy(self) -> Union[list, np.array]:
         return convert_rpy(self.imu.getRollPitchYaw())
-
-
