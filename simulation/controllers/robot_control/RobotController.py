@@ -5,7 +5,7 @@ from ArmController import ArmController
 class RobotController(Robot):
     def __init__(self, timestep=128):
         super().__init__()
-        self.arm = ArmController()
+        self.arm = ArmController(self)
 
         # Initialize motor
         self.lift_motor = self.getDevice("liftmot")

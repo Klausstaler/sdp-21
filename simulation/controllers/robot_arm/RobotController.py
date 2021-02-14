@@ -2,7 +2,6 @@ from controller import Supervisor, Robot
 import numpy as np
 import sys, tempfile
 from typing import Union
-
 try:
     import ikpy
     from ikpy.chain import Chain
@@ -22,23 +21,26 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
     rpy[1], rpy[2] = rpy[2], rpy[1]
     return rpy
 
+class RobotController(Supervisor):
 
-class ArmController:
 
-    def __init__(self, robot: Robot, timestep=128):
+
+    def __init__(self, timestep=128):
         # Initialize the arm motors and encoders.
+        super().__init__()
         self.arm_chain = self.get_armchain()
-        self.suction_cup = robot.getDevice("robot_box_connector")
+        self.suction_cup = self.getDevice("robot_box_connector")
         self.suction_cup.enablePresence(timestep)
-        self.motors = []
+        self.lift_motor = self.getDevice("liftmot")
+        self.arm_motors = []
 
         for link in self.arm_chain.links:
             if any(joint_name in link.name for joint_name in ["arm", "linear_actuator"]):
-                motor = robot.getDevice(link.name)
+                motor = self.getDevice(link.name)
                 motor.setVelocity(.4)
                 position_sensor = motor.getPositionSensor()
                 position_sensor.enable(timestep)
-                self.motors.append(motor)
+                self.arm_motors.append(motor)
 
         # Deactivate fixed joints
         for i in [0, 1, 2]:
@@ -65,16 +67,16 @@ class ArmController:
         """
         # 0's for fixed joints, rest of the links have a joint associated with them
         initial_joints = self.get_joint_config()
-        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]),
-                                                       # no idea why this is the correct target_orientation
-                                                       orientation_mode="Z",
-                                                       max_iter=4,
-                                                       initial_position=initial_joints)
-        for i, motor in enumerate(self.motors):
-            motor.setPosition(ik_results[i + 3])  # ignore first three joints as they are fixed
+        ik_results = self.arm_chain.inverse_kinematics(coordinate, target_orientation=np.array([-1, 0, 1]), # no idea why this is the correct target_orientation
+                                                                   orientation_mode="Z",
+                                                                   max_iter=4,
+                                                                   initial_position=initial_joints)
+        for i, motor in enumerate(self.arm_motors):
+            motor.setPosition(ik_results[i+3]) # ignore first three joints as they are fixed
+
 
     def get_joint_config(self) -> list:
-        return [0, 0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
+        return [0, 0, 0] + [m.getPositionSensor().getValue() for m in self.arm_motors]
 
     def park_parcel(self):
         parking_location = np.array([-.1, .18, .04])
@@ -84,8 +86,7 @@ class ArmController:
         relative_target = np.array([x_pos, .1678, 0.04])
         self.move_endeffector(relative_target)
         curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
-        if np.linalg.norm(
-                relative_target - curr_pos) < 0.045:  # if we are close to the target location but still had no pickup, move forward for pickup
+        if np.linalg.norm(relative_target - curr_pos) < 0.045: # if we are close to the target location but still had no pickup, move forward for pickup
             x_pos -= .01
         return x_pos
 
@@ -103,3 +104,5 @@ class ArmController:
 
     def get_rpy(self) -> Union[list, np.array]:
         return convert_rpy(self.imu.getRollPitchYaw())
+
+

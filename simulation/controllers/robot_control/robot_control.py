@@ -18,5 +18,5 @@ while robot_controller.step(TIMESTEP) != -1:
         robot_controller.arm.park_parcel()
     else:
         robot_controller.lift_motor.setPosition(.73)
-        x_pos = robot_controller.try_pickup(x_pos)
+        x_pos = robot_controller.arm.try_pickup(x_pos)
         print(x_pos)
