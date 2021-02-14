@@ -21,9 +21,7 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
     rpy[1], rpy[2] = rpy[2], rpy[1]
     return rpy
 
-
-
-class RobotController(Robot):
+class ArmController(Robot):
 
 
 
@@ -31,8 +29,7 @@ class RobotController(Robot):
         # Initialize the arm motors and encoders.
         super().__init__()
         self.arm_chain = self.get_armchain()
-        self.imu, self.suction_cup = self.getDevice("robot_imu"), self.getDevice("robot_box_connector")
-        self.imu.enable(timestep)
+        self.suction_cup = self.getDevice("robot_box_connector")
         self.suction_cup.enablePresence(timestep)
         self.motors = []
 
@@ -45,14 +42,20 @@ class RobotController(Robot):
                 self.motors.append(motor)
 
         # Deactivate fixed joints
-        for i in [0, 1]:
+        for i in [0, 1, 2]:
             self.arm_chain.active_links_mask[i] = False
 
     def get_armchain(self) -> Chain:
+        """
         with tempfile.NamedTemporaryFile(suffix='.urdf', delete=False) as file:
             filename = file.name
             file.write(self.getUrdf().encode('utf-8'))
-        arm_chain = Chain.from_urdf_file(filename)
+        """
+        """
+        with open("robot.urdf","w") as f:
+            f.write(self.getUrdf())
+        #"""
+        arm_chain = Chain.from_urdf_file("../robot_control/robot.urdf")
         return arm_chain
 
     def move_endeffector(self, coordinate: np.array):
@@ -67,16 +70,15 @@ class RobotController(Robot):
                                                                    orientation_mode="Z",
                                                                    max_iter=4,
                                                                    initial_position=initial_joints)
-
         for i, motor in enumerate(self.motors):
-            motor.setPosition(ik_results[i+2]) # ignore first two joints as it does not have an associated motor
+            motor.setPosition(ik_results[i+3]) # ignore first three joints as they are fixed
 
 
     def get_joint_config(self) -> list:
-        return [0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
+        return [0, 0, 0] + [m.getPositionSensor().getValue() for m in self.motors]
 
     def park_parcel(self):
-        parking_location = np.array([-.1, .1678, .04])
+        parking_location = np.array([-.1, .18, .04])
         self.move_endeffector(parking_location)
 
     def try_pickup(self, x_pos):
@@ -101,5 +103,3 @@ class RobotController(Robot):
 
     def get_rpy(self) -> Union[list, np.array]:
         return convert_rpy(self.imu.getRollPitchYaw())
-
-
