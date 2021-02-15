@@ -1,150 +1,224 @@
+#SDP2021
+#GROUP21
+#CREATED BY: REECE WALKER
+#PREVIOUS VERSION BY: REECE WALKER
+#CURRENT VERSION BY: REECE WALKER 15/02/2021
+
 import math
 from PIL import Image, ImageDraw
 
 class LineGridGenerator():
 
+
+#CREATES THE BASE IMAGE FOR THE 4 WAY (+) JUNCTION
+#
+#@PARAM:
+#   size:
+#       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+#
+#   line_width:
+#       Int stating the number of pixels line should take up (think rn odd
+#       witdth will be out of line in some places)
+#
+#@RETURNS:
+#       Object of the Image class showing the junction
     def __create_p_junction(self, size, line_width):
         img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
 
-        if (size[0]%2 == 1):
-            x_line = int(math.floor(size[0]/2))
-        else:
-            x_line = int((size[0]/2)-1)
+        x_mid_point = (size[0]/2)-1
+        y_mid_point = (size[1]/2)-1
 
-        if (size[1]%2 == 1):
-            y_line = int(math.floor(size[1]/2))
-        else:
-            y_line = int((size[1]/2)-1)
+        print(x_mid_point)
+        print(y_mid_point)
+
 
         img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
-        drawer.line((0,y_line, size[0],y_line), fill="black", width=line_width)
-        drawer.line((x_line,0, x_line,size[1]), fill="black", width=line_width)
+        drawer.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
+        drawer.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img.save("p.jpg")
         return img
 
 
+    #CREATES THE BASE IMAGE FOR THE 3 WAY (T) JUNCTION
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the base T-junctions
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_t_junction(self, size, line_width):
 
-        if (size[0]%2 == 1):
-            y_line = int(math.floor(size[1]/2))
-        else:
-            y_line = int((size[1]/2)-1)
-
-        if (size[1]%2 == 1):
-            x_line = int(math.floor(size[0]/2))
-        else:
-            x_line = int((size[0]/2)-1)
+        x_mid_point = (size[0]/2)-1
+        y_mid_point = (size[1]/2)-1
 
         img1 = Image.new("RGB", size, "white")
         drawer1 = ImageDraw.Draw(img1)
-        drawer1.line((0,y_line, size[0],y_line), fill="black", width=line_width)
-        drawer1.line((x_line,y_line, x_line,size[1]), fill="black", width=line_width)
+        drawer1.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
+        drawer1.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
         img2 = Image.new("RGB", size, "white")
         drawer2 = ImageDraw.Draw(img2)
-        drawer2.line((0,y_line, x_line,y_line), fill="black", width=line_width)
-        drawer2.line((x_line,0, x_line,size[1]), fill="black", width=line_width)
+        drawer2.line((0,y_mid_point, x_mid_point,y_mid_point), fill="black", width=line_width)
+        drawer2.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img1.save("t1.jpg")
-        img2.save("t2.jpg")
         return (img1, img2)
 
 
+    #CREATES THE BASE IMAGE FOR THE STRAIGHT LINE
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the 2 straight lines
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_line(self, size, line_width):
 
-        if (size[0]%2 == 1):
-            y_line = int(math.floor(size[1]/2))
-        else:
-            y_line = int((size[1]/2)-1)
-
-        if (size[1]%2 == 1):
-            x_line = int(math.floor(size[0]/2))
-        else:
-            x_line = int((size[0]/2)-1)
+        x_mid_point = (size[0]/2)-1
+        y_mid_point = (size[1]/2)-1
 
         img1 = Image.new("RGB", size, "white")
         drawer1 = ImageDraw.Draw(img1)
-        drawer1.line((x_line,0, x_line,size[1]), fill="black", width=line_width)
+        drawer1.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
 
         img2 = Image.new("RGB", size, "white")
         drawer2 = ImageDraw.Draw(img2)
-        drawer2.line((0,y_line, size[0],y_line), fill="black", width=line_width)
+        drawer2.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
 
-        img1.save("l1.jpg")
-        img2.save("l2.jpg")
         return (img1, img2)
 
+
+    #CREATES THE BASE IMAGE FOR THE RIGHT ANGLE TURNS
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the base turns
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_turn(self, size, line_width):
 
-        if (size[0]%2 == 1):
-            y_line = int(math.floor(size[1]/2))
-        else:
-            y_line = int((size[1]/2)-1)
-
-        if (size[1]%2 == 1):
-            x_line = int(math.floor(size[0]/2))
-        else:
-            x_line = int((size[0]/2)-1)
+        x_mid_point = (size[0]/2)-1
+        y_mid_point = (size[1]/2)-1
 
         img1 = Image.new("RGB", size, "white")
-        drawer = ImageDraw.Draw(img1)
-        drawer.line((0,y_line, x_line+int(line_width/2),y_line), fill="black", width=line_width)
-        drawer.line((x_line,y_line, x_line,size[1]), fill="black", width=line_width)
+        drawer1 = ImageDraw.Draw(img1)
+        drawer1.line((0,y_mid_point, x_mid_point+(line_width/2),y_mid_point), fill="black", width=line_width)
+        drawer1.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
         img2 = Image.new("RGB", size, "white")
-        drawer = ImageDraw.Draw(img2)
-        drawer.line((x_line,y_line, size[0], y_line), fill="black", width=line_width)
-        drawer.line((x_line,y_line, x_line,size[1]), fill="black", width=line_width)
-
+        drawer2 = ImageDraw.Draw(img2)
+        drawer2.line((x_mid_point-(line_width/2)+1,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
+        drawer2.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
         img1.save("turn.jpg")
         img2.save("turn2.jpg")
         return img1, img2
 
-    def create_line_grid(self, size, grid_array):
-        if (max(size)%2 == 1):
-            line_width = int(math.floor(max(size)*0.10))
-        else:
-            line_width = int(max(size)*0.10)
 
+    #CREATES THE FULL FLOOR LINEGRID ACORDING TO THE ARGUMENTS
+    #
+    #@PARAM:
+    #   size:
+    #       List of form x,y which defines the image size of each indivitual node
+    #
+    #   grid_array:
+    #       2D List where 'grid_array[i][j]' refairs to node x=i, z=j
+    #       Contains values from 0-14 detailing what is in that node position
+    #           0) Shelf with open side facing north
+    #           1) Shelf with open side facing east
+    #           2) Shelf with open side facing south
+    #           3) Shelf with open side facing west
+    #           4) Horizontal floor line
+    #           5) Vertical floor line
+    #           6) 4 way (+) floor junction
+    #           7) T junction (3 exits) with exits to the north, south and west
+    #           8) T junction (3 exits) with exits to the north, south and east
+    #           9) T junction (3 exits) with exits to the east, west and south
+    #          10) T junction (3 exits) with exits to the east, west and north
+    #          11) Right angle turn with exits south and west
+    #          12) Right angle turn with exits south and east
+    #          13) Right angle turn with exits north and east
+    #          14) Right angle turn with exits north and west
+    #
+    #
+    #@RETURNS:
+    #   Image object detailing the full floor grid
+    def create_line_grid(self, size, grid_array):
+
+        #DEFINES THE line_width (IN PIXELS), SHOULD BE EVEN AND IS HARD CODED
+        #AS THE TAPE LINE WILL BE THE SAME SIZE REGUARDLESS OF WAREHOUSE SIZE
+        line_width = 6
+
+        #CALLS PRIVATE METHODS TO CREATE EACH GRID IMAGE NEEDED
         (v_line, h_line) =              self.__create_line(size, line_width)
         p_junction =                    self.__create_p_junction(size, line_width)
         (t_h_junction, t_v_junction) =  self.__create_t_junction(size, line_width)
         (e_s_turn, n_e_turn) =          self.__create_turn(size, line_width)
 
+        #WORKS OUT THE total_width AND total_height OF THE FINAL IMAGE
+        #AND CREATES A BLANK WHITE IMAGE OF THIS SIZE
         total_width = size[0] * len(grid_array[0])
         total_height = size[1] * len(grid_array)
-
         full_image = Image.new("RGB", (total_width, total_height), "white")
 
+        #NESTED LOOP TO LOOK THROUGH grid_array AND PLACE THE CORRECT GRID IMAGE
+        #ACORDING TO THE VALUES IN grid_array
         for i in range(len(grid_array)):
 
+            #CREATES A BLANK IMAGE THAT WILL DISPLAY THE CURRENT ROW
             row_image = Image.new("RGB", (total_width, size[1]), "white")
             for j in range(len(grid_array[i])):
 
+                #HOIZONTAL LINE SHOULD BE PLACED
                 if grid_array[i][j] == 4:
                     row_image.paste(h_line, (size[0]*j, 0))
 
+                #VERTICAL LINE SHOULD BE PLACED
                 elif grid_array[i][j] == 5:
                     row_image.paste(v_line, (size[0]*j, 0))
 
+                #PLUS JUNCTION SHOULD BE PLACED
                 elif grid_array[i][j] == 6:
                     row_image.paste(p_junction, (size[0]*j, 0))
 
+                #T JUNCTION SHOULD BE PLACED
                 elif grid_array[i][j] >= 7 and grid_array[i][j] <= 10:
                     if grid_array[i][j] < 9:
+                        #SHOULD USE THE T JUCTION WITH THE FULL VERTICAL LINE
                         row_image.paste(t_v_junction.rotate((grid_array[i][j]-7)*180), (size[0]*j, 0))
                     else:
+                        #SHOULD USE THE T JUCTION WITH THE FULL HORIZONTAL LINE
                         row_image.paste(t_h_junction.rotate((grid_array[i][j]-9)*180), (size[0]*j, 0))
 
+                #RIGHT ANGLE TURN SHOULD BE PLACED
                 elif grid_array[i][j] == 11 or grid_array[i][j] == 13:
+                    #SHOULD USE EAST TO SOUTH TURN
                     row_image.paste(e_s_turn.rotate((grid_array[i][j]-11)*90), (size[0]*j, 0))
                 elif grid_array[i][j] == 12 or grid_array[i][j] == 14:
+                    #SHOULD USE NORTH TO EAST TURN
                     row_image.paste(n_e_turn.rotate((grid_array[i][j]-12)*90), (size[0]*j, 0))
 
+            #PLACES row_image ONTO full_image AT THE CORRECT SPOT FOR CURRENT ROW
             full_image.paste(row_image, (0, size[1]*i))
 
+        #RETURNS THE FULL IMAGE OF THE FLOOR GRID
         return full_image
