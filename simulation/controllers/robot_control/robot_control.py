@@ -2,6 +2,7 @@ from RobotController import RobotController
 import numpy as np
 import main
 import socket
+from server import utils
 
 def movearm():
     IKPY_MAX_ITERATIONS = 4
@@ -29,7 +30,7 @@ def movearm():
             robot_controller.lift_motor.setPosition(.73)
             x_pos = robot_controller.arm.try_pickup(x_pos)
 
-# This method is from Ryan's (Client's) main.py
+# This method is from Ryan's (Client's) server.py
 def process(data): # takes in request from server and handles the corresponding function.
     # print(data)
     length, robotid, function, params = data.split(":")
@@ -37,13 +38,13 @@ def process(data): # takes in request from server and handles the corresponding 
         from_node , to_node = params.split(";")
         print(f"Robot is moving from node {from_node} to {to_node}.")
         current, desired = params.split(";")
-        return main.encode(f"Moved {robotid} from node {current} to {desired}.")
+        return utils.encode(f"Moved {robotid} from node {current} to {desired}.")
     if function == "move-arm":
         print(f"Robotic arm is moving.")
         movearm()
-        return main.encode(f"Arm moved to pick up package.")
+        return utils.encode(f"Arm moved to pick up package.")
 
-# This method is from Ryan's (Client's) main.py     
+# This method is from Ryan's (Client's) server.py
 def establishConnection():
     # local host IP '127.0.0.1'
     host = '127.0.0.1'
@@ -60,9 +61,9 @@ def establishConnection():
         # message sent to server
         # s.send(message.encode('ascii'))
 
-        # messaga received from server
+        # message received from server
         print("Waiting to recieve command...")
-        data = main.recvall(s)
+        data = utils.recvall(s)
         print("msg recieved: " + data)
         response = process(data)
         s.send(response)

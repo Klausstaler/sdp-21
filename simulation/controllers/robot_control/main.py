@@ -1,22 +1,6 @@
 # Import socket module
 import socket
 
-def create_header(zerobits, length): #returns the msg len header of the payload where len = len of msg and zerobits is number of padded zeros at the start
-    string = ""
-    for i in range(zerobits):
-        string += "0"
-    string += str(length)
-    # print(string)
-    return string
-
-def encode(string): # encodes a string in the format msglen:string\n where msglen is len of string
-    length = len(string)
-    bitlen = len(str(length))
-    zerobits = 5 - bitlen
-    head = create_header(zerobits,length)
-    # print(f"{head}:{str}")
-    return f"{head}:{string}\n".encode()
-
 # DAVE - I've moved this to Fredrik's robot_arm.py
 #
 # def process(data): # takes in request from server and handles the corresponding function.
@@ -64,14 +48,6 @@ def encode(string): # encodes a string in the format msglen:string\n where msgle
 #         #     break
 #     # close the connection
 #     s.close()
-
-def recvall(connection): # handles the reception of packets and decodes the data
-    data = b""
-    while "\n" not in data.decode():
-        data += connection.recv(8)
-    # print(data.decode())
-    return data.decode()
-
 
 
 def displayOptions(): # Ignore
