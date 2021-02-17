@@ -1,11 +1,13 @@
 PROTO Shelf [
 field SFVec3f translation 0 0 0
 field SFRotation rotation 0 1 0 0
+field SFVec3f scale 1 1 1
 ]
 {
 Solid {
       translation IS translation
       rotation IS rotation
+      scale IS scale
       children [
         DEF SHAPE Shape {
           appearance PBRAppearance {
