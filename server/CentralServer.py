@@ -1,8 +1,7 @@
-
-from server.networking.server import Robot
-from server.networking.server import Task, TaskType
-from server.networking.server import Scheduler
-from server.networking.server import NetworkInterface
+from server.Robot import Robot
+from server.Scheduler import Scheduler
+from server.Task import Task, TaskType
+from server.networking.NetworkInterface import NetworkInterface
 
 
 class CentralServer:

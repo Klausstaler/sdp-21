@@ -1,8 +1,8 @@
 from collections import deque, defaultdict
 from typing import List, Dict, Set, Union
 
-from server.networking.server import Robot
-from server.networking.server import Task
+from server.Robot import Robot
+from server.Task import Task
 
 
 class Scheduler:

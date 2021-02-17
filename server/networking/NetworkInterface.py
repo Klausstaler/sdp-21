@@ -1,7 +1,5 @@
 from server.Robot import Robot
 from server.Task import Task
-from typing import Union
-import server.CentralServer
 import asyncio
 
 
@@ -11,7 +9,7 @@ class NetworkInterface:
     """
 
     def __init__(self):
-        self.central_server: Union[None, server.CentralServer.CentralServer] = None
+        self.central_server = None
 
     def register_server(self, central_server):
         self.central_server = central_server
