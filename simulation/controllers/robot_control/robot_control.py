@@ -1,8 +1,7 @@
 from RobotController import RobotController
-import numpy as np
-import main
 import socket
-from server import utils
+from server.networking import utils
+
 
 def movearm():
     IKPY_MAX_ITERATIONS = 4

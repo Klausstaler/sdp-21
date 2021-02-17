@@ -1,7 +1,7 @@
 import socket
 from _thread import *
 import threading
-from utils import encode, decode, recvall
+from server.networking.utils import encode, decode, recvall
 print_lock = threading.Lock()
 
 # thread function
