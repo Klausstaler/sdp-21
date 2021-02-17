@@ -16,5 +16,5 @@ class NetworkInterface:
 
     async def send_request(self, robot: Robot, task: Task):
         await asyncio.sleep(1)
-        print("Finished task", task.task_type)
+        print("Robot", robot.id, "finished task", task.task_type)
         await self.central_server.finished_task(robot)
