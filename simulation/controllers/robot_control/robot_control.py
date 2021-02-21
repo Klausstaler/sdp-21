@@ -30,6 +30,12 @@ def movearm():
             robot_controller.lift_motor.setPosition(.73)
             x_pos = robot_controller.arm.try_pickup(x_pos)
 
+        msg = robot_controller.nfc_reader.read()
+        if msg:
+            print("The message is: ", msg)
+        else:
+            print("No message received")
+
 # This method is from Ryan's (Client's) server.py
 def process(data): # takes in request from server and handles the corresponding function.
     # print(data)

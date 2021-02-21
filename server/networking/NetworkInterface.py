@@ -1,5 +1,5 @@
 from collections import namedtuple
-from typing import Dict
+from typing import Dict, NamedTuple, Tuple
 
 from server.Robot import Robot
 from server.Task import Task, TaskType
@@ -10,7 +10,10 @@ from server.networking.utils import recvall, encode, decode
 
 print_lock = threading.Lock()
 
-Connection = namedtuple("Connection", ["socket", "address"])
+
+class Connection(NamedTuple):
+    socket: socket.socket
+    address: Tuple[str, int]
 
 
 def format_task(robot_id, task: Task) -> str:
@@ -25,11 +28,11 @@ def format_task(robot_id, task: Task) -> str:
 
 
 # thread function
-def send_task(socket: socket.socket, robot_id, task: Task):
+def send_task(sock: socket.socket, robot_id, task: Task):
     cmd = encode(format_task(robot_id, task))
     # data received from client
-    socket.send(cmd)
-    response = recvall(socket)
+    sock.send(cmd)
+    response = recvall(sock)
     print_lock.release()
     print(decode(response))
 
@@ -50,6 +53,11 @@ class NetworkInterface:
         print("socket binded to port", self.port)
         self.socket.listen(5)
         print("socket is listening")
+
+    def __del__(self):
+        for k, connection in self.open_connections.items():
+            connection.socket.close()
+        self.socket.close()
 
     def register_server(self, central_server):
         self.central_server = central_server
