@@ -1,9 +1,83 @@
 #VRML_SIM R2021a utf8
 # license: Apache License 2.0
 # license url: http://www.apache.org/licenses/LICENSE-2.0
-# This is the description of the sample PROTO node.
+# This is the description of NFC Tag.
+
 PROTO NFCTag [
+	# Position of the nfc tag
 	field SFVec3f translation 0 0 0
-	field SFRotation rotation 0 0 1 1.578
-	field SFVec3f size 0.4 0.4 0.4
+	field SFRotation rotation 0 1 0 0
+	# Dimenisions of the box shape of the nfc tag.
+	field SFVec3f dimensions 0.01 0.001 0.02
+	# Transmission Details
+	field SFString information_sent "Node 1"
+	field SFFloat transmission_range 0.5
+	field SFInt32 transmission_channel 0 #-1 for all channels 
 ]
+{
+	Robot {
+		translation IS translation
+		rotation IS rotation
+		scale IS 1 1 1
+		description "NFC Tag Emitter"
+		contactMaterial "default"
+		children [
+			Emitter {
+				translation IS translation
+				rotation IS rotation
+				scale 1 1 1
+				children []
+				name "emitter"
+				model ""
+				description ""
+				contactMaterial "default"
+				boundingObject NULL
+				physics NULL
+				recognitionColors [0 0 0]
+				type "infra-red"
+				range IS transmission_range
+				maxRange -1
+				aperture -1
+				channel IS transmission_channel
+				baudRate -1
+				byteSize 8
+				bufferSize 16
+			}
+			Shape { 
+				appearance PBRAppearance{
+					baseColor 0.333333 1 0
+					baseColorMap NULL
+					transparency 0
+					roughness 1
+					roughnessMap NULL
+					metalness 0
+					metalnessMap NULL
+					IBLStrength 1
+					normalMap NULL
+					normalMapFactor 1
+					occlusionMap NULL
+					occlusionMapStrength 1
+					emissiveColor 0.333333 1 0
+					emissiveColorMap NULL
+					emissiveIntensity 15
+					textureTransform NULL
+					name "PBRAppearance"
+				}
+
+				geometry DEF NFC_tag_shape Box{
+					size 0.01 0.001 0.02
+				}
+				castShadows FALSE
+				isPickable TRUE
+			}
+		]
+		name IS information_sent
+		physics NULL
+		locked FALSE
+		translationStep 0.01
+		rotationStep 0.262
+		radarCrossSection 0
+		controller "RFID_emit"
+		controllerArgs [""]
+	}
+}
