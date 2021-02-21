@@ -1,0 +1,9 @@
+#VRML_SIM R2021a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is the description of the sample PROTO node.
+PROTO NFCTag [
+	field SFVec3f translation 0 0 0
+	field SFRotation rotation 0 0 1 1.578
+	field SFVec3f size 0.4 0.4 0.4
+]
