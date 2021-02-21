@@ -5,20 +5,23 @@
 
 PROTO NFCTag [
 	# Position of the nfc tag
-	field SFVec3f translation 0 0 0
+	field SFVec3f translation 0.0 0.01 0.0
 	field SFRotation rotation 0 1 0 0
-	# Dimenisions of the box shape of the nfc tag.
-	field SFVec3f dimensions 0.01 0.001 0.02
+	# Appereance of the nfc tag
+	field SFVec3f dimensions 0.01 0.001 0.02 # Dimenisions of the box shape of the nfc tag.
+	field SFColor baseColor 0.333 1 0
+	field SFColor emissiveColor 0 1 0
+	field SFFloat emissiveIntensity 10
 	# Transmission Details
-	field SFString information_sent "Node 1"
-	field SFFloat transmission_range 0.5
-	field SFInt32 transmission_channel 0 #-1 for all channels 
+	field SFString informationSent "Node 1"
+	field SFFloat transmissionRange 0.25
+	field SFInt32 transmissionChannel 0 #-1 for all channels
 ]
 {
 	Robot {
 		translation IS translation
 		rotation IS rotation
-		scale IS 1 1 1
+		scale 1 1 1
 		description "NFC Tag Emitter"
 		contactMaterial "default"
 		children [
@@ -35,17 +38,17 @@ PROTO NFCTag [
 				physics NULL
 				recognitionColors [0 0 0]
 				type "infra-red"
-				range IS transmission_range
+				range IS transmissionRange
 				maxRange -1
 				aperture -1
-				channel IS transmission_channel
+				channel IS transmissionChannel
 				baudRate -1
 				byteSize 8
 				bufferSize 16
 			}
 			Shape { 
 				appearance PBRAppearance{
-					baseColor 0.333333 1 0
+					baseColor IS baseColor
 					baseColorMap NULL
 					transparency 0
 					roughness 1
@@ -57,21 +60,21 @@ PROTO NFCTag [
 					normalMapFactor 1
 					occlusionMap NULL
 					occlusionMapStrength 1
-					emissiveColor 0.333333 1 0
+					emissiveColor IS emissiveColor
 					emissiveColorMap NULL
-					emissiveIntensity 15
+					emissiveIntensity IS emissiveIntensity
 					textureTransform NULL
 					name "PBRAppearance"
 				}
 
 				geometry DEF NFC_tag_shape Box{
-					size 0.01 0.001 0.02
+					size IS dimensions
 				}
 				castShadows FALSE
 				isPickable TRUE
 			}
 		]
-		name IS information_sent
+		name IS informationSent
 		physics NULL
 		locked FALSE
 		translationStep 0.01
