@@ -82,11 +82,9 @@ class ArmController:
 
     def is_parked(self):
         parking_location = np.array([-.1, .18, .04])
-        is_parked = False
+
         curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3,3]
-        if round(np.linalg.norm(parking_location - curr_pos), 4) == 0.0400:
-            is_parked = True
-        return is_parked
+        return round(np.linalg.norm(parking_location - curr_pos), 4) <= 0.0400
 
     def try_pickup(self, x_pos):
         relative_target = np.array([x_pos, .1678, 0.04])
