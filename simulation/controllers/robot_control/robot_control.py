@@ -1,6 +1,7 @@
 from RobotController import RobotController
 import socket
-from server.networking import utils
+
+import utils
 
 
 def movearm():
