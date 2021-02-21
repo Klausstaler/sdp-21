@@ -39,10 +39,12 @@ def process(data): # takes in request from server and handles the corresponding 
         print(f"Robot is moving from node {from_node} to {to_node}.")
         current, desired = params.split(";")
         return utils.encode(f"Moved {robotid} from node {current} to {desired}.")
-    if function == "move-arm":
+    elif function == "move_arm":
         print(f"Robotic arm is moving.")
         movearm()
         return utils.encode(f"Arm moved to pick up package.")
+    else:
+        return utils.encode("Unknown command!")
 
 # This method is from Ryan's (Client's) server.py
 def establishConnection():

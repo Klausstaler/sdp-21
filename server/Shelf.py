@@ -2,10 +2,11 @@ from server.Location import Location
 
 
 class Shelf:
-    def __init__(self, compartment_size: float, height: float, location: Location):
+    def __init__(self, compartment_size: float, num_compartments, location: Location):
         self.compartment_size = compartment_size
-        self.height = height
+        self.num_compartments = num_compartments
         self.location = location
+        self.compartments = [None for _ in range(num_compartments)]
 
     def get_compartment_height(self, compartment_number: int):
         """

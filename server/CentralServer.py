@@ -1,3 +1,4 @@
+from server.Parcel import Parcel
 from server.Robot import Robot
 from server.Scheduler import Scheduler
 from server.Task import Task, TaskType
@@ -10,11 +11,14 @@ class CentralServer:
         self.network_interface = network_interface
         self.network_interface.register_server(self)
 
-    async def move_parcel(self, parcel, final_location):
+    async def move_parcel(self, parcel: Parcel, final_location):
         robot = self.scheduler.get_free_robot()
 
-        self.scheduler.add_tasks(robot, [Task(TaskType.MOVE_ARM, {"5": 10})])
-        self.scheduler.add_tasks(robot, [Task(TaskType.MOVE_ARM, {"1": 3})])
+        height = .98
+        # we still need to figure out movement and other stuff
+        tasks = [Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(height)})]
+        tasks.append(Task(TaskType.MOVE_ARM, {}))
+        self.scheduler.add_tasks(robot, tasks)
         print("Sending tasks....")
         await self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
 
