@@ -1,11 +1,14 @@
 from controller import Robot
 from ArmController import ArmController
+from NFCReader import NFCReader
 
 
 class RobotController(Robot):
     def __init__(self, timestep=128):
         super().__init__()
-        self.arm = ArmController(self)
+        self.arm = ArmController(self, timestep=timestep)
+        self.nfc_reader = NFCReader(self, timestep=timestep, led_present=False)
+        self.nfc_reader.setChannel(0)
 
         # Initialize motor
         self.lift_motor = self.getDevice("liftmot")
