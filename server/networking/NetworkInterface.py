@@ -66,7 +66,7 @@ class NetworkInterface:
     def resolve_connection(self, robot_id) -> Connection:
         if robot_id in self.open_connections:
             return self.open_connections[robot_id]
-        c, addr = self.socket.accept()  # let's for now hope the next robot connecting is the correct one
-        connection = Connection(c, addr)
+        sock, addr = self.socket.accept()  # let's for now hope the next robot connecting is the correct one
+        connection = Connection(sock, addr)
         self.open_connections[robot_id] = connection
         return connection

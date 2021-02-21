@@ -69,12 +69,6 @@ def establishConnection():
         print("msg recieved: " + data)
         response = process(data)
         s.send(response)
-        # ask the client whether he wants to continue
-        # ans = input('\nDo you want to continue(y/n) :')
-        # if ans == 'y':
-        #     continue
-        # else:
-        #     break
     # close the connection
     s.close()
     
