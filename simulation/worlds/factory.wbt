@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.02169090730008295 0.9983383185354866 0.05338638669395696 3.16461876166789
-  position 2.4409600989866265 0.9556267676578443 -2.823273531994792
+  orientation 0.01972375429773915 0.9887505919784573 0.1482674623059716 3.1208498443864525
+  position 2.4680629674726298 0.6667046453203368 -1.81731314302358
 }
 TexturedBackground {
   texture "empty_office"
@@ -549,9 +549,14 @@ Transform {
   rotation -0.577349935856137 -0.577349935856137 -0.5773509358560258 0
 }
 DEF TRANSPORT Robot {
-  translation 2.89814 0.0708838 0.225768
+  translation 2.89829 0.060884 0.225751
   rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
   children [
+    Receiver {
+      translation 0.35 0.25 0.05
+      type "infra-red"
+      bufferSize 16
+    }
     Solid {
       translation 0.375 0.535 0.19
       rotation -1 0 0 -1.57
@@ -609,7 +614,7 @@ DEF TRANSPORT Robot {
                       }
                     ]
                     endPoint DEF ROBOT_ARM Solid {
-                      translation 0 0 0.020000000000000157
+                      translation 0 0 0.02000000000000013
                       rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.09439
                       children [
                         Group {
@@ -1098,7 +1103,7 @@ DEF TRANSPORT Robot {
       ]
       endPoint DEF WHEEL_SOLID Solid {
         translation 0.65 0.6 -2.15743e-06
-        rotation 0 1 0 0.24992364184015348
+        rotation 0 0.9999999999999999 0 0.24992364331287692
         children [
           Shape {
             appearance PBRAppearance {
@@ -1287,8 +1292,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.309720000128548e-07
-        rotation 0 1 0 2.6825098443229716
+        translation 0.1 0.6 -6.309720000101344e-07
+        rotation 0 1 0 2.682509844857118
         children [
           Shape {
             appearance PBRAppearance {
@@ -1477,8 +1482,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999641745e-06
-        rotation 0 1 0 2.682509607460161
+        translation 0.65 -0.04 -1.0683199999728265e-06
+        rotation 0 0.9999999999999999 0 2.6825096100331565
         children [
           Shape {
             appearance PBRAppearance {
@@ -1667,8 +1672,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.578059997434938e-08
-        rotation 0 0.9999999999999999 0 0.24992400345920288
+        translation 0.1 -0.04 -5.578059997427044e-08
+        rotation 0 1 0 0.24992400589617014
         children [
           Shape {
             appearance PBRAppearance {
@@ -1850,4 +1855,7 @@ DEF TRANSPORT Robot {
   }
   controller "robot_control"
   supervisor TRUE
+}
+NFCTag {
+  translation 2.61 0.01 0
 }

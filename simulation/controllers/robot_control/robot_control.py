@@ -20,3 +20,9 @@ while robot_controller.step(TIMESTEP) != -1:
         robot_controller.lift_motor.setPosition(.73)
         x_pos = robot_controller.arm.try_pickup(x_pos)
         print(x_pos)
+
+    msg = robot_controller.nfc_reader.read()
+    if msg:
+        print("The message is: ", msg)
+    else:
+        print("No message received")
