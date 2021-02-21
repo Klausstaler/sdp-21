@@ -2,6 +2,9 @@
 # license: Apache License 2.0
 # license url: http://www.apache.org/licenses/LICENSE-2.0
 # This is the description of NFC Tag.
+# Translation and rotation fields manipulate the position of the nfc tag.
+# Dimensions, basecolor, emissive color and emissive intensity manipulate how the nfc tag looks.
+# InfromationSent, transsmissionRange, transmission Channel, manipulate how and what is transmitted by the nfc tag.
 
 PROTO NFCTag [
 	# Position of the nfc tag
