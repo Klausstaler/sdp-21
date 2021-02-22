@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9988355622884053 0.0456795142199669 -0.015521001534461298 5.114044414272806
-  position 0.9439878209169761 21.41008009703561 14.473315323701836
+  orientation -0.9965750499124845 0.034110208175985826 0.07533036300270733 1.5485404399000495
+  position 2.2642557825521203 29.490257580811758 6.464867494955017
 }
 TexturedBackground {
   texture "empty_office"
@@ -28,13 +28,193 @@ Floor {
   appearance ThreadMetalPlate {
   }
 }
+Solid {
+  translation -6.77 0.04960760000003672 3.99
+  rotation 0.39674668374283567 0.09951941331601805 -0.9125173726084879 1.0745537616954797e-16
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 13.4
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity -2.0021419900815403e-17 -2.875709104029362e-13 4.588624393487182e-17
+  angularVelocity 6.661338147750937e-16 1.3221152901248326e-16 2.664535259100379e-16
+}
+Solid {
+  translation -0.79 0.04960760000003671 -2.62
+  rotation 7.673866110436777e-17 0.9999999999999999 -1.2789736642050182e-17 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 12.25
+      }
+    }
+  ]
+  name "solid(9)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 1.1179873224343172e-17 -2.8751408431499006e-13 -2.1424000878691214e-17
+  angularVelocity -3.996802888650569e-16 -1.0314645975025215e-16 -6.661338147750947e-16
+}
+Solid {
+  translation -3.7 0.04960760000003671 10.6
+  rotation 8.313364135765047e-17 0.9999999999999999 -1.9397822337199442e-16 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 6.2
+      }
+    }
+  ]
+  name "solid(10)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity -1.1336325257403513e-17 -2.8757094416183037e-13 -5.790741014366016e-17
+  angularVelocity -1.598721155460226e-15 3.8171596361288474e-19 1.3322676295502147e-16
+}
+Solid {
+  translation 0.68 0.04960760000003671 6.15
+  rotation 2.1316434213721742e-18 0.9999999999999999 -2.7711179735300584e-17 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 3.1
+      }
+    }
+  ]
+  name "solid(12)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 4.5511029607317514e-17 -2.875709110448818e-13 4.127818942291077e-17
+  angularVelocity 1.1990408665951703e-15 -5.4900347785035125e-17 -9.325873406851315e-16
+}
+Solid {
+  translation 3.73000000320564 0.0496076000096973 10.62
+  rotation -4.456457079875805e-10 0.9999999999999999 -4.456462425492393e-10 -1.570795307179585
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 3.34
+      }
+    }
+  ]
+  name "solid(11)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 3.4615631057602224e-10 -7.594610450831095e-11 4.844126108709516e-17
+  angularVelocity 5.3303802395403635e-16 1.6941837730695518e-17 -6.922991785602878e-09
+}
+Solid {
+  translation -3.77 0.04960760000003672 3.99
+  rotation 0.37079323039900985 -0.05669882806986012 -0.9269830759974916 6.8985991086834e-17
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 13.4
+      }
+    }
+  ]
+  name "solid(5)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 1.772673843842545e-17 -2.8751407848523033e-13 3.1564191876586706e-17
+  angularVelocity -2.9582283945787943e-31 -4.868936650687139e-17 -7.99360577730112e-16
+}
+Solid {
+  translation -0.77 0.04960760000003672 3.99
+  rotation 0.09497257594705762 0.9828149556707727 -0.15828762657844553 2.693360502469793e-16
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 13.4
+      }
+    }
+  ]
+  name "solid(6)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 8.60548274893475e-17 -2.8757061631151483e-13 6.88251479534588e-17
+  angularVelocity 1.5987211554602257e-15 -2.7701725013936215e-16 -1.9984014443252814e-15
+}
+Solid {
+  translation 2.23 0.04960760000003672 3.99
+  rotation 0.37079323039900985 -0.05669882806986012 -0.9269830759974916 6.8985991086834e-17
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 13.4
+      }
+    }
+  ]
+  name "solid(7)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 1
+  }
+  linearVelocity 1.772673843842545e-17 -2.8751407848523033e-13 3.1564191876586706e-17
+  angularVelocity -2.9582283945787943e-31 -4.868936650687139e-17 -7.99360577730112e-16
+}
+Solid {
+  translation 5.23 0.04960760000003672 3.99
+  rotation -0.6080116307921022 -0.6499060711238609 0.45600872309406054 -8.414160911376424e-17
+  children [
+    Shape {
+      geometry Box {
+        size 0.3 1e-06 13.4
+      }
+    }
+  ]
+  name "solid(8)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    density -1
+    mass 1
+  }
+  linearVelocity -2.4482219218226215e-17 -2.8762753182227075e-13 -1.2000888487726088e-17
+  angularVelocity -1.332267629550187e-16 -5.656813648015995e-17 3.9968028886505617e-16
+}
 Door {
-  hidden translation_5 1.1012274425681312e-09 0 0.0010000035106232097
-  hidden rotation_5 0 1 0 0
+  hidden translation_5 2.4522735508902826e-09 -1.1102230246251565e-15 0.0010000078176420901
   translation 10.04 3.27 4
   rotation 0 1 0 4.7123889
   name "door(1)"
-  position -1.0639196142724932e-08
+  position -1.9706605633510945e-08
   doorAppearance GlossyPaint {
     baseColor 0.16 0.16 0.16
   }
@@ -57,11 +237,10 @@ OilBarrel {
   rotation 0 -1 0 0.3403392
 }
 Door {
-  hidden translation_5 1.1012269429677701e-09 0 0.0010000035106215999
-  hidden rotation_5 0 1 0 0
+  hidden translation_5 2.4522708863550235e-09 -1.1102230246251565e-15 0.0010000078176343186
   translation -10.05 0.02 0
   rotation 0 1 0 1.5707963
-  position -1.0639197092471712e-08
+  position -1.9706593538031293e-08
   doorAppearance GlossyPaint {
     baseColor 0.16 0.16 0.16
   }
@@ -89,8 +268,8 @@ WoodenPallet {
   rotation 1 0 0 5.2359877
 }
 CardboardBox {
-  translation 2.2339668309512652 0.19960760000000002 11.807743
-  rotation -6.243722389384326e-17 -1.0300634231433396e-16 1 1.5707963267948961
+  translation 2.2339668309512652 0.1996076000000369 11.807743
+  rotation 3.77632587286803e-17 2.4905307002834054e-17 1 1.5707963267948961
 }
 WoodenPalletStack {
   translation -6.8424942 0 11.754332
@@ -154,10 +333,16 @@ Cabinet {
   ]
 }
 Cabinet {
-  hidden translation_7 -2.0826823300956754e-06 0 0.0014395362380690572
-  hidden rotation_7 0 -1 0 0.002893544214734457
-  hidden translation_11 2.082684240178878e-06 0 0.0014395368980060833
-  hidden rotation_11 0 1 0 0.0028935455412265427
+  hidden translation_6 -0.5000000001990876 0.749791815325963 0.49999999845976717
+  hidden rotation_6 0.9900022201732809 2.3794857166688681e-07 -0.14105177791122675 7.969607854306e-05
+  hidden position_6_0 -0.0006648423834201481
+  hidden translation_7 -5.153759071563346e-06 0 0.002264500764881951
+  hidden rotation_7 0 -1 0 0.004551776048613128
+  hidden translation_10 0.5000053565766254 0.7497904189667692 0.4999842608374001
+  hidden rotation_10 0.9844814325194284 0.09570621444676415 0.14709394800862594 8.686146664002058e-05
+  hidden position_10_0 -0.009742657750273262
+  hidden translation_11 8.529486124286834e-06 0 -0.002913205440838422
+  hidden rotation_11 0 -1 0 0.005855722793829636
   translation 1.49 0 -3.84
   columnsWidths [
     1, 1
@@ -450,8 +635,8 @@ Solid {
   name "warehouse.obj"
 }
 Solid {
-  translation 3.1727783638869353 1.1365777369215813 -0.13493990289828076
-  rotation 0.7043462388156988 0.7097844130318928 0.010122395129122407 3.1103999213052727
+  translation 3.1732697317235043 1.1360612316883987 -0.13384328668652523
+  rotation 0.7048958774192726 0.7092029024865585 0.012371139880982887 3.104503356756162
   children [
     DEF CONNECTOR_BOX1 Connector {
       translation 0.07 -0.175 0.0199993
@@ -551,15 +736,49 @@ Solid {
   physics Physics {
     density 324
   }
+  linearVelocity -0.001625236042799164 0.0005400021170403329 0.005416552228593101
+  angularVelocity 0.031098144857138063 0.00014759233583292721 0.009304878366116605
 }
 Transform {
   translation 2.958 0.97 -0.16
   rotation -0.577349935856137 -0.577349935856137 -0.5773509358560258 0
 }
 DEF TRANSPORT Robot {
-  translation 5.97982 0.0433463 10.0316
-  rotation 0.8795399570339661 -0.3355803987513663 -0.3373355302285296 -1.696346435034399
+  translation 4.942212920652921 0.048093070589268976 7.82771652965786
+  rotation -0.5802885700089778 -0.5770257054700083 -0.5747229860931048 2.0908941364297284
   children [
+    DEF ds_right DistanceSensor {
+      translation 0.77 0.19 0.03
+      rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0.498039
+          }
+          geometry Box {
+            size 0.03 0.06 0.06
+          }
+        }
+      ]
+      name "ds_right"
+      type "infra-red"
+    }
+    DEF ds_left DistanceSensor {
+      translation 0.77 0.4 0.03
+      rotation 0.5773492691885823 0.5773502691890485 -0.5773512691895147 2.0944
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0.498039
+          }
+          geometry Box {
+            size 0.03 0.06 0.06
+          }
+        }
+      ]
+      name "ds_left"
+      type "infra-red"
+    }
     Solid {
       translation 0.375 0.535 0.19
       rotation -1 0 0 -1.57
@@ -601,7 +820,7 @@ DEF TRANSPORT Robot {
                   }
                   SliderJoint {
                     jointParameters JointParameters {
-                      position 0.38999726690739916
+                      position 0.38999730882671513
                       minStop -0.0001
                       maxStop 0.5
                     }
@@ -616,8 +835,8 @@ DEF TRANSPORT Robot {
                       }
                     ]
                     endPoint DEF ROBOT_ARM Solid {
-                      translation -3.30007e-06 -0.000511388 0.2999972718145744
-                      rotation -0.577349891538202 0.5773505078323454 0.5773504081981401 2.094389846469515
+                      translation 0.026056 8.52715e-05 0.2998470030009086
+                      rotation -0.5773463727264898 0.577357964656605 0.5773464701088485 2.094373830411701
                       children [
                         Group {
                           children [
@@ -683,7 +902,7 @@ DEF TRANSPORT Robot {
                         }
                         HingeJoint {
                           jointParameters HingeJointParameters {
-                            position 5.542908845764711e-06
+                            position 6.387363551270655e-06
                             axis 0 -1 0
                             anchor 0.033 0 0.07
                           }
@@ -700,8 +919,8 @@ DEF TRANSPORT Robot {
                             }
                           ]
                           endPoint Solid {
-                            translation 0.033 0 0.07
-                            rotation 0 -1 0 5.5429114997703504e-06
+                            translation 0.03299996432495038 1.2816217065392115e-07 0.06994955588171144
+                            rotation 0.029765332375353254 -0.9995569140385707 -2.4213091222915086e-05 6.271813601480148e-06
                             children [
                               Group {
                                 children [
@@ -754,7 +973,7 @@ DEF TRANSPORT Robot {
                               }
                               HingeJoint {
                                 jointParameters HingeJointParameters {
-                                  position 1.1146222848750708e-06
+                                  position 3.4772140335963683e-06
                                   axis 0 -1 0
                                   anchor 0 0 0.155
                                 }
@@ -772,7 +991,7 @@ DEF TRANSPORT Robot {
                                 ]
                                 endPoint Solid {
                                   translation 0 0 0.155
-                                  rotation 0 -1 0 1.1147024756232075e-06
+                                  rotation 0 -0.9999999999999999 0 3.4771788604241872e-06
                                   children [
                                     Group {
                                       children [
@@ -852,7 +1071,7 @@ DEF TRANSPORT Robot {
                                     }
                                     HingeJoint {
                                       jointParameters HingeJointParameters {
-                                        position 4.3287798714936224e-07
+                                        position 4.397596674378818e-07
                                         axis 0 -1 0
                                         anchor 0 0 0.135
                                       }
@@ -870,7 +1089,7 @@ DEF TRANSPORT Robot {
                                       ]
                                       endPoint Solid {
                                         translation 0 0 0.135
-                                        rotation 0 -1 0 4.3290373821061784e-07
+                                        rotation 0 -1 0 4.400260168383548e-07
                                         children [
                                           Group {
                                             children [
@@ -923,7 +1142,7 @@ DEF TRANSPORT Robot {
                                           }
                                           HingeJoint {
                                             jointParameters HingeJointParameters {
-                                              position -1.278526355530846e-07
+                                              position -1.309371474821992e-07
                                               axis 0 0 1
                                               anchor 0 0 0.081
                                             }
@@ -941,7 +1160,7 @@ DEF TRANSPORT Robot {
                                             ]
                                             endPoint Solid {
                                               translation 0 0 0.081
-                                              rotation 0 0 -1 1.264405455326821e-07
+                                              rotation 0 0 -1 1.2990531157078367e-07
                                               children [
                                                 Connector {
                                                   name "robot_box_connector"
@@ -963,6 +1182,8 @@ DEF TRANSPORT Robot {
                                                   0 0 0
                                                 ]
                                               }
+                                              linearVelocity -1.6856342037961192e-06 -1.4875356533906495e-06 1.421077185582469e-08
+                                              angularVelocity 4.209949322482957e-08 9.007887262755798e-09 5.342397267637361e-06
                                             }
                                           }
                                         ]
@@ -999,6 +1220,8 @@ DEF TRANSPORT Robot {
                                             0 0 -0.00015098
                                           ]
                                         }
+                                        linearVelocity -1.1516867231895252e-06 -1.45680095071264e-06 1.0002253535398022e-08
+                                        angularVelocity 4.209934039364542e-08 1.3858741856190161e-08 5.342397639766465e-06
                                       }
                                     }
                                   ]
@@ -1022,6 +1245,8 @@ DEF TRANSPORT Robot {
                                       0 0 -5.99276e-20
                                     ]
                                   }
+                                  linearVelocity -6.38540936858876e-07 -1.3200105963413437e-06 5.957190927193979e-09
+                                  angularVelocity 4.2245140140348486e-08 1.3906242693401205e-08 5.3604989011469965e-06
                                 }
                               }
                             ]
@@ -1045,6 +1270,8 @@ DEF TRANSPORT Robot {
                                 0 0 1.56701e-20
                               ]
                             }
+                            linearVelocity -1.447578853291157e-07 -1.0707052642218487e-06 1.659140697744316e-09
+                            angularVelocity 2.0302823637347767e-08 4.961570668634124e-09 1.9058945405688063e-06
                           }
                         }
                       ]
@@ -1069,6 +1296,8 @@ DEF TRANSPORT Robot {
                           -0.000533052 -0.00082008 -0.00062712
                         ]
                       }
+                      linearVelocity 2.13434908355006e-09 -6.812229463614312e-07 -1.691851614899889e-11
+                      angularVelocity 5.256392641694643e-09 7.591273392344096e-12 -7.470828645370692e-09
                     }
                   }
                 ]
@@ -1098,7 +1327,7 @@ DEF TRANSPORT Robot {
     }
     DEF WHEEL1 HingeJoint {
       jointParameters HingeJointParameters {
-        position 574.8879734372388
+        position 2224.086938769685
         axis 0 1 0
         anchor 0.65 0.61 0
       }
@@ -1108,8 +1337,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 0.61 0
-        rotation 0.00016935023946673021 0.9999999658086683 0.00019925651433200632 3.083483807951979
+        translation 0.6500014512899082 0.6099999906096967 6.108351164417226e-06
+        rotation 0.001631309413115226 0.9999980463015855 -0.0011163434107854535 6.01728813669349
         children [
           Shape {
             appearance PBRAppearance {
@@ -1284,11 +1513,13 @@ DEF TRANSPORT Robot {
           density -1
           mass 0.4
         }
+        linearVelocity 0.0014411814312759274 3.0003152251392128e-05 0.2000415804342462
+        angularVelocity 3.9999012570588013 0.005897867479679868 -0.028421592560168893
       }
     }
     DEF WHEEL2 HingeJoint {
       jointParameters HingeJointParameters {
-        position 828.5580681454421
+        position 2318.355058269131
         axis 0 1 0
         anchor 0.1 0.61 0
       }
@@ -1298,8 +1529,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.61 0
-        rotation 0.0003227104639050487 -0.9999997999177709 -0.000544079382701698 0.8665444895657952
+        translation 0.10000890827888725 0.610000257277389 -3.602577613189104e-07
+        rotation -0.00047594104813446003 0.9999978089644886 0.002038515720066002 6.028102734138305
         children [
           Shape {
             appearance PBRAppearance {
@@ -1474,11 +1705,13 @@ DEF TRANSPORT Robot {
           density -1
           mass 0.4
         }
+        linearVelocity 0.001416345406933288 4.58771820341068e-07 0.2000075661450128
+        angularVelocity 3.999902305855264 0.00589831184343276 -0.02842272407373806
       }
     }
     DEF WHEEL3 HingeJoint {
       jointParameters HingeJointParameters {
-        position 828.7509880457411
+        position 2397.0606693986942
         axis 0 1 0
         anchor 0.65 -0.05 0
       }
@@ -1488,8 +1721,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.05 0
-        rotation 0.000367589228153411 -0.9999996719761263 -0.0007217518960892556 0.66409695266521
+        translation 0.6499991665991807 -0.05000039395326006 6.331117361761168e-07
+        rotation 0.0002606228965478621 -0.9999999649203805 4.727519349052232e-05 3.221352194320987
         children [
           Shape {
             appearance PBRAppearance {
@@ -1664,11 +1897,13 @@ DEF TRANSPORT Robot {
           density -1
           mass 0.4
         }
+        linearVelocity 0.0014309511121501546 2.8122323795876513e-06 0.2000330982379937
+        angularVelocity 3.9999029537798663 0.005897931637658559 -0.028421560581985778
       }
     }
     DEF WHEEL4 HingeJoint {
       jointParameters HingeJointParameters {
-        position 574.8452288630731
+        position 1984.9249988748318
         axis 0 1 0
         anchor 0.1 -0.05 0
       }
@@ -1678,8 +1913,8 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.05 0
-        rotation 0.00014176919643483693 0.9999999713193807 0.00019303557374846853 3.031202375138075
+        translation 0.09999870789697154 -0.049999807069503355 -2.822408013798716e-05
+        rotation 0.0006794348706257361 0.9999997385326456 -0.00024759421865461586 5.606853412480676
         children [
           Shape {
             appearance PBRAppearance {
@@ -1854,6 +2089,8 @@ DEF TRANSPORT Robot {
           density -1
           mass 0.4
         }
+        linearVelocity 0.001415937964291426 -3.0778043228886195e-06 0.19996760371861244
+        angularVelocity 3.999898509227934 0.005896077857526348 -0.028420307822130765
       }
     }
   ]
@@ -1863,4 +2100,6 @@ DEF TRANSPORT Robot {
   }
   controller "robot_control"
   supervisor TRUE
+  linearVelocity 0.0014060452047962037 6.03062637299246e-06 0.200049361086116
+  angularVelocity 6.869576050323217e-06 5.433448634823073e-05 5.19449731431987e-05
 }
