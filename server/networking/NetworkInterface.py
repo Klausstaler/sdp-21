@@ -1,4 +1,3 @@
-from collections import namedtuple
 from typing import Dict, NamedTuple, Tuple
 
 from server.Robot import Robot
