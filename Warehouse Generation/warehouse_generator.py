@@ -25,6 +25,9 @@ from PIL import Image
 #   shelf_size:
 #       The length, breadth and height of the shelf units (x,y,z)
 #
+#   line_distance_from_shelf:
+#       Int defining distance from shelf and it's access line in meters
+#
 #   placement_grid:
 #       2D List where 'placement_grid[i][j]' refairs to node x=i, z=j
 #       Contains values from 0-14 detailing what is in that node position
@@ -45,12 +48,18 @@ from PIL import Image
 #          14) Right angle turn with exits north and west
 
 
-def create_world(world_name, room_size, shelf_size, placement_grid):
+def create_world(world_name, room_size, shelf_size, number_of_racks,
+                line_distance_from_shelf, placement_grid):
+
     #CREATES FLOOR LINE IMAGE USING 'line_grid_generator.py'
     line_gen = LineGridGenerator()
+
     line_grid_image = line_gen.create_line_grid(
-    [int(shelf_size[0]*64),int(shelf_size[2]*64)], placement_grid)
-    line_grid_image.save("warehouse_floor_grid.jpg")
+    [int(shelf_size[0]*30),int(shelf_size[2]*30)],
+    int(round(30*line_distance_from_shelf)),
+    placement_grid)
+
+    line_grid_image.save("textures/warehouse_floor_grid.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
     wbt_file_start = (
@@ -76,7 +85,7 @@ TexturedBackground {\n\
     #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
     #CHANGED TO THE LOCATION OF IMAGE WHEN MAP IS LOADED IN WEBOTS
       "url [\n\
-        \"C:/Users/Reece/Documents/Uni Year 3/Semester 2/SDP/code/WarehouseGenCode/warehouse_floor_grid.jpg\"\n\
+        \"textures/warehouse_floor_grid.jpg\"\n\
       ]\n\
       repeatS FALSE\n\
       repeatT FALSE\n\
@@ -89,16 +98,16 @@ TexturedBackground {\n\
 
     #DEFINES THE GEOMETRY FOR THE SHELFS (CURRENTLY USES SHAPE NODE WILL NEED
     #TO CHANGE THIS SLIGHTLY ACORDING TO THE SHELF PROTONODE WHEN ITS DONE)
-    box_geom_def = (
-"    DEF BOX_GEOMETRY Shape {\n\
-      appearance PBRAppearance {\n\
-      }\n\
-      geometry Box {\n\
-        size " + str(1.0*shelf_size[0]) + " " +
-        str(1.0*shelf_size[1]) + " " +
-        str(1.0*shelf_size[2]) + "\n\
-      }\n\
-    }\n")
+#     box_geom_def = (
+# "    DEF BOX_GEOMETRY Shape {\n\
+#       appearance PBRAppearance {\n\
+#       }\n\
+#       geometry Box {\n\
+#         size " + str(1.0*shelf_size[0]) + " " +
+#         str(1.0*shelf_size[1]) + " " +
+#         str(1.0*shelf_size[2]) + "\n\
+#       }\n\
+#     }\n")
 
     #Appends both strings together into the string that will be outputted
     #as the world file
@@ -112,11 +121,23 @@ TexturedBackground {\n\
 
     #USED TO CONVERT THE 'i','j' VAULES INTO THE THE 'x','z' FORM USED BY WEBOTS
     #(WHERE THE MIDDLE POINT OF THE MAP IS 'x=0', 'z=0')
-    j_conversion_x = math.floor((room_size[0]/shelf_size[0])/2)
-    i_conversion_z = math.floor((room_size[1]/shelf_size[2])/2)
+    if len(placement_grid[0])%2 == 0:
+        j_conversion_x = (room_size[0]/max(shelf_size))
+    else:
+        j_conversion_x = ((room_size[0]/max(shelf_size)))-1
+
+    if len(placement_grid)%2 == 0:
+        i_conversion_z = (room_size[1]/max(shelf_size))
+    else:
+        i_conversion_z = ((room_size[1]/max(shelf_size)))-1
+
+    print(j_conversion_x)
+    print(i_conversion_z)
 
     #KEEPS TRACK OF SHELF NUMBERS
     shelf_num = 0
+    webots_x = -(j_conversion_x)
+    webots_z = -(i_conversion_z)
 
     #NESTED LOOP TO ITTERATE THROUGH THE 2D LIST
     for i in range(len(placement_grid)):
@@ -124,41 +145,69 @@ TexturedBackground {\n\
             #Checks if current index is a shelf (will need to add checks once
             #orientation is added for other kinds of shelfs)
             #CHECKS IF CURRENT INDEX IS A SHELF
-            if placement_grid[i][j] == 0:
-                #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
-                if not shelf_num:
-                    #IF FIRST SHELF THEN CREATES SHELF ACORDING TO INPUT AND
-                    #DEFINES THE GEOMETRY USED FOR ALL SUBSIQUENT SHELFS
-                    obj = create_box(
-                    [
-                    (j-j_conversion_x)*shelf_size[0],
-                    0.5*shelf_size[1],
-                    (i-i_conversion_z)*shelf_size[2]
-                    ],
-                    [0.0,0.0,0.0,0.0],
-                    shelf_size,
-                    box_geom_def,
-                    "USE BOX_GEOMETRY",
-                    "solid(" + str(shelf_num) + ")")
-                else:
-                    #SHELF IS NOT FIRST SHELF SO SHOULD USE GEOMETRY DEFINED
-                    #BY FIRST SHELF
-                    obj = create_box(
-                    [
-                    (j-j_conversion_x)*shelf_size[0],
-                    0.5*shelf_size[1],
-                    (i-i_conversion_z)*shelf_size[2]
-                    ],
-                    [0.0,0.0,0.0,0.0],
-                    shelf_size,
-                    "    USE BOX_GEOMETRY\n",
-                    "USE BOX_GEOMETRY",
-                    "solid(" + str(shelf_num) + ")")
+            if placement_grid[i][j] >= 0 and placement_grid[i][j] <= 3:
 
+                #SETS VALUES FOR NORTH FACING SHELF
+                if placement_grid[i][j] == 0:
+                    x_coord = webots_x
+                    y_coord = number_of_racks*shelf_size[1]
+                    z_coord = webots_z + (max(shelf_size)-(min(shelf_size)/2))
+                    rotation = [1,0,1,3.14159]
+                    print("---------------------")
+                    print(x_coord)
+                    print(z_coord)
+
+                #SETS VALUES FOR EAST FACING SHELF
+                elif placement_grid[i][j] == 1:
+                    x_coord = webots_x + (max(shelf_size)-(min(shelf_size)/2))
+                    y_coord = number_of_racks*shelf_size[1]
+                    z_coord = webots_z + max(shelf_size)/2
+                    rotation = [0,0,1,3.14159]
+
+                #SETS VALUES FOR SOUTH FACING SHELF
+                elif placement_grid[i][j] == 2:
+                    x_coord = webots_x
+                    y_coord = number_of_racks*shelf_size[1]
+                    z_coord = webots_z + (min(shelf_size)/2)
+                    rotation = [1,0,1,3.14159]
+
+                #SETS VALUES FOR WEST FACING SHELF
+                else:
+                    x_coord = webots_x + (min(shelf_size)/2)
+                    y_coord = number_of_racks*shelf_size[1]
+                    z_coord = webots_z + max(shelf_size)/2
+                    rotation = [0,0,1,3.14159]
+
+                # #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
+                # if not shelf_num:
+                #     #IF FIRST SHELF THEN CREATES SHELF ACORDING TO INPUT AND
+                #     #DEFINES THE GEOMETRY USED FOR ALL SUBSIQUENT SHELFS
+                #     obj = create_box(
+                #     [x_coord, y_coord, z_coord],
+                #     rotation,
+                #     shelf_size,
+                #     box_geom_def,
+                #     "USE BOX_GEOMETRY",
+                #     "solid(" + str(shelf_num) + ")")
+                # else:
+                #     #SHELF IS NOT FIRST SHELF SO SHOULD USE GEOMETRY DEFINED
+                #     #BY FIRST SHELF
+                #     obj = create_box(
+                #     [x_coord, y_coord, z_coord],
+                #     rotation,
+                #     shelf_size,
+                #     "    USE BOX_GEOMETRY\n",
+                #     "USE BOX_GEOMETRY",
+                #     "solid(" + str(shelf_num) + ")")
+
+                obj = create_shelf(shelf_size, number_of_racks, [x_coord, y_coord, z_coord], rotation)
                 #APPENDS THE NEWLY CREATED SHELF'S CODE TO OUTPUT FILE
                 full_file_string += obj
                 #ADDS 1 TO 'shelf_num' TO KEEP TRACK OF NUMBER OF SHELFS
                 shelf_num += 1
+            webots_x += max(shelf_size)
+        webots_x = -j_conversion_x
+        webots_z += max(shelf_size)
 
     #Writer to write the output string file to a file denoted by 'world_name'
     #in the format needed for webots map files
@@ -172,8 +221,54 @@ TexturedBackground {\n\
     writer.close()
 
 
-#USED TO CREATE CODE DEFINING INSTANCE OF A BOX, WILL NEED TO BE CHANGED TO
-#FIT FORMAT OF SHELF NODE
+# #USED TO CREATE CODE DEFINING INSTANCE OF A BOX, WILL NEED TO BE CHANGED TO
+# #FIT FORMAT OF SHELF NODE
+# #
+# #@PARAM:
+# #   translation:
+# #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' coordinates
+# #
+# #   rotation:
+# #       List of size 4 where index '0,1,2,3' defines shelf's 'x,y,z,angle'
+# #       rotation values
+# #
+# #   scale:
+# #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' lengths in m
+# #
+# #   children:
+# #       String defining child nodes of shelf
+# #
+# #   boundingObject:
+# #       String defining the 'boundingObject' used by the shelf
+# #
+# #   name:
+# #       String defining the 'name' of the shelf
+# #
+# #
+# #@RETURNS:
+# #   String of code to create the shelf in webots
+# def create_box(translation, rotation, scale, children, boundingObject, name):
+#
+#     #CREATS STRING ACORDING TO ARGUMENTS
+#     obj = (
+# "Solid {\n\
+#   translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+#   rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n"\
+#   + "scale 1 1 1\n\
+#   children [\n"\
+# + children + "\
+#   ]\n\
+#   name \"" + name + "\"\n\
+#   boundingObject " + boundingObject + "\n\
+#   physics Physics {\n\
+#     mass 1\n\
+#   }\n\
+#   linearVelocity 0.0 0.0 0.0\n\
+#   angularVelocity 0.0 0.0 0.0\n\
+# }\n")
+
+
+#USED TO CREATE CODE DEFINING INSTANCE OF A SHELF
 #
 #@PARAM:
 #   translation:
@@ -196,26 +291,16 @@ TexturedBackground {\n\
 #       String defining the 'name' of the shelf
 #
 #
-#@RETURNS:
-#   String of code to create the shelf in webots
-def create_box(translation, rotation, scale, children, boundingObject, name):
+def create_shelf(shelf_size, number_of_racks, translation, rotation):
 
     #CREATS STRING ACORDING TO ARGUMENTS
     obj = (
-"Solid {\n\
+"Shelf {\n\
   translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
-  rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n"\
-  + "scale 1 1 1\n\
-  children [\n"\
-+ children + "\
-  ]\n\
-  name \"" + name + "\"\n\
-  boundingObject " + boundingObject + "\n\
-  physics Physics {\n\
-    mass 1\n\
-  }\n\
-  linearVelocity 0.0 0.0 0.0\n\
-  angularVelocity 0.0 0.0 0.0\n\
+  rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n\
+  numRacks 1 " + str(number_of_racks) + " 1\n\
+  baseDim " + str(shelf_size[0]) + " 0.02 " + str(shelf_size[2]) + "\n\
+  legDim 0.05 " + str(shelf_size[1]) + " 0.05\n\
 }\n")
 
     #RETURNS STRING
