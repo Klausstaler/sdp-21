@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.007317117996174866 0.9863216030982142 0.16466983647893405 2.9723030897237535
-  position 6.034420409556642 1.7435221161734815 -3.517933029695633
+  orientation 0.15085909666911326 0.9654934674272116 0.21228258832876273 4.157010118927231
+  position 5.531118384189642 1.4590029427669433 -0.3625923692046462
 }
 TexturedBackground {
   texture "empty_office"
@@ -445,6 +445,54 @@ Solid {
   translation 6.10226 1.18818 -0.144647
   rotation 0.7066560049579306 0.7075570049642521 -0.0006126850042986258 -3.140475307179586
   children [
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175144 -5.59463e-07
+      rotation 1 0 0 1.578
+      name "connector(10)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175 -0.02
+      rotation 1 0 0 1.578
+      name "connector(9)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175072 -0.0100003
+      rotation 1 0 0 1.578
+      name "connector(8)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175072 -0.0100003
+      rotation 1 0 0 1.578
+      name "connector(6)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175144 -5.59463e-07
+      rotation 1 0 0 1.578
+      name "connector(7)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175 -0.02
+      rotation 1 0 0 1.578
+      name "connector(5)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
     DEF CONNECTOR_BOX1 Connector {
       translation 0.07 -0.175 0.0199993
       rotation 1 0 0 1.5708
@@ -1292,7 +1340,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.309720000111855e-07
+        translation 0.1 0.6 -6.309720000119883e-07
         rotation 0 1 0 2.682509844857118
         children [
           Shape {
@@ -1482,7 +1530,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999694837e-06
+        translation 0.65 -0.04 -1.0683199999669305e-06
         rotation 0 1 0 2.6825096105486783
         children [
           Shape {
@@ -1672,7 +1720,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.57805999742644e-08
+        translation 0.1 -0.04 -5.578059997425954e-08
         rotation 0 1 0 0.24992400589617014
         children [
           Shape {
