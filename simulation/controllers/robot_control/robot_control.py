@@ -1,28 +1,30 @@
 from RobotController import RobotController
-import numpy as np
+from NetworkInterface import NetworkInterface
+from Task import TaskType, task_type_to_func
+
 IKPY_MAX_ITERATIONS = 4
 TIMESTEP = 128
+
+# Init network interface
+net_interface = NetworkInterface()
 
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)
 
-was_released = False
-
 x_pos = -.5 # go close to target in increments of .01
 while robot_controller.step(TIMESTEP) != -1:
-    is_present = robot_controller.arm.suction_cup.getPresence()
-    is_locked = robot_controller.arm.suction_cup.isLocked()
-    if is_present and not was_released and not is_locked:
-        robot_controller.arm.suction_cup.lock()
-    if is_locked:
-        robot_controller.arm.park_parcel()
-    else:
-        robot_controller.lift_motor.setPosition(.73)
-        x_pos = robot_controller.arm.try_pickup(x_pos)
-        print(x_pos)
-
+    success, curr_task = False, net_interface.get_current_task()
+    if curr_task.task_type == TaskType.PICKUP_PARCEL:
+        success = robot_controller.arm.try_pickup()
+    elif curr_task.task_type == TaskType.RAISE_PLATFORM:
+        success = robot_controller.raise_platform(**curr_task.params)
+    if success:
+        print("Finished", curr_task.task_type)
+        net_interface.send_response(task_type_to_func[curr_task.task_type])
+    """
     msg = robot_controller.nfc_reader.read()
     if msg:
         print("The message is: ", msg)
     else:
         print("No message received")
+    """
