@@ -15,8 +15,7 @@ class Connection(NamedTuple):
 
 
 def format_task(robot_id, task: Task) -> str:
-    task_type_to_func = {TaskType.PICKUP_PARCEL: "pickup_parcel", TaskType.RAISE_PLATFORM: "raise_platform"}
-    res = [robot_id, task_type_to_func[task.task_type]]
+    res = [robot_id, task.task_type.value]
     for key, val in task.params.items():
         res.append(",".join(map(str, [key, val])))
     # if no parameters are present, we insert the empty string at the end to present having no params
