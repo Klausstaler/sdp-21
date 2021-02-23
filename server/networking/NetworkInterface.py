@@ -4,7 +4,7 @@ from server.Robot import Robot
 from server.Task import Task, TaskType
 import socket
 import threading
-from server.networking.utils import recvall, encode, decode
+from networking.utils import recvall, encode, decode
 
 print_lock = threading.Lock()
 

@@ -2,7 +2,7 @@ from server.Parcel import Parcel
 from server.Robot import Robot
 from server.Scheduler import Scheduler
 from server.Task import Task, TaskType
-from server.networking.NetworkInterface import NetworkInterface
+from networking.NetworkInterface import NetworkInterface
 
 
 class CentralServer:
