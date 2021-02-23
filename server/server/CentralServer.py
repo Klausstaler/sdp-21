@@ -14,13 +14,17 @@ class CentralServer:
     async def move_parcel(self, parcel: Parcel, final_location):
         robot = self.scheduler.get_free_robot()
 
-        height = .98
         # we still need to figure out movement and other stuff
         tasks = [
             # Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(height)}),
             # Task(TaskType.PICKUP_PARCEL, {}),
             Task(TaskType.REACH_NODE, {})
             ]
+        compartment_num = parcel.shelf_info.compartment_number
+        needed_height = parcel.shelf_info.assigned_shelf.get_compartment_height(compartment_num)
+        print(needed_height)
+        tasks = [Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
+                 Task(TaskType.PICKUP_PARCEL, {})]
         self.scheduler.add_tasks(robot, tasks)
         print("Sending tasks....")
         await self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))

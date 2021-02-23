@@ -29,9 +29,6 @@ class LineGridGenerator():
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
-        print(x_mid_point)
-        print(y_mid_point)
-
 
         img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
@@ -101,6 +98,33 @@ class LineGridGenerator():
         return (img1, img2)
 
 
+        #CREATES THE LINE ON A SHELF NODE
+        #
+        #@PARAM:
+        #   size:
+        #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+        #
+        #   line_width:
+        #       Int stating the number of pixels line should take up (think rn odd
+        #       witdth will be out of line in some places)
+        #
+        #   shelf_line_dist:
+        #       Int defining amount of pixels needed to be between shelf and it's
+        #       acces line (where 30 = 1m between shelf and line)
+        #
+        #@RETURNS:
+        #       Tuple of Objects of the Image class showing the 2 straight lines
+        #       (2 needed incase of x,y of the image not being equal)
+        def __create_shelf_line(self, full_image, size, shelf_line_dist, line_width):
+
+            x_mid_point = (size[0]/2)-1
+            y_mid_point = (size[1]/2)-1
+
+            drawer = ImageDraw.Draw(full_image)
+            drawer.line(((shelf_line_dist/2),0, x_mid_point,size[1]), fill="black", width=line_width)
+            return full_image
+
+
     #CREATES THE BASE IMAGE FOR THE RIGHT ANGLE TURNS
     #
     #@PARAM:
@@ -129,16 +153,18 @@ class LineGridGenerator():
         drawer2.line((x_mid_point-(line_width/2)+1,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
         drawer2.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img1.save("turn.jpg")
-        img2.save("turn2.jpg")
-        return img1, img2
+        return (img1, img2)
 
 
     #CREATES THE FULL FLOOR LINEGRID ACORDING TO THE ARGUMENTS
     #
     #@PARAM:
-    #   size:
-    #       List of form x,y which defines the image size of each indivitual node
+    #   shelf_size:
+    #       List of form x,y which defines the x,y size of shelf in pixels
+    #
+    #   shelf_line_dist:
+    #       Int defining amount of pixels needed to be between shelf and it's
+    #       acces line (where 30 = 1m between shelf and line)
     #
     #   grid_array:
     #       2D List where 'grid_array[i][j]' refairs to node x=i, z=j
@@ -162,11 +188,14 @@ class LineGridGenerator():
     #
     #@RETURNS:
     #   Image object detailing the full floor grid
-    def create_line_grid(self, size, grid_array):
+    def create_line_grid(self, shelf_size, shelf_line_dist, grid_array):
 
         #DEFINES THE line_width (IN PIXELS), SHOULD BE EVEN AND IS HARD CODED
         #AS THE TAPE LINE WILL BE THE SAME SIZE REGUARDLESS OF WAREHOUSE SIZE
-        line_width = 6
+        line_width = 2
+
+        #DEFINES SIZE OF EACH NODE AND NUMBER OF PIXELS IN EACH IMAGE
+        size = [max(shelf_size), max(shelf_size)]
 
         #CALLS PRIVATE METHODS TO CREATE EACH GRID IMAGE NEEDED
         (v_line, h_line) =              self.__create_line(size, line_width)
@@ -175,7 +204,7 @@ class LineGridGenerator():
         (e_s_turn, n_e_turn) =          self.__create_turn(size, line_width)
 
         #WORKS OUT THE total_width AND total_height OF THE FINAL IMAGE
-        #AND CREATES A BLANK WHITE IMAGE OF THIS SIZE
+        #AND CREATES A BLANK white IMAGE OF THIS SIZE
         total_width = size[0] * len(grid_array[0])
         total_height = size[1] * len(grid_array)
         full_image = Image.new("RGB", (total_width, total_height), "white")
@@ -219,6 +248,112 @@ class LineGridGenerator():
 
             #PLACES row_image ONTO full_image AT THE CORRECT SPOT FOR CURRENT ROW
             full_image.paste(row_image, (0, size[1]*i))
+
+        #DRAWS LINES FROM PATH TO SHELF NODES
+        for i in range(len(grid_array)):
+            for j in range(len(grid_array[i])):
+                if grid_array[i][j] >= 0 and grid_array[i][j] <=3:
+
+                    if grid_array[i][j] == 0:
+                        x_mid_point = (size[0]/2)-1
+                        y_mid_point = (size[1]/2)-1
+
+                        drawer = ImageDraw.Draw(full_image)
+                        drawer.line((((size[0]*j) + x_mid_point, (size[1]*(i-1)) + y_mid_point),
+                        (size[0]*j) + x_mid_point, (size[1]*(i+1)) - shelf_size[0]),
+                        fill="black", width=line_width)
+
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*j)+(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
+
+
+                    elif grid_array[i][j] == 1:
+                        x_mid_point = (size[0]/2)-1
+                        y_mid_point = (size[1]/2)-1
+
+                        drawer = ImageDraw.Draw(full_image)
+                        drawer.line(((size[0]*j) + shelf_size[0], ((size[1]*i) + y_mid_point),
+                        (size[0]*(j+1)) + x_mid_point, ((size[1]*i) + y_mid_point)),
+                        fill="black", width=line_width)
+
+
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+
+
+
+                    elif grid_array[i][j] == 2:
+                        x_mid_point = (size[0]/2)-1
+                        y_mid_point = (size[1]/2)-1
+
+                        drawer = ImageDraw.Draw(full_image)
+                        drawer.line((((size[0]*j) + x_mid_point, (size[1]*(i)) + shelf_size[0],
+                        (size[0]*j) + x_mid_point, (size[1]*(i+1)) + y_mid_point)),
+                        fill="black", width=line_width)
+
+                        #drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*j)+(shelf_line_dist/2),(size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
+
+
+                    else:
+                        x_mid_point = (size[0]/2)-1
+                        y_mid_point = (size[1]/2)-1
+
+                        drawer = ImageDraw.Draw(full_image)
+                        drawer.line(((size[0]*j) - x_mid_point, (size[1]*i) + y_mid_point,
+                        (size[0]*(j+1)) - shelf_size[0], (size[1]*i) + y_mid_point),
+                        fill="black", width=line_width)
+
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2),
+                        # ((size[0]*(j+1))-(shelf_line_dist + shelf_size[0])), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+
+
+
 
         #RETURNS THE FULL IMAGE OF THE FLOOR GRID
         return full_image
