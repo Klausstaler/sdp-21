@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class TaskType(Enum):
-    MOVE_ARM = 1
+    PICKUP_PARCEL = 1
     RAISE_PLATFORM = 2
 
 class Task:

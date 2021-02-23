@@ -1,9 +1,7 @@
-from queue import Empty
-
 from RobotController import RobotController
 from NetworkInterface import NetworkInterface
 from robot_methods import raise_platform
-from Task import TaskType, Task, task_type_to_func
+from Task import TaskType, task_type_to_func
 
 IKPY_MAX_ITERATIONS = 4
 TIMESTEP = 128
@@ -22,7 +20,7 @@ while robot_controller.step(TIMESTEP) != -1:
     elif curr_task.task_type == TaskType.RAISE_PLATFORM:
         success = raise_platform(robot_controller, **curr_task.params)
     if success:
-        print(curr_task.task_type)
+        print("Finished", curr_task.task_type)
         net_interface.send_response(task_type_to_func[curr_task.task_type])
     """
     msg = robot_controller.nfc_reader.read()

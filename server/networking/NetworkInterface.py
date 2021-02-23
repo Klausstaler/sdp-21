@@ -16,7 +16,7 @@ class Connection(NamedTuple):
 
 
 def format_task(robot_id, task: Task) -> str:
-    task_type_to_func = {TaskType.MOVE_ARM: "move_arm", TaskType.RAISE_PLATFORM: "raise_platform"}
+    task_type_to_func = {TaskType.PICKUP_PARCEL: "pickup_parcel", TaskType.RAISE_PLATFORM: "raise_platform"}
     res = [robot_id, task_type_to_func[task.task_type]]
     for key, val in task.params.items():
         res.append(",".join(map(str, [key, val])))
@@ -64,8 +64,8 @@ class NetworkInterface:
     async def send_request(self, robot: Robot, task: Task):
         connection = self.resolve_connection(robot.id)
         print_lock.acquire()
-        print('Connected to :', connection.address[0], ':', connection.address[1])
         # start_new_thread(threaded, (connection.socket, robot.id, task)) # let's not thread for now
+        print("Sending task", task.task_type, "to", robot.id)
         send_task(connection.socket, robot.id, task)
         print("Robot", robot.id, "finished task", task.task_type)
         await self.central_server.finished_task(robot)
@@ -76,4 +76,5 @@ class NetworkInterface:
         sock, addr = self.socket.accept()  # let's for now hope the next robot connecting is the correct one
         connection = Connection(sock, addr)
         self.open_connections[robot_id] = connection
+        print('Connected to :', connection.address[0], ':', connection.address[1])
         return connection
