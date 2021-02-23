@@ -3,7 +3,7 @@ import asyncio
 from server.CentralServer import CentralServer
 from server.Robot import Robot
 from server.Scheduler import Scheduler
-from server.networking.NetworkInterface import NetworkInterface
+from networking.NetworkInterface import NetworkInterface
 from server.Location import Size, Location
 from server.Parcel import Parcel
 
