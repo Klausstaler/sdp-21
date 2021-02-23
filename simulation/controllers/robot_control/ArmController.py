@@ -22,6 +22,8 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
     rpy[1], rpy[2] = rpy[2], rpy[1]
     return rpy
 
+INITIAL_PICKUP_X = -.5
+
 
 class ArmController:
 
@@ -39,6 +41,8 @@ class ArmController:
                 position_sensor = motor.getPositionSensor()
                 position_sensor.enable(timestep)
                 self.motors.append(motor)
+
+        self.pickup_x = INITIAL_PICKUP_X # used to try different pickup locations if pickup fails
 
         # Deactivate fixed joints
         for i in [0, 1, 2]:
@@ -80,14 +84,29 @@ class ArmController:
         parking_location = np.array([-.1, .18, .04])
         self.move_endeffector(parking_location)
 
-    def try_pickup(self, x_pos):
-        relative_target = np.array([x_pos, .1678, 0.04])
+    def is_parked(self):
+        parking_location = np.array([-.1, .18, .04])
+
+        curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3,3]
+        return round(np.linalg.norm(parking_location - curr_pos), 4) <= 0.0405
+
+    def try_pickup(self):
+        relative_target = np.array([self.pickup_x, .1678, 0.04])
         self.move_endeffector(relative_target)
-        curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
-        if np.linalg.norm(
-                relative_target - curr_pos) < 0.045:  # if we are close to the target location but still had no pickup, move forward for pickup
-            x_pos -= .01
-        return x_pos
+
+        is_present = self.suction_cup.getPresence()
+        is_locked = self.suction_cup.isLocked()
+        if is_present and not is_locked:
+            self.suction_cup.lock()
+        if is_locked:
+            self.park_parcel()
+            if self.is_parked():
+                self.pickup_x = INITIAL_PICKUP_X
+                return True  # success
+        else:
+            self.pickup_x -= .01
+        return False
+
 
     def convert_relative(self, global_coord: np.array) -> np.array:
         """

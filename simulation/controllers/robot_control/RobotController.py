@@ -56,3 +56,8 @@ class RobotController(Robot):
             self.lift.setVelocity(-1)
         else:
             self.lift.setVelocity(0)
+
+    def raise_platform(self, height: str) -> bool:
+        height = float(height)
+        self.lift_motor.setPosition(height)
+        return abs(self.lift_motor.getPositionSensor().getValue() - height) < 0.001
