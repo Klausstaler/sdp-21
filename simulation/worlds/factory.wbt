@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.01972375429773915 0.9887505919784573 0.1482674623059716 3.1208498443864525
-  position 2.4680629674726298 0.6667046453203368 -1.81731314302358
+  orientation -0.019764636725970126 -0.9985932055439788 -0.049203343143444656 3.195056613219173
+  position 5.763453932598609 0.6967188494845116 -1.8802407027383088
 }
 TexturedBackground {
   texture "empty_office"
@@ -442,7 +442,7 @@ Solid {
   name "warehouse.obj"
 }
 Solid {
-  translation 3.17227 1.1744 -0.13977
+  translation 6.10226 1.18818 -0.144647
   rotation 0.7066560049579306 0.7075570049642521 -0.0006126850042986258 -3.140475307179586
   children [
     DEF CONNECTOR_BOX1 Connector {
@@ -545,11 +545,11 @@ Solid {
   }
 }
 Transform {
-  translation 2.958 0.97 -0.16
+  translation 5.85 1 0
   rotation -0.577349935856137 -0.577349935856137 -0.5773509358560258 0
 }
 DEF TRANSPORT Robot {
-  translation 2.89829 0.060884 0.225751
+  translation 5.77829 0.062329 0.251374
   rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
   children [
     Receiver {
@@ -1292,7 +1292,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.309720000101344e-07
+        translation 0.1 0.6 -6.309720000122657e-07
         rotation 0 1 0 2.682509844857118
         children [
           Shape {
@@ -1482,7 +1482,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999728265e-06
+        translation 0.65 -0.04 -1.068319999966048e-06
         rotation 0 0.9999999999999999 0 2.6825096100331565
         children [
           Shape {
@@ -1672,7 +1672,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.578059997427044e-08
+        translation 0.1 -0.04 -5.578059997425824e-08
         rotation 0 1 0 0.24992400589617014
         children [
           Shape {
@@ -1855,6 +1855,13 @@ DEF TRANSPORT Robot {
   }
   controller "robot_control"
   supervisor TRUE
+}
+Shelf {
+  translation 6.41 2 0
+  rotation 0.7071067811865475 0 0.7071067811865475 3.14
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
 }
 NFCTag {
   translation 2.61 0.01 0
