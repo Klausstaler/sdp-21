@@ -2,12 +2,9 @@ from enum import Enum
 
 
 class TaskType(Enum):
-    PICKUP_PARCEL = 1
-    RAISE_PLATFORM = 2
-    NO_TASK = 3
-
-
-task_type_to_func = {TaskType.PICKUP_PARCEL: "pickup_parcel", TaskType.RAISE_PLATFORM: "raise_platform"}
+    PICKUP_PARCEL = "pickup_parcel"
+    RAISE_PLATFORM = "raise_platform"
+    NO_TASK = "NO_TASK"
 
 
 class Task:
