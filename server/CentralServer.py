@@ -16,8 +16,7 @@ class CentralServer:
 
         height = .98
         # we still need to figure out movement and other stuff
-        tasks = [Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(height)})]
-        tasks.append(Task(TaskType.MOVE_ARM, {}))
+        tasks = [Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(height)}), Task(TaskType.MOVE_ARM, {})]
         self.scheduler.add_tasks(robot, tasks)
         print("Sending tasks....")
         await self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
