@@ -122,20 +122,21 @@ TexturedBackground {\n\
     #USED TO CONVERT THE 'i','j' VAULES INTO THE THE 'x','z' FORM USED BY WEBOTS
     #(WHERE THE MIDDLE POINT OF THE MAP IS 'x=0', 'z=0')
     if len(placement_grid[0])%2 == 0:
-        j_conversion_x = (room_size[0]/max(shelf_size))
+        #j_conversion_x = (room_size[0]/max(shelf_size))
+        j_conversion_x = ((room_size[0])/2)
     else:
-        j_conversion_x = ((room_size[0]/max(shelf_size)))-1
+        #j_conversion_x = ((room_size[0]/max(shelf_size)))-1
+        j_conversion_x = ((room_size[0])/2)
 
     if len(placement_grid)%2 == 0:
-        i_conversion_z = (room_size[1]/max(shelf_size))
+        #i_conversion_z = (room_size[1]/max(shelf_size))
+        i_conversion_z = ((room_size[1])/2)
     else:
-        i_conversion_z = ((room_size[1]/max(shelf_size)))-1
-
-    print(j_conversion_x)
-    print(i_conversion_z)
+        #i_conversion_z = ((room_size[1]/max(shelf_size)))-1
+        i_conversion_z = ((room_size[1])/2)
 
     #KEEPS TRACK OF SHELF NUMBERS
-    shelf_num = 0
+    node_num = 0
     webots_x = -(j_conversion_x)
     webots_z = -(i_conversion_z)
 
@@ -149,34 +150,51 @@ TexturedBackground {\n\
 
                 #SETS VALUES FOR NORTH FACING SHELF
                 if placement_grid[i][j] == 0:
-                    x_coord = webots_x
-                    y_coord = number_of_racks*shelf_size[1]
+                    x_coord = webots_x + (max(shelf_size)/2)
+                    y_coord = number_of_racks * shelf_size[1]
                     z_coord = webots_z + (max(shelf_size)-(min(shelf_size)/2))
                     rotation = [1,0,1,3.14159]
-                    print("---------------------")
-                    print(x_coord)
-                    print(z_coord)
+
+                    #SETS VALUES FOR THE TAG
+                    tag_x_coord = webots_x + (max(shelf_size)/2)
+                    tag_y_coord = 0
+                    tag_z_coord = webots_z + (max(shelf_size)-min(shelf_size))
 
                 #SETS VALUES FOR EAST FACING SHELF
                 elif placement_grid[i][j] == 1:
-                    x_coord = webots_x + (max(shelf_size)-(min(shelf_size)/2))
+                    x_coord = webots_x + (shelf_size[0]/2)
                     y_coord = number_of_racks*shelf_size[1]
-                    z_coord = webots_z + max(shelf_size)/2
+                    z_coord = webots_z + (max(shelf_size)/2)
                     rotation = [0,0,1,3.14159]
+
+                    #SETS VALUES FOR THE TAG
+                    tag_x_coord = webots_x + (shelf_size[0])
+                    tag_y_coord = 0
+                    tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 #SETS VALUES FOR SOUTH FACING SHELF
                 elif placement_grid[i][j] == 2:
-                    x_coord = webots_x
+                    x_coord = webots_x + (max(shelf_size)/2)
                     y_coord = number_of_racks*shelf_size[1]
                     z_coord = webots_z + (min(shelf_size)/2)
                     rotation = [1,0,1,3.14159]
 
+                    #SETS VALUES FOR THE TAG
+                    tag_x_coord = webots_x + (max(shelf_size)/2)
+                    tag_y_coord = 0
+                    tag_z_coord = webots_z + (min(shelf_size))
+
                 #SETS VALUES FOR WEST FACING SHELF
                 else:
-                    x_coord = webots_x + (min(shelf_size)/2)
+                    x_coord = webots_x + (max(shelf_size)-(min(shelf_size)/2))
                     y_coord = number_of_racks*shelf_size[1]
-                    z_coord = webots_z + max(shelf_size)/2
+                    z_coord = webots_z + (max(shelf_size)/2)
                     rotation = [0,0,1,3.14159]
+
+                    #SETS VALUES FOR THE TAG
+                    tag_x_coord = webots_x + (max(shelf_size)-(min(shelf_size)))
+                    tag_y_coord = 0
+                    tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 # #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
                 # if not shelf_num:
@@ -200,13 +218,44 @@ TexturedBackground {\n\
                 #     "USE BOX_GEOMETRY",
                 #     "solid(" + str(shelf_num) + ")")
 
+                #CREATES CODE TO GENERATE WEBOTS SHELF IN CORRECT LOCATION
                 obj = create_shelf(shelf_size, number_of_racks, [x_coord, y_coord, z_coord], rotation)
                 #APPENDS THE NEWLY CREATED SHELF'S CODE TO OUTPUT FILE
                 full_file_string += obj
-                #ADDS 1 TO 'shelf_num' TO KEEP TRACK OF NUMBER OF SHELFS
-                shelf_num += 1
+
+                #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                full_file_string += tag_obj
+                node_num += 1
+
+            #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
+            elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
+                tag_x_coord = webots_x + ((shelf_size[0]/2))
+                tag_y_coord = 0
+                tag_z_coord = webots_z + ((shelf_size[2]/2))
+
+                #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                full_file_string += tag_obj
+                node_num += 1
+
+            #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
+            elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
+
+                #CHECHKS IF LINE IS ATTACHED TO A SHELF
+                if(connected_to_shelf(placement_grid,i,j)):
+                    tag_x_coord = webots_x + ((shelf_size[0]/2))
+                    tag_y_coord = 0
+                    tag_z_coord = webots_z + ((shelf_size[2]/2))
+
+                    #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
+                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                    full_file_string += tag_obj
+                    node_num += 1
+
+
             webots_x += max(shelf_size)
-        webots_x = -j_conversion_x
+        webots_x = -(j_conversion_x)
         webots_z += max(shelf_size)
 
     #Writer to write the output string file to a file denoted by 'world_name'
@@ -290,7 +339,6 @@ TexturedBackground {\n\
 #   name:
 #       String defining the 'name' of the shelf
 #
-#
 def create_shelf(shelf_size, number_of_racks, translation, rotation):
 
     #CREATS STRING ACORDING TO ARGUMENTS
@@ -305,3 +353,54 @@ def create_shelf(shelf_size, number_of_racks, translation, rotation):
 
     #RETURNS STRING
     return obj
+
+def create_tag(translation, information_sent):
+
+    #CREATS STRING ACORDING TO ARGUMENTS
+    obj = (
+"NFCTag {\n\
+  translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+  dimensions 0.03 0.001 0.03\n\
+  informationSent \"" + str(information_sent) + "\"\n\
+}\n")
+
+    #RETURNS STRING
+    return obj
+
+
+#USED TO CHECK IF A STRAIGHT LINE HAS A SHELF CONNECTED TO IT
+#
+#@PARAM:
+#   placement_grid:
+#       2D List where 'placement_grid[i][j]' refairs to node x=i, z=j
+#       Contains values from 0-14 detailing what is in that node position
+#       Check "create_world"'s comments for more information
+#
+#   index_i:
+#       Index i of the currently considered line
+#
+#   index_j:
+#       Index j of the currently considered line
+#
+#   @RETURNS:
+#       True if connected to a shelf False otherwise
+def connected_to_shelf(placement_grid, index_i, index_j):
+
+    #CHECK NORTH FOR SOUTH FACING SHELF
+    if index_i > 0 and placement_grid[index_i-1][index_j] == 2:
+        return True
+
+    #CHECK SOUTH FOR NORTH FACING SHELF
+    elif index_i < len(placement_grid)-1 and placement_grid[index_i+1][index_j] == 0:
+        return True
+
+    #CHECK WEST FOR EAST FACING SHELF
+    elif index_j > 0 and placement_grid[index_i][index_j-1] == 1:
+        return True
+
+    #CHECK EAST FOR WEST FACING SHELF
+    elif index_j < len(placement_grid)-1 and placement_grid[index_i][index_j+1] == 3:
+        return True
+
+    #RETURNS FALSE IF NO CONNECTED SHELFS WERE FOUND
+    return False

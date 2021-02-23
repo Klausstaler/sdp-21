@@ -23,14 +23,14 @@ class LineGridGenerator():
 #@RETURNS:
 #       Object of the Image class showing the junction
     def __create_p_junction(self, size, line_width):
-        img = Image.new("RGB", size, "yellow")
+        img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
 
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
 
-        img = Image.new("RGB", size, "yellow")
+        img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
         drawer.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
         drawer.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
@@ -56,12 +56,12 @@ class LineGridGenerator():
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
-        img1 = Image.new("RGB", size, "yellow")
+        img1 = Image.new("RGB", size, "white")
         drawer1 = ImageDraw.Draw(img1)
         drawer1.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
         drawer1.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img2 = Image.new("RGB", size, "yellow")
+        img2 = Image.new("RGB", size, "white")
         drawer2 = ImageDraw.Draw(img2)
         drawer2.line((0,y_mid_point, x_mid_point,y_mid_point), fill="black", width=line_width)
         drawer2.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
@@ -87,11 +87,11 @@ class LineGridGenerator():
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
-        img1 = Image.new("RGB", size, "yellow")
+        img1 = Image.new("RGB", size, "white")
         drawer1 = ImageDraw.Draw(img1)
         drawer1.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img2 = Image.new("RGB", size, "yellow")
+        img2 = Image.new("RGB", size, "white")
         drawer2 = ImageDraw.Draw(img2)
         drawer2.line((0,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
 
@@ -122,9 +122,6 @@ class LineGridGenerator():
 
             drawer = ImageDraw.Draw(full_image)
             drawer.line(((shelf_line_dist/2),0, x_mid_point,size[1]), fill="black", width=line_width)
-            drawer.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
-            drawer.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
-
             return full_image
 
 
@@ -146,12 +143,12 @@ class LineGridGenerator():
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
-        img1 = Image.new("RGB", size, "yellow")
+        img1 = Image.new("RGB", size, "white")
         drawer1 = ImageDraw.Draw(img1)
         drawer1.line((0,y_mid_point, x_mid_point+(line_width/2),y_mid_point), fill="black", width=line_width)
         drawer1.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
 
-        img2 = Image.new("RGB", size, "yellow")
+        img2 = Image.new("RGB", size, "white")
         drawer2 = ImageDraw.Draw(img2)
         drawer2.line((x_mid_point-(line_width/2)+1,y_mid_point, size[0],y_mid_point), fill="black", width=line_width)
         drawer2.line((x_mid_point,y_mid_point, x_mid_point,size[1]), fill="black", width=line_width)
@@ -207,17 +204,17 @@ class LineGridGenerator():
         (e_s_turn, n_e_turn) =          self.__create_turn(size, line_width)
 
         #WORKS OUT THE total_width AND total_height OF THE FINAL IMAGE
-        #AND CREATES A BLANK yellow IMAGE OF THIS SIZE
+        #AND CREATES A BLANK white IMAGE OF THIS SIZE
         total_width = size[0] * len(grid_array[0])
         total_height = size[1] * len(grid_array)
-        full_image = Image.new("RGB", (total_width, total_height), "yellow")
+        full_image = Image.new("RGB", (total_width, total_height), "white")
 
         #NESTED LOOP TO LOOK THROUGH grid_array AND PLACE THE CORRECT GRID IMAGE
         #ACORDING TO THE VALUES IN grid_array
         for i in range(len(grid_array)):
 
             #CREATES A BLANK IMAGE THAT WILL DISPLAY THE CURRENT ROW
-            row_image = Image.new("RGB", (total_width, size[1]), "yellow")
+            row_image = Image.new("RGB", (total_width, size[1]), "white")
             for j in range(len(grid_array[i])):
 
                 #HOIZONTAL LINE SHOULD BE PLACED
@@ -262,19 +259,23 @@ class LineGridGenerator():
                         y_mid_point = (size[1]/2)-1
 
                         drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
-                        (size[0]*j)+(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        drawer.line((((size[0]*j) + x_mid_point, (size[1]*(i-1)) + y_mid_point),
+                        (size[0]*j) + x_mid_point, (size[1]*(i+1)) - shelf_size[0]),
                         fill="black", width=line_width)
 
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
-                        (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
-                        fill="black", width=line_width)
-
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0]))),
-                        (size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0])))),
-                        fill="black", width=line_width)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*j)+(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
 
 
                     elif grid_array[i][j] == 1:
@@ -282,19 +283,24 @@ class LineGridGenerator():
                         y_mid_point = (size[1]/2)-1
 
                         drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
-                        (size[0]*(j+1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2)),
+                        drawer.line(((size[0]*j) + shelf_size[0], ((size[1]*i) + y_mid_point),
+                        (size[0]*(j+1)) + x_mid_point, ((size[1]*i) + y_mid_point)),
                         fill="black", width=line_width)
 
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2),
-                        (size[0]*(j+1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2)),
-                        fill="black", width=line_width)
 
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
-                        (size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2)),
-                        fill="black", width=line_width)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
 
 
 
@@ -303,19 +309,24 @@ class LineGridGenerator():
                         y_mid_point = (size[1]/2)-1
 
                         drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
-                        (size[0]*j)+(shelf_line_dist/2),(size[1]*(i+1))+y_mid_point),
+                        drawer.line((((size[0]*j) + x_mid_point, (size[1]*(i)) + shelf_size[0],
+                        (size[0]*j) + x_mid_point, (size[1]*(i+1)) + y_mid_point)),
                         fill="black", width=line_width)
 
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
-                        (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))+y_mid_point),
-                        fill="black", width=line_width)
-
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*j)+(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0]))),
-                        (size[0]*(j+1))-(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0])))),
-                        fill="black", width=line_width)
+                        #drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*j)+(shelf_line_dist/2),(size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
 
 
                     else:
@@ -323,19 +334,23 @@ class LineGridGenerator():
                         y_mid_point = (size[1]/2)-1
 
                         drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2),
-                        (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2)),
+                        drawer.line(((size[0]*j) - x_mid_point, (size[1]*i) + y_mid_point,
+                        (size[0]*(j+1)) - shelf_size[0], (size[1]*i) + y_mid_point),
                         fill="black", width=line_width)
 
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2),
-                        (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*(i+1))-(shelf_line_dist/2)),
-                        fill="black", width=line_width)
-
-                        drawer = ImageDraw.Draw(full_image)
-                        drawer.line(((size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2),
-                        ((size[0]*(j+1))-(shelf_line_dist + shelf_size[0])), (size[1]*(i+1))-(shelf_line_dist/2)),
-                        fill="black", width=line_width)
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2),
+                        # ((size[0]*(j+1))-(shelf_line_dist + shelf_size[0])), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
 
 
 
