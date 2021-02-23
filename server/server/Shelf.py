@@ -1,3 +1,5 @@
+from typing import Union, NamedTuple
+
 from server.Location import Location
 
 
@@ -13,4 +15,9 @@ class Shelf:
         :param compartment_number: Compartment number of shelf. Starts at 0 at the bottom
         :return:
         """
-        return compartment_number*self.compartment_size # for now we assume we can simply multiply compartment number with size
+        return (compartment_number - 1) * self.compartment_size  # for now we assume we can simply multiply compartment number with size
+
+
+class ShelfInfo(NamedTuple):
+    assigned_shelf: Union[None, Shelf]
+    compartment_number: Union[None, int]
