@@ -14,10 +14,10 @@ ans = [19, 24, 23, 18, 17, 22, 21]
 dir = [1, 3, 3, 2, 2, 3]
 
 
-FSM_state = ['start', 'forward', 'opt', 'pick', 'lift', 'finish', 'stop']
+FSM_state = {'start':1, 'forward':2, 'opt':3, 'pick':4, 'lift':5, 'finish':6, 'stop':7}
 
-FSM_state = 'forward'
-last_state = 'forward'
+FSM_state = 2
+last_state = 2
 
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)
@@ -29,20 +29,20 @@ x_pos = -.5 # go close to target in increments of .01
 opt =1 
 while robot_controller.step(TIMESTEP) != -1:
 
-    if FSM_state == 'stop':
+    if FSM_state == 7: #if FSM_state == 'stop'
         robot_controller.strafeForward(0)
     
-    if FSM_state == 'forward':
-        last_state = 'forward'
+    if FSM_state == 2: #FSM_state == 'forward':
+        last_state = 2
         robot_controller.line_tracking()
     
 
     
-    if FSM_state == 'opt':
+    if FSM_state == 3: #FSM_state == 'opt'
         assert msg != ans[0] 
         opt = dir[0]
-        last_state = 'opt'
-        if opt == 1:
+        last_state = 3 #last_state = 'opt'
+        if opt == 1: 
             print("opt: ",opt)
             robot_controller.line_tracking()
 
@@ -58,18 +58,18 @@ while robot_controller.step(TIMESTEP) != -1:
             
     msg = robot_controller.nfc_reader.read()
     if msg:
-        FSM_state = 'opt'
+        FSM_state = 3
         if len(dir) == 0:
-           FSM_state = 'stop'
+           FSM_state = 7 # stop
     else:
-        print(len(ans))
-        print(len(dir))
+        #print(len(ans))
+        #print(len(dir))
         #print("no message received")
 
-        if last_state == 'opt':
+        if last_state == 3: # if opt
             ans.pop(0)
             dir.pop(0)
-        FSM_state = 'forward'
+        FSM_state = 2 # move forward
 
 
     """
