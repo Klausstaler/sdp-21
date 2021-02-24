@@ -44,7 +44,7 @@ class RobotController(Robot):
         self.nfc_reader.setChannel(-1)
 
         # Initialize Navigation
-        self.nav = Navigation(self, timestep=timestep)
+        self.nav = Navigation(timestep=timestep)
 
         
         

@@ -625,7 +625,7 @@ DEF TRANSPORT Robot {
       }
       device [
         DEF wheel1 RotationalMotor {
-          name "wheel1"
+          name "wheel_FL"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
@@ -815,11 +815,11 @@ DEF TRANSPORT Robot {
       }
       device [
         DEF wheel2 RotationalMotor {
-          name "wheel2"
+          name "wheel_BL"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.3097200001283e-07
+        translation 0.1 0.6 -6.309720000128419e-07
         rotation 0 1 0 2.6825098452577842
         children [
           Shape {
@@ -1005,11 +1005,11 @@ DEF TRANSPORT Robot {
       }
       device [
         DEF wheel3 RotationalMotor {
-          name "wheel3"
+          name "wheel_FR"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999602332e-06
+        translation 0.65 -0.04 -1.0683199999621293e-06
         rotation 0 1 0 2.682509613130929
         children [
           Shape {
@@ -1195,11 +1195,11 @@ DEF TRANSPORT Robot {
       }
       device [
         DEF wheel4 RotationalMotor {
-          name "wheel4"
+          name "wheel_BR"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.578059997605002e-08
+        translation 0.1 -0.04 -5.5780599975737105e-08
         rotation 0 0.9999999999999999 0 0.24992400671091725
         children [
           Shape {
