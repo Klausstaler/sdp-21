@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.09489004787803347 0.9453573400185519 0.31192207117604304 3.568906433823009
-  position 1.6460747066212913 2.684861892475074 -2.4977222588639973
+  orientation 0.15085909666911326 0.9654934674272116 0.21228258832876273 4.157010118927231
+  position 5.531118384189642 1.4590029427669433 -0.3625923692046462
 }
 TexturedBackground {
   texture "empty_office"
@@ -442,9 +442,57 @@ Solid {
   name "warehouse.obj"
 }
 Solid {
-  translation 3.17227 1.1744 -0.13977
+  translation 6.10226 1.18818 -0.144647
   rotation 0.7066560049579306 0.7075570049642521 -0.0006126850042986258 -3.140475307179586
   children [
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175144 -5.59463e-07
+      rotation 1 0 0 1.578
+      name "connector(10)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175 -0.02
+      rotation 1 0 0 1.578
+      name "connector(9)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX3 Connector {
+      translation -0.02 -0.175072 -0.0100003
+      rotation 1 0 0 1.578
+      name "connector(8)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175072 -0.0100003
+      rotation 1 0 0 1.578
+      name "connector(6)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175144 -5.59463e-07
+      rotation 1 0 0 1.578
+      name "connector(7)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
+    DEF CONNECTOR_BOX4 Connector {
+      translation -0.01 -0.175 -0.02
+      rotation 1 0 0 1.578
+      name "connector(5)"
+      model "suction"
+      type "passive"
+      snap FALSE
+    }
     DEF CONNECTOR_BOX1 Connector {
       translation 0.07 -0.175 0.0199993
       rotation 1 0 0 1.5708
@@ -545,11 +593,11 @@ Solid {
   }
 }
 Transform {
-  translation 2.958 0.97 -0.16
+  translation 5.85 1 0
   rotation -0.577349935856137 -0.577349935856137 -0.5773509358560258 0
 }
 DEF TRANSPORT Robot {
-  translation 2.89829 0.060884 0.225751
+  translation 5.77829 0.062329 0.251374
   rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
   children [
     Receiver {
@@ -1292,7 +1340,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.309720000111855e-07
+        translation 0.1 0.6 -6.309720000119883e-07
         rotation 0 1 0 2.682509844857118
         children [
           Shape {
@@ -1482,7 +1530,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999694837e-06
+        translation 0.65 -0.04 -1.0683199999669305e-06
         rotation 0 1 0 2.6825096105486783
         children [
           Shape {
@@ -1672,7 +1720,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.57805999742644e-08
+        translation 0.1 -0.04 -5.578059997425954e-08
         rotation 0 1 0 0.24992400589617014
         children [
           Shape {
@@ -1855,6 +1903,13 @@ DEF TRANSPORT Robot {
   }
   controller "robot_control"
   supervisor TRUE
+}
+Shelf {
+  translation 6.41 2 0
+  rotation 0.7071067811865475 0 0.7071067811865475 3.14
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
 }
 NFCTag {
   translation 2.61 0.01 0
