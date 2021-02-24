@@ -21,48 +21,88 @@ class Navigation:
             Wheels[name[6:]].setVelocity(0.0)
         self.wheels = SimpleNamespace(**Wheels)
 
-    def follow_line(self,):
-        pass
-        # if lf <= 900 and rt <= 900:
-        #     leftSpeed = 8.0
-        #     rightSpeed = 8.0
-        # elif lf > 900: #and rt <=900:
-        #     self.strafeLeft(6)
-        #     return None
-        # elif rt > 900 and lf <=900:
-        #     leftSpeed = 1
-        #     rightSpeed = 5
+    # n=1 is turn until the first line you see, 
+    def turn_until_line_n(self, n=1, new=False, speed = 4):
+        if new:
+            self.n_lines = n
+            self.n_line_token = False
+        # print(self.n_lines, self.n_line_token)
+
+        if self.n_lines>1:
+            self.turn_clockwise(speed)
+            if self.line_detected() and not self.n_line_token:
+                self.n_line_token = True
+            elif self.n_line_token == True and not self.line_detected():
+                self.n_lines-=1
+                self.n_line_token = False
+            return False
+        elif self.n_lines==1:
+            self.turn_clockwise(speed)
+            if self.line_detected():
+                self.stop()
+                return True
+        else:
+            self.stop()
+            return True
+
+    def follow_line(self, speed = 4):
+        leftSpeed = speed
+        rightSpeed = speed
+        turnfactor = 10
+        nearLine = True
+        # if True:
+        # print(self.IR.left.getValue(),self.IR.mid.getValue(),self.IR.right.getValue())
+
+        if self.IR.left.getValue() <= 900 and self.IR.right.getValue()<=900 and self.IR.mid.getValue()>900:
+            leftSpeed = speed*2
+            rightSpeed = speed*2
+        elif self.IR.left.getValue() >= 900 and self.IR.right.getValue()<=900:
+            leftSpeed = speed
+            rightSpeed = speed/turnfactor
+        elif self.IR.left.getValue() <= 900 and self.IR.right.getValue()>=900:
+            leftSpeed = speed/turnfactor
+            rightSpeed = speed
+        # elif self.IR.left.getValue() >= 990 and self.IR.right.getValue()>=990 and self.IR.mid.getValue()>990:
+        #     # print("Junction")
+        #     leftSpeed = 0
+        #     rightSpeed = 0
+        #     nearLine = False
+        else:
+            # print("abababa")
+            nearLine = False
+
+        self.wheels.FL.setVelocity(leftSpeed)
+        self.wheels.FR.setVelocity(rightSpeed)
+        self.wheels.BL.setVelocity(rightSpeed)
+        self.wheels.BR.setVelocity(leftSpeed)
         
-        # if mid<=900:
-        #     leftSpeed = leftSpeed/3
-        #     rightSpeed = rightSpeed/3
+        return nearLine
 
     def turn_clockwise(self, speed):
         self.wheels.FL.setVelocity(-speed)
         self.wheels.FR.setVelocity(speed)
         self.wheels.BL.setVelocity(-speed)
         self.wheels.BR.setVelocity(speed)
-        print(self.line_detected())
+        # print(self.line_detected())
+    
+    def stop(self):
+        self.wheels.FL.setVelocity(0)
+        self.wheels.FR.setVelocity(0)
+        self.wheels.BL.setVelocity(0)
+        self.wheels.BR.setVelocity(0)
+        # print(self.line_detected())
     
 
-    # n=1 is turn until the first line you see, 
-    def turn_until_line_n(self, n):
-        token = False
-        while n!=0:
-            self.turn_clockwise(4)
-            if self.line_detected() and token == False:
-                token = True
-            if token == True and self.line_detected() ==False:
-                n-=1
-                token = False
-
     def line_detected(self):
+        # print(self.IR.left.getValue(),self.IR.mid.getValue(),self.IR.right.getValue())
         if self.IR.left.getValue() <= 900 and self.IR.right.getValue()<=900 and self.IR.mid.getValue()>900:
+            return True
+        elif self.IR.left.getValue() >= 990 or self.IR.right.getValue()>=990 or self.IR.mid.getValue()>=990:
             return True
         else:
             return False
 class RobotController(Robot):
-    def __init__(self, timestep=128):
+    def __init__(self, timestep=128, params=None):
         super().__init__()
         self.arm = ArmController(self, timestep=timestep)
         self.nfc_reader = NFCReader(self, timestep=timestep, led_present=False)
@@ -70,34 +110,33 @@ class RobotController(Robot):
 
         # Initialize Navigation
         self.nav = Navigation(self, timestep=timestep)
+        self.nav.turn_until_line_n(n=1, new=True)
 
-        
-        
-    def line_tracking(self):
-        self.nav.turn_until_line_n(2)
-        # lf = self.left.getValue()
-        # rt = self.right.getValue()
-        # mid = self.mid.getValue()
-        # leftSpeed = 4
-        # rightSpeed = 4
-        # # following white lines
-        # print(lf, mid, rt)
-        
-        # if lf <= 900 and rt <= 900:
-        #     leftSpeed = 8.0
-        #     rightSpeed = 8.0
-        # elif lf > 900: #and rt <=900:
-        #     self.strafeLeft(6)
-        #     return None
-        # elif rt > 900 and lf <=900:
-        #     leftSpeed = 1
-        #     rightSpeed = 5
-        
-        # if mid<=900:
-        #     leftSpeed = leftSpeed/3
-        #     rightSpeed = rightSpeed/3
+        self.follow_line = True
+        self.turning = False
+        self.reached_node = False
+        self.node_to_reach = None
+
+    def reach_node(self, node):
+        self.node_to_reach = node
+        if not self.reached_node:
+            if self.follow_line:
+                # print("following line")
+                self.follow_line = self.nav.follow_line()
+            elif self.turning:
+                # print("turning")
+                self.follow_line = self.nav.turn_until_line_n()
+            else:
+                self.nav.turn_until_line_n(n=1, new=True)
+                self.turning = True
+        else:
+            self.nav.stop()
         if message:=self.nfc_reader.read():
             print(message)
+        if message == self.node_to_reach:
+            self.reached_node = True
+            self.nav.stop()
+            return True
         
     def liftUp(self):
         if (self.liftSens.getValue() < self.lift.getMaxPosition()):
