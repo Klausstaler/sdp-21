@@ -9,9 +9,13 @@
 PROTO MainRobot [
 	# # Position of the robot
 	field SFVec3f translation 0.0 0.00 0.0
-	# field SFRotation rotation 0 1 0 0
-	## Distance sensor Details
-    
+	field SFRotation rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
+	
+  ## Distance sensor Details
+  field SFVec3f ds_right_tranlsation 0.77 0.18 0.03
+	field SFVec3f ds_left_tranlsation 0.77 0.42 0.03
+	field SFVec3f ds_mid_tranlsation 0.77 0.30 0.03
+	  
     ## Reciever details
     # field SFInt32 RecievingChannel 0 #-1 for all channels
 ]
@@ -26,7 +30,7 @@ PROTO MainRobot [
       bufferSize 16
     }
     DEF ds_right DistanceSensor {
-      translation 0.77 0.19 0.03
+      translation IS ds_right_tranlsation
       rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
       children [
         Shape {
@@ -41,8 +45,26 @@ PROTO MainRobot [
       name "ds_right"
       type "infra-red"
     }
+
+    DEF ds_mid DistanceSensor {
+      translation IS ds_mid_tranlsation
+      rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0.498039
+          }
+          geometry Box {
+            size 0.03 0.06 0.06
+          }
+        }
+      ]
+      name "ds_mid"
+      type "infra-red"
+    }
+
     DEF ds_left DistanceSensor {
-      translation 0.77 0.4 0.03
+      translation IS ds_left_tranlsation
       rotation 0.5773492691885823 0.5773502691890485 -0.5773512691895147 2.0944
       children [
         Shape {
@@ -598,7 +620,7 @@ PROTO MainRobot [
       }
       device [
         DEF wheel1 RotationalMotor {
-          name "wheel1"
+          name "wheel_FL"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
@@ -788,7 +810,7 @@ PROTO MainRobot [
       }
       device [
         DEF wheel2 RotationalMotor {
-          name "wheel2"
+          name "wheel_BL"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
@@ -978,7 +1000,7 @@ PROTO MainRobot [
       }
       device [
         DEF wheel3 RotationalMotor {
-          name "wheel3"
+          name "wheel_FR"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
@@ -1168,7 +1190,7 @@ PROTO MainRobot [
       }
       device [
         DEF wheel4 RotationalMotor {
-          name "wheel4"
+          name "wheel_BR"
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
