@@ -22,7 +22,7 @@ class CentralServer:
         tasks = [
             # Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
             # Task(TaskType.PICKUP_PARCEL, {}),
-            Task(TaskType.REACH_NODE, {})
+            Task(TaskType.REACH_NODE, {"node":"9"})
             ]
         self.scheduler.add_tasks(robot, tasks)
         print("Sending tasks....")
