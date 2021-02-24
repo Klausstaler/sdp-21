@@ -14,7 +14,9 @@ class NFCReader:
         message_str = None
 
         queue_len = self.__receiver.getQueueLength()
+        print("nooo")
         if queue_len > 0:
+            print("Yess")
             if self.LED:
                 self.LED.set(value=1)
             message = self.__receiver.getData()

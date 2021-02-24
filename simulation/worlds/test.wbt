@@ -1,0 +1,25 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.5247024045442106 0.7584943400268019 0.38648896855257014 1.6952788393860014
+  position 1.680076209307983 3.089306375746714 2.5206174337016978
+}
+Floor {
+  appearance Parquetry {
+    type "light strip"
+  }
+}
+DEF TRANSPORT MainRobot {
+  translation -0.0183409 0.0894739 2.05998
+}
+NFCTag {
+  translation 0 0.01 2.45
+  transmissionRange -1
+}
+PointLight {
+  attenuation 0 0 1
+  intensity 20
+  location 0 10 0
+}
