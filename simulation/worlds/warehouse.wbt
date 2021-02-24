@@ -3,17 +3,14 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5819237695887575 -0.6688943511813153 -0.46254196927991076 4.540711569720804
-  position 1.9211135785371576 6.603313777754189 0.5617599049834
+  orientation -0.3262309416129661 -0.8532289259510951 -0.4069075726189649 1.9416956845616502
+  position -4.563115249035339 4.556739617966466 -0.42833413457649105
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
   luminosity 0
   castShadows FALSE
-}
-NFCTag {
-  translation 0.51 0.01 0
 }
 RectangleArena {
   floorSize 4 4
@@ -96,11 +93,12 @@ NFCTag {
   informationSent "5"
 }
 NFCTag {
-  translation -0.5 0 0.5
+  translation -0.5 0.08 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "6"
+  transmissionRange 0.1
 }
 NFCTag {
   translation 0.5 0 0.5
@@ -117,11 +115,12 @@ NFCTag {
   informationSent "8"
 }
 NFCTag {
-  translation -0.5 0 1.5
+  translation -0.5 0.01 1.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "9"
+  transmissionRange 0.15
 }
 NFCTag {
   translation 0.5 0 1.5
@@ -138,5 +137,5 @@ NFCTag {
   informationSent "11"
 }
 DEF TRANSPORT MainRobot {
-  translation -0.209612 0.229626 1.06821
+  translation 0.0324134 0.0698012 0.850352
 }

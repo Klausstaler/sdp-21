@@ -24,6 +24,18 @@ PROTO MainRobot [
   translation IS translation
   rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
   children [
+    LED {
+      translation 0.35 0.25 0.05
+      children [
+        PointLight {
+          attenuation 0 0 1
+          color 0 0 0
+          intensity 1
+          location 0 0 0
+          on FALSE
+        }
+      ]
+    }
     Receiver {
       translation 0.35 0.25 0.05
       type "infra-red"
