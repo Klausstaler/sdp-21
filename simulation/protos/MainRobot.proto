@@ -74,6 +74,10 @@ PROTO MainRobot [
             }
           ]
           name "ds_right"
+          lookupTable [
+            0 0 0
+            0.1 150 0
+          ]
           type "infra-red"
         }
         %{ y = 0 }%
@@ -91,6 +95,10 @@ PROTO MainRobot [
             }
           ]
           name "ds_mid"
+          lookupTable [
+            0 0 0
+            0.1 150 0
+          ]
           type "infra-red"
         }
 
@@ -110,6 +118,10 @@ PROTO MainRobot [
           ]
           name "ds_left"
           type "infra-red"
+          lookupTable [
+            0 0 0
+            0.1 150 0
+          ]
         }
       ]
     }
