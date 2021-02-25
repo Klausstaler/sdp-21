@@ -40,7 +40,6 @@ class NetworkInterface:
     """
 
     def __init__(self):
-        self.central_server = None
         self.port, self.host = 12345, ""
         self.open_connections: Dict[int, Connection] = dict()
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -56,9 +55,6 @@ class NetworkInterface:
             connection.socket.close()
         self.socket.close()
 
-    def register_server(self, central_server):
-        self.central_server = central_server
-
     async def send_request(self, robot: Robot, task: Task):
         connection = self.resolve_connection(robot.id)
         print_lock.acquire()
@@ -66,7 +62,6 @@ class NetworkInterface:
         print("Sending task", task.task_type, "to", robot.id)
         send_task(connection.socket, robot.id, task)
         print("Robot", robot.id, "finished task", task.task_type)
-        await self.central_server.finished_task(robot)
 
     def resolve_connection(self, robot_id) -> Connection:
         if robot_id in self.open_connections:
