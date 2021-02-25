@@ -18,11 +18,11 @@ class CentralServer:
 
         compartment_num = parcel.shelf_info.compartment_number
         needed_height = parcel.shelf_info.assigned_shelf.get_compartment_height(compartment_num)
-        print(needed_height)
+        # print(needed_height)
         tasks = [
-            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
-            Task(TaskType.PICKUP_PARCEL, {}),
-            Task(TaskType.REACH_NODE, {})
+            # Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
+            # Task(TaskType.PICKUP_PARCEL, {}),
+            Task(TaskType.REACH_NODE, {"node":"9"})
             ]
         self.scheduler.add_tasks(robot, tasks)
         print("Sending tasks....")

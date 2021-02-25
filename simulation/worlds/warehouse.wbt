@@ -1,0 +1,141 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.3262309416129661 -0.8532289259510951 -0.4069075726189649 1.9416956845616502
+  position -4.563115249035339 4.556739617966466 -0.42833413457649105
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  luminosity 0
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 4 4
+  floorTileSize 4 4
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/warehouse_floor_grid.jpg"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+    }
+    roughness 0.2
+    metalness 0
+  }
+}
+Shelf {
+  translation -1.5 3 -1.5
+  rotation 0.7071067811865475 0 0.7071067811865475 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "Procedural Shelf(1)"
+}
+NFCTag {
+  translation -1.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "0"
+}
+Shelf {
+  translation -0.5 3 -1.5
+  rotation 0.7071067811865475 0 0.7071067811865475 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "Procedural Shelf(2)"
+}
+NFCTag {
+  translation -0.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "1"
+}
+Shelf {
+  translation 0.5 3 -1.5
+  rotation 0.7071067811865475 0 0.7071067811865475 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
+NFCTag {
+  translation 0.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "2"
+}
+NFCTag {
+  translation -1.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "3"
+}
+NFCTag {
+  translation -0.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "4"
+}
+NFCTag {
+  translation 0.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "5"
+}
+NFCTag {
+  translation -0.5 0.08 0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "6"
+  transmissionRange 0.1
+}
+NFCTag {
+  translation 0.5 0 0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "7"
+}
+NFCTag {
+  translation -1.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "8"
+}
+NFCTag {
+  translation -0.5 0.01 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "9"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 0.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "10"
+}
+NFCTag {
+  translation 1.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "11"
+}
+DEF TRANSPORT MainRobot {
+  translation 0.0324134 0.0698012 0.850352
+}
