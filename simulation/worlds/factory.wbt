@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.15085909666911326 0.9654934674272116 0.21228258832876273 4.157010118927231
-  position 5.531118384189642 1.4590029427669433 -0.3625923692046462
+  orientation 0.09061043718160379 0.9940975558137685 0.0596640444392615 4.587723951246533
+  position 4.563674205779646 1.4753411892213883 -0.2399531276323215
 }
 TexturedBackground {
   texture "empty_office"
@@ -442,95 +442,100 @@ Solid {
   name "warehouse.obj"
 }
 Solid {
-  translation 6.10226 1.18818 -0.144647
+  translation 6.10228 1.18818 -0.134647
   rotation 0.7066560049579306 0.7075570049642521 -0.0006126850042986258 -3.140475307179586
   children [
-    DEF CONNECTOR_BOX3 Connector {
-      translation -0.02 -0.175144 -5.59463e-07
-      rotation 1 0 0 1.578
-      name "connector(10)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX3 Connector {
-      translation -0.02 -0.175 -0.02
-      rotation 1 0 0 1.578
-      name "connector(9)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX3 Connector {
-      translation -0.02 -0.175072 -0.0100003
-      rotation 1 0 0 1.578
-      name "connector(8)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX4 Connector {
-      translation -0.01 -0.175072 -0.0100003
-      rotation 1 0 0 1.578
-      name "connector(6)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX4 Connector {
-      translation -0.01 -0.175144 -5.59463e-07
-      rotation 1 0 0 1.578
-      name "connector(7)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX4 Connector {
-      translation -0.01 -0.175 -0.02
-      rotation 1 0 0 1.578
-      name "connector(5)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX1 Connector {
-      translation 0.07 -0.175 0.0199993
-      rotation 1 0 0 1.5708
-      name "connector(4)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX1 Connector {
-      translation 0 -0.175 0.0199993
-      rotation 1 0 0 1.5708
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX1 Connector {
-      translation 0 -0.175 0
-      rotation -1 0 0 -1.578
-      name "connector(1)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX1 Connector {
-      translation 0 -0.175 0.01
-      rotation 1 0 0 1.5708
-      name "connector(2)"
-      model "suction"
-      type "passive"
-      snap FALSE
-    }
-    DEF CONNECTOR_BOX4 Connector {
-      translation 0 -0.175 -0.02
-      rotation 1 0 0 1.578
-      name "connector(3)"
-      model "suction"
-      type "passive"
-      snap FALSE
+    Transform {
+      children [
+        DEF CONNECTOR_BOX4 Connector {
+          translation 0 -0.175 -0.02
+          rotation 1 0 0 1.578
+          name "connector(3)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX1 Connector {
+          translation 0 -0.175 0.01
+          rotation 1 0 0 1.5708
+          name "connector(2)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX1 Connector {
+          translation 0 -0.175 0
+          rotation -1 0 0 -1.578
+          name "connector(1)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX1 Connector {
+          translation 0 -0.175 0.0199993
+          rotation 1 0 0 1.5708
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX1 Connector {
+          translation 0.07 -0.175 0.0199993
+          rotation 1 0 0 1.5708
+          name "connector(4)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX4 Connector {
+          translation -0.01 -0.175 -0.02
+          rotation 1 0 0 1.578
+          name "connector(5)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX4 Connector {
+          translation -0.01 -0.175144 -5.59463e-07
+          rotation 1 0 0 1.578
+          name "connector(7)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX4 Connector {
+          translation -0.01 -0.175072 -0.0100003
+          rotation 1 0 0 1.578
+          name "connector(6)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX3 Connector {
+          translation -0.02 -0.175072 -0.0100003
+          rotation 1 0 0 1.578
+          name "connector(8)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX3 Connector {
+          translation -0.02 -0.175 -0.02
+          rotation 1 0 0 1.578
+          name "connector(9)"
+          model "suction"
+          type "passive"
+          snap FALSE
+        }
+        DEF CONNECTOR_BOX3 Connector {
+          translation -0.02 -0.175144 -5.59463e-07
+          rotation 1 0 0 1.578
+          name "connector(10)"
+          model "suction"
+          type "passive"
+          numberOfRotations 0
+          snap FALSE
+        }
+      ]
     }
     Transform {
       scale 0.35 0.35 0.35
@@ -991,6 +996,7 @@ DEF TRANSPORT Robot {
                                                   type "active"
                                                   axisTolerance 0.1
                                                   rotationTolerance 0.1
+                                                  numberOfRotations 0
                                                 }
                                               ]
                                               name "link_5"
@@ -1340,7 +1346,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 0.6 -6.309720000119883e-07
+        translation 0.1 0.6 -6.309720000127917e-07
         rotation 0 1 0 2.682509844857118
         children [
           Shape {
@@ -1530,7 +1536,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.65 -0.04 -1.0683199999669305e-06
+        translation 0.65 -0.04 -1.0683199999643752e-06
         rotation 0 1 0 2.6825096105486783
         children [
           Shape {
@@ -1720,7 +1726,7 @@ DEF TRANSPORT Robot {
         }
       ]
       endPoint DEF WHEEL_SOLID Solid {
-        translation 0.1 -0.04 -5.578059997425954e-08
+        translation 0.1 -0.04 -5.578059997424717e-08
         rotation 0 1 0 0.24992400589617014
         children [
           Shape {
