@@ -17,8 +17,10 @@ PROTO MainRobot [
   field SFFloat maxVelocity 100
 
   ### Distance sensor Details
-  field SFVec3f Distance_sensor_pos 0.43 0 -0.0700015
-  field SFFloat Distance_apart 0.13
+  field SFVec3f Distance_sensor_pos 0.43 0 -0.011
+  field SFFloat Distance_apart 0.15
+  field SFInt32 numberOfRays 5
+  field SFFloat aperture 1.2
   
   ### Reciever details
   # field SFInt32 RecievingChannel 0 #-1 for all channels
@@ -73,6 +75,8 @@ PROTO MainRobot [
               }
             }
           ]
+          numberOfRays IS numberOfRays
+          aperture IS aperture
           name "ds_right"
           lookupTable [
             0 0 0
@@ -99,6 +103,8 @@ PROTO MainRobot [
             0 0 0
             0.1 150 0
           ]
+          numberOfRays IS numberOfRays
+          aperture IS aperture
           type "infra-red"
         }
 
@@ -122,6 +128,8 @@ PROTO MainRobot [
             0 0 0
             0.1 150 0
           ]
+          numberOfRays IS numberOfRays
+          aperture IS aperture
         }
       ]
     }

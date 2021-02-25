@@ -6,8 +6,8 @@ from types import SimpleNamespace
 class Navigation:
     def __init__(self, robot: Robot, timestep=128):
         self.max_val = 150
-        self.low_val = 120
-        self.high_val = 142
+        self.low_val = 123
+        self.high_val = 140
         #IR sensors
         IR = {}
         for name in ["ds_left", "ds_right", "ds_mid"]:
@@ -29,21 +29,23 @@ class Navigation:
             if name=="left":
                 value = self.IR.left.getValue()
             elif name=="right":
-                value = self.IR.left.getValue()
+                value = self.IR.right.getValue()
             elif name == "mid":
-                value = self.IR.left.getValue()
-        if value<=self.low_val:
+                value = self.IR.mid.getValue()
+        if value >0 and value<=self.low_val:
             return 0
-        elif value<= self.high_val:
+        elif value >self.low_val and value<= self.high_val:
             return 0.5
-        else:
+        elif value >self.high_val:
             return 1
 
     def sensors_values(self, left, mid, right):
-        values = (left, mid, right)
+        values = [left, mid, right]
         ans = True
         for i, name in enumerate(["left","mid","right"]):
+            # print(self.sensor_value(name), values[i], values, ans)
             ans = ans and (self.sensor_value(name) in values[i])
+        # print("--"*10)
         return ans
 
     def set_wheel_speeds(self, FL, FR, BL, BR):
@@ -79,9 +81,13 @@ class Navigation:
     def follow_line(self, speed = 3):
         nearLine = True
 
-        if self.sensors_values(left=[0], mid=[1], right=[0]):
+        if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
             print("case straight")
             self.move_forward(speed*2)
+        elif self.sensors_values(left=[0], mid=[0], right=[1]):
+            self.strafe(speed, right=True)
+        elif self.sensors_values(left=[1], mid=[0], right=[0]):
+            self.strafe(speed, right=False)   
         elif self.sensors_values(left=[0], mid=[0,0.5,1], right=[1]):
             print("case right")
             self.turn_on_wheel_axis(speed, left=False, top=True)
@@ -89,9 +95,10 @@ class Navigation:
             print("case left")
             self.turn_on_wheel_axis(speed, left=True, top=True)
         elif self.sensors_values(left=[0], mid=[0], right=[0]):
+            print("noneeee")
             nearLine = False
             self.move_forward(speed/2)
-
+        print(self.line_detected())
         return nearLine
 
     def move_forward(self, speed):
@@ -119,8 +126,8 @@ class Navigation:
             self.set_wheel_speeds(speed, 0.1, speed, 0.1)
     
     def line_detected(self):
-        print(self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
-        if self.sensors_values(left=[0], mid=[1, 0.5], right=[0]):
+        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        if self.sensors_values(left=[0,0.5], mid=[1, 0.5], right=[0,0.5]):
             return True
         elif self.sensor_value("left")==1 or self.sensor_value("right")==1:
             return True
@@ -145,26 +152,26 @@ class RobotController(Robot):
     def reach_node(self, node):
         self.node_to_reach = node
         # self.nav.turn_clockwise(4)
-        # self.follow_line = self.nav.follow_line()
+        self.follow_line = self.nav.follow_line()
         # return False
-        if not self.reached_node:
-            if self.follow_line:
-                # print("following line")
-                self.follow_line = self.nav.follow_line()
-            elif self.turning:
-                # print("turning")
-                self.follow_line = self.nav.turn_until_line_n()
-            else:
-                self.nav.turn_until_line_n(n=1, new=True)
-                self.turning = True
-        else:
-            self.nav.stop()
-        if message:=self.nfc_reader.read():
-            print(message)
-        if message == self.node_to_reach:
-            self.reached_node = True
-            self.nav.stop()
-            return True
+        # if not self.reached_node:
+        #     if self.follow_line:
+        #         # print("following line")
+        #         self.follow_line = self.nav.follow_line()
+        #     elif self.turning:
+        #         # print("turning")
+        #         self.follow_line = self.nav.turn_until_line_n()
+        #     else:
+        #         self.nav.turn_until_line_n(n=1, new=True)
+        #         self.turning = True
+        # else:
+        #     self.nav.stop()
+        # if message:=self.nfc_reader.read():
+        #     print(message)
+        # if message == self.node_to_reach:
+        #     self.reached_node = True
+        #     self.nav.stop()
+        #     return True
         
     def liftUp(self):
         if (self.liftSens.getValue() < self.lift.getMaxPosition()):
