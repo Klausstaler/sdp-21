@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.3262309416129661 -0.8532289259510951 -0.4069075726189649 1.9416956845616502
-  position -4.563115249035339 4.556739617966466 -0.42833413457649105
+  orientation 0.4290039261477574 0.8938232816896351 0.13052039097160653 5.627025154392559
+  position -1.8291251106767183 1.1294454919733417 2.412654273563742
 }
 TexturedBackground {
 }
@@ -34,6 +34,8 @@ Shelf {
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
   name "Procedural Shelf(1)"
+}
+DEF TRANSPORT MainRobot {
 }
 NFCTag {
   translation -1.5 0 -1
@@ -135,7 +137,4 @@ NFCTag {
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "11"
-}
-DEF TRANSPORT MainRobot {
-  translation 0.0324134 0.0698012 0.850352
 }

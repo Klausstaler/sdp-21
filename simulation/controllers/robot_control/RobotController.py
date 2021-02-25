@@ -83,7 +83,7 @@ class Navigation:
         self.wheels.FR.setVelocity(speed)
         self.wheels.BL.setVelocity(-speed)
         self.wheels.BR.setVelocity(speed)
-        # print(self.line_detected())
+        print(self.line_detected())
     
     def stop(self):
         self.wheels.FL.setVelocity(0)
@@ -94,7 +94,7 @@ class Navigation:
     
 
     def line_detected(self):
-        # print(self.IR.left.getValue(),self.IR.mid.getValue(),self.IR.right.getValue())
+        print(self.IR.left.getValue(),self.IR.mid.getValue(),self.IR.right.getValue())
         if self.IR.left.getValue() <= 900 and self.IR.right.getValue()<=900 and self.IR.mid.getValue()>900:
             return True
         elif self.IR.left.getValue() >= 990 or self.IR.right.getValue()>=990 or self.IR.mid.getValue()>=990:
@@ -119,6 +119,8 @@ class RobotController(Robot):
 
     def reach_node(self, node):
         self.node_to_reach = node
+        self.nav.turn_clockwise(20)
+        return False
         if not self.reached_node:
             if self.follow_line:
                 # print("following line")
