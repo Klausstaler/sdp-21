@@ -12,8 +12,10 @@ class RobotController(Robot):
 
         # Initialize Navigation
         self.nav = Navigation(self, timestep=timestep)
-        self.nav.turn_until_line_n(n=1, new=True)
+        #self.nav.turn_until_line_n(n=1, new=True)
 
+        self.lift_motor = self.getDevice("liftmot")
+        self.getDevice("liftpos").enable(timestep)
         self.follow_line = True
         self.turning = False
         self.turned = False

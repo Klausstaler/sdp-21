@@ -1467,6 +1467,7 @@ PROTO MainRobot [
       ]
       name "lift_link"
       physics Physics {
+      	density -1
         mass 0.01
       }
     }
