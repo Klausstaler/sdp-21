@@ -4,22 +4,24 @@ from BasicNavigation import BasicNavigation
 
 class Navigation(BasicNavigation):
     def __init__(self, robot: Robot, timestep=128):
-        super(Navigation, self).__init__()
+        super().__init__(robot, timestep=128)
 
     def follow_line(self, speed = 3):
         nearLine = True
         if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
             print("case straight")
-            self.move_forward(speed*2)
+            self.move_forward(speed*3)
         elif self.sensors_values(left=[0], mid=[0], right=[1]):
+            print("strafe right")
             self.strafe(speed, right=True)
         elif self.sensors_values(left=[1], mid=[0], right=[0]):
+            print("strafe left")
             self.strafe(speed, right=False)   
-        elif self.sensors_values(left=[0], mid=[0,0.5,1], right=[1]):
-            print("case right")
+        elif self.sensors_values(left=[0], mid=[0,0.5,1], right=[1,0.5]):
+            print("turn wheels top right")
             self.turn_on_wheel_axis(speed, left=False, top=True)
-        elif self.sensors_values(left=[1], mid=[0,0.5,1], right=[0]):
-            print("case left")
+        elif self.sensors_values(left=[1,0.5], mid=[0,0.5,1], right=[0]):
+            print("turn wheels top left")
             self.turn_on_wheel_axis(speed, left=True, top=True)
         elif self.sensors_values(left=[0], mid=[0], right=[0]):
             print("noneeee")

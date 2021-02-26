@@ -1,6 +1,30 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
+    contactProperties [
+        ContactProperties {
+            material1 "InteriorWheelMat"
+            coulombFriction [
+                1.8, 0, 0.2
+            ]
+            frictionRotation -0.9648 0
+            bounce 0
+            forceDependentSlip [
+                10, 0
+            ]
+        }
+        ContactProperties {
+            material1 "ExteriorWheelMat"
+            coulombFriction [
+                1.8, 0, 0.2
+            ]
+            frictionRotation 0.9648 0
+            bounce 0
+            forceDependentSlip [
+                10, 0
+            ]
+        }
+  ]
 }
 Viewpoint {
   orientation -1 0 0 1
@@ -27,7 +51,7 @@ url [
     metalness 0
   }
   wallThickness 0.01
-  wallHeight 1
+  wallHeight 0.01
 }
 Shelf {
   translation -1.5 3 -1.5

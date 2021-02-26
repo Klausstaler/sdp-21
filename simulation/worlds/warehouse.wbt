@@ -1,16 +1,40 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
 }
 Viewpoint {
-  orientation 0.5066676489956911 -0.7124675521531706 -0.48546666269688227 4.420354459267175
-  position 1.4188605995751744 3.4030504366099694 -0.09350652430358569
+  orientation -0.007642792922629238 0.875148913583101 0.4837933099688954 3.1139438387537135
+  position 0.10363557747337293 6.869778859049824 -4.747233582879228
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
-  luminosity 0
-  castShadows FALSE
+  texture "noon_park_empty"
+  luminosity 0.5
 }
 RectangleArena {
   floorSize 4 4
@@ -26,6 +50,13 @@ RectangleArena {
     roughness 0.2
     metalness 0
   }
+  wallHeight 0.01
+  wallAppearance NULL
+}
+DEF TRANSPORT MainRobot {
+  translation -0.494294 0.200617 0.465823
+  rotation 0.5808170217303981 -0.575390021527355 -0.5758280215437421 -2.0894153071795865
+  Distance_apart 0.15
 }
 NFCTag {
   translation -1.5 0 -1
@@ -70,12 +101,11 @@ NFCTag {
   informationSent "5"
 }
 NFCTag {
-  translation -0.5 0.08 0.5
+  translation -0.5 0 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "6"
-  transmissionRange 0.1
 }
 NFCTag {
   translation 0.5 0 0.5
@@ -92,12 +122,11 @@ NFCTag {
   informationSent "8"
 }
 NFCTag {
-  translation -0.5 0.02 1.5
+  translation -0.5 0 1.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "9"
-  transmissionRange 0.5
 }
 NFCTag {
   translation 0.5 0 1.5
@@ -113,5 +142,6 @@ NFCTag {
   emissiveColor 0 0 0
   informationSent "11"
 }
-DEF TRANSPORT MainRobot {
+Floor {
+  translation 0 -0.01 0
 }

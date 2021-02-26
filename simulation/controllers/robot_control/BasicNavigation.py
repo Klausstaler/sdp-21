@@ -15,7 +15,7 @@ class BasicNavigation:
 
         # Wheels # Front Left, Back Left, Front Right, Back Right
         Wheels = {}
-        for name in ['wheel_FL', 'wheel_BL', 'wheel_FR', 'wheel_BR']:
+        for name in ['wheel_FL', 'wheel_FR', 'wheel_BL', 'wheel_BR']:
             Wheels[name[6:]] = robot.getDevice(name)
             # self.Wheels[name[6:]].enable(timestep)
             Wheels[name[6:]].setPosition(float('inf'))
@@ -53,13 +53,19 @@ class BasicNavigation:
     def move_forward(self, speed):
         self.set_wheel_speeds(speed, speed, speed, speed)
 
+    def move_diagonal(self, speed, right=True):
+        if right:
+            self.set_wheel_speeds(speed, -1, -1 , speed)
+        else:
+            self.set_wheel_speeds(-1, speed, speed, -1)
+
     def stop(self):
         self.set_wheel_speeds(0, 0, 0, 0)
 
     def strafe(self, speed, right=True):
         if not right:
             speed *=-1
-        self.set_wheel_speeds(speed, -speed, speed, -speed)
+        self.set_wheel_speeds(-speed, speed, speed, -speed)
 
     def turn(self, speed, clock=True):
         if not clock:
@@ -69,7 +75,7 @@ class BasicNavigation:
     def turn_on_wheel_axis(self, speed, left=True, top=True):
         if top:
             speed*=-1
-        if left:
+        if not left:
             self.set_wheel_speeds(0., speed, 0., speed)
         else:
             self.set_wheel_speeds(speed, 0., speed, 0.)

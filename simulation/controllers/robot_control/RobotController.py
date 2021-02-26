@@ -21,11 +21,7 @@ class RobotController(Robot):
 
     def reach_node(self, node):
         self.node_to_reach = node
-        # self.nav.turn_clockwise(4)
-        self.nav.strafe(speed=6)
-        # self.nav.turn_on_wheel_axis(6, left=True, top=True)
-        # self.follow_line = self.nav.follow_line()
-        # return False
+        self.nav.follow_line(speed=3)
         # if not self.reached_node:
         #     if self.follow_line:
         #         # print("following line")
