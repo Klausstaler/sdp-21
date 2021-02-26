@@ -11,7 +11,7 @@ net_interface = NetworkInterface()
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)
 
-x_pos = -.5 # go close to target in increments of .01
+
 while robot_controller.step(TIMESTEP) != -1:
     success, curr_task = False, net_interface.get_current_task()
     if curr_task.task_type == TaskType.REACH_NODE:
