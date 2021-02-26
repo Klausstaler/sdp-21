@@ -6,13 +6,12 @@ class NetworkInterface:
     def __init__(self):
         self.host, self.port = '127.0.0.1', 12345
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+        self.curr_task: Task = Task(TaskType.NO_TASK, {})
+        self.task_queue = queue.Queue()
+        
         # Connect to server
         self.socket.connect((self.host, self.port))
         print("Connected successfully!")
-
-        self.curr_task: Task = Task(TaskType.NO_TASK, {})
-        self.task_queue = queue.Queue()
         threading.Thread(target=self.receive_messages, daemon=True).start()
 
     def __del__(self):

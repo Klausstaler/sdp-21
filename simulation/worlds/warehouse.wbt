@@ -1,0 +1,165 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.9997665551189451 0.020576472378394925 0.006591210060272006 5.663049638772078
+  position -0.4180188911533394 2.701361360364876 3.1501846900264168
+  follow "robot"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  luminosity 0.8
+}
+RectangleArena {
+  floorSize 4 4
+  floorTileSize 4 4
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/warehouse_floor_grid.jpg"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+    }
+    roughness 0.2
+    metalness 0
+  }
+  wallHeight 0.01
+  wallAppearance NULL
+}
+DEF TRANSPORT MainRobot {
+  translation -0.489229 0.200763 -0.104153
+  rotation 0.5808170217303981 -0.575390021527355 -0.5758280215437421 -2.0894153071795865
+  Distance_apart 0.15
+}
+NFCTag {
+  translation -1.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "0"
+}
+NFCTag {
+  translation -0.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "1"
+}
+NFCTag {
+  translation 0.5 0 -1
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "2"
+}
+NFCTag {
+  translation -1.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "3"
+}
+NFCTag {
+  translation -0.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "4"
+}
+NFCTag {
+  translation 0.5 0 -0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "5"
+}
+NFCTag {
+  translation -0.5 0.1 1.48
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "6"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 1.5 0.1 1.49
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "7"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 1.51 0.1 -1.24
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "9"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 0.5 0 0.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "7"
+}
+NFCTag {
+  translation -1.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "8"
+}
+NFCTag {
+  translation -0.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "9"
+}
+NFCTag {
+  translation 0.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "10"
+}
+NFCTag {
+  translation 1.5 0 1.5
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "11"
+}
+Floor {
+  translation 0 -0.01 0
+}

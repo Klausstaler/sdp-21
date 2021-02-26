@@ -21,6 +21,9 @@ class Scheduler:
         if tasks and robot in self.free_robots:
             self.free_robots.remove(robot)
 
+    def has_tasks(self, robot: Robot) -> bool:
+        return len(self.open_tasks[robot]) > 0
+
     def get_next_task(self, robot: Robot) -> Union[None, Task]:
         if self.open_tasks[robot]:
             next_task = self.open_tasks[robot].popleft()
