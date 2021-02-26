@@ -16,7 +16,9 @@ while robot_controller.step(TIMESTEP) != -1:
     success, curr_task = False, net_interface.get_current_task()
     if curr_task.task_type == TaskType.REACH_NODE:
         success = robot_controller.reach_node(curr_task.params["node"])
-    if curr_task.task_type == TaskType.PICKUP_PARCEL:
+    if curr_task.task_type == TaskType.TURN_UNTIL:
+        success = robot_controller.turn_until(int(curr_task.params["n"]))
+    elif curr_task.task_type == TaskType.PICKUP_PARCEL:
         success = robot_controller.arm.try_pickup()
     elif curr_task.task_type == TaskType.RAISE_PLATFORM:
         success = robot_controller.raise_platform(**curr_task.params)

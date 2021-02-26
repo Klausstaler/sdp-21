@@ -27,8 +27,10 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.007642792922629238 0.875148913583101 0.4837933099688954 3.1139438387537135
-  position 0.10363557747337293 6.869778859049824 -4.747233582879228
+  orientation 0.9997665551189451 0.020576472378394925 0.006591210060272006 5.663049638772078
+  position -0.4180188911533394 2.701361360364876 3.1501846900264168
+  follow "robot"
+  followType "Mounted Shot"
 }
 TexturedBackground {
 }
@@ -100,11 +102,28 @@ NFCTag {
   informationSent "5"
 }
 NFCTag {
-  translation -0.5 0.1 0.5
+  translation -0.5 0.1 1.48
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "6"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 1.5 0.1 1.49
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "7"
+  transmissionRange 0.15
+}
+NFCTag {
+  translation 1.51 0.1 -1.24
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "9"
+  transmissionRange 0.15
 }
 NFCTag {
   translation 0.5 0 0.5

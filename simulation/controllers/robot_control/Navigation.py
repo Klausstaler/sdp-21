@@ -31,22 +31,22 @@ class Navigation(BasicNavigation):
         return nearLine
 
     # n=1 is turn until the first line you see, 
-    def turn_until_line_n(self, n=1, new=False, speed = 6):
+    def turn_until_line_n(self, n=1, new=False, speed = 10):
         if new:
             self.n_lines = n
             self.n_line_token = False
-        
+        print(self.n_lines, self.line_detected(strong=True))
         if self.n_lines>1:
             self.turn(speed, clock=True)
-            if self.line_detected() and not self.n_line_token:
+            if self.line_detected(strong=True) and not self.n_line_token:
                 self.n_line_token = True
-            elif self.n_line_token == True and not self.line_detected():
+            elif self.n_line_token == True and not self.line_detected(strong=True):
                 self.n_lines-=1
                 self.n_line_token = False
             return False
         elif self.n_lines==1:
             self.turn(speed, clock=True)
-            if self.line_detected():
+            if self.line_detected(strong=True):
                 self.stop()
                 return True
         else:

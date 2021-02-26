@@ -80,11 +80,15 @@ class BasicNavigation:
         else:
             self.set_wheel_speeds(speed, 0., speed, 0.)
     
-    def line_detected(self):
-        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
-        if self.sensors_values(left=[0,0.5], mid=[1, 0.5], right=[0,0.5]):
-            return True
-        elif self.sensor_value("left")==1 or self.sensor_value("right")==1:
-            return True
-        else:
-            return False
+    def line_detected(self, strong=False):
+        # print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        if strong:
+            if self.sensors_values(left=[0], mid=[1], right=[0]):
+                return True
+        else:    
+            if self.sensors_values(left=[0,0.5], mid=[1, 0.5], right=[0,0.5]):
+                return True
+            elif self.sensor_value("left")==1 or self.sensor_value("right")==1:
+                return True
+            else:
+                return False
