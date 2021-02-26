@@ -33,8 +33,7 @@ Viewpoint {
 TexturedBackground {
 }
 TexturedBackgroundLight {
-  texture "noon_park_empty"
-  luminosity 0.5
+  luminosity 0.8
 }
 RectangleArena {
   floorSize 4 4
@@ -54,7 +53,7 @@ RectangleArena {
   wallAppearance NULL
 }
 DEF TRANSPORT MainRobot {
-  translation -0.494294 0.200617 0.465823
+  translation -0.489229 0.200763 -0.104153
   rotation 0.5808170217303981 -0.575390021527355 -0.5758280215437421 -2.0894153071795865
   Distance_apart 0.15
 }
@@ -101,7 +100,7 @@ NFCTag {
   informationSent "5"
 }
 NFCTag {
-  translation -0.5 0 0.5
+  translation -0.5 0.1 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0

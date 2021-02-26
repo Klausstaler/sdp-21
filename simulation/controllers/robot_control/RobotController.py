@@ -21,25 +21,32 @@ class RobotController(Robot):
 
     def reach_node(self, node):
         self.node_to_reach = node
-        self.nav.follow_line(speed=3)
-        # if not self.reached_node:
-        #     if self.follow_line:
-        #         # print("following line")
-        #         self.follow_line = self.nav.follow_line()
-        #     elif self.turning:
-        #         # print("turning")
-        #         self.follow_line = self.nav.turn_until_line_n()
-        #     else:
-        #         self.nav.turn_until_line_n(n=1, new=True)
-        #         self.turning = True
-        # else:
-        #     self.nav.stop()
-        # if message:=self.nfc_reader.read():
-        #     print(message)
-        # if message == self.node_to_reach:
-        #     self.reached_node = True
-        #     self.nav.stop()
-        #     return True
+        # self.nav.follow_line(speed=3)
+        if not self.reached_node:
+            if self.follow_line:
+                # print("following line")
+                self.follow_line = self.nav.follow_line()
+            elif self.turning:
+                # print("turning")
+                self.follow_line = self.nav.turn_until_line_n()
+            else:
+                self.nav.turn_until_line_n(n=1, new=True)
+                self.turning = True
+        else:
+            self.nav.stop()
+
+        return self.check_reach_node()
+
+    def check_reach_node(self):
+        if message:=self.nfc_reader.read():
+            print(message)
+        if message!=None:
+            self.nav.stop()
+            return True
+        if message == self.node_to_reach:
+            self.reached_node = True
+            self.nav.stop()
+            return True
         
     def liftUp(self):
         if (self.liftSens.getValue() < self.lift.getMaxPosition()):
