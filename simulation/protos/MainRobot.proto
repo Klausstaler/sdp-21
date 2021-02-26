@@ -1070,6 +1070,8 @@ PROTO MainRobot [
                             }
                             PositionSensor {
                               name "arm2sensor"
+                              noise 0.000349066
+                              resolution 9.58252e-05
                             }
                           ]
                           endPoint Solid {
@@ -1140,6 +1142,8 @@ PROTO MainRobot [
                                   }
                                   PositionSensor {
                                     name "arm3sensor"
+                                    noise 0.000349066
+			             resolution 9.58252e-05
                                   }
                                 ]
                                 endPoint Solid {
@@ -1237,6 +1241,8 @@ PROTO MainRobot [
                                         }
                                         PositionSensor {
                                           name "arm4sensor"
+                                          noise 0.000349066
+                                          resolution 9.58252e-05
                                         }
                                       ]
                                       endPoint Solid {
@@ -1307,6 +1313,8 @@ PROTO MainRobot [
                                               }
                                               PositionSensor {
                                                 name "arm5sensor"
+                                                noise 0.000349066
+                                                resolution 9.58252e-05
                                               }
                                             ]
                                             endPoint Solid {
