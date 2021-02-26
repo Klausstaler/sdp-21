@@ -1443,13 +1443,24 @@ PROTO MainRobot [
                   }
                 ]
                 name "slider"
+                physics Physics {
+                  density -1
+                  mass 0.01
+                }
               }
             ]
             name "base_robot"
+            physics Physics {
+              density -1
+              mass 0.001
+            }
           }
         }
       ]
       name "lift_link"
+      physics Physics {
+        mass 0.01
+      }
     }
 
     DEF SHAPE Group {
