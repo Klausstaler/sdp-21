@@ -932,6 +932,7 @@ PROTO MainRobot [
       children [
         SliderJoint {
           jointParameters JointParameters {
+            maxStop 1.5
           }
           device [
             PositionSensor {
@@ -941,6 +942,8 @@ PROTO MainRobot [
               name "liftmot"
               controlPID 10 0.1 0.8
               maxForce 300
+              noise 0.0005
+              resolution 9.58252e-05
             }
           ]
           endPoint
@@ -948,21 +951,7 @@ PROTO MainRobot [
           translation 0 0.250072 0.089801
           rotation -1 0 0 -1.57
           children [
-            SliderJoint {
-              jointParameters DEF Platform JointParameters {
-                axis 0 1 0
-                maxStop 1.5
-              }
-              device [
-                PositionSensor {
-                  name "liftpos"
-                }
-                LinearMotor {
-                  name "liftmot"
-                  maxPosition 1.5
-                }
-              ]
-              endPoint Solid {
+                Solid {
                 rotation 0 1 0 1.5708
                 children [
                   Solid {
@@ -1002,6 +991,8 @@ PROTO MainRobot [
                             name "linear_actuator"
                             maxPosition 0.4
                             maxForce 180
+                            noise 0.0005
+                            resolution 9.58252e-05
                           }
                         ]
                         endPoint DEF ROBOT_ARM Solid {
@@ -1477,8 +1468,7 @@ PROTO MainRobot [
                   density -1
                   mass 0.001
                 }
-              }
-        }
+          }
       ]
       name "lift_link"
       physics Physics {
