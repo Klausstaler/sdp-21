@@ -25,7 +25,7 @@ while robot_controller.step(TIMESTEP) != -1:
     if success:
         print("Finished", curr_task.task_type)
         net_interface.send_response(curr_task.task_type.value)
-    robot_controller.nav.set_wheel_speeds(10, 10, 10, 10)
+    #robot_controller.nav.set_wheel_speeds(10, 10, 10, 10)
     """
     msg = robot_controller.nfc_reader.read()
     if msg:

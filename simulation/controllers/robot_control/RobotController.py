@@ -16,6 +16,8 @@ class RobotController(Robot):
 
         self.lift_motor = self.getDevice("liftmot")
         self.getDevice("liftpos").enable(timestep)
+        self.lift_motor.setPosition(0.0)
+
         self.follow_line = True
         self.turning = False
         self.turned = False

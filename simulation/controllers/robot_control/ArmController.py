@@ -40,6 +40,7 @@ class ArmController:
                 motor.setVelocity(.4)
                 position_sensor = motor.getPositionSensor()
                 position_sensor.enable(timestep)
+                motor.setPosition(0.0)
                 self.motors.append(motor)
 
         self.pickup_x = INITIAL_PICKUP_X # used to try different pickup locations if pickup fails
