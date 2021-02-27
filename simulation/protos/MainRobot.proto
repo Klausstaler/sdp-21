@@ -942,6 +942,7 @@ PROTO MainRobot [
               name "liftmot"
               controlPID 10 0.1 0.8
               maxForce 300
+              acceleration 2
               noise 0.0005
               resolution 9.58252e-05
             }
