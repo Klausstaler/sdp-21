@@ -3,9 +3,6 @@ from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
 
-class TaskCompletion():
-    def __init__(self) -> None:
-        pass
 
 
 class RobotController(Robot):
@@ -32,7 +29,6 @@ class RobotController(Robot):
     def reach_node(self, node):
         self.turned =False
         self.node_to_reach = node
-        # self.nav.follow_line(speed=3)
         if not self.reached_node:
             if self.follow_line:
                 # print("following line")
