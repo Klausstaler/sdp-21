@@ -3,6 +3,11 @@ from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
 
+class TaskCompletion():
+    def __init__(self) -> None:
+        pass
+
+
 class RobotController(Robot):
     def __init__(self, timestep=128, params=None):
         super().__init__()
