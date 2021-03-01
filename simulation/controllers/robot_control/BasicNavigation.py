@@ -8,6 +8,7 @@ class BasicNavigation:
         self.high_val = 140
         #IR sensors
         IR = {}
+
         for name in ["ds_left", "ds_right", "ds_mid"]:
             IR[name[3:]] = robot.getDevice(name)
             IR[name[3:]].enable(timestep)
@@ -49,12 +50,15 @@ class BasicNavigation:
         self.wheels.FR.setVelocity(FR)
         self.wheels.BL.setVelocity(BL)
         self.wheels.BR.setVelocity(BR)
+
+    def wrapper(self, speed, right, clock, top, left):
+        pass
     
-    def move_forward(self, speed):
+    def move_forward(self, speed, right=None, top=None, clock=None):
         self.set_wheel_speeds(speed, speed, speed, speed)
 
-    def move_diagonal(self, speed, right=True):
-        if right:
+    def move_diagonal(self, speed, right=True, top=None, clock=None):
+        if not right:
             self.set_wheel_speeds(speed, -1, -1 , speed)
         else:
             self.set_wheel_speeds(-1, speed, speed, -1)
@@ -62,30 +66,32 @@ class BasicNavigation:
     def stop(self):
         self.set_wheel_speeds(0, 0, 0, 0)
 
-    def strafe(self, speed, right=True):
+    def strafe(self, speed, right=True, top=None, clock=None):
         if not right:
             speed *=-1
         self.set_wheel_speeds(-speed, speed, speed, -speed)
 
-    def turn(self, speed, clock=True):
+    def turn(self, speed, clock=True, top=None, right=None):
         if not clock:
             speed *=-1
         self.set_wheel_speeds(speed, -speed, speed, -speed)
     
-    def turn_on_wheel_axis(self, speed, left=True, top=True):
+    def turn_on_wheel_axis(self, speed, right=False, top=True, clock=None):
         if top:
             speed*=-1
-        if not left:
+        if right:
             self.set_wheel_speeds(0., speed, 0., speed)
         else:
             self.set_wheel_speeds(speed, 0., speed, 0.)
     
     def line_detected(self, strong=False):
-        # print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
         if strong:
-            if self.sensors_values(left=[0], mid=[1], right=[0]):
+            if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
                 return True
-        else:    
+            else:
+                return False
+        else:
             if self.sensors_values(left=[0,0.5], mid=[1, 0.5], right=[0,0.5]):
                 return True
             elif self.sensor_value("left")==1 or self.sensor_value("right")==1:

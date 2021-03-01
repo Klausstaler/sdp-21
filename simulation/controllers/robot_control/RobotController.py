@@ -22,50 +22,33 @@ class RobotController(Robot):
 
         self.follow_line = True
         self.turning = False
-        self.turned = False
-        self.reached_node = False
-        self.node_to_reach = None
-
+        self.t = 0
+        
     def reach_node(self, node):
-        self.turned =False
-        self.node_to_reach = node
-        if not self.reached_node:
-            if self.follow_line:
-                # print("following line")
-                self.follow_line = self.nav.follow_line()
-                self.turning = False
-            elif self.turning:
-                # print("turning")
-                self.follow_line = self.nav.turn_until_line_n()
-            else:
-                self.nav.turn_until_line_n(n=1, new=True)
-                self.turning = True
+        print(self.follow_line, self.turning)
+        if self.follow_line:
+            self.follow_line = self.nav.follow_line()
+            self.turning = False
+        elif self.turning:
+            self.follow_line = self.nav.turn_until_line_n()
         else:
-            self.nav.stop()
-
-        return self.check_reach_node()
-
-    def turn_until(self, n):
-        self.reached_node = False
-        if self.turning and not self.turned:
-            self.turned = self.nav.turn_until_line_n()
-        elif not self.turned:
-            self.nav.turn_until_line_n(n=n+1, new=True)
+            self.nav.turn_until_line_n(n=1, new=True)
             self.turning = True
-        print("have i turned?",self.turned)
-        return self.turned
+        return node
 
-
-    def check_reach_node(self):
+    def check_reach_node(self, node_to_reach):
         if message:=self.nfc_reader.read():
             print(message)
-        # if message!=None:
-        #     # self.nav.stop()
-        #     return True
-        if message == self.node_to_reach:
-            self.reached_node = True
+        if message == node_to_reach:
             self.nav.stop()
             return True
+    
+    def time_completion(self, t,  new=False):
+        if new:
+            self.t = t
+        return 
+        
+        return True
         
     def liftUp(self):
         if (self.liftSens.getValue() < self.lift.getMaxPosition()):
