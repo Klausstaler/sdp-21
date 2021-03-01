@@ -55,24 +55,50 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     line_gen = LineGridGenerator()
 
     line_grid_image = line_gen.create_line_grid(
-    [int(shelf_size[0]*30),int(shelf_size[2]*30)],
-    int(round(30*line_distance_from_shelf)),
+    [int(shelf_size[0]*60),int(shelf_size[2]*60)],
+    int(round(60*line_distance_from_shelf)),
     placement_grid)
 
-    line_grid_image.save("textures/warehouse_floor_grid.jpg")
+    line_grid_image.save("./textures/warehouse_floor_grid.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
     wbt_file_start = (
-"#VRML_SIM R2021a utf8\n\
+"""#VRML_SIM R2021a utf8\n\
 WorldInfo {\n\
   coordinateSystem \"NUE\"\n\
+    contactProperties [
+        ContactProperties {
+            material1 \"InteriorWheelMat\"\n\
+            coulombFriction [\n\
+                1.8, 0, 0.2\n\
+            ]\n\
+            frictionRotation -0.9648 0\n\
+            bounce 0\n\
+            forceDependentSlip [\n\
+                10, 0\n\
+            ]\n\
+        }
+        ContactProperties {\n\
+            material1 \"ExteriorWheelMat\"\n\
+            coulombFriction [\n\
+                1.8, 0, 0.2\n\
+            ]\n\
+            frictionRotation 0.9648 0\n\
+            bounce 0\n\
+            forceDependentSlip [\n\
+                10, 0\n\
+            ]\n\
+        }\n\
+  ]\n\
 }\n\
 Viewpoint {\n\
   orientation -1 0 0 1\n\
   position 0 4 3\n\
 }\n\
 TexturedBackground {\n\
-}\n")
+}\n\
+TexturedBackgroundLight {\n\
+}\n""")
 
 
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
@@ -85,14 +111,18 @@ TexturedBackground {\n\
     #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
     #CHANGED TO THE LOCATION OF IMAGE WHEN MAP IS LOADED IN WEBOTS
       "url [\n\
-        \"textures/warehouse_floor_grid.jpg\"\n\
+        \"./textures/warehouse_floor_grid.jpg\"\n\
       ]\n\
       repeatS FALSE\n\
       repeatT FALSE\n\
     }\n\
+    baseColor 1 1 1\n\
+    transparency 0\n\
+    roughness 0.2\n\
+    metalness 0\n\
   }\n\
-  wallThickness " + str(0.2) + "\n\
-  wallHeight " + str(1) + "\n\
+  wallThickness " + str(0.01) + "\n\
+  wallHeight " + str(0.01) + "\n\
 }\n")
 
 
@@ -360,7 +390,9 @@ def create_tag(translation, information_sent):
     obj = (
 "NFCTag {\n\
   translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
-  dimensions 0.03 0.001 0.03\n\
+  dimensions 0.03 0.01 0.03\n\
+  baseColor 0 0 0\n\
+  emissiveColor 0 0 0\n\
   informationSent \"" + str(information_sent) + "\"\n\
 }\n")
 
@@ -385,7 +417,6 @@ def create_tag(translation, information_sent):
 #   @RETURNS:
 #       True if connected to a shelf False otherwise
 def connected_to_shelf(placement_grid, index_i, index_j):
-
     #CHECK NORTH FOR SOUTH FACING SHELF
     if index_i > 0 and placement_grid[index_i-1][index_j] == 2:
         return True
@@ -399,7 +430,7 @@ def connected_to_shelf(placement_grid, index_i, index_j):
         return True
 
     #CHECK EAST FOR WEST FACING SHELF
-    elif index_j < len(placement_grid)-1 and placement_grid[index_i][index_j+1] == 3:
+    elif index_j < len(placement_grid[index_i])-1 and placement_grid[index_i][index_j+1] == 3:
         return True
 
     #RETURNS FALSE IF NO CONNECTED SHELFS WERE FOUND
