@@ -1,0 +1,4 @@
+neighbours:
+  1. calculate direction for one node(how many line turns clockwise?)
+  2. mirror for other node
+  3. parse neighbours string
