@@ -21,6 +21,8 @@ PROTO MainRobot [
   field SFFloat Distance_apart 0.12
   field SFInt32 numberOfRays 5
   field SFFloat aperture 1.3
+
+  field SFString robot_id "1"
   
   ### Reciever details
   # field SFInt32 RecievingChannel 0 #-1 for all channels
@@ -32,6 +34,7 @@ PROTO MainRobot [
 
 {
 	DEF TRANSPORT Robot {
+  name IS robot_id
   translation IS translation
   rotation IS rotation
   children [
