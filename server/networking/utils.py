@@ -15,12 +15,12 @@ def encode(string): # encodes a string in the format msglen:string\n where msgle
     # print(f"{head}:{str}")
     return f"{head}:{string}\n".encode()
 
-def decode(String): # decodes and returns the string of a recieved msg
+def decode(String) -> str: # decodes and returns the string of a recieved msg
     len, msg = String.split(":")
     # print
-    return msg
+    return msg.strip()
 
-def recvall(connection): # handles the reception of packets and decodes the data
+def recvall(connection) -> str: # handles the reception of packets and decodes the data
     data = b""
     while "\n" not in data.decode():
         data += connection.recv(8)
