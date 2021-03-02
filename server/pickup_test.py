@@ -8,6 +8,7 @@ from server.Location import Size, Location
 from server.Parcel import Parcel
 from server.Shelf import Shelf, ShelfInfo
 
+
 async def main():
     sched = Scheduler()
     robot_size = Size(height=.25, length=.75, width=.7)
@@ -21,7 +22,7 @@ async def main():
     task1 = asyncio.create_task(server.move_parcel(parcel, None))
     task2 = asyncio.create_task(server.move_parcel(parcel, None))
 
-
     await asyncio.gather(task1, task2)
+
 
 asyncio.run(main())
