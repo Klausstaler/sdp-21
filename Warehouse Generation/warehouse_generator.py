@@ -389,10 +389,11 @@ def create_tag(translation, information_sent):
     #CREATS STRING ACORDING TO ARGUMENTS
     obj = (
 "NFCTag {\n\
-  translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+  translation " + str(translation[0]) + " " + str(translation[1]+0.1) + " " + str(translation[2]) + "\n\
   dimensions 0.03 0.01 0.03\n\
   baseColor 0 0 0\n\
   emissiveColor 0 0 0\n\
+  transmissionRange 0.15\n\
   informationSent \"" + str(information_sent) + "\"\n\
 }\n")
 

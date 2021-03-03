@@ -27,19 +27,38 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.9997665551189451 0.020576472378394925 0.006591210060272006 5.663049638772078
-  position -0.4180188911533394 2.701361360364876 3.1501846900264168
+  orientation -0.1980544167778961 0.9523872650077716 0.23180367867181062 1.775484373515411
+  position 4.5628226567634345 2.0040536657156505 -2.9204419107694344
   follow "robot"
-  followType "Mounted Shot"
+  followType "Pan and Tilt Shot"
 }
 TexturedBackground {
+  texture "dawn_cloudy_empty"
 }
 TexturedBackgroundLight {
-  luminosity 0.8
+  texture "dusk"
+  luminosity 1.5
+}
+WoodenBox {
+  translation 1.73 0.3 0.07
+}
+WoodenBox {
+  translation 1.0459 0.3 0.166591
+  rotation 0 1 0 0.261799
+  name "wooden box(1)"
+}
+WoodenPalletStack {
+  translation 3.63616 1.70633e-05 -3.59384
+  rotation -2.3464099999558937e-06 0.9999999999812026 5.664739999893518e-06 0.785398
+}
+WoodenBox {
+  translation 1.36468 0.94 0.0811819
+  rotation 0 1 0 0.261799
+  name "wooden box(2)"
 }
 RectangleArena {
-  floorSize 4 4
-  floorTileSize 4 4
+  floorSize 8 8
+  floorTileSize 8 8
   floorAppearance PBRAppearance {
     baseColorMap ImageTexture {
       url [
@@ -52,57 +71,57 @@ RectangleArena {
     metalness 0
   }
   wallHeight 0.01
-  wallAppearance NULL
-}
-DEF TRANSPORT MainRobot {
-  translation -0.489229 0.200763 -0.104153
-  rotation 0.5808170217303981 -0.575390021527355 -0.5758280215437421 -2.0894153071795865
-  Distance_apart 0.15
 }
 NFCTag {
-  translation -1.5 0 -1
+  translation -3 0.1 -3
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "0"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation -0.5 0 -1
+  translation -1 0.1 -3
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "1"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation 0.5 0 -1
+  translation 3 0.1 -3
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "2"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation -1.5 0 -0.5
+  translation -1 0.1 -1
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "3"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation -0.5 0 -0.5
+  translation 3 0.1 -1
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "4"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation 0.5 0 -0.5
+  translation -1 0.1 1
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "5"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation -0.5 0.1 1.48
+  translation 3 0.1 1
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -110,7 +129,7 @@ NFCTag {
   transmissionRange 0.15
 }
 NFCTag {
-  translation 1.5 0.1 1.49
+  translation -3 0.1 3
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -118,48 +137,25 @@ NFCTag {
   transmissionRange 0.15
 }
 NFCTag {
-  translation 1.51 0.1 -1.24
-  dimensions 0.03 0.01 0.03
-  baseColor 0 0 0
-  emissiveColor 0 0 0
-  informationSent "9"
-  transmissionRange 0.15
-}
-NFCTag {
-  translation 0.5 0 0.5
-  dimensions 0.03 0.01 0.03
-  baseColor 0 0 0
-  emissiveColor 0 0 0
-  informationSent "7"
-}
-NFCTag {
-  translation -1.5 0 1.5
+  translation -1 0.1 3
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "8"
+  transmissionRange 0.15
 }
 NFCTag {
-  translation -0.5 0 1.5
+  translation 3 0.1 2.94
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "9"
+  transmissionRange 0.3
 }
-NFCTag {
-  translation 0.5 0 1.5
-  dimensions 0.03 0.01 0.03
-  baseColor 0 0 0
-  emissiveColor 0 0 0
-  informationSent "10"
+DEF TRANSPORT MainRobot {
+  translation -0.974332 0.180943 -1.77856
+  Distance_apart 0.11
 }
-NFCTag {
-  translation 1.5 0 1.5
-  dimensions 0.03 0.01 0.03
-  baseColor 0 0 0
-  emissiveColor 0 0 0
-  informationSent "11"
-}
-Floor {
-  translation 0 -0.01 0
+FloorLight {
+  translation 3.34 0 3.5
 }

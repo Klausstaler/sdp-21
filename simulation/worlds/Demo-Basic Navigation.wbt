@@ -1,0 +1,155 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  info [
+    "Simulation of the KUKA youBot robot."
+    "This model includes an accurate and fast simulation of the Meccanum wheels."
+    "The robot can be equiped with various sensors (including the Microsoft Kinect) and configured with zero, one or two arms."
+  ]
+  title "KUKA youBot"
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.9983427047689967 0.057352614946051886 0.0047456710140905585 0.4266731215124816
+  position -0.20594181472950135 3.491791208915666 3.3632332811482866
+  follow "robot"
+  followType "Pan and Tilt Shot"
+}
+TexturedBackground {
+  texture "dusk"
+  skybox FALSE
+}
+TexturedBackgroundLight {
+  texture "stadium"
+  luminosity 1.5
+}
+Floor {
+  size 10 19
+  appearance Parquetry {
+    type "chequered"
+    colorOverride 0.811765 0.823529 0.647059
+  }
+}
+DEF TRANSPORT MainRobot {
+  translation -0.431886 0.191286 -2.05384
+}
+TrafficCone {
+  translation -1.15 0 -2.08
+}
+TrafficCone {
+  translation 0.67 0 -2.08
+  name "traffic cone(1)"
+}
+TrafficCone {
+  translation 0.67 0 -3.38
+  name "traffic cone(2)"
+}
+TrafficCone {
+  translation 0.67 0 -2.73
+  name "traffic cone(17)"
+}
+TrafficCone {
+  translation -1.19 0 -3.38
+  name "traffic cone(3)"
+}
+TrafficCone {
+  translation -1.19 0 -4.59
+  name "traffic cone(4)"
+}
+TrafficCone {
+  translation 0.85 0 -4.32
+  name "traffic cone(5)"
+}
+TrafficCone {
+  translation 1.4 0 -4.8
+  name "traffic cone(18)"
+}
+TrafficCone {
+  translation 1.79 0 -5.29
+  name "traffic cone(6)"
+}
+TrafficCone {
+  translation 2.19 0 -5.87
+  name "traffic cone(12)"
+}
+TrafficCone {
+  translation 2.47 0 -7.15
+  name "traffic cone(8)"
+}
+TrafficCone {
+  translation 1.94 0 -7.67
+  name "traffic cone(19)"
+}
+TrafficCone {
+  translation 0.8 0 -7.69
+  name "traffic cone(10)"
+}
+TrafficCone {
+  translation 0.19 0 -7.72
+  name "traffic cone(15)"
+}
+TrafficCone {
+  translation -0.43 0 -7.77
+  name "traffic cone(16)"
+}
+TrafficCone {
+  translation 2.46 0 -6.54
+  name "traffic cone(11)"
+}
+TrafficCone {
+  translation 1.37 0 -7.67
+  name "traffic cone(9)"
+}
+TrafficCone {
+  translation -0.87 0 -5.47
+  name "traffic cone(7)"
+}
+TrafficCone {
+  translation -0.34 0 -6.02
+  name "traffic cone(13)"
+}
+FloorLight {
+  translation -1.72 0 -2.05
+  pointLightColor 0.333333 1 0
+  pointLightIntensity 2
+}
+FloorLight {
+  translation -1.35 0 -7.92
+  name "floor light(2)"
+  pointLightColor 0.666667 0 0
+  pointLightIntensity 2
+}
+FloorLight {
+  translation 3.15 0 -6.41
+  name "floor light(3)"
+  pointLightIntensity 0.5
+}
+FloorLight {
+  translation 1.23 0 -3.96
+  name "floor light(1)"
+  pointLightIntensity 0.5
+}
