@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+    <h1>Current Tasks</h1><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Robot</th>
+            <th scope="col">Robot IP</th>
+            <th scope="col">Package ID</th>
+            <th scope="col">Package Details</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{task.robot.name}}</th>
+            <td>{{task.robot.ip}}</td>
+            <td>{{task.package.old_id}}</td>
+            <td>{{task.package.details}}</td>
+            <td>{% if task.holding_package == 0 %}
+                Robot moving towards the package
+                {% endif %}
+                {% if task.holding_package == 1 %}
+                Package acquired. Robot moving towards drop zone
+                {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h3>Load from JSON</h3><br>
+      <form method="POST" style="padding-left: 1%;">
+        {% csrf_token %}
+        {{form.as_p}}
+      <input type="submit" value="Load">
+    </form>
+
+{% endblock %}

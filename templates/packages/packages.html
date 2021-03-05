@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Packages {% endblock %}
+
+{% block body %}
+
+        
+
+
+        <h1>packages:</h1>
+        {% for package in packages %}
+            <a href= "/packages/{{package.code}}">{{package.name}}</a><br>
+        {%endfor%}
+        
+        <br><br>
+        <a href="/packages/create">or create new package</a>
+
+{% endblock %}
