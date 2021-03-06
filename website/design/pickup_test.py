@@ -25,4 +25,4 @@ async def main():
     await asyncio.gather(task1, task2)
 
 
-#asyncio.run(main())
+asyncio.run(main())

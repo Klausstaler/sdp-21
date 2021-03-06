@@ -2,7 +2,8 @@ from django.shortcuts import render,get_object_or_404,HttpResponseRedirect
 from .models import package,node,robot,shelf,hidden_package
 from .forms import packageCreateForm,packagePickForm
 from django.contrib import messages
-from .tasks import send_robot
+from .functions import get_node_list
+from .functions import package_request
 
 # Create your views here.
 
@@ -56,15 +57,15 @@ def package_request_view(request):
     form = packagePickForm(request.POST or None)
     if form.is_valid():
         data = form.data.getlist('package')
-        ids=[]
+        packs = {}
         for id in data:
             pack = package.objects.get(pk=id)
             shelf = pack.shelf
             compartment = pack.shelf_compartment
             p=hidden_package.objects.create(old_id=pack.id,shelf=pack.shelf,shelf_compartment=pack.shelf_compartment,weight=pack.weight,length=pack.length,width=pack.width,heigth=pack.heigth,details=pack.details)
-            ids.append(p.id)
+            packs[p.id] = p
             pack.delete()
-        send_robot.delay(ids)
+        package_request(packs)
         messages.success(request, 'Packages Are On Their Way!')
         return HttpResponseRedirect('/get')
     context={
