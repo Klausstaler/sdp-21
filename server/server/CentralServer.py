@@ -44,7 +44,7 @@ class CentralServer:
             # Task(TaskType.MOVEMENT, {"func_name":"turn_on_wheel_axis","total_time":30, "speed":15, "top":True, "right":False}),
             ]
         self.scheduler.add_tasks(robot, tasks)
-        print("Sending tasks....")
+        print(f"Sending tasks to robot {robot.id}")
         while self.scheduler.has_tasks(robot):
             await self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
 

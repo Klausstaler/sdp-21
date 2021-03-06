@@ -7,11 +7,11 @@ import copy
 IKPY_MAX_ITERATIONS = 4
 TIMESTEP = 128
 
-# Init network interface
-net_interface = NetworkInterface()
-
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)
+
+# Init network interface
+net_interface = NetworkInterface(robot_controller.getName())
 
 class TaskCompletion():
     def __init__(self, robot_controller:RobotController) -> None:

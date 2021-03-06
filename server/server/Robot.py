@@ -2,7 +2,7 @@ from server.Location import Size
 
 
 class Robot:
-    def __init__(self, robot_id, size: Size):
+    def __init__(self, robot_id: str, size: Size):
         self.id = robot_id
         self.size = size
 

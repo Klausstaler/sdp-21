@@ -49,20 +49,8 @@ class RobotController(Robot):
         return 
         
         return True
-        
-    def liftUp(self):
-        if (self.liftSens.getValue() < self.lift.getMaxPosition()):
-            self.lift.setVelocity(1)
-        else:
-            self.lift.setVelocity(0)
-
-    def liftDown(self):
-        if (self.liftSens.getValue() > self.lift.getMinPosition()):
-            self.lift.setVelocity(-1)
-        else:
-            self.lift.setVelocity(0)
 
     def raise_platform(self, height: str) -> bool:
         height = float(height)
         self.lift_motor.setPosition(height)
-        return abs(self.lift_motor.getPositionSensor().getValue() - height) < 0.001
+        return abs(self.lift_motor.getPositionSensor().getValue() - height) < 0.005
