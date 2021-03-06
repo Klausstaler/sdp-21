@@ -34,9 +34,9 @@ class TaskCompletion():
         
     def next_step(self):
         if self.running and not self.completed:
-            self.completed = self.completition_func(
-                self.func(**self.params)
-                )
+            temp = self.func(**self.params)
+            self.completed = self.completition_func(temp)
+
         elif not self.completed:
             self.func(**self.init_param)
             self.running = True
@@ -57,8 +57,11 @@ class TaskCompletion():
             params["time"] = time
             init_params["time"] = time
         print(params)
-        if completition_func:= Tasks_dic[task_type]["completition_func"] is None:
+        completition_func = Tasks_dic[task_type]["completition_func"]
+        if completition_func is None:
             completition_func = lambda x:x
+        else:
+            completition_func = completition_func(self.robot_controller)
 
         self.set_func(
             task_func   = Tasks_dic[task_type]["task_func"](controller=self.robot_controller), 

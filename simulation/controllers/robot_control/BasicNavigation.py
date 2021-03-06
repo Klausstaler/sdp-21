@@ -66,7 +66,8 @@ class BasicNavigation:
     def stop(self):
         self.set_wheel_speeds(0, 0, 0, 0)
 
-    def strafe(self, speed, right=True, top=None, clock=None):
+    def strafe(self, speed, right, top=None, clock=None):
+        print(right)
         if not right:
             speed *=-1
         self.set_wheel_speeds(-speed, speed, speed, -speed)
