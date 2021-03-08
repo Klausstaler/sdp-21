@@ -341,11 +341,18 @@ function createGrid(){
   return str;
 }
 
+
+function export_json(){
+     var str = export_js_gen() + "||" + export_js_db()
+     post_data(str)
+     console.log(str)
+    return str
+}
 function get_json_db(node){
   var id = node.id;
   var type = node.getAttribute("type");
   var neighbours = node.getAttribute("neighbours");
- console.log(str);
+// console.log(str);
    return "\"" + id + "\" :{" + "\"type\":\"" + type + "\", \"neighbours\" : " + neighbours + "}"
 }
 
@@ -355,14 +362,13 @@ function export_js_gen(){
  for(var i = 0; i < nodes.length; i++){
    if(nodes[i].getAttribute("type") != "undefined"){
      var json_str = get_json_gen(nodes[i]);
-     console.log(i + " " +nodes.length);
+//     console.log(i + " " +nodes.length);
      str += json_str + ",";
 
    }
  }
  str = str.slice(0,-1) + "}}";
- console.log(str);
- post_data(str)
+// console.log(str);
  return str;
 }
 
