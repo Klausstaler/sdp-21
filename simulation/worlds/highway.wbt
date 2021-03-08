@@ -40,7 +40,7 @@ RectangleArena {
   floorAppearance PBRAppearance {
     baseColorMap ImageTexture {
 url [
-        "textures/warehouse_floor_grid.jpg"
+        "textures/highway.jpg"
       ]
       repeatS FALSE
       repeatT FALSE
