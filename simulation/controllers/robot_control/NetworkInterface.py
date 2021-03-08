@@ -3,16 +3,16 @@ from Task import resolve_task, Task, TaskType
 
 
 class NetworkInterface:
-    def __init__(self):
+    def __init__(self, robot_id: str):
         self.host, self.port = '127.0.0.1', 12345
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-        # Connect to server
-        self.socket.connect((self.host, self.port))
-        print("Connected successfully!")
-
         self.curr_task: Task = Task(TaskType.NO_TASK, {})
         self.task_queue = queue.Queue()
+        
+        # Connect to server
+        self.socket.connect((self.host, self.port))
+        self.socket.send(utils.encode(robot_id))  # send ID to server
+        print("Connected successfully!")
         threading.Thread(target=self.receive_messages, daemon=True).start()
 
     def __del__(self):

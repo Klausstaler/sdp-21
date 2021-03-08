@@ -2,7 +2,7 @@ from server.Location import Size
 
 
 class Robot:
-    def __init__(self, robot_id, size: Size):
+    def __init__(self, robot_id: str, size: Size):
         self.id = robot_id
         self.size = size
 
@@ -13,4 +13,5 @@ class Robot:
         :param height: Height of the robot
         :return: The height needed to raise the platform to the appropriate level
         """
-        return height - self.size.height
+        #EPSILON = 0.02 # we want to place the platform slightly below it!
+        return height - self.size.height #- EPSILON

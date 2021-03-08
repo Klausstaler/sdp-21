@@ -6,9 +6,9 @@ class NFCReader:
     def __init__(self, robot: Robot, timestep=128, led_present=False):
         self.__receiver: Receiver = robot.getDevice("receiver")
         self.__receiver.enable(timestep)
-        self.LED: Union[None, LED] = None
-        if led_present:
-            self.LED = robot.getDevice("led")
+        # self.LED: Union[None, LED] = None
+        # if led_present:
+        self.LED = robot.getDevice("led")
 
     def read(self):
         message_str = None
