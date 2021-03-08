@@ -4,7 +4,7 @@ from .forms import packageCreateForm,packagePickForm
 from django.contrib import messages
 from .functions import get_node_list
 from .functions import package_request
-
+from home.views import home_view
 # Create your views here.
 
 def packages_view(request):
@@ -39,6 +39,17 @@ def create_view(request):
     }
 
     return render(request,'packages/create.html',context)
+
+
+def map_gen_view(request):
+    if request.method == "GET":
+        print("Get request sent!")
+        return render(request, "map_gen.html")
+    elif request.method == "POST":
+        print("Post request sent!")
+        JSON = request.POST.get("data")
+        # print(JSON)
+        return home_view(request, JSON)
 
 def map_view(request):
     packages = package.objects.all()

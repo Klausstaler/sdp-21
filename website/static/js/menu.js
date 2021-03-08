@@ -1,5 +1,23 @@
 // import {export_js} from './parser.js';
 
+function post_data(json_str){
+
+var http = new XMLHttpRequest();
+var url = 'get_data.php';
+var params = 'orem=ipsum&name=binny';
+http.open('POST', "/generator/", true);
+console.log(json_str)
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+//        alert(http.responseText);
+    }
+}
+http.send("data=" + json_str);
+}
+
 function connect_via_x(Node1, Node2, boxWidth){ // left to right
   // var start =
   var node1;
@@ -25,8 +43,6 @@ function connect_via_x(Node1, Node2, boxWidth){ // left to right
   div.style.height = "0px";
   div.style.visibility = "visible";
   document.getElementsByClassName("connections")[0].appendChild(div);
-
-
 }
 
 function connect_via_y(Node1, Node2, boxHeight){ //top to bottm
@@ -161,8 +177,8 @@ function addBox(id, left,top) {
   var div = document.createElement("div");
   div.className = "box";
   // div.id = id;
-  div.style.left = String(150 + Number(left))+"px";
-  div.style.top = String(50 + Number(top))+"px";
+  div.style.left = String(200 + Number(left))+"px";
+  div.style.top = String(150 + Number(top))+"px";
   document.getElementsByClassName("grid")[0].appendChild(div);
 }
 
@@ -206,9 +222,9 @@ function add_node(id, coords, left, top){ // where modifier is last row, last co
   div.setAttribute("coords",coords);
 
 // /  // div.style.position = "absolute";
-  div.style.left = String(140 + Number(left))+"px";
+  div.style.left = String(192 + Number(left))+"px";
   // div.style.right = "0px";
-  div.style.top = String(42.5 + Number(top))+"px";
+  div.style.top = String(143 + Number(top))+"px";
   document.getElementsByClassName("grid")[0].appendChild(div);
   document.getElementById(id).onclick = function() {
 
@@ -321,6 +337,7 @@ function createGrid(){
   }
   str = str.slice(0,-1) + "}";
   console.log(str);
+  post_data(str)
   return str;
 }
 
@@ -328,7 +345,8 @@ function get_json_db(node){
   var id = node.id;
   var type = node.getAttribute("type");
   var neighbours = node.getAttribute("neighbours");
-  return "\"" + id + "\" :{" + "\"type\":\"" + type + "\", \"neighbours\" : " + neighbours + "}"
+ console.log(str);
+   return "\"" + id + "\" :{" + "\"type\":\"" + type + "\", \"neighbours\" : " + neighbours + "}"
 }
 
 function export_js_gen(){
@@ -344,6 +362,7 @@ function export_js_gen(){
  }
  str = str.slice(0,-1) + "}}";
  console.log(str);
+ post_data(str)
  return str;
 }
 

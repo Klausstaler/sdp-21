@@ -9,6 +9,7 @@ def parseJSONstring(text):
     text = text.replace(" ","")
     try:
         dic = json.loads(text)
+        print(dic.keys())
     except:
         return False
     nodes = {}
@@ -79,20 +80,22 @@ def parseJSONstring(text):
 
 
 # Create your views here.
-def home_view(request):
-    form = jsonForm(request.POST or None)
-    if form.is_valid():
-        node.objects.all().delete()
-        robot.objects.all().delete()
-        if parseJSONstring(form.data.getlist('text')[0]):
+def home_view(request, JSON = None):
+    # form = jsonForm(request.POST or None)
+    # if form.is_valid():
+    #     node.objects.all().delete()
+    #     robot.objects.all().delete()
+    if JSON != None:
+        if parseJSONstring(JSON):
+            print("Successfully Parsed!")
             messages.success(request, 'JSON Loaded')
         else:
             messages.success(request, 'Wrong JSON Format')
-        return HttpResponseRedirect('/')
-    tasks = task.objects.all()
-    context={
-        'tasks':tasks,
-        'form':form,
-    }
+        # return HttpResponseRedirect('/')
+        tasks = task.objects.all()
+        context={
+            'tasks':tasks,
+            # 'form':form,
+        }
     
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', context = None)
