@@ -18,7 +18,7 @@ class packageAdmin(admin.ModelAdmin):
 admin.site.register(package,packageAdmin)
 
 class robotAdmin(admin.ModelAdmin):
-    list_display = ['name','ip']
+    list_display = ['name','height','length','width']
     class Meta:
         model = robot
 admin.site.register(robot,robotAdmin)

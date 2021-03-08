@@ -5,10 +5,13 @@ from .forms import jsonForm
 import json
 
 
-def parseJSONstring(text):
+def importJSON(text):
+    node.objects.all().delete()
+    robot.objects.all().delete()
     text = text.replace(" ","")
     try:
         dic = json.loads(text)
+        print(dic.keys())
     except:
         return False
     nodes = {}
@@ -80,19 +83,13 @@ def parseJSONstring(text):
 
 # Create your views here.
 def home_view(request):
-    form = jsonForm(request.POST or None)
-    if form.is_valid():
-        node.objects.all().delete()
-        robot.objects.all().delete()
-        if parseJSONstring(form.data.getlist('text')[0]):
-            messages.success(request, 'JSON Loaded')
-        else:
-            messages.success(request, 'Wrong JSON Format')
-        return HttpResponseRedirect('/')
     tasks = task.objects.all()
+    if tasks:
+        empty = False
+    else:
+        empty = True
     context={
         'tasks':tasks,
-        'form':form,
-    }
-    
+        'empty':empty,
+    }  
     return render(request, 'home.html', context)

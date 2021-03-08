@@ -32,7 +32,7 @@ class package(models.Model):
     weight = models.IntegerField(blank=True,null=True)
     length = models.IntegerField(blank=True,null=True)
     width = models.IntegerField(blank=True,null=True)
-    heigth = models.IntegerField(blank=True,null=True)
+    height = models.IntegerField(blank=True,null=True)
     details = models.TextField(blank=True)
     def __str__(self):
         return str(self.id)
@@ -44,13 +44,15 @@ class hidden_package(models.Model):
     weight = models.IntegerField(blank=True,null=True)
     length = models.IntegerField(blank=True,null=True)
     width = models.IntegerField(blank=True,null=True)
-    heigth = models.IntegerField(blank=True,null=True)
+    height = models.IntegerField(blank=True,null=True)
     details = models.TextField(blank=True)
     def __str__(self):
         return str(self.old_id)
 class robot(models.Model):
-    name = models.CharField(max_length=120,verbose_name='Name',blank=True,null=True)
-    ip = models.GenericIPAddressField(verbose_name='IP',primary_key=True)
+    name = models.CharField(max_length=120,verbose_name='Name',primary_key=True)
+    height = models.IntegerField(blank=True,null=True)
+    length = models.IntegerField(blank=True,null=True)
+    width = models.IntegerField(blank=True,null=True)
     status = models.BooleanField(blank=True, null=True,default=False,editable=False)
     node_id = models.ForeignKey(node,on_delete=models.CASCADE, related_name="node_id",null=True,blank=True)
 

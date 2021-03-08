@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from home.views import home_view
-from design.views import map_view,package_request_view
+from design.views import map_view,package_request_view,map_gen_view
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('packages/',include('design.urls')),
     path('map/',map_view),
+    # path('generator/', map_gen_view),
+    path('generator/', csrf_exempt(map_gen_view)),
     path('get/',package_request_view),
     path('',home_view),
 ]
