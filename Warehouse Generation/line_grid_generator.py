@@ -192,7 +192,7 @@ class LineGridGenerator():
 
         #DEFINES THE line_width (IN PIXELS), SHOULD BE EVEN AND IS HARD CODED
         #AS THE TAPE LINE WILL BE THE SAME SIZE REGUARDLESS OF WAREHOUSE SIZE
-        line_width = 6
+        line_width = 2
 
         #DEFINES SIZE OF EACH NODE AND NUMBER OF PIXELS IN EACH IMAGE
         size = [max(shelf_size), max(shelf_size)]
