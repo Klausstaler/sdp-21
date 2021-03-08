@@ -55,8 +55,8 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     line_gen = LineGridGenerator()
 
     line_grid_image = line_gen.create_line_grid(
-    [int(shelf_size[0]*60),int(shelf_size[2]*60)],
-    int(round(60*line_distance_from_shelf)),
+    [int(shelf_size[0]*64),int(shelf_size[2]*64)],
+    int(round(64*line_distance_from_shelf)),
     placement_grid)
 
     line_grid_image.save("textures/warehouse_floor_grid.jpg")
@@ -80,8 +80,9 @@ TexturedBackgroundLight {\n\
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
     wbt_file_floor = (
 "RectangleArena {\n\
-  floorSize " + str(room_size[0]) + " " + str(room_size[1]) + "\n\
-  floorTileSize " + str(room_size[0]) + " " + str(room_size[1]) + "\n\
+  translation 0 0 0\n\
+  floorSize 32 32\n\
+  floorTileSize 32 32\n\
   floorAppearance PBRAppearance {\n\
     baseColorMap ImageTexture {\n" +
     #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
@@ -163,7 +164,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)/2)
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)-min(shelf_size))
 
                 #SETS VALUES FOR EAST FACING SHELF
@@ -175,7 +176,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (shelf_size[0])
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 #SETS VALUES FOR SOUTH FACING SHELF
@@ -187,7 +188,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)/2)
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (min(shelf_size))
 
                 #SETS VALUES FOR WEST FACING SHELF
@@ -199,7 +200,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)-(min(shelf_size)))
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 # #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
@@ -237,7 +238,7 @@ TexturedBackgroundLight {\n\
             #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
             elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
                 tag_x_coord = webots_x + ((shelf_size[0]/2))
-                tag_y_coord = 0
+                tag_y_coord = 0.001
                 tag_z_coord = webots_z + ((shelf_size[2]/2))
 
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
