@@ -76,7 +76,7 @@ class Node():
 #   List still contains the starting node and ending node and the start and end
 #   of the returned list respectivly
 def a_star_search(
-node_positions, node_connections, start_node_index, end_node_index):
+node_positions, node_connections, node_distances, start_node_index, end_node_index):
 
     #INITILISE open_nodes AND close_nodes LISTS
     open_nodes = []
@@ -125,7 +125,7 @@ node_positions, node_connections, start_node_index, end_node_index):
 
         #CREATES CHILDREN OF CURRENTLY CONSIDERED NODE
         children = create_child_nodes(
-        node_positions, node_connections, current_node, end_node)
+        node_positions, node_connections, node_distances, current_node, end_node)
 
         #CHECK TO SEE IF child ALREADY EXISTS WITHN close_nodes
         for child in children:
@@ -163,7 +163,7 @@ node_positions, node_connections, start_node_index, end_node_index):
 #   List of Node containing the nodes connected to the parent_node as children
 #   of itself
 #
-def create_child_nodes(node_positions, node_connections, parent_node, target_node):
+def create_child_nodes(node_positions, node_connections, node_distances, parent_node, target_node):
 
     #Gets the node index of the parent_node
     parent_node_index = node_positions.index(parent_node.node_position)
@@ -171,7 +171,13 @@ def create_child_nodes(node_positions, node_connections, parent_node, target_nod
 
     #Uses values in node_connections to create children of parent_node
     for child in node_connections[parent_node_index]:
+        child_parent_index = 0
+        for connected_node in node_connections[child]:
+            if connected_node == parent_node_index:
+                break
+            child_parent_index += 1
+
         child_nodes.append(
-        Node(node_positions[child], target_node.node_position, parent_node, 1))
-        
+        Node(node_positions[child], target_node.node_position, parent_node, node_distances[child][child_parent_index]))
+
     return child_nodes
