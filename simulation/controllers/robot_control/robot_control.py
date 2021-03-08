@@ -70,11 +70,14 @@ task_completion = TaskCompletion(robot_controller)
 time = 0
 while robot_controller.step(TIMESTEP) != -1:
     success, curr_task = False, net_interface.get_current_task()
-    if curr_task.task_type!= TaskType.NO_TASK:
+    if curr_task.task_type != TaskType.NO_TASK:
         task_completion.set_task(curr_task.task_type, curr_task.params, time=time)
         success = task_completion.next_step()
     if success:
         print("Finished", curr_task.task_type)
         task_completion.reset()
-        net_interface.send_response(curr_task.task_type.value)
+        if curr_task.task_type == TaskType.REACH_NODE:
+            net_interface.send_response(f"{curr_task.task_type.value};{curr_task.params['node']}")
+        else:
+            net_interface.send_response(curr_task.task_type.value)
     time+=1

@@ -35,6 +35,10 @@ class Connection(NamedTuple):
     distance: float
 adjacency_list = []
 for node_idx, adjacent_nodes in enumerate(node_connections):
-    
+    node_list = []
+    for adj_idx, adjacent_node in enumerate(adjacent_nodes):
+        connection = Connection(adjacent_node, node_distances[node_idx][adj_idx])
+        node_list.append(connection)
+    adjacency_list.append(node_list)
 
 #print(a_star_search.a_star_search(node_positions, node_connections, node_distances, 1, 41))
