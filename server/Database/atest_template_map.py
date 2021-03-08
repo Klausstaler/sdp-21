@@ -1,5 +1,5 @@
 import a_star_search
-
+from typing import NamedTuple
 node_positions = [
     [[0,0],[3,0],[6,0],[9,0]],#0-3
     [[0,1],[0.5,1],[2.5,1],[3,1],[3.5,1],[5.5,1],[6,1],[6.5,6],[8.5,1],[9,1]],#4-13
@@ -30,5 +30,11 @@ node_distances = [
     [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
     [1],[3,1],[3,1],[3],
     ]
+class Connection(NamedTuple):
+    node_idx: int
+    distance: float
+adjacency_list = []
+for node_idx, adjacent_nodes in enumerate(node_connections):
+    
 
-print(a_star_search.a_star_search(node_positions, node_connections, node_distances, 1, 41))
+#print(a_star_search.a_star_search(node_positions, node_connections, node_distances, 1, 41))
