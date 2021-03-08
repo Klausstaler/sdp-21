@@ -55,17 +55,43 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     line_gen = LineGridGenerator()
 
     line_grid_image = line_gen.create_line_grid(
+
     [int(shelf_size[0]*64),int(shelf_size[2]*64)],
     int(round(64*line_distance_from_shelf)),
+
     placement_grid)
 
     line_grid_image.save("textures/warehouse_floor_grid.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
     wbt_file_start = (
-"#VRML_SIM R2021a utf8\n\
+"""#VRML_SIM R2021a utf8\n\
 WorldInfo {\n\
   coordinateSystem \"NUE\"\n\
+    contactProperties [
+        ContactProperties {
+            material1 \"InteriorWheelMat\"\n\
+            coulombFriction [\n\
+                1.8, 0, 0.2\n\
+            ]\n\
+            frictionRotation -0.9648 0\n\
+            bounce 0\n\
+            forceDependentSlip [\n\
+                10, 0\n\
+            ]\n\
+        }
+        ContactProperties {\n\
+            material1 \"ExteriorWheelMat\"\n\
+            coulombFriction [\n\
+                1.8, 0, 0.2\n\
+            ]\n\
+            frictionRotation 0.9648 0\n\
+            bounce 0\n\
+            forceDependentSlip [\n\
+                10, 0\n\
+            ]\n\
+        }\n\
+  ]\n\
 }\n\
 Viewpoint {\n\
   orientation -1 0 0 1\n\
@@ -74,7 +100,9 @@ Viewpoint {\n\
 TexturedBackground {\n\
 }\n\
 TexturedBackgroundLight {\n\
+
 }\n")
+
 
 
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
@@ -100,6 +128,8 @@ TexturedBackgroundLight {\n\
   }\n\
   wallThickness " + str(0.01) + "\n\
   wallHeight " + str(1) + "\n\
+
+
 }\n")
 
 
@@ -370,6 +400,7 @@ def create_tag(translation, information_sent):
   dimensions 0.02 0.01 0.02\n\
   baseColor 0 0 0\n\
   emissiveColor 0 0 0\n\
+
   informationSent \"" + str(information_sent) + "\"\n\
 }\n")
 
