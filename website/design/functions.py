@@ -3,6 +3,9 @@ from .models import task as tsk
 from .models import node as nd
 import asyncio
 
+def sim_json(json):
+    pass
+
 def package_request(packs):
     for id in packs:
         pack = packs.get(id)
