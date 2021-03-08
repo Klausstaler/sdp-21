@@ -35,8 +35,8 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 8 8
-  floorTileSize 8 8
+  floorSize 10 10
+  floorTileSize 10 10
   floorAppearance PBRAppearance {
     baseColorMap ImageTexture {
 url [
@@ -53,8 +53,15 @@ url [
   wallThickness 0.01
   wallHeight 0.01
 }
+Shelf {
+  translation 0.5 3 -4.5
+  rotation 1 0 1 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
 NFCTag {
-  translation -3.0 0.1 -3.0
+  translation 0.5 0.1 -4.0
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -62,7 +69,7 @@ NFCTag {
   informationSent "0"
 }
 NFCTag {
-  translation -1.0 0.1 -3.0
+  translation -2.5 0.1 -3.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -70,15 +77,22 @@ NFCTag {
   informationSent "1"
 }
 NFCTag {
-  translation 3.0 0.1 -3.0
+  translation 0.5 0.1 -3.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   transmissionRange 0.15
   informationSent "2"
 }
+Shelf {
+  translation 1.5 3 -3.5
+  rotation 0 0 1 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
 NFCTag {
-  translation -1.0 0.1 -1.0
+  translation 1.0 0.1 -3.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -86,7 +100,7 @@ NFCTag {
   informationSent "3"
 }
 NFCTag {
-  translation 3.0 0.1 -1.0
+  translation -2.5 0.1 -1.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -94,15 +108,22 @@ NFCTag {
   informationSent "4"
 }
 NFCTag {
-  translation -1.0 0.1 1.0
+  translation 0.5 0.1 -1.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   transmissionRange 0.15
   informationSent "5"
 }
+Shelf {
+  translation 2.5 3 -0.5
+  rotation 1 0 1 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
 NFCTag {
-  translation 3.0 0.1 1.0
+  translation 2.5 0.1 0.0
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -110,7 +131,7 @@ NFCTag {
   informationSent "6"
 }
 NFCTag {
-  translation -3.0 0.1 3.0
+  translation 0.5 0.1 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
@@ -118,18 +139,40 @@ NFCTag {
   informationSent "7"
 }
 NFCTag {
-  translation -1.0 0.1 3.0
+  translation 2.5 0.1 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   transmissionRange 0.15
   informationSent "8"
 }
+Shelf {
+  translation 3.5 3 0.5
+  rotation 0 0 1 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
 NFCTag {
-  translation 3.0 0.1 3.0
+  translation 3.0 0.1 0.5
   dimensions 0.03 0.01 0.03
   baseColor 0 0 0
   emissiveColor 0 0 0
   transmissionRange 0.15
   informationSent "9"
+}
+Shelf {
+  translation 2.5 3 1.5
+  rotation 1 0 1 3.14159
+  numRacks 1 3 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+}
+NFCTag {
+  translation 2.5 0.1 1.0
+  dimensions 0.03 0.01 0.03
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  transmissionRange 0.15
+  informationSent "10"
 }
