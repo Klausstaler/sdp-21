@@ -56,7 +56,6 @@ class TaskCompletion():
         if task_type in [TaskType.MOVEMENT]:
             params["time"] = time
             init_params["time"] = time
-        print(params)
         completition_func = Tasks_dic[task_type]["completition_func"]
         if completition_func is None:
             completition_func = lambda x:x
