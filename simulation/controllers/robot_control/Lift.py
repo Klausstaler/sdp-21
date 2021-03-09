@@ -16,14 +16,15 @@ class Lift:
             else:
                 self.motors[m].setVelocity(1.0)
 
-    def raisePlatform(self, H):
+    def raisePlatform(self, height: str):
+        height = float(height)
         try:
-            assert H >= 0
-            theta = asin(H/(self.L*self.n))
-            x = sqrt(self.L**2 - H**2/self.n**2)
+            assert height >= 0
+            theta = asin(height / (self.L * self.n))
+            x = sqrt(self.L ** 2 - height ** 2 / self.n ** 2)
             delta_x = (self.L - x)/2
-        except:
-            print(f"ERROR - The desired height {H} is not reachable with the current configuration of the scissor lift")
+        except Exception as e:
+            print(f"ERROR - The desired height {height} is not reachable with the current configuration of the scissor lift")
         else:
             for m in range(len(self.motors)):
                 if m < 2:
