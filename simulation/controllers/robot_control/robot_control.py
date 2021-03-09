@@ -79,8 +79,5 @@ while robot_controller.step(TIMESTEP) != -1:
     if success:
         print("Finished", curr_task.task_type)
         task_completion.reset()
-        if curr_task.task_type == TaskType.REACH_NODE:
-            net_interface.send_response(f"{curr_task.task_type.value};{curr_task.params['node']}")
-        else:
-            net_interface.send_response(curr_task.task_type.value)
+        net_interface.send_response(curr_task.task_type.value)
     time+=1

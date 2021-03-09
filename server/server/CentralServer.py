@@ -1,5 +1,4 @@
 from server.Parcel import Parcel
-from server.Robot import Robot
 from server.Scheduler import Scheduler
 from server.Task import Task, TaskType
 from networking.NetworkInterface import NetworkInterface
@@ -46,7 +45,7 @@ class CentralServer:
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
         while self.scheduler.has_tasks(robot):
-            await self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
+            await self.network_interface.send_request(robot, await self.scheduler.get_next_task(robot))
 
 ################# For line following demo world.
 # Task(TaskType.REACH_NODE, {"node": "3"}),
