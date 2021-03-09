@@ -35,8 +35,8 @@ class Lift:
             motorT.setPosition(theta)
             bml = self.robot.getDevice('base motor left')
             bmr = self.robot.getDevice('base motor right')
-            bml.setVelocity(pi * delta_x/theta)
-            bmr.setVelocity(pi * delta_x/theta)
+            bml.setVelocity(delta_x/theta)
+            bmr.setVelocity(delta_x/theta)
             # bml.setPosition(delta_x)
             bmr.setPosition(-2 * delta_x)
 

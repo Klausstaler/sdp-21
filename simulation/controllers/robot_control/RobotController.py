@@ -2,7 +2,7 @@ from controller import Robot
 from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
-
+from Lift import Lift
 
 
 class RobotController(Robot):
@@ -36,7 +36,8 @@ class RobotController(Robot):
         return node
 
     def check_reach_node(self, node_to_reach):
-        if message:=self.nfc_reader.read():
+        message=self.nfc_reader.read()
+        if message:
             print(message)
         if message == node_to_reach:
             self.nav.stop()
