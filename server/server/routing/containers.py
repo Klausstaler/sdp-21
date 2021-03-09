@@ -1,4 +1,4 @@
-from typing import List, Union, NamedTuple
+from typing import List, NamedTuple
 
 class Connection(NamedTuple):
     node_idx: int
