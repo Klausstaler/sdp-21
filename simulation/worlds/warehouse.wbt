@@ -1016,7 +1016,7 @@ Solid {
   }
 }
 DEF TRANSPORT MainRobot {
-  translation 3.52935 0.181607 4.5818
+  translation 3.51935 0.181602 4.58171
 }
 SuctionBox {
   translation 2.53039 1.33827 2.81
