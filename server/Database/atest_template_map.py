@@ -1,44 +1,36 @@
-import a_star_search
-from typing import NamedTuple
-node_positions = [
-    [[0,0],[3,0],[6,0],[9,0]],#0-3
-    [[0,1],[0.5,1],[2.5,1],[3,1],[3.5,1],[5.5,1],[6,1],[6.5,6],[8.5,1],[9,1]],#4-13
-    [[0,2],[0.5,2],[2.5,2],[3,2],[3.5,2],[5.5,2],[6,2],[6.5,6],[8.5,2],[9,2]],#14-23
-    [[0,3],[0.5,3],[2.5,3],[3,3],[3.5,3],[5.5,3],[6,3],[6.5,6],[8.5,3],[9,3]],#24-33
-    [[0,4],[0.5,4],[2.5,4],[3,4],[3.5,4],[5.5,4],[6,4],[6.5,6],[8.5,4],[9,4]],#34-43
-    [[0,5],[0.5,5],[2.5,5],[3,5],[3.5,5],[5.5,5],[6,5],[6.5,6],[8.5,5],[9,5]],#44-53
-    [[0,6],[3,6],[6,6],[9,6]]#54-57
-    ]
+from server.routing.containers import Connection, Node
+from server.routing.Graph import Graph
+adjacency_list = [[Connection(1, 3, 5)], [Connection(2, 3, 5), Connection(7, 1, 1)],
+                  [Connection(3, 3, 5), Connection(10, 1, 1)], [Connection(13, 1, 1)],
+                  [Connection(0, 1, 5), Connection(5, 1, 5)], [Connection(4, 1, 5)], [Connection(7, 1, 1)],
+                  [Connection(17, 1, 1), Connection(6, 1, 1), Connection(8, 1, 1)], [Connection(7, 1, 1)],
+                  [Connection(10, 1, 1)], [Connection(9, 1, 1), Connection(20, 1, 1), Connection(11, 1, 1)],
+                  [Connection(10, 1, 1)], [Connection(13, 1, 1)], [Connection(12, 1, 1), Connection(23, 1, 5)],
 
-node_connections = [
-    [1],                    [2,13],                 [3],                           [13],
-    [0,5],      [4], [7],   [6,8,17],   [7], [10],  [9,11,2],   [10],   [13],   [12,23],
-    [4,15],     [14],[17],  [16,18,27], [17],[20],  [19,21,10], [20],   [23],   [22,33],
-    [14,25],    [24],[27],  [26,28,37], [27],[30],  [29,31,20], [30],   [33],   [32,43],
-    [24,35],    [34],[37],  [36,38,47], [37],[40],  [39,41,30], [40],   [43],   [42,53],
-    [34,45],    [44],[47],  [46,48,55], [47],[50],  [49,51,40], [50],   [53],   [52,57],
-    [44],                   [54],                   [55,50],                    [56],
-    ]
+                  [Connection(4, 1, 5), Connection(15, 1, 5)], [Connection(14, 1, 5)], [Connection(17, 1, 1)],
+                  [Connection(27, 1, 1), Connection(16, 1, 1), Connection(18, 1, 1)], [Connection(17, 1, 1)],
+                  [Connection(20, 1, 1)], [Connection(19, 1, 1), Connection(30, 1, 1), Connection(21, 1, 1)],
+                  [Connection(20, 1, 1)], [Connection(23, 1, 1)], [Connection(22, 1, 1), Connection(33, 1, 5)],
 
+                  [Connection(14, 1, 5), Connection(25, 1, 5)], [Connection(24, 1, 5)], [Connection(27, 1, 1)],
+                  [Connection(37, 1, 1), Connection(26, 1, 1), Connection(28, 1, 1)], [Connection(27, 1, 1)],
+                  [Connection(30, 1, 1)], [Connection(29, 1, 1), Connection(40, 1, 1), Connection(31, 1, 1)],
+                  [Connection(30, 1, 1)], [Connection(33, 1, 1)], [Connection(32, 1, 1), Connection(43, 1, 5)],
 
-node_distances = [
-    [3],[3,1],[3,1],[1],
-    [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
-    [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
-    [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
-    [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
-    [1,1],[1],[1],[1,1,1],[1],[1],[1,1,1],[1],[1],[1,1],
-    [1],[3,1],[3,1],[3],
-    ]
-class Connection(NamedTuple):
-    node_idx: int
-    distance: float
-adjacency_list = []
-for node_idx, adjacent_nodes in enumerate(node_connections):
-    node_list = []
-    for adj_idx, adjacent_node in enumerate(adjacent_nodes):
-        connection = Connection(adjacent_node, node_distances[node_idx][adj_idx])
-        node_list.append(connection)
-    adjacency_list.append(node_list)
+                  [Connection(24, 1, 5), Connection(35, 1, 5)], [Connection(34, 1, 5)], [Connection(37, 1, 1)],
+                  [Connection(47, 1, 1), Connection(36, 1, 1), Connection(38, 1, 1)], [Connection(37, 1, 1)],
+                  [Connection(40, 1, 1)], [Connection(39, 1, 1), Connection(50, 1, 1), Connection(41, 1, 1)],
+                  [Connection(40, 1, 1)], [Connection(43, 1, 1)], [Connection(42, 1, 1), Connection(53, 1, 5)],
 
-#print(a_star_search.a_star_search(node_positions, node_connections, node_distances, 1, 41))
+                  [Connection(34, 1, 5), Connection(45, 1, 5)], [Connection(44, 1, 5)], [Connection(47, 1, 1)],
+                  [Connection(55, 1, 5), Connection(46, 1, 1), Connection(48, 1, 1)], [Connection(47, 1, 1)],
+                  [Connection(50, 1, 1)], [Connection(49, 1, 1), Connection(56, 1, 5), Connection(51, 1, 1)],
+                  [Connection(50, 1, 1)], [Connection(53, 1, 1)], [Connection(52, 1, 1), Connection(57, 1, 5)],
+
+                  [Connection(44, 1, 5)], [Connection(54, 3, 5)], [Connection(55, 3, 5)], [Connection(56, 3, 5)]]
+
+graph = Graph(adjacency_list)
+print(graph.graph[0].incoming_connections, graph.graph[0].outgoing_connections)
+graph.graph[43].occupying_robot = True
+print(graph.dist_closest_robot(50))
+print(len(graph.graph))

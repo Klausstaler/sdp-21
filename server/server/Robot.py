@@ -1,5 +1,5 @@
 from server.Location import Size
-from server.Scheduler import Node
+from server.routing.containers import Node
 
 class Robot:
     def __init__(self, robot_id: str, size: Size, curr_pos: Node):

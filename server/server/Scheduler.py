@@ -5,30 +5,18 @@ from server.Robot import Robot
 from server.Task import Task, TaskType
 from website.design.functions import get_node_dict
 
-
-class Connection(NamedTuple):
-    node_idx: int
-    distance: float
-
-
-class Node:
-
-    def __init__(self, node_id: int, connections: List[Connection], occupying_robot: Union[None, Robot] = None):
-        self.node_id = node_id
-        self.connections = connections
-        self.occupying_robot = occupying_robot
-
-
 class Scheduler:
     def __init__(self):
         self.free_robots: Set[Robot] = set()
         self.open_tasks: Dict[Robot, deque[Task]] = defaultdict(deque)
         self.graph: defaultdict[int, Node] = defaultdict(Node)
+        """
         node_dict = get_node_dict()
         for from_node_id, adjacent_nodes in node_dict.items():
             self.graph[from_node_id] = Node(from_node_id, [])
             for node_id in adjacent_nodes:
                 self.graph[from_node_id].connections.append(Connection(node_id, 1.))  # currently no distance support
+        """
 
     def add_free_robot(self, robot: Robot) -> None:
         self.free_robots.add(robot)
