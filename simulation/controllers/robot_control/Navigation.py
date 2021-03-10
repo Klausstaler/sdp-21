@@ -17,11 +17,18 @@ class Navigation(BasicNavigation):
         if success:= time-self.time<total_time:
             func(speed=speed, right=right, top=top, clock=clock)
 
-        #print(time, total_time, self.time, success, right)
+        print(time, total_time, self.time, success, right)
         return not success
 
     def follow_line(self, speed = 3.5):
         nearLine = True
+        distance_sensor_reading = self.get_front_distance_value()
+        #Check for if something is within the bots "safety distance" if so stops
+        if(distance_sensor_reading <= self.safety_distance):
+            print("Object within safty distance pausing movement (Distance from object {})".format(distance_sensor_reading))
+            self.move_forward(0)
+            return nearLine
+
         if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
             print("case straight")
             self.move_forward(speed*2)
@@ -40,23 +47,21 @@ class Navigation(BasicNavigation):
         elif self.sensors_values(left=[1,0.5], mid=[0,0.5,1], right=[0]):
             print("turn wheels top left")
             self.turn_on_wheel_axis(speed, right=False, top=True)
+
         elif self.sensors_values(left=[0], mid=[0], right=[0]):
             print("noneeee")
             # nearLine = False
             self.move_forward(speed)
-        else:
 
-            print("Doing nothing!")
-
-        #print(self.line_detected())
+        print(self.line_detected())
         return nearLine
 
-    # n=1 is turn until the first line you see, 
+    # n=1 is turn until the first line you see,
     def turn_until_line_n(self, n=1, new=False, speed = 5):
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
-        #print(self.n_lines, self.line_detected(strong=True))
+        print(self.n_lines, self.line_detected(strong=True))
         if self.n_lines>1:
             self.turn(speed, clock=True)
             if self.line_detected(strong=True) and not self.n_line_token:
@@ -73,5 +78,3 @@ class Navigation(BasicNavigation):
         else:
             self.stop()
             return True
-
-

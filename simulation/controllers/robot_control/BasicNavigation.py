@@ -6,6 +6,14 @@ class BasicNavigation:
         self.max_val = 150
         self.low_val = 123
         self.high_val = 140
+
+        # Front distance sensor
+        self.ds_front = robot.getDevice('ds_front')
+        self.ds_front.enable(timestep)
+
+        #Specifys how far away the bot must be from the object infront of it in order to move forward (in CM)
+        self.safety_distance = 100
+
         #IR sensors
         IR = {}
 
@@ -22,6 +30,7 @@ class BasicNavigation:
             Wheels[name[6:]].setPosition(float('inf'))
             Wheels[name[6:]].setVelocity(0.0)
         self.wheels = SimpleNamespace(**Wheels)
+
 
     def sensor_value(self, name, value=None):
         if value is None:
@@ -45,6 +54,9 @@ class BasicNavigation:
             ans = ans and (self.sensor_value(name) in values[i])
         return ans
 
+    def get_front_distance_value(self):
+        return self.ds_front.getValue()
+
     def set_wheel_speeds(self, FL, FR, BL, BR):
         self.wheels.FL.setVelocity(FL)
         self.wheels.FR.setVelocity(FR)
@@ -53,7 +65,7 @@ class BasicNavigation:
 
     def wrapper(self, speed, right, clock, top, left):
         pass
-    
+
     def move_forward(self, speed, right=None, top=None, clock=None):
         self.set_wheel_speeds(speed, speed, speed, speed)
 
@@ -67,7 +79,7 @@ class BasicNavigation:
         self.set_wheel_speeds(0, 0, 0, 0)
 
     def strafe(self, speed, right, top=None, clock=None):
-        #print(right)
+        print(right)
         if not right:
             speed *=-1
         self.set_wheel_speeds(-speed, speed, speed, -speed)
@@ -76,7 +88,7 @@ class BasicNavigation:
         if not clock:
             speed *=-1
         self.set_wheel_speeds(speed, -speed, speed, -speed)
-    
+
     def turn_on_wheel_axis(self, speed, right=False, top=True, clock=None):
         if top:
             speed*=-1
@@ -84,9 +96,9 @@ class BasicNavigation:
             self.set_wheel_speeds(0., speed, 0., speed)
         else:
             self.set_wheel_speeds(speed, 0., speed, 0.)
-    
+
     def line_detected(self, strong=False):
-        #print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
         if strong:
             if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
                 return True
