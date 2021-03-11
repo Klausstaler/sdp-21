@@ -1,7 +1,7 @@
+from networking.NetworkInterface import NetworkInterface
 from server.Parcel import Parcel
 from server.Scheduler import Scheduler
 from server.Task import Task, TaskType
-from networking.NetworkInterface import NetworkInterface
 
 
 class CentralServer:
@@ -27,21 +27,21 @@ class CentralServer:
             Task(TaskType.REACH_NODE, {"node": "15"}),
             Task(TaskType.TURN_UNTIL, {"n": 3}),
             Task(TaskType.REACH_NODE, {"node": "14"}),
-            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":3, "speed":5, "right":True}),
-            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)+0.03}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
+            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height) + 0.03}),
             Task(TaskType.PICKUP_PARCEL, {}),
             Task(TaskType.RAISE_PLATFORM, {"height": 0}),
-            
-            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":4, "speed":5,"right":False}),
+
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
             Task(TaskType.REACH_NODE, {"node": "13"}),
             Task(TaskType.REACH_NODE, {"node": "12"}),
             Task(TaskType.TURN_UNTIL, {"n": 1}),
             Task(TaskType.REACH_NODE, {"node": "1"}),
             Task(TaskType.TURN_UNTIL, {"n": 3}),
             Task(TaskType.REACH_NODE, {"node": "0"}),
-            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":15, "speed":7, "right":True}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 15, "speed": 7, "right": True}),
             # Task(TaskType.MOVEMENT, {"func_name":"turn_on_wheel_axis","total_time":30, "speed":15, "top":True, "right":False}),
-            ]
+        ]
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
         while self.scheduler.has_tasks(robot):
@@ -59,4 +59,3 @@ class CentralServer:
 # Task(TaskType.MOVEMENT, {"func_name":"move_diagonal","total_time":35, "speed":15, "right":True}),
 # Task(TaskType.MOVEMENT, {"func_name":"turn","total_time":24, "speed":12}),            
 # Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":30, "speed":15}),
-            

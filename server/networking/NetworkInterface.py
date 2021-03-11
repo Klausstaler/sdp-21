@@ -6,6 +6,7 @@ from networking.utils import encode, decode
 from server.Robot import Robot
 from server.Task import Task
 
+
 class Connection(NamedTuple):
     reader: StreamReader
     writer: StreamWriter

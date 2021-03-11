@@ -1,14 +1,15 @@
-from server.routing.containers import Connection, Node
-from server.Task import Task, TaskType
-from typing import List
 from collections import defaultdict
 from heapq import heappop, heappush, heapify
+from typing import List
+
+from server.Task import Task, TaskType
+from server.routing.containers import Connection, Node
 
 
 def __calc_lines_to_turn(prev_node: Node, curr_node: Node, next_node: Node) -> int:
     prev_node_id, next_node_id = prev_node.node_id, next_node.node_id
     connections = curr_node.all_connections
-    assert(len(connections) == 4)
+    assert (len(connections) == 4)
     prev_idx, next_idx = 0, 0
     for i, connection in enumerate(connections):
         if connection and connection.node_id == prev_node_id:
@@ -28,7 +29,8 @@ def path_to_commands(path: List[Node]) -> List[Task]:
     # oh no this is impossible
     prev_node, res = None, []
     for curr_node, next_node in zip(path[:-1], path[1:]):
-        lines_to_turn = __calc_lines_to_turn(prev_node, curr_node, next_node) if prev_node else 0 # what to do when we do not know the direction?
+        lines_to_turn = __calc_lines_to_turn(prev_node, curr_node,
+                                             next_node) if prev_node else 0  # what to do when we do not know the direction?
         if lines_to_turn > 0:
             res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
         res.append(Task(TaskType.REACH_NODE, {"node": f"{curr_node.node_id}"}))

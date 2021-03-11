@@ -1,5 +1,4 @@
 from enum import Enum
-from functools import partial
 
 
 class TaskType(Enum):

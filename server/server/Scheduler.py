@@ -1,10 +1,12 @@
 from collections import deque, defaultdict
-from typing import List, Dict, Set, Union, NamedTuple
+from typing import List, Dict, Set, Union
 
 from server.Robot import Robot
 from server.Task import Task, TaskType
 from server.routing.containers import Node
-#from website.design.functions import get_node_dict
+
+
+# from website.design.functions import get_node_dict
 
 class Scheduler:
     def __init__(self):
@@ -46,9 +48,9 @@ class Scheduler:
 
     async def check_collisions(self, robot: Robot, node_id: int) -> None:
         pass
-        #if self.graph[node_id].occupying_robot:
+        # if self.graph[node_id].occupying_robot:
         #    await asyncio.sleep(2)
         #    await self.check_collisions(robot, node_id)
-        #self.graph[robot.curr_pos.node_id].occupying_robot = None
-        #self.graph[node_id].occupying_robot = robot
-        #robot.curr_pos = self.graph[node_id]
+        # self.graph[robot.curr_pos.node_id].occupying_robot = None
+        # self.graph[node_id].occupying_robot = robot
+        # robot.curr_pos = self.graph[node_id]
