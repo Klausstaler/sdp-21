@@ -1,4 +1,5 @@
 from server.routing.containers import Connection, Node
+from server.Task import Task, TaskType
 from typing import List
 from collections import defaultdict
 from heapq import heappop, heappush, heapify
@@ -46,21 +47,27 @@ class Graph:
                     reverse_search = True
         return float("inf")  # no robot found, all good to go yeet
 
-    def get_path(self, start_location: int, end_location: int) -> List[Node]:
-        return [self.graph[start_location]] + self.shortest_paths[start_location][end_location]
-
-    def path_to_commands(self, path: List[Node]) -> List[Task]:
-        # oh no this is impossible
-        prev_node, res_ = path[0], []
-        for curr_node in path:
-            if curr_node == prev_node:
-                continue
-
-        pass
-
     def get_commands(self, start_location, end_location: int) -> List[Task]:
         return self.path_to_commands(self.get_path(start_location, end_location))
 
+    def path_to_commands(self, path: List[Node]) -> List[Task]:
+        # oh no this is impossible
+        prev_node, res = None, []
+        for curr_node, next_node in zip(path[:-1], path[1:]):
+            lines_to_turn = self.__calc_lines_to_turn(prev_node, curr_node, next_node)
+            res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
+            res.append(Task(TaskType.REACH_NODE, {"node": f"{curr_node.node_id}"}))
+            prev_node = curr_node
+        return res
+
+    def get_path(self, start_location: int, end_location: int) -> List[Node]:
+        return [self.graph[start_location]] + self.shortest_paths[start_location][end_location]
+
+    def __calc_lines_to_turn(self, prev_node: Node, curr_node: Node, to_node: Node) -> int:
+        prev_node_id, to_node_id = prev_node.node_id, to_node.node_id
+        connections = curr_node.all_connections
+        prev_idx = curr_node.all_connections.i
+        pass
     def __compute_shortest_paths(self) -> None:
         """
         Floyd-Warshall algo to compute the shortest paths between all nodes.
