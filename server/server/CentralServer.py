@@ -19,8 +19,28 @@ class CentralServer:
         needed_height = parcel.shelf_info.assigned_shelf.get_compartment_height(compartment_num)
         # print(needed_height)
         tasks = [
-            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
+            Task(TaskType.REACH_NODE, {"node": "51"}),
+            Task(TaskType.TURN_UNTIL, {"n": 3}),
+            Task(TaskType.REACH_NODE, {"node": "50"}),
+            Task(TaskType.TURN_UNTIL, {"n": 2}),
+            Task(TaskType.REACH_NODE, {"node": "43"}),
+            Task(TaskType.REACH_NODE, {"node": "29"}),
+            Task(TaskType.REACH_NODE, {"node": "15"}),
+            Task(TaskType.TURN_UNTIL, {"n": 3}),
+            Task(TaskType.REACH_NODE, {"node": "14"}),
+            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":3, "speed":5, "right":True}),
+            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)+0.03}),
             Task(TaskType.PICKUP_PARCEL, {}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0}),
+            
+            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":4, "speed":5,"right":False}),
+            Task(TaskType.REACH_NODE, {"node": "13"}),
+            Task(TaskType.REACH_NODE, {"node": "12"}),
+            Task(TaskType.TURN_UNTIL, {"n": 1}),
+            Task(TaskType.REACH_NODE, {"node": "1"}),
+            Task(TaskType.TURN_UNTIL, {"n": 3}),
+            Task(TaskType.REACH_NODE, {"node": "0"}),
+            Task(TaskType.MOVEMENT, {"func_name":"strafe","total_time":15, "speed":7, "right":True}),
             # Task(TaskType.MOVEMENT, {"func_name":"turn_on_wheel_axis","total_time":30, "speed":15, "top":True, "right":False}),
             ]
         self.scheduler.add_tasks(robot, tasks)
