@@ -192,7 +192,7 @@ class LineGridGenerator():
 
         #DEFINES THE line_width (IN PIXELS), SHOULD BE EVEN AND IS HARD CODED
         #AS THE TAPE LINE WILL BE THE SAME SIZE REGUARDLESS OF WAREHOUSE SIZE
-        line_width = 6
+        line_width = 2
 
         #DEFINES SIZE OF EACH NODE AND NUMBER OF PIXELS IN EACH IMAGE
         size = [max(shelf_size), max(shelf_size)]
@@ -207,6 +207,8 @@ class LineGridGenerator():
         #AND CREATES A BLANK white IMAGE OF THIS SIZE
         total_width = size[0] * len(grid_array[0])
         total_height = size[1] * len(grid_array)
+        ##total_width = 2048
+        ##total_height = 2048
         full_image = Image.new("RGB", (total_width, total_height), "white")
 
         #NESTED LOOP TO LOOK THROUGH grid_array AND PLACE THE CORRECT GRID IMAGE
@@ -351,9 +353,17 @@ class LineGridGenerator():
                         # drawer.line(((size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2),
                         # ((size[0]*(j+1))-(shelf_line_dist + shelf_size[0])), (size[1]*(i+1))-(shelf_line_dist/2)),
                         # fill="black", width=line_width)
-
+        #n = 0;
+        #while(pow(n, 2) < total_width){
+        #    n++
+        #}
+        power_width = 2048
+        power_height = 2048
+        full_image_powered = Image.new("RGB", (power_width, power_height), "orange")
+        offset = ((power_width - total_width) // 2, (power_height - total_height) // 2)
+        full_image_powered.paste(full_image, offset)
 
 
 
         #RETURNS THE FULL IMAGE OF THE FLOOR GRID
-        return full_image
+        return full_image_powered
