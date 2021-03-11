@@ -3,6 +3,7 @@ from typing import List
 from collections import defaultdict
 from heapq import heappop, heappush, heapify
 
+
 class Graph:
     def __init__(self, adjacency_list: List[List[Connection]]):
         self.graph: defaultdict[int, Node] = defaultdict(Node)
@@ -43,13 +44,18 @@ class Graph:
                     heappush(distances, (connection.distance + dist, connection.node_idx))
                 if connection.priority > start_priority:
                     reverse_search = True
-        return float("inf") # no robot found, all good to go yeet
+        return float("inf")  # no robot found, all good to go yeet
 
     def get_path(self, start_location: int, end_location: int) -> List[Node]:
-        return self.shortest_paths[start_location][end_location]
+        return [self.graph[start_location]] + self.shortest_paths[start_location][end_location]
 
     def path_to_commands(self, path: List[Node]) -> List[Task]:
         # oh no this is impossible
+        prev_node, res_ = path[0], []
+        for curr_node in path:
+            if curr_node == prev_node:
+                continue
+
         pass
 
     def get_commands(self, start_location, end_location: int) -> List[Task]:

@@ -4,7 +4,7 @@ adjacency_list = [[Connection(1, 3, 5)], [Connection(2, 3, 5), Connection(7, 1, 
                   [Connection(3, 3, 5), Connection(10, 1, 1)], [Connection(13, 1, 1)],
                   [Connection(0, 1, 5), Connection(5, 1, 5)], [Connection(4, 1, 5)], [Connection(7, 1, 1)],
                   [Connection(17, 1, 1), Connection(6, 1, 1), Connection(8, 1, 1)], [Connection(7, 1, 1)],
-                  [Connection(10, 1, 1)], [Connection(9, 1, 1), Connection(20, 1, 1), Connection(11, 1, 1)],
+                  [Connection(10, 1, 1)], [Connection(9, 1, 1), Connection(11, 1, 1), Connection(20, 1, 1)],
                   [Connection(10, 1, 1)], [Connection(13, 1, 1)], [Connection(12, 1, 1), Connection(23, 1, 5)],
 
                   [Connection(4, 1, 5), Connection(15, 1, 5)], [Connection(14, 1, 5)], [Connection(17, 1, 1)],
