@@ -45,6 +45,16 @@ class Graph:
                     reverse_search = True
         return float("inf") # no robot found, all good to go yeet
 
+    def get_path(self, start_location: int, end_location: int) -> List[Node]:
+        return self.shortest_paths[start_location][end_location]
+
+    def path_to_commands(self, path: List[Node]) -> List[Task]:
+        # oh no this is impossible
+        pass
+
+    def get_commands(self, start_location, end_location: int) -> List[Task]:
+        return self.path_to_commands(self.get_path(start_location, end_location))
+
     def __compute_shortest_paths(self) -> None:
         """
         Floyd-Warshall algo to compute the shortest paths between all nodes.
@@ -64,9 +74,5 @@ class Graph:
                     if new_dist < curr_dist:
                         first_path = self.shortest_paths[i][k]
                         second_path = self.shortest_paths[k][j]
-
                         self.shortest_paths[i][j] = first_path + second_path
                         distances[i][j] = new_dist
-
-    def get_path(self, start_location: int, end_location: int) -> List[Node]:
-        return self.shortest_paths[start_location][end_location]
