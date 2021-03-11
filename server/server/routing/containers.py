@@ -12,3 +12,7 @@ class Node:
         self.outgoing_connections = outgoing_connections
         self.incoming_connections: List[Connection] = []
         self.occupying_robot = occupying_robot
+
+    def __repr__(self):
+        return f"<Node {self.node_id}, Occupying robot: {self.occupying_robot}>"
+

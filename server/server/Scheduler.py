@@ -3,7 +3,8 @@ from typing import List, Dict, Set, Union, NamedTuple
 
 from server.Robot import Robot
 from server.Task import Task, TaskType
-from website.design.functions import get_node_dict
+from server.routing.containers import Node
+#from website.design.functions import get_node_dict
 
 class Scheduler:
     def __init__(self):
@@ -44,9 +45,10 @@ class Scheduler:
         return None
 
     async def check_collisions(self, robot: Robot, node_id: int) -> None:
-        if self.graph[node_id].occupying_robot:
-            await asyncio.sleep(2)
-            await self.check_collisions(robot, node_id)
-        self.graph[robot.curr_pos.node_id].occupying_robot = None
-        self.graph[node_id].occupying_robot = robot
-        robot.curr_pos = self.graph[node_id]
+        pass
+        #if self.graph[node_id].occupying_robot:
+        #    await asyncio.sleep(2)
+        #    await self.check_collisions(robot, node_id)
+        #self.graph[robot.curr_pos.node_id].occupying_robot = None
+        #self.graph[node_id].occupying_robot = robot
+        #robot.curr_pos = self.graph[node_id]
