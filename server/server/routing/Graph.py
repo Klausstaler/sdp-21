@@ -5,6 +5,37 @@ from collections import defaultdict
 from heapq import heappop, heappush, heapify
 
 
+def __calc_lines_to_turn(prev_node: Node, curr_node: Node, next_node: Node) -> int:
+    prev_node_id, next_node_id = prev_node.node_id, next_node.node_id
+    connections = curr_node.all_connections
+    assert(len(connections) == 4)
+    prev_idx, next_idx = 0, 0
+    for i, connection in enumerate(connections):
+        if connection and connection.node_id == prev_node_id:
+            prev_idx = i
+        if connection and connection.node_id == next_node_id:
+            next_idx = i
+    lines_to_turn = 0
+    facing_direction = (prev_idx + 2) % len(connections)
+    while facing_direction != next_idx:
+        if connections[facing_direction]:
+            lines_to_turn += 1
+        facing_direction = (facing_direction + 1) % len(connections)
+    return lines_to_turn
+
+
+def path_to_commands(path: List[Node]) -> List[Task]:
+    # oh no this is impossible
+    prev_node, res = None, []
+    for curr_node, next_node in zip(path[:-1], path[1:]):
+        lines_to_turn = __calc_lines_to_turn(prev_node, curr_node, next_node) if prev_node else 0 # what to do when we do not know the direction?
+        if lines_to_turn > 0:
+            res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
+        res.append(Task(TaskType.REACH_NODE, {"node": f"{curr_node.node_id}"}))
+        prev_node = curr_node
+    return res
+
+
 class Graph:
     def __init__(self, adjacency_list: List[List[Connection]]):
         self.graph: defaultdict[int, Node] = defaultdict(Node)
@@ -15,7 +46,7 @@ class Graph:
         for from_node_id, adjacent_nodes in enumerate(adjacency_list):
             self.graph[from_node_id].outgoing_connections = adjacent_nodes
             for outgoing_connection in adjacent_nodes:
-                to_id = outgoing_connection.node_idx
+                to_id = outgoing_connection.node_id
                 incoming_connection = Connection(from_node_id, outgoing_connection.distance,
                                                  outgoing_connection.priority)
                 self.graph[to_id].incoming_connections.append(incoming_connection)
@@ -41,33 +72,18 @@ class Graph:
             curr_node = self.graph[curr_node_id]
             connections = curr_node.incoming_connections if reverse_search else curr_node.outgoing_connections
             for connection in connections:
-                if connection.node_idx in unvisited:
-                    heappush(distances, (connection.distance + dist, connection.node_idx))
+                if connection.node_id in unvisited:
+                    heappush(distances, (connection.distance + dist, connection.node_id))
                 if connection.priority > start_priority:
                     reverse_search = True
         return float("inf")  # no robot found, all good to go yeet
 
     def get_commands(self, start_location, end_location: int) -> List[Task]:
-        return self.path_to_commands(self.get_path(start_location, end_location))
-
-    def path_to_commands(self, path: List[Node]) -> List[Task]:
-        # oh no this is impossible
-        prev_node, res = None, []
-        for curr_node, next_node in zip(path[:-1], path[1:]):
-            lines_to_turn = self.__calc_lines_to_turn(prev_node, curr_node, next_node)
-            res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
-            res.append(Task(TaskType.REACH_NODE, {"node": f"{curr_node.node_id}"}))
-            prev_node = curr_node
-        return res
+        return path_to_commands(self.get_path(start_location, end_location))
 
     def get_path(self, start_location: int, end_location: int) -> List[Node]:
         return [self.graph[start_location]] + self.shortest_paths[start_location][end_location]
 
-    def __calc_lines_to_turn(self, prev_node: Node, curr_node: Node, to_node: Node) -> int:
-        prev_node_id, to_node_id = prev_node.node_id, to_node.node_id
-        connections = curr_node.all_connections
-        prev_idx = curr_node.all_connections.i
-        pass
     def __compute_shortest_paths(self) -> None:
         """
         Floyd-Warshall algo to compute the shortest paths between all nodes.
@@ -76,8 +92,8 @@ class Graph:
         distances: defaultdict[int, defaultdict[int, float]] = defaultdict(lambda: defaultdict(lambda: float('inf')))
         for start_location, node in self.graph.items():
             for connection in node.outgoing_connections:
-                distances[start_location][connection.node_idx] = connection.distance
-                self.shortest_paths[start_location][connection.node_idx] = [self.graph[connection.node_idx]]
+                distances[start_location][connection.node_id] = connection.distance
+                self.shortest_paths[start_location][connection.node_id] = [self.graph[connection.node_id]]
 
         for k in self.graph.keys():
             for i in self.graph.keys():

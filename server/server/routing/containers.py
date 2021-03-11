@@ -9,7 +9,7 @@ class Direction(Enum):
 
 
 class Connection(NamedTuple):
-    node_idx: int
+    node_id: int
     distance: float
     priority: int
     direction: Direction
