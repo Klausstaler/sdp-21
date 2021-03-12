@@ -60,10 +60,35 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     line_grid_image.save("textures/warehouse_floor_grid.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
+
     wbt_file_start = (
-        "#VRML_SIM R2021a utf8\n\
-        WorldInfo {\n\
+    """#VRML_SIM R2021a utf8\n\
+        WorldInfo {\n
         coordinateSystem \"NUE\"\n\
+            contactProperties [
+                ContactProperties {
+                    material1 \"InteriorWheelMat\"\n\
+                    coulombFriction [\n\
+                        1.8, 0, 0.2\n\
+                    ]\n\
+                    frictionRotation -0.9648 0\n\
+                    bounce 0\n\
+                    forceDependentSlip [\n\
+                        10, 0\n\
+                    ]\n\
+                }
+                ContactProperties {\n\
+                    material1 \"ExteriorWheelMat\"\n\
+                    coulombFriction [\n\
+                        1.8, 0, 0.2\n\
+                    ]\n\
+                    frictionRotation 0.9648 0\n\
+                    bounce 0\n\
+                    forceDependentSlip [\n\
+                        10, 0\n\
+                    ]\n\
+                }\n\
+        ]\n\
         }\n\
         Viewpoint {\n\
         orientation -1 0 0 1\n\
@@ -72,7 +97,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
         TexturedBackground {\n\
         }\n\
         TexturedBackgroundLight {\n\
-        }\n"
+        }\n"""
     )
 
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
