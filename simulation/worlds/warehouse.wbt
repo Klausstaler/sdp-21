@@ -27,8 +27,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.5028681922507215 0.6526747402578904 0.5666915074816161 2.0916712343357404
-  position 4.891803210764468 3.7469083984783564 3.013018028070247
+  orientation 0.46142677786897474 0.6785513883256813 0.5715359499338132 4.14393654351704
+  position 2.389233539222465 6.536641698888857 3.614905756753624
   follow "1"
 }
 TexturedBackground {
@@ -691,6 +691,7 @@ NFCTag {
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "56"
+  transmissionRange 0.2
 }
 NFCTag {
   translation 4.5 0.001 3
@@ -698,7 +699,9 @@ NFCTag {
   baseColor 0 0 0
   emissiveColor 0 0 0
   informationSent "57"
+  transmissionRange 0.2
 }
 DEF TRANSPORT MainRobot {
   translation 4.47546 0.18227 3.90009
+  Distance_apart 0.13
 }
