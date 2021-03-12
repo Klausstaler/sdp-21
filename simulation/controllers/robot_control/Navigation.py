@@ -25,6 +25,10 @@ class Navigation(BasicNavigation):
         nearLine = True
         case = "none"
         
+        if self.sensors_values(left=[0,0.5,1], mid=[0,0.5,1], right=[0,0.5,1]):
+            case = "Lost, keep going"
+            self.move_forward(speed)
+
         if self.sensors_values(left=[0], mid=[1], right=[0]):
             case = "straight"
             self.move_forward(speed * 2)
