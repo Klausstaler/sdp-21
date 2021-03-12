@@ -1,9 +1,9 @@
 from collections import defaultdict
 from heapq import heappop, heappush, heapify
-from typing import List
+from typing import List, Dict
 
 from server.Task import Task, TaskType
-from server.routing.containers import Connection, Node
+from server.routing.containers import Connection, Node, Direction
 
 
 def __calc_lines_to_turn(prev_node: Node, curr_node: Node, next_node: Node) -> int:
@@ -31,28 +31,36 @@ def path_to_commands(path: List[Node]) -> List[Task]:
     for curr_node, next_node in zip(path[:-1], path[1:]):
         lines_to_turn = __calc_lines_to_turn(prev_node, curr_node,
                                              next_node) if prev_node else 0  # what to do when we do not know the direction?
+        print(lines_to_turn)
+        print(Task(TaskType.REACH_NODE, {"node": f"{next_node.node_id}"}))
         if lines_to_turn > 0:
             res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
-        res.append(Task(TaskType.REACH_NODE, {"node": f"{curr_node.node_id}"}))
+        res.append(Task(TaskType.REACH_NODE, {"node": f"{next_node.node_id}"}))
         prev_node = curr_node
     return res
 
 
 class Graph:
-    def __init__(self, adjacency_list: List[List[Connection]]):
+    def __init__(self, node_connections: Dict[int, List[Connection]]):
         self.graph: defaultdict[int, Node] = defaultdict(Node)
         self.shortest_paths: defaultdict[int, defaultdict[int, List[Node]]] = defaultdict(lambda: defaultdict(list))
         # Initializes graph datastructure
-        for from_node_id in range(len(adjacency_list)):
+        for from_node_id in node_connections.keys():
             self.graph[from_node_id] = Node(from_node_id, [])
-        for from_node_id, adjacent_nodes in enumerate(adjacency_list):
-            self.graph[from_node_id].outgoing_connections = adjacent_nodes
-            for outgoing_connection in adjacent_nodes:
+        for from_node_id, connections in node_connections.items():
+            self.graph[from_node_id].all_connections = connections
+            for connection in filter(lambda x: x is not None, connections):
+                if connection.direction in [Direction.BIDIRECTIONAL, Direction.INCOMING]:
+                    self.graph[from_node_id].incoming_connections.append(connection)
+                if connection.direction in [Direction.BIDIRECTIONAL, Direction.OUTGOING]:
+                    self.graph[from_node_id].outgoing_connections.append(connection)
+            """
+            for outgoing_connection in connections:
                 to_id = outgoing_connection.node_id
                 incoming_connection = Connection(from_node_id, outgoing_connection.distance,
                                                  outgoing_connection.priority)
                 self.graph[to_id].incoming_connections.append(incoming_connection)
-
+            """
         self.__compute_shortest_paths()
 
     def dist_closest_robot(self, node_id: int) -> float:

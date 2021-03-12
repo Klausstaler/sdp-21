@@ -1,3 +1,4 @@
+from server.routing.Graph import Graph
 from server.routing.containers import Connection, Direction
 
 # if this is wrong I will have to cry myself to sleep tonight
@@ -48,7 +49,7 @@ db_output = {
     41: [Connection(40, 1, 1, Direction.BIDIRECTIONAL), None, None, None],
     42: [Connection(43, 1, 1, Direction.BIDIRECTIONAL), None, None, None],
     43: [Connection(42, 1, 1, Direction.BIDIRECTIONAL), Connection(33, 1, 1, Direction.INCOMING), None, Connection(53, 1, 5, Direction.OUTGOING)],
-    44: [Connection(34, 1, 5, Direction.OUTGOING), Connection(45, 1, 5, Direction.BIDIRECTIONAL), Connection(54, 1, 1, Direction.INCOMING)],
+    44: [Connection(34, 1, 5, Direction.OUTGOING), Connection(45, 1, 5, Direction.BIDIRECTIONAL), Connection(54, 1, 1, Direction.INCOMING), None],
     45: [Connection(44, 1, 5, Direction.BIDIRECTIONAL), None, None, None],
     46: [Connection(47, 1, 1, Direction.BIDIRECTIONAL), None, None, None],
     47: [Connection(55, 1, 5, Direction.OUTGOING), Connection(46, 1, 1, Direction.BIDIRECTIONAL), Connection(37, 1, 1, Direction.INCOMING), Connection(48, 1, 1, Direction.BIDIRECTIONAL)],
@@ -63,67 +64,17 @@ db_output = {
     56: [Connection(55, 3, 5, Direction.OUTGOING), Connection(50, 1, 5, Direction.INCOMING), Connection(57, 3, 5, Direction.INCOMING), None],
     57: [Connection(56, 3, 5, Direction.OUTGOING), Connection(53, 1, 5, Direction.INCOMING), None, None]
 }
-adjacency_list = [
-       #           [Connection(1, 3, 5)],
-       #           [Connection(2, 3, 5), Connection(7, 1, 1)],
-        #          [Connection(3, 3, 5), Connection(10, 1, 1)],
-        #          [Connection(13, 1, 1)],
-        #          [Connection(0, 1, 5), Connection(5, 1, 5)],
-        #          [Connection(4, 1, 5)], [Connection(7, 1, 1)],
-        #          [Connection(17, 1, 1), Connection(6, 1, 1), Connection(8, 1, 1)],
-         #         [Connection(7, 1, 1)],
-                  [Connection(10, 1, 1)],
-                  [Connection(9, 1, 1), Connection(11, 1, 1), Connection(20, 1, 1)],
-                  [Connection(10, 1, 1)], [Connection(13, 1, 1)],
-                  [Connection(12, 1, 1), Connection(23, 1, 5)],
-                  [Connection(4, 1, 5), Connection(15, 1, 5)],
-                  [Connection(14, 1, 5)], [Connection(17, 1, 1)],
-                  [Connection(27, 1, 1), Connection(16, 1, 1), Connection(18, 1, 1)],
-                  [Connection(17, 1, 1)],
-                  [Connection(20, 1, 1)],
-                  [Connection(19, 1, 1), Connection(30, 1, 1), Connection(21, 1, 1)],
-                  [Connection(20, 1, 1)],
-                  [Connection(23, 1, 1)],
-                  [Connection(22, 1, 1), Connection(33, 1, 5)],
-                  [Connection(14, 1, 5), Connection(25, 1, 5)],
-                  [Connection(24, 1, 5)],
-                  [Connection(27, 1, 1)],
-                  [Connection(37, 1, 1), Connection(26, 1, 1), Connection(28, 1, 1)],
-                  [Connection(27, 1, 1)],
-                  [Connection(30, 1, 1)],
-                  [Connection(29, 1, 1), Connection(40, 1, 1), Connection(31, 1, 1)],
-                  [Connection(30, 1, 1)],
-                  [Connection(33, 1, 1)],
-                  [Connection(32, 1, 1), Connection(43, 1, 5)],
-                  [Connection(24, 1, 5), Connection(35, 1, 5)],
-                  [Connection(34, 1, 5)],
-                  [Connection(37, 1, 1)],
-                  [Connection(47, 1, 1), Connection(36, 1, 1), Connection(38, 1, 1)],
-                  [Connection(37, 1, 1)],
-                  [Connection(40, 1, 1)],
-                  [Connection(39, 1, 1), Connection(50, 1, 1), Connection(41, 1, 1)],
-                  [Connection(40, 1, 1)],
-                  [Connection(43, 1, 1)],
-                  [Connection(42, 1, 1), Connection(53, 1, 5)],
-                  [Connection(34, 1, 5), Connection(45, 1, 5)],
-                  [Connection(44, 1, 5)],
-                  [Connection(47, 1, 1)],
-                  [Connection(55, 1, 5), Connection(46, 1, 1), Connection(48, 1, 1)],
-                  [Connection(47, 1, 1)],
-                  [Connection(50, 1, 1)],
-                  [Connection(49, 1, 1), Connection(56, 1, 5), Connection(51, 1, 1)],
-                  [Connection(50, 1, 1)],
-                  [Connection(53, 1, 1)],
-                  [Connection(52, 1, 1), Connection(57, 1, 5)],
-                  [Connection(44, 1, 5)],
-                  [Connection(54, 3, 5)],
-                  [Connection(55, 3, 5)],
-                  [Connection(56, 3, 5)]]
 
-graph = Graph(adjacency_list)
+graph = Graph(db_output)
 print(graph.graph[0].incoming_connections, graph.graph[0].outgoing_connections)
 graph.graph[43].occupying_robot = True
 print(graph.dist_closest_robot(50))
 print(len(graph.graph))
+"""
 print(graph.get_path(0, 3))
+print(graph.get_commands(0, 3))
 print(graph.get_path(0, 21))
+print(graph.get_commands(0, 21))"""
+#print(graph.get_path(50, 2))
+#print(graph.get_commands(50, 2))
+print(graph.get_commands(1, 14))

@@ -6,6 +6,9 @@ from server.routing.containers import Connection, Node, Direction
 
 connections = [None, Connection(1, 1, 1, Direction.BIDIRECTIONAL), Connection(2, 1, 1, Direction.BIDIRECTIONAL),
                Connection(3, 1, 1, Direction.BIDIRECTIONAL)]
+
+connections = [Connection(1, 1, 1, Direction.BIDIRECTIONAL), Connection(2, 1, 1, Direction.BIDIRECTIONAL), Connection(3, 1, 1, Direction.BIDIRECTIONAL),
+               None]
 nodes = [Node(1, []), Node(2, []), Node(3, []), Node(4, [])]
 turn_node = Node(10, [])
 turn_node.all_connections = connections

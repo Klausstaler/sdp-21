@@ -40,6 +40,9 @@ class Task:
         self.params = params
         self.task_type = task_type
 
+    def __repr__(self):
+        return f"<Task type: {self.task_type.value}, Parameters {self.params}>"
+
 
 def resolve_task(data: str) -> Task:
     task_type_mapper = {
