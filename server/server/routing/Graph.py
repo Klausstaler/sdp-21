@@ -65,7 +65,7 @@ class Graph:
         distances.append((0, node_id))
         heapify(distances)
         unvisited = set(self.graph.keys())
-        reverse_search, start_priority = False, self.graph[node_id].outgoing_connections[0].priority
+        reverse_search, start_priority = False, self.graph[node_id].incoming_connections[0].priority
         while unvisited:
             dist, curr_node_id = heappop(distances)
             unvisited.remove(curr_node_id)
