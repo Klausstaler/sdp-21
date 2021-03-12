@@ -11,7 +11,7 @@ from server.Shelf import Shelf, ShelfInfo
 
 async def main():
     sched = Scheduler()
-    robot_size = Size(height=.25, length=.75, width=.7)
+    robot_size = Size(height=.17, length=.75, width=.7)
     my_shelf = Shelf(1, 2, Location(0, 0))
     shelf_info = ShelfInfo(my_shelf, 1)
     parcel = Parcel(12, Size(.35, .35, .35), Location(0, 0), shelf_info)

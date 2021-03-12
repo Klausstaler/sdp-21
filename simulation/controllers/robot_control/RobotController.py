@@ -24,7 +24,7 @@ class RobotController(Robot):
         self.t = 0
         
     def reach_node(self, node):
-        print(self.follow_line, self.turning)
+        #print(self.follow_line, self.turning)
         if self.follow_line:
             self.follow_line = self.nav.follow_line()
             self.turning = False
