@@ -32,18 +32,26 @@ class Navigation(BasicNavigation):
         if self.sensors_values(left=[0], mid=[1], right=[0]):
             case = "straight"
             self.move_forward(speed * 2)
-        elif self.sensors_values(left=[0.5], mid=[1], right=[0]):
-            case = "slow diagonal right"
-            self.move_diagonal(speed, right=True)
-        elif self.sensors_values(left=[0], mid=[1], right=[0.5]):
+        elif self.sensors_values(left=[0.5], mid=[0.5], right=[0]):
             case = "slow diagonal left"
             self.move_diagonal(speed, right=False)
+            self.turn(speed, clock=False)
+
+        elif self.sensors_values(left=[0], mid=[0.5], right=[0.5]):
+            case = "slow diagonal right"
+            self.move_diagonal(speed, right=True)
+            self.turn(speed, clock=True)
+
+        else:
+            case = "slow straight"            
+            self.move_forward(speed)
+
 
         if self.sensors_values(left=[1], mid=[0,0.5], right=[0,0.5]):
             case = "left"
             self.turn(speed, clock=False)
 
-        if self.sensors_values(left=[0,0], mid=[0.5], right=[0.5]):
+        if self.sensors_values(left=[0,0.5], mid=[0,0.5], right=[1]):
             case = "right"
             self.turn(speed, clock=True)
 
@@ -57,7 +65,7 @@ class Navigation(BasicNavigation):
         return nearLine
 
     # n=1 is turn until the first line you see, 
-    def turn_until_line_n(self, n=1, new=False, speed=5):
+    def turn_until_line_n(self, n=1, new=False, speed=10):
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
