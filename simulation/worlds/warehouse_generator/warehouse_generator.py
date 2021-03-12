@@ -324,6 +324,7 @@ def create_tag(translation, information_sent):
         dimensions 0.02 0.01 0.02\n\
         baseColor 0 0 0\n\
         emissiveColor 0 0 0\n\
+        transmissionRange 0.20 \n\
         informationSent \"" + str(information_sent) + "\"\n\
         }\n"
     )
