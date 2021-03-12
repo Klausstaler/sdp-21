@@ -57,7 +57,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     int(round(64*line_distance_from_shelf)),
     placement_grid)
 
-    line_grid_image.save("textures/warehouse_floor_grid.jpg")
+    line_grid_image.save("textures/"+world_name+".jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
 
@@ -94,10 +94,15 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
         orientation -1 0 0 1\n\
         position 0 4 3\n\
         }\n\
-        TexturedBackground {\n\
-        }\n\
-        TexturedBackgroundLight {\n\
-        }\n"""
+        TexturedBackground {
+            skybox FALSE
+            skyColor [ 0.156863 0.247059 0.388235 ]
+        }     
+        TexturedBackgroundLight {
+        texture "dusk"
+        }
+        DEF TRANSPORT MainRobot {
+        }"""
     )
 
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
@@ -111,7 +116,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
             #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
             #CHANGED TO THE LOCATION OF IMAGE WHEN MAP IS LOADED IN WEBOTS
             "url [\n\
-                \"textures/warehouse_floor_grid.jpg\"\n\
+                \"textures/"+world_name+".jpg\"\n\
             ]\n\
             repeatS FALSE\n\
             repeatT FALSE\n\
@@ -294,7 +299,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
 
     #WRITER TO OUTPUT 'full_file_string' TO FILE DENOTED BY 'world_name'
     #FORMAT OUTPUTTED AS THE FORM NEEDED BY WEBOTS
-    writer = open(world_name, "wb")
+    writer = open(world_name+".wbt", "wb")
     writer.write(full_file_string.encode('utf-8'))
     writer.close()
 
