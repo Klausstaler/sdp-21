@@ -22,21 +22,21 @@ class TaskCompletion():
         self.init_param = {}
         self.func = None
         self.params = {}
-        self.completition_func = lambda x: x
+        self.completion_func = lambda x: x
 
     def reset(self):
         self.__init__(self.robot_controller)
 
-    def set_func(self, task_func=None, init_param={}, params={}, completition_func=None):
+    def set_func(self, task_func=None, init_param={}, params={}, completion_func=None):
         self.func = task_func
         self.init_param = init_param
         self.params = params
-        self.completition_func = completition_func
+        self.completion_func = completion_func
 
     def next_step(self):
         if self.running and not self.completed:
             temp = self.func(**self.params)
-            self.completed = self.completition_func(temp)
+            self.completed = self.completion_func(temp)
 
         elif not self.completed:
             self.func(**self.init_param)
@@ -57,17 +57,17 @@ class TaskCompletion():
         if task_type in [TaskType.MOVEMENT]:
             params["time"] = time
             init_params["time"] = time
-        completition_func = Tasks_dic[task_type]["completition_func"]
-        if completition_func is None:
-            completition_func = lambda x: x
+        completion_func = Tasks_dic[task_type]["completition_func"]
+        if completion_func is None:
+            completion_func = lambda x: True
         else:
-            completition_func = completition_func(self.robot_controller)
+            completion_func = completion_func(self.robot_controller)
 
         self.set_func(
             task_func=Tasks_dic[task_type]["task_func"](controller=self.robot_controller),
             init_param=init_params,
             params=params,
-            completition_func=completition_func
+            completion_func=completion_func
         )
 
 

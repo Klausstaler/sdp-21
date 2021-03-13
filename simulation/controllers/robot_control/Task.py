@@ -29,7 +29,7 @@ Tasks_dic = {
         "completition_func": None,
     },
     TaskType.MOVEMENT: {
-        "task_func": lambda controller: controller.nav.movment_wrapper,
+        "task_func": lambda controller: controller.nav.movement_wrapper,
         "completition_func": None,
     }
 }

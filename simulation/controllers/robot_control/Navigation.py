@@ -7,7 +7,7 @@ class Navigation(BasicNavigation):
     def __init__(self, robot: Robot, timestep=128):
         super().__init__(robot, timestep=128)
 
-    def movment_wrapper(self, func_name, time, total_time, new=False, speed=4, right=False, top=False, clock=False):
+    def movement_wrapper(self, func_name, time, total_time, new=False, speed=4, right=False, top=False, clock=False):
         time, speed, total_time = int(time), int(speed), int(total_time)
         right, clock, top = right == "True", clock == "True", top == "True"
 
@@ -24,8 +24,8 @@ class Navigation(BasicNavigation):
     def follow_line(self, speed=3.5):
         nearLine = True
         case = "none"
-        
-        if self.sensors_values(left=[0,0.5,1], mid=[0,0.5,1], right=[0,0.5,1]):
+
+        if self.sensors_values(left=[0, 0.5, 1], mid=[0, 0.5, 1], right=[0, 0.5, 1]):
             case = "Lost, keep going"
             self.move_forward(speed)
 
@@ -43,29 +43,29 @@ class Navigation(BasicNavigation):
             self.turn(speed, clock=True)
 
         else:
-            case = "slow straight"            
+            case = "slow straight"
             self.move_forward(speed)
 
-
-        if self.sensors_values(left=[1], mid=[0,0.5], right=[0,0.5]):
+        if self.sensors_values(left=[1], mid=[0, 0.5], right=[0, 0.5]):
             case = "left"
             self.turn(speed, clock=False)
 
-        if self.sensors_values(left=[0,0.5], mid=[0,0.5], right=[1]):
+        if self.sensors_values(left=[0, 0.5], mid=[0, 0.5], right=[1]):
             case = "right"
             self.turn(speed, clock=True)
 
         if (self.sensors_values(left=[1], mid=[1], right=[0]) or
-            self.sensors_values(left=[0], mid=[1], right=[1])):
+                self.sensors_values(left=[0], mid=[1], right=[1])):
             case = "straight, but junction"
             self.move_forward(speed)
-        
-        print("case",case,"----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
-        
+
+        print("case", case, "----", self.IR.left.getValue(), self.IR.mid.getValue(), self.IR.right.getValue())
+
         return nearLine
 
     # n=1 is turn until the first line you see, 
     def turn_until_line_n(self, n=1, new=False, speed=10):
+        print(n)
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
