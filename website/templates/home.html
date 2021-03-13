@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+    <h1>Current Tasks</h1><br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Robot Name</th>
+            <th scope="col">Package ID</th>
+            <th scope="col">Package Details</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{task.robot.name}}</th>
+            <td>{{task.package.old_id}}</td>
+            <td>{{task.package.details}}</td>
+            <td>{% if task.holding_package == 0 %}
+                Robot moving towards the package
+                {% endif %}
+                {% if task.holding_package == 1 %}
+                Package acquired. Robot moving towards drop zone
+                {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      {% if empty %}
+      <h5 style=text-align:center>There are no running tasks</h5>
+      {% endif %}
+      
+
+{% endblock %}

@@ -1,9 +1,9 @@
 from controller import Robot
+
 from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
 from Lift import Lift
-
 
 class RobotController(Robot):
     def __init__(self, timestep=128, params=None):
@@ -14,7 +14,7 @@ class RobotController(Robot):
 
         # Initialize Navigation
         self.nav = Navigation(self, timestep=timestep)
-        #self.nav.turn_until_line_n(n=1, new=True)
+        # self.nav.turn_until_line_n(n=1, new=True)
 
         # Initialise scissor lift with measurements
         self.scissor_lift = Lift(self, 0.6, 4)
@@ -22,9 +22,9 @@ class RobotController(Robot):
         self.follow_line = True
         self.turning = False
         self.t = 0
-        
+
     def reach_node(self, node):
-        #print(self.follow_line, self.turning)
+        # print(self.follow_line, self.turning)
         if self.follow_line:
             self.follow_line = self.nav.follow_line()
             self.turning = False
@@ -36,18 +36,18 @@ class RobotController(Robot):
         return node
 
     def check_reach_node(self, node_to_reach):
-        message=self.nfc_reader.read()
-        if message:
-            print(message)
+        if message := self.nfc_reader.read():
+            pass
+            #print(message)
         if message == node_to_reach:
             self.nav.stop()
             return True
-    
-    def time_completion(self, t,  new=False):
+
+    def time_completion(self, t, new=False):
         if new:
             self.t = t
-        return 
-        
+        return
+
         return True
 
     def raise_platform(self, height: str) -> bool:

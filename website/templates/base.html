@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, inital-scale=1">
+        <title>{% block title %}Django{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        {% include 'header.html' %}
+        {% include 'messages.html' %}
+
+        {% block body %}
+        {% endblock %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    </body>
+</html>
