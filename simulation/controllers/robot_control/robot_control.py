@@ -59,7 +59,7 @@ class TaskCompletion():
             init_params["time"] = time
         completion_func = Tasks_dic[task_type]["completition_func"]
         if completion_func is None:
-            completion_func = lambda x: True
+            completion_func = lambda x: x
         else:
             completion_func = completion_func(self.robot_controller)
 

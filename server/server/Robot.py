@@ -1,6 +1,8 @@
-from server.Location import Size
+from collections import namedtuple
+
 from server.routing.containers import Node
 
+Size = namedtuple("Size", ["length", "width", "height"])
 
 class Robot:
     def __init__(self, robot_id: str, size: Size, curr_pos: Node):

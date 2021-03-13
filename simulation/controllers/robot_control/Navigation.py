@@ -59,30 +59,31 @@ class Navigation(BasicNavigation):
             case = "straight, but junction"
             self.move_forward(speed)
 
-        print("case", case, "----", self.IR.left.getValue(), self.IR.mid.getValue(), self.IR.right.getValue())
+        # print("case", case, "----", self.IR.left.getValue(), self.IR.mid.getValue(), self.IR.right.getValue())
 
         return nearLine
 
     # n=1 is turn until the first line you see, 
     def turn_until_line_n(self, n=1, new=False, speed=10):
-        print(n)
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
-        # print(self.n_lines, self.line_detected(strong=True))
+        print(self.n_lines, self.line_detected(strong=True))
         if self.n_lines > 1:
             self.turn(speed, clock=True)
             if self.line_detected(strong=True) and not self.n_line_token:
                 self.n_line_token = True
-            elif self.n_line_token == True and not self.line_detected(strong=True):
+            elif self.n_line_token and not self.line_detected(strong=True):
                 self.n_lines -= 1
                 self.n_line_token = False
             return False
         elif self.n_lines == 1:
             self.turn(speed, clock=True)
             if self.line_detected(strong=True):
+                print("Yeet")
                 self.stop()
                 return True
         else:
+            print("no line left")
             self.stop()
             return True

@@ -63,9 +63,10 @@ class Graph:
             """
         self.__compute_shortest_paths()
 
-    def dist_closest_robot(self, node_id: int) -> float:
+    def dist_closest_robot(self, node_id: int, priority: int) -> float:
         """
         Returns the distance to the closest robot which could follow the same path as a robot on the given node id.
+        :param priority:
         :param node_id:
         :return:
         """
@@ -73,9 +74,11 @@ class Graph:
         distances.append((0, node_id))
         heapify(distances)
         unvisited = set(self.graph.keys())
-        reverse_search, start_priority = False, self.graph[node_id].incoming_connections[0].priority
+        reverse_search = False
         while unvisited:
             dist, curr_node_id = heappop(distances)
+            if curr_node_id not in unvisited:
+                continue
             unvisited.remove(curr_node_id)
             if curr_node_id != node_id and self.graph[curr_node_id].occupying_robot:
                 return dist
@@ -84,11 +87,11 @@ class Graph:
             for connection in connections:
                 if connection.node_id in unvisited:
                     heappush(distances, (connection.distance + dist, connection.node_id))
-                if connection.priority > start_priority:
+                if connection.priority > priority:
                     reverse_search = True
         return float("inf")  # no robot found, all good to go yeet
 
-    def get_commands(self, start_location, end_location: int) -> List[Task]:
+    def get_commands(self, start_location: int, end_location: int) -> List[Task]:
         return path_to_commands(self.get_path(start_location, end_location))
 
     def get_path(self, start_location: int, end_location: int) -> List[Node]:

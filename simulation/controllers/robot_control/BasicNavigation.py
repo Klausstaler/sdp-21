@@ -88,7 +88,7 @@ class BasicNavigation:
             self.set_wheel_speeds(speed, 0., speed, 0.)
 
     def line_detected(self, strong=False):
-        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        #print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
         if strong:
             if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5]):
                 return True

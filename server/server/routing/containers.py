@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, NamedTuple
+from typing import List, NamedTuple, Union
 
 
 class Direction(Enum):
@@ -18,7 +18,7 @@ class Connection(NamedTuple):
 class Node:
     def __init__(self, node_id: int, outgoing_connections: List[Connection], occupying_robot=None):
         self.node_id = node_id
-        self.all_connections = []
+        self.all_connections: List[Union[None, Connection]] = []
         self.outgoing_connections = outgoing_connections
         self.incoming_connections: List[Connection] = []
         self.occupying_robot = occupying_robot

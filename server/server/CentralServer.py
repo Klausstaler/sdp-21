@@ -17,7 +17,9 @@ class CentralServer:
         compartment_num = parcel.shelf_info.compartment_number
         needed_height = parcel.shelf_info.assigned_shelf.get_compartment_height(compartment_num)
         # print(needed_height)
-        tasks = [
+        tasks = self.scheduler.graph.get_commands(robot.curr_pos.node_id, 37)
+        tasks.extend(self.scheduler.graph.get_commands(37, 56))
+        """tasks = [
             Task(TaskType.REACH_NODE, {"node": "51"}),
             Task(TaskType.TURN_UNTIL, {"n": 3}),
             Task(TaskType.REACH_NODE, {"node": "50"}),
@@ -40,10 +42,11 @@ class CentralServer:
             Task(TaskType.TURN_UNTIL, {"n": 3}),
             Task(TaskType.REACH_NODE, {"node": "0"}),
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 15, "speed": 7, "right": True}),
-        ]
+        ]"""
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
         while self.scheduler.has_tasks(robot):
+            print(f"Robot currently at {robot.curr_pos.node_id}")
             await self.network_interface.send_request(robot, await self.scheduler.get_next_task(robot))
 
 ################# For line following demo world.

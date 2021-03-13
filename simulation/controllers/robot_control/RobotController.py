@@ -38,7 +38,8 @@ class RobotController(Robot):
 
     def check_reach_node(self, node_to_reach):
         if message := self.nfc_reader.read():
-            print(message)
+            pass
+            #print(message)
         if message == node_to_reach:
             self.nav.stop()
             return True

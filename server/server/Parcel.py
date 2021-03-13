@@ -1,4 +1,5 @@
-from server.Location import Location, Size
+from server.Location import Location
+from server.Robot import Size
 from server.Shelf import ShelfInfo
 
 

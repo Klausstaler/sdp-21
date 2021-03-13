@@ -70,11 +70,11 @@ print(graph.graph[0].incoming_connections, graph.graph[0].outgoing_connections)
 graph.graph[43].occupying_robot = True
 print(graph.dist_closest_robot(50))
 print(len(graph.graph))
-"""
+
 print(graph.get_path(0, 3))
 print(graph.get_commands(0, 3))
 print(graph.get_path(0, 21))
-print(graph.get_commands(0, 21))"""
-#print(graph.get_path(50, 2))
-#print(graph.get_commands(50, 2))
+print(graph.get_commands(0, 21))
+print(graph.get_path(50, 2))
+print(graph.get_commands(50, 2))
 print(graph.get_commands(1, 14))
