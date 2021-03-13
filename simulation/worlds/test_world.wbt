@@ -28,7 +28,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.9999629755766062 -0.007003492737564139 -0.004999856543419456 1.2400350179660613
-  position -1.2398732816614038 8.482574692972092 4.522316359963682
+  position -1.2344446318262217 6.9017635901685646 3.979469472065133
 }
 TexturedBackground {
   skybox FALSE
@@ -50,6 +50,7 @@ DEF TRANSPORT MainRobot {
 }
 SuctionBox {
   translation -2.2386 1.21393 1
+  mass 2
 }
 RectangleArena {
   floorSize 32 32
