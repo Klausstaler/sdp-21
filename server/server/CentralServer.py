@@ -17,7 +17,14 @@ class CentralServer:
         compartment_num = parcel.shelf_info.compartment_number
         needed_height = parcel.shelf_info.assigned_shelf.get_compartment_height(compartment_num)
         # print(needed_height)
-        tasks = self.scheduler.graph.get_commands(robot.curr_pos.node_id, 37)
+        tasks = self.scheduler.graph.get_commands(robot.curr_pos.node_id, parcel.location_id)
+        tasks.extend([
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
+            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
+            Task(TaskType.PICKUP_PARCEL, {}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
+        ])
         tasks.extend(self.scheduler.graph.get_commands(37, 56))
         """tasks = [
             Task(TaskType.REACH_NODE, {"node": "51"}),
