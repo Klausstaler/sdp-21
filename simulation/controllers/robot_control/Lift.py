@@ -40,6 +40,8 @@ class Lift:
             bmr.setVelocity(delta_x/theta)
             # bml.setPosition(delta_x)
             bmr.setPosition(-2 * delta_x)
+            # Wait 2 secs just in case
+            self.robot.step(1280)
 
     def checkHeight(self,H):
         # NEEDS IMPLEMENTING
