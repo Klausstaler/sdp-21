@@ -16,8 +16,10 @@ def __calc_lines_to_turn(prev_node: Node, curr_node: Node, next_node: Node) -> i
             prev_idx = i
         if connection and connection.node_id == next_node_id:
             next_idx = i
-    lines_to_turn = 0
     facing_direction = (prev_idx + 2) % len(connections)
+    if facing_direction == next_idx:
+        return 0
+    lines_to_turn = 1
     while facing_direction != next_idx:
         if connections[facing_direction]:
             lines_to_turn += 1
@@ -31,8 +33,6 @@ def path_to_commands(path: List[Node]) -> List[Task]:
     for curr_node, next_node in zip(path[:-1], path[1:]):
         lines_to_turn = __calc_lines_to_turn(prev_node, curr_node,
                                              next_node) if prev_node else 0  # what to do when we do not know the direction?
-        print(lines_to_turn)
-        print(Task(TaskType.REACH_NODE, {"node": f"{next_node.node_id}"}))
         if lines_to_turn > 0:
             res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
         res.append(Task(TaskType.REACH_NODE, {"node": f"{next_node.node_id}"}))
