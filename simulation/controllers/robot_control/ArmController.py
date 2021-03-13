@@ -1,7 +1,8 @@
-from controller import Supervisor, Robot
-import numpy as np
-import sys, tempfile
+import sys
 from typing import Union
+
+import numpy as np
+from controller import Robot
 
 try:
     import ikpy
@@ -21,6 +22,7 @@ def convert_rpy(rpy: Union[list, np.array]) -> Union[list, np.array]:
     rpy[0], rpy[1], rpy[2] = -rpy[0], -rpy[1], -rpy[2]
     rpy[1], rpy[2] = rpy[2], rpy[1]
     return rpy
+
 
 INITIAL_PICKUP_X = -.5
 
@@ -43,7 +45,7 @@ class ArmController:
                 motor.setPosition(0.0)
                 self.motors.append(motor)
 
-        self.pickup_x = INITIAL_PICKUP_X # used to try different pickup locations if pickup fails
+        self.pickup_x = INITIAL_PICKUP_X  # used to try different pickup locations if pickup fails
 
         # Deactivate fixed joints
         for i in [0, 1, 2]:
@@ -88,7 +90,7 @@ class ArmController:
     def is_parked(self):
         parking_location = np.array([-.1, .18, .04])
 
-        curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3,3]
+        curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
         return round(np.linalg.norm(parking_location - curr_pos), 4) <= 0.05
 
     def try_pickup(self):
@@ -107,7 +109,6 @@ class ArmController:
         else:
             self.pickup_x -= .01
         return False
-
 
     def convert_relative(self, global_coord: np.array) -> np.array:
         """

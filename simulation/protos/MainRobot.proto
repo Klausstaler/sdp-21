@@ -18,7 +18,7 @@ PROTO MainRobot [
 
   ### Distance sensor Details
   field SFVec3f Distance_sensor_pos 0.43 0 -0.12
-  field SFFloat Distance_apart 0.12
+  field SFFloat Distance_apart 0.13
   field SFInt32 numberOfRays 5
   field SFFloat aperture 1.3
 

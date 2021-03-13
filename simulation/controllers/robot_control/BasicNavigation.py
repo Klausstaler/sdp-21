@@ -1,5 +1,7 @@
-from controller import Robot
 from types import SimpleNamespace
+
+from controller import Robot
+
 
 class BasicNavigation:
     def __init__(self, robot: Robot, timestep=128):
@@ -34,23 +36,23 @@ class BasicNavigation:
 
     def sensor_value(self, name, value=None):
         if value is None:
-            if name=="left":
+            if name == "left":
                 value = self.IR.left.getValue()
-            elif name=="right":
+            elif name == "right":
                 value = self.IR.right.getValue()
             elif name == "mid":
                 value = self.IR.mid.getValue()
-        if value >0 and value<=self.low_val:
+        if value > 0 and value <= self.low_val:
             return 0
-        elif value >self.low_val and value<= self.high_val:
+        elif value > self.low_val and value <= self.high_val:
             return 0.5
-        elif value >self.high_val:
+        elif value > self.high_val:
             return 1
 
     def sensors_values(self, left, mid, right):
         values = [left, mid, right]
         ans = True
-        for i, name in enumerate(["left","mid","right"]):
+        for i, name in enumerate(["left", "mid", "right"]):
             ans = ans and (self.sensor_value(name) in values[i])
         return ans
 
@@ -71,7 +73,7 @@ class BasicNavigation:
 
     def move_diagonal(self, speed, right=True, top=None, clock=None):
         if not right:
-            self.set_wheel_speeds(speed, -1, -1 , speed)
+            self.set_wheel_speeds(speed, -1, -1, speed)
         else:
             self.set_wheel_speeds(-1, speed, speed, -1)
 
@@ -79,19 +81,19 @@ class BasicNavigation:
         self.set_wheel_speeds(0, 0, 0, 0)
 
     def strafe(self, speed, right, top=None, clock=None):
-        print(right)
+        # print(right)
         if not right:
-            speed *=-1
+            speed *= -1
         self.set_wheel_speeds(-speed, speed, speed, -speed)
 
     def turn(self, speed, clock=True, top=None, right=None):
         if not clock:
-            speed *=-1
+            speed *= -1
         self.set_wheel_speeds(speed, -speed, speed, -speed)
 
     def turn_on_wheel_axis(self, speed, right=False, top=True, clock=None):
         if top:
-            speed*=-1
+            speed *= -1
         if right:
             self.set_wheel_speeds(0., speed, 0., speed)
         else:
@@ -100,14 +102,14 @@ class BasicNavigation:
     def line_detected(self, strong=False):
         print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
         if strong:
-            if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5]):
+            if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5]):
                 return True
             else:
                 return False
         else:
-            if self.sensors_values(left=[0,0.5], mid=[1, 0.5], right=[0,0.5]):
+            if self.sensors_values(left=[0, 0.5], mid=[1, 0.5], right=[0, 0.5]):
                 return True
-            elif self.sensor_value("left")==1 or self.sensor_value("right")==1:
+            elif self.sensor_value("left") == 1 or self.sensor_value("right") == 1:
                 return True
             else:
                 return False

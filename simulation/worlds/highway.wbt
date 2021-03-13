@@ -1,30 +1,6 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
-    contactProperties [
-        ContactProperties {
-            material1 "InteriorWheelMat"
-            coulombFriction [
-                1.8, 0, 0.2
-            ]
-            frictionRotation -0.9648 0
-            bounce 0
-            forceDependentSlip [
-                10, 0
-            ]
-        }
-        ContactProperties {
-            material1 "ExteriorWheelMat"
-            coulombFriction [
-                1.8, 0, 0.2
-            ]
-            frictionRotation 0.9648 0
-            bounce 0
-            forceDependentSlip [
-                10, 0
-            ]
-        }
-  ]
 }
 Viewpoint {
   orientation -1 0 0 1
@@ -35,8 +11,9 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 10 7
-  floorTileSize 10 7
+  translation 0 0 0
+  floorSize 32 32
+  floorTileSize 32 32
   floorAppearance PBRAppearance {
     baseColorMap ImageTexture {
 url [
@@ -51,46 +28,41 @@ url [
     metalness 0
   }
   wallThickness 0.01
-  wallHeight 0.01
+  wallHeight 1
 }
 NFCTag {
-  translation -4.5 0.1 -3.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 -3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "0"
 }
 NFCTag {
-  translation -1.5 0.1 -3.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 -3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "1"
 }
 NFCTag {
-  translation 1.5 0.1 -3.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 -3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "2"
 }
 NFCTag {
-  translation 4.5 0.1 -3.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 -3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "3"
 }
 NFCTag {
-  translation -4.5 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "4"
 }
 Shelf {
@@ -101,11 +73,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -4.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation -4.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "5"
 }
 Shelf {
@@ -116,19 +87,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -2.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation -2.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "6"
 }
 NFCTag {
-  translation -1.5 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "7"
 }
 Shelf {
@@ -139,11 +108,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -1.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation -1.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "8"
 }
 Shelf {
@@ -154,19 +122,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 1.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation 1.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "9"
 }
 NFCTag {
-  translation 1.5 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "10"
 }
 Shelf {
@@ -177,11 +143,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 2.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation 2.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "11"
 }
 Shelf {
@@ -192,27 +157,24 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 4.0 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation 4.0 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "12"
 }
 NFCTag {
-  translation 4.5 0.1 -2.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 -2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "13"
 }
 NFCTag {
-  translation -4.5 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "14"
 }
 Shelf {
@@ -223,11 +185,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -4.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation -4.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "15"
 }
 Shelf {
@@ -238,19 +199,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -2.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation -2.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "16"
 }
 NFCTag {
-  translation -1.5 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "17"
 }
 Shelf {
@@ -261,11 +220,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -1.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation -1.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "18"
 }
 Shelf {
@@ -276,19 +234,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 1.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation 1.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "19"
 }
 NFCTag {
-  translation 1.5 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "20"
 }
 Shelf {
@@ -299,11 +255,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 2.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation 2.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "21"
 }
 Shelf {
@@ -314,27 +269,24 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 4.0 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation 4.0 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "22"
 }
 NFCTag {
-  translation 4.5 0.1 -1.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 -1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "23"
 }
 NFCTag {
-  translation -4.5 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "24"
 }
 Shelf {
@@ -345,11 +297,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -4.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation -4.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "25"
 }
 Shelf {
@@ -360,19 +311,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -2.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation -2.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "26"
 }
 NFCTag {
-  translation -1.5 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "27"
 }
 Shelf {
@@ -383,11 +332,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -1.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation -1.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "28"
 }
 Shelf {
@@ -398,19 +346,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 1.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation 1.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "29"
 }
 NFCTag {
-  translation 1.5 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "30"
 }
 Shelf {
@@ -421,11 +367,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 2.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation 2.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "31"
 }
 Shelf {
@@ -436,27 +381,24 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 4.0 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation 4.0 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "32"
 }
 NFCTag {
-  translation 4.5 0.1 0.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 0.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "33"
 }
 NFCTag {
-  translation -4.5 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "34"
 }
 Shelf {
@@ -467,11 +409,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -4.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation -4.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "35"
 }
 Shelf {
@@ -482,19 +423,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -2.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation -2.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "36"
 }
 NFCTag {
-  translation -1.5 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "37"
 }
 Shelf {
@@ -505,11 +444,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -1.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation -1.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "38"
 }
 Shelf {
@@ -520,19 +458,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 1.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation 1.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "39"
 }
 NFCTag {
-  translation 1.5 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "40"
 }
 Shelf {
@@ -543,11 +479,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 2.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation 2.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "41"
 }
 Shelf {
@@ -558,27 +493,24 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 4.0 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation 4.0 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "42"
 }
 NFCTag {
-  translation 4.5 0.1 1.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 1.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "43"
 }
 NFCTag {
-  translation -4.5 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "44"
 }
 Shelf {
@@ -589,11 +521,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -4.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation -4.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "45"
 }
 Shelf {
@@ -604,19 +535,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -2.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation -2.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "46"
 }
 NFCTag {
-  translation -1.5 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "47"
 }
 Shelf {
@@ -627,11 +556,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation -1.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation -1.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "48"
 }
 Shelf {
@@ -642,19 +570,17 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 1.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation 1.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "49"
 }
 NFCTag {
-  translation 1.5 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "50"
 }
 Shelf {
@@ -665,11 +591,10 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 2.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation 2.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "51"
 }
 Shelf {
@@ -680,50 +605,44 @@ Shelf {
   legDim 0.05 1 0.05
 }
 NFCTag {
-  translation 4.0 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation 4.0 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "52"
 }
 NFCTag {
-  translation 4.5 0.1 2.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 2.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "53"
 }
 NFCTag {
-  translation -4.5 0.1 3.0
-  dimensions 0.03 0.01 0.03
+  translation -4.5 0.001 3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "54"
 }
 NFCTag {
-  translation -1.5 0.1 3.0
-  dimensions 0.03 0.01 0.03
+  translation -1.5 0.001 3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "55"
 }
 NFCTag {
-  translation 1.5 0.1 3.0
-  dimensions 0.03 0.01 0.03
+  translation 1.5 0.001 3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "56"
 }
 NFCTag {
-  translation 4.5 0.1 3.0
-  dimensions 0.03 0.01 0.03
+  translation 4.5 0.001 3.0
+  dimensions 0.02 0.01 0.02
   baseColor 0 0 0
   emissiveColor 0 0 0
-  transmissionRange 0.15
   informationSent "57"
 }
