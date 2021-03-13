@@ -70,12 +70,16 @@ class Graph:
         :param node_id:
         :return:
         """
-        distances = [(float("inf"), node_id) for node_id in self.graph.keys()]
-        distances.append((0, node_id))
+        print(node_id, priority)
+        distances = []
+        for connection in filter(lambda conn: conn.priority > priority, self.graph[node_id].outgoing_connections):
+            distances.append((connection.distance, connection.node_id))
+            print(connection.node_id)
+        #distances = [(0, node_id)]
         heapify(distances)
         unvisited = set(self.graph.keys())
         reverse_search = False
-        while unvisited:
+        while unvisited and distances:
             dist, curr_node_id = heappop(distances)
             if curr_node_id not in unvisited:
                 continue

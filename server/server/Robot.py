@@ -1,12 +1,10 @@
 from collections import namedtuple
 
-from server.routing.containers import Node
-
 Size = namedtuple("Size", ["length", "width", "height"])
 
 class Robot:
-    def __init__(self, robot_id: str, size: Size, curr_pos: Node):
-        self.curr_pos = curr_pos
+    def __init__(self, robot_id: str, size: Size, pos_id: int):
+        self.pos_id = pos_id
         self.id = robot_id
         self.size = size
 

@@ -1,5 +1,4 @@
 from typing import Union, NamedTuple
-from server.routing.containers import Node
 
 
 class Shelf:

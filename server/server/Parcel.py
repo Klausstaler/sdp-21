@@ -1,4 +1,3 @@
-from server.routing.containers import Node
 from server.Robot import Size
 from server.Shelf import ShelfInfo
 

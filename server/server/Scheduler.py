@@ -4,6 +4,7 @@ from typing import List, Dict, Set, Union
 from server.Robot import Robot
 from server.Task import Task, TaskType
 from server.routing.Graph import Graph
+import asyncio
 
 
 # from website.design.functions import get_node_dict
@@ -16,6 +17,7 @@ class Scheduler:
         self.DIST_THRESHOLD = 2
 
     def add_free_robot(self, robot: Robot) -> None:
+        self.graph.graph[robot.pos_id].occupying_robot = robot
         self.free_robots.add(robot)
 
     def get_free_robot(self) -> Robot:
@@ -41,16 +43,17 @@ class Scheduler:
         return None
 
     async def check_collisions(self, robot: Robot, node_id: int) -> None:
-        robot_pos, priority = robot.curr_pos, 5
-        for connection in robot_pos.outgoing_connections:
-            if connection.node_id == node_id:
-                priority = connection.priority
-                break
-        dist_closest = self.graph.dist_closest_robot(node_id, priority)
+        robot_pos = robot.pos_id
+        priority = self.graph.graph[robot_pos].incoming_connections[0].priority
+        #for connection in self.graph.graph[robot_pos].outgoing_connections:
+        #    if connection.node_id == node_id:
+        #        priority = connection.priority
+        #        break
+        dist_closest = self.graph.dist_closest_robot(robot_pos, priority)
         if dist_closest <= self.DIST_THRESHOLD:
             print(f"Robot {robot.id} is too close to another robot! Stopping...")
             await asyncio.sleep(2)
             await self.check_collisions(robot, node_id)
-        self.graph.graph[robot.curr_pos.node_id].occupying_robot = None
+        self.graph.graph[robot.pos_id].occupying_robot = None
         self.graph.graph[node_id].occupying_robot = robot
-        robot.curr_pos = self.graph.graph[node_id]
+        robot.pos_id = node_id
