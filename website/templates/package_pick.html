@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Packages {% endblock %}
+
+{% block body %}
+        
+
+
+        <h1>Packages</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <a style="padding-left: 1%;"></a><input type="submit" value="Get Packages">
+        </form>
+    
+{% endblock %}

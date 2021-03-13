@@ -21,3 +21,7 @@ Warehouse automation using autonomous robots
 3. Test the code. E.g. if it is a change in the simulation, check if the simulation is still working. Do appropriate tests based on the context in which the changes were made.
 4. If you request changes, make a comment and tag the person on it again.
 5. If you are happy, feel free to merge!
+Required python modules:
+Celery
+Django
+asyncio
