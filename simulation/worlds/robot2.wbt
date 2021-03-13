@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.025272028819347647 0.9988557929694064 -0.04060085480396353 4.254093632983107
-  position -2.8251548861262132 0.38507342389288535 -0.7725315002817204
+  orientation 0.06344569820300998 -0.9962266649145761 -0.05922056646734419 4.777478005958066
+  position 3.0213268737979915 0.6198485412423558 -0.8239712157197703
 }
 TexturedBackground {
 }
@@ -16,8 +16,8 @@ DirectionalLight {
   intensity 2
 }
 DEF TRANSPORT Robot {
-  translation -8.026056484007488e-05 0.18098904368168098 0.00018777016853499767
-  rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
+  translation 0.0038923035348423494 0.1749073148987352 -0.43670609942405036
+  rotation -0.5807689968370322 0.5756332304566693 0.5756333523232703 2.0892745049294863
   children [
     DEF NFC Group {
       children [
@@ -110,6 +110,7 @@ DEF TRANSPORT Robot {
       children [
         DEF wheel_BR HingeJoint {
           jointParameters HingeJointParameters {
+            position 6.879998558297295
             axis 0 1 0
             anchor 0.328 -0.328 -0.115
           }
@@ -124,6 +125,7 @@ DEF TRANSPORT Robot {
           ]
           endPoint DEF WHEEL_SOLID Solid {
             translation 0.328 -0.328 -0.115
+            rotation 0 -0.9999999999999999 0 5.686372056061878
             scale 1.3 1.3 1.3
             children [
               Shape {
@@ -303,6 +305,7 @@ DEF TRANSPORT Robot {
         }
         DEF wheel_FR HingeJoint {
           jointParameters HingeJointParameters {
+            position 6.879998542113975
             axis 0 1 0
             anchor -0.328 -0.328 -0.115
           }
@@ -317,6 +320,7 @@ DEF TRANSPORT Robot {
           ]
           endPoint DEF WHEEL_SOLID Solid {
             translation -0.328 -0.328 -0.115
+            rotation 0 -1 0 5.686372072245199
             scale 1.3 1.3 1.3
             children [
               Shape {
@@ -496,6 +500,7 @@ DEF TRANSPORT Robot {
         }
         DEF wheel_BL HingeJoint {
           jointParameters HingeJointParameters {
+            position 6.879998574384587
             axis 0 1 0
             anchor 0.328 0.328 -0.115
           }
@@ -510,6 +515,7 @@ DEF TRANSPORT Robot {
           ]
           endPoint DEF WHEEL_SOLID Solid {
             translation 0.328 0.328 -0.115
+            rotation 0 -1 0 5.686372039974586
             scale 1.3 1.3 1.3
             children [
               Shape {
@@ -689,6 +695,7 @@ DEF TRANSPORT Robot {
         }
         DEF wheel_FL HingeJoint {
           jointParameters HingeJointParameters {
+            position 6.879998558201271
             axis 0 1 0
             anchor -0.328 0.328 -0.115
           }
@@ -703,6 +710,7 @@ DEF TRANSPORT Robot {
           ]
           endPoint DEF WHEEL_SOLID Solid {
             translation -0.328 0.328 -0.115
+            rotation 0 -1 0 5.686372056157902
             scale 1.3 1.3 1.3
             children [
               Shape {
@@ -887,6 +895,7 @@ DEF TRANSPORT Robot {
       children [
         DEF RSLIDE SliderJoint {
           jointParameters JointParameters {
+            position -0.013165270284724917
             axis 1 0 0
           }
           device [
@@ -896,6 +905,7 @@ DEF TRANSPORT Robot {
             }
           ]
           endPoint Solid {
+            translation -0.013165270284724917 0 0
             children [
               DEF R Transform {
                 translation 0.3 0 0
@@ -912,8 +922,8 @@ DEF TRANSPORT Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.3 2.08677e-07 -0.09
-                      rotation -0.577350935856026 -0.5773499358561369 -0.5773499358561369 2.094395307179586
+                      translation -0.3000000000000002 2.086770000131466e-07 -0.09000000000000005
+                      rotation -0.577350935856026 -0.577349935856137 -0.5773499358561369 2.0943953071795853
                       children [
                         Transform {
                           translation 0 -0.3 0
@@ -929,7 +939,7 @@ DEF TRANSPORT Robot {
                                 }
                               ]
                               endPoint Solid {
-                                translation 0 0.3 0
+                                translation 0 0.2999999999999997 0
                                 rotation 1 0 0 0
                                 children [
                                   Transform {
@@ -947,7 +957,7 @@ DEF TRANSPORT Robot {
                                           }
                                         ]
                                         endPoint Solid {
-                                          translation 0 -0.3 0
+                                          translation 0 -0.2999999999999997 0
                                           rotation -1 0 0 0
                                           children [
                                             Transform {
@@ -964,7 +974,7 @@ DEF TRANSPORT Robot {
                                                     }
                                                   ]
                                                   endPoint Solid {
-                                                    translation 0 0.3 0
+                                                    translation 0 0.2999999999999997 0
                                                     rotation 1 0 0 0
                                                     children [
                                                       DEF Scissor Group {
@@ -1363,8 +1373,8 @@ DEF TRANSPORT Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 0.3 -2.08677e-07 -0.09
-                      rotation -0.577350935856026 -0.5773499358561369 -0.5773499358561369 2.094395307179586
+                      translation 0.30000000000000004 -2.0867699999232991e-07 -0.09000000000000002
+                      rotation -0.5773509358560259 -0.5773499358561371 -0.5773499358561368 2.094395307179586
                       children [
                         Transform {
                           translation 0 0.3 0
@@ -1381,7 +1391,7 @@ DEF TRANSPORT Robot {
                                 }
                               ]
                               endPoint Solid {
-                                translation 0 -0.3 0
+                                translation 0 -0.2999999999999999 0
                                 rotation -1 0 0 0
                                 children [
                                   Transform {
@@ -1398,7 +1408,7 @@ DEF TRANSPORT Robot {
                                           }
                                         ]
                                         endPoint Solid {
-                                          translation 0 0.3 0
+                                          translation 0 0.2999999999999999 0
                                           rotation 1 0 0 0
                                           children [
                                             Transform {
@@ -1416,7 +1426,7 @@ DEF TRANSPORT Robot {
                                                     }
                                                   ]
                                                   endPoint Solid {
-                                                    translation 0 -0.2999999999999999 0
+                                                    translation 0 -0.2999999999999997 0
                                                     rotation -1 0 0 0
                                                     children [
                                                       Transform {
@@ -1433,8 +1443,8 @@ DEF TRANSPORT Robot {
                                                               }
                                                             ]
                                                             endPoint Solid {
-                                                              translation -0.149999999999927 0.3025839999999736 0.01655219999999869
-                                                              rotation 0.5773509358554477 0.5773489358556702 0.57735093585545 2.0943999999999505
+                                                              translation -0.149999999999927 0.3025839999999734 0.016552199999998705
+                                                              rotation 0.5773509358554468 0.5773489358556702 0.5773509358554509 2.0943999999999505
                                                               children [
                                                                 Transform {
                                                                   translation 0 -0.04 0.26
@@ -1459,6 +1469,7 @@ DEF TRANSPORT Robot {
                                                                 }
                                                                 DEF ARMSLIDER SliderJoint {
                                                                   jointParameters JointParameters {
+                                                                    position -2.820434952136158e-09
                                                                     minStop -0.0001
                                                                     maxStop 0.5
                                                                   }
@@ -1468,12 +1479,13 @@ DEF TRANSPORT Robot {
                                                                     }
                                                                     LinearMotor {
                                                                       name "linear_actuator"
+                                                                      minPosition -2.820434952136158e-09
                                                                       maxPosition 0.4
                                                                       maxForce 180
                                                                     }
                                                                   ]
                                                                   endPoint DEF ROBOT_ARM Solid {
-                                                                    translation 0 0 0.02000000000000013
+                                                                    translation 0 0 0.019999997179565177
                                                                     rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.09439
                                                                     children [
                                                                       Group {
@@ -1540,6 +1552,7 @@ DEF TRANSPORT Robot {
                                                                       }
                                                                       HingeJoint {
                                                                         jointParameters HingeJointParameters {
+                                                                          position -8.516047719719111e-10
                                                                           axis 0 -1 0
                                                                           anchor 0.033 0 0.07
                                                                         }
@@ -1612,6 +1625,7 @@ DEF TRANSPORT Robot {
                                                                             }
                                                                             HingeJoint {
                                                                               jointParameters HingeJointParameters {
+                                                                                position -2.111507824434272e-07
                                                                                 axis 0 -1 0
                                                                                 anchor 0 0 0.155
                                                                               }
@@ -1631,7 +1645,7 @@ DEF TRANSPORT Robot {
                                                                               ]
                                                                               endPoint Solid {
                                                                                 translation 0 0 0.155
-                                                                                rotation 0 -1 0 0
+                                                                                rotation 0 1 0 2.1073424255447025e-07
                                                                                 children [
                                                                                   Group {
                                                                                     children [
@@ -1711,6 +1725,7 @@ DEF TRANSPORT Robot {
                                                                                   }
                                                                                   HingeJoint {
                                                                                     jointParameters HingeJointParameters {
+                                                                                      position -2.3320937620562367e-11
                                                                                       axis 0 -1 0
                                                                                       anchor 0 0 0.135
                                                                                     }
@@ -1783,6 +1798,7 @@ DEF TRANSPORT Robot {
                                                                                         }
                                                                                         HingeJoint {
                                                                                           jointParameters HingeJointParameters {
+                                                                                            position -4.204197456515715e-13
                                                                                             axis 0 0 1
                                                                                             anchor 0 0 0.081
                                                                                           }
@@ -2029,6 +2045,10 @@ DEF TRANSPORT Robot {
                                                         ]
                                                       }
                                                     ]
+                                                    physics Physics {
+                                                      density -1
+                                                      mass 0.001
+                                                    }
                                                   }
                                                 }
                                               ]
@@ -2120,6 +2140,10 @@ DEF TRANSPORT Robot {
                                               ]
                                             }
                                           ]
+                                          physics Physics {
+                                            density -1
+                                            mass 0.001
+                                          }
                                         }
                                       }
                                     ]
@@ -2211,6 +2235,10 @@ DEF TRANSPORT Robot {
                                     ]
                                   }
                                 ]
+                                physics Physics {
+                                  density -1
+                                  mass 0.001
+                                }
                               }
                             }
                           ]
@@ -2302,6 +2330,10 @@ DEF TRANSPORT Robot {
                           ]
                         }
                       ]
+                      physics Physics {
+                        density -1
+                        mass 0.001
+                      }
                     }
                   }
                 ]
