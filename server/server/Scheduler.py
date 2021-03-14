@@ -45,10 +45,7 @@ class Scheduler:
     async def check_collisions(self, robot: Robot, node_id: int) -> None:
         robot_pos = robot.pos_id
         priority = self.graph.graph[robot_pos].incoming_connections[0].priority
-        #for connection in self.graph.graph[robot_pos].outgoing_connections:
-        #    if connection.node_id == node_id:
-        #        priority = connection.priority
-        #        break
+
         dist_closest = self.graph.dist_closest_robot(robot_pos, priority)
         graph = self.graph.graph
         last_time_accessed = (datetime.now() - graph[node_id].last_accessed).seconds

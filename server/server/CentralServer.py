@@ -2,6 +2,7 @@ from networking.NetworkInterface import NetworkInterface
 from server.Parcel import Parcel
 from server.Scheduler import Scheduler
 from server.Task import Task, TaskType
+from server.Robot import Robot
 from server.routing.Graph import Graph, path_to_commands
 
 
@@ -41,6 +42,9 @@ class CentralServer:
         tasks.extend(self.scheduler.graph.get_commands(attached_node, 0)) # move back to some position
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
+        await self.do_tasks(robot)
+
+    async def do_tasks(self, robot: Robot):
         while self.scheduler.has_tasks(robot):
             await self.network_interface.send_request(robot, await self.scheduler.get_next_task(robot))
 

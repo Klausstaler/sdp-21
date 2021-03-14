@@ -6,7 +6,7 @@ from server.Scheduler import Scheduler
 from networking.NetworkInterface import NetworkInterface
 from server.Parcel import Parcel
 from server.Shelf import Shelf, ShelfInfo
-from server.routing.Graph import Graph, Connection, Direction
+from server.routing.Graph import Graph, Connection, Direction, path_to_commands
 
 db_output = {
     0: [Connection(4, 3, 5, Direction.INCOMING), None, None, Connection(1, 3, 5, Direction.OUTGOING)],
@@ -78,7 +78,7 @@ db_output = {
 }
 
 
-async def main():
+async def parcel_pickup():
     sched = Scheduler(Graph(db_output))
     my_shelf = Shelf(1, 2, 16)
     shelf_info = ShelfInfo(my_shelf, 1)
@@ -86,7 +86,7 @@ async def main():
     robot_size = Size(height=.25, length=.75, width=.7)
     sched.add_free_robot(Robot("2", robot_size, 56))
     sched.add_free_robot(Robot("1", robot_size, 37))
-    sched.add_free_robot(Robot("3", robot_size, 62))
+    #sched.add_free_robot(Robot("3", robot_size, 62))
     interface = NetworkInterface()
     server = CentralServer(sched, interface)
     task1 = asyncio.create_task(server.move_parcel(parcel, None))
@@ -96,9 +96,23 @@ async def main():
     shelf_info = ShelfInfo(my_shelf, 1)
     parcel = Parcel(12., Size(.35, .35, .35), 28, shelf_info)
     task2 = asyncio.create_task(server.move_parcel(parcel, None))
-    task3 = asyncio.create_task(server.move_parcel(parcel, None))
+    #task3 = asyncio.create_task(server.move_parcel(parcel, None))
     #await asyncio.gather(task1, task2)
-    await asyncio.gather(task1, task2, task3)
+    await asyncio.gather(task1, task2)
 
+async def robo_move():
+    sched = Scheduler(Graph(db_output))
 
-asyncio.run(main())
+    robot_size = Size(height=.25, length=.75, width=.7)
+    robo_1, robo_2 = Robot("1", robot_size, 37), Robot("2", robot_size, 56),
+    sched.add_free_robot(robo_2)
+    sched.add_free_robot(robo_1)
+    interface = NetworkInterface()
+    server = CentralServer(sched, interface)
+    sched.add_tasks(robo_1, sched.graph.get_commands(robo_1.pos_id, 53))
+    sched.add_tasks(robo_1, sched.graph.get_commands(53, 50))
+    sched.add_tasks(robo_2, sched.graph.get_commands(robo_2.pos_id, 50))
+    sched.add_tasks(robo_2, sched.graph.get_commands(50, 57))
+    t1, t2 = asyncio.create_task(server.do_tasks(robo_2)), asyncio.create_task(server.do_tasks(robo_1))
+    await asyncio.gather(t1, t2)
+asyncio.run(robo_move())
