@@ -1,5 +1,5 @@
 from .models import package,robot,shelf,hidden_package
-from .models import task as tsk
+from .models import task
 from .models import node as nd
 import asyncio
 # from warehouse_generator import create_world
@@ -57,6 +57,10 @@ def get_connected_nodes(id):
     dictionary = get_node_dict()
     return dictionary.get(id)
 
+def create_task(r,p,h):
+    task.objects.create(robot=r,package=p,holding_package=h)
+
+
 def package_request(packs):
     for id in packs:
         pack = packs.get(id)
@@ -64,3 +68,5 @@ def package_request(packs):
         print('Shelf:{}'.format(pack.shelf))
         print('Node:{}'.format(pack.shelf.node))
         get_node_dict()
+        rob = robot.objects.all()[0]
+        create_task(rob,pack,False)
