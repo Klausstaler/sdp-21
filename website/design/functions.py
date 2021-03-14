@@ -49,8 +49,8 @@ def get_node_dict():
             data['down'] = [n.down_node.id,n.down_node_distance,n.down_node_direction,n.down_node_priority]
         if n.up_node:
             data['up'] = [n.up_node.id,n.up_node_distance,n.up_node_direction,n.up_node_priority]
-        nodes[n] = data
-        print(data)
+        nodes[n.id] = data
+        print(nodes)
     return nodes
 
 def get_connected_nodes(id):
