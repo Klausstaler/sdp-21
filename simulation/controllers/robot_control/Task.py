@@ -3,6 +3,7 @@ from enum import Enum
 
 class TaskType(Enum):
     PICKUP_PARCEL = "pickup_parcel"
+    DROPOFF_PARCEL = "dropoff_parcel"
     RAISE_PLATFORM = "raise_platform"
     REACH_NODE = "reach_node"
     NO_TASK = "NO_TASK"
@@ -22,6 +23,10 @@ Tasks_dic = {
     },
     TaskType.PICKUP_PARCEL: {
         "task_func": lambda controller: controller.arm.try_pickup,
+        "completition_func": None,
+    },
+    TaskType.DROPOFF_PARCEL: {
+        "task_func": lambda controller: controller.arm.try_dropoff,
         "completition_func": None,
     },
     TaskType.RAISE_PLATFORM: {
@@ -45,6 +50,7 @@ def resolve_task(data: str) -> Task:
     task_type_mapper = {
         "reach_node": TaskType.REACH_NODE,
         "pickup_parcel": TaskType.PICKUP_PARCEL,
+        "dropoff_parcel": TaskType.DROPOFF_PARCEL,
         "raise_platform": TaskType.RAISE_PLATFORM,
         "turn_until": TaskType.TURN_UNTIL,
         "movement": TaskType.MOVEMENT

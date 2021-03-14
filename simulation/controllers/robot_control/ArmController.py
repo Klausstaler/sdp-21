@@ -87,9 +87,7 @@ class ArmController:
         parking_location = np.array([-.1, .18, .04])
         self.move_endeffector(parking_location)
 
-    def is_parked(self):
-        parking_location = np.array([-.1, .18, .04])
-
+    def is_parked(self, parking_location):
         curr_pos = self.arm_chain.forward_kinematics(self.get_joint_config())[:3, 3]
         return round(np.linalg.norm(parking_location - curr_pos), 4) <= 0.05
 
@@ -103,12 +101,24 @@ class ArmController:
             self.suction_cup.lock()
         if is_locked:
             self.park_parcel()
-            if self.is_parked():
+            if self.is_parked(np.array([-.1, .18, .04])):
                 self.pickup_x = INITIAL_PICKUP_X
                 return True  # success
         else:
             self.pickup_x -= .01
         return False
+
+    def try_dropoff(self):
+        is_present = self.suction_cup.getPresence()
+        is_locked = self.suction_cup.isLocked()
+        if is_present and is_locked:
+            relative_target = np.array([self.pickup_x - 0.15, .1678, 0.04])
+            self.move_endeffector(relative_target)
+            if self.is_parked(relative_target):
+                print("Dropoff Achieved")
+                self.suction_cup.unlock()
+                self.pickup_x = INITIAL_PICKUP_X
+                return True  # success
 
     def convert_relative(self, global_coord: np.array) -> np.array:
         """

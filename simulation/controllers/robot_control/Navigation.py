@@ -15,7 +15,8 @@ class Navigation(BasicNavigation):
 
         if new:
             self.time = time
-        if success := time - self.time < total_time:
+        success = time - self.time < total_time
+        if success:
             func(speed=speed, right=right, top=top, clock=clock)
 
         # print(time, total_time, self.time, success, right)
