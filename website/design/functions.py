@@ -37,68 +37,30 @@ def sim_json(json):
     print("World Successfully generated.")
     # pass
 
+def get_node_dict():
+    nodes = {}
+    for n in nd.objects.all():
+        data = {}
+        if n.right_node:
+            data['right'] = [n.right_node.id,n.right_node_distance,n.right_node_direction,n.right_node_priority]
+        if n.left_node:
+            data['left'] = [n.left_node.id,n.left_node_distance,n.left_node_direction,n.left_node_priority]
+        if n.down_node:
+            data['down'] = [n.down_node.id,n.down_node_distance,n.down_node_direction,n.down_node_priority]
+        if n.up_node:
+            data['up'] = [n.up_node.id,n.up_node_distance,n.up_node_direction,n.up_node_priority]
+        nodes[n] = data
+        print(data)
+    return nodes
+
+def get_connected_nodes(id):
+    dictionary = get_node_dict()
+    return dictionary.get(id)
+
 def package_request(packs):
     for id in packs:
         pack = packs.get(id)
         print('Parcel:{}'.format(pack.old_id))
         print('Shelf:{}'.format(pack.shelf))
         print('Node:{}'.format(pack.shelf.node))
-
-
-def get_node_list():
-    nodes = []
-    for n in nd.objects.all():
-        n_of_nodes = 0
-        if n.fifth_node:
-            n_of_nodes+=1
-        if n.fourth_node:
-            n_of_nodes+=1
-        if n.third_node:
-            n_of_nodes+=1
-        if n.second_node:
-            n_of_nodes+=1
-        if n.first_node:
-            n_of_nodes+=1
-        if n_of_nodes == 5:
-            nod = [n.id,n.first_node.id,n.second_node.id,n.third_node.id,n.fourth_node.id,n.fifth_node.id]
-        elif n_of_nodes == 4:
-            nod = [n.id,n.first_node.id,n.second_node.id,n.third_node.id,n.fourth_node.id]
-        elif n_of_nodes == 3:
-            nod = [n.id,n.first_node.id,n.second_node.id,n.third_node.id]
-        elif n_of_nodes == 2:
-            nod = [n.id,n.first_node.id,n.second_node.id]
-        elif n_of_nodes == 1:
-            nod = [n.id,n.first_node.id]
-        nodes.append(nod)
-    return nodes
-
-def get_node_dict():
-    nodes = {}
-    for n in nd.objects.all():
-        n_of_nodes = 0
-        if n.fifth_node:
-            n_of_nodes+=1
-        if n.fourth_node:
-            n_of_nodes+=1
-        if n.third_node:
-            n_of_nodes+=1
-        if n.second_node:
-            n_of_nodes+=1
-        if n.first_node:
-            n_of_nodes+=1
-        if n_of_nodes == 5:
-            nod = [n.first_node.id,n.second_node.id,n.third_node.id,n.fourth_node.id,n.fifth_node.id]
-        elif n_of_nodes == 4:
-            nod = [n.first_node.id,n.second_node.id,n.third_node.id,n.fourth_node.id]
-        elif n_of_nodes == 3:
-            nod = [n.first_node.id,n.second_node.id,n.third_node.id]
-        elif n_of_nodes == 2:
-            nod = [n.first_node.id,n.second_node.id]
-        elif n_of_nodes == 1:
-            nod = [n.first_node.id]
-        nodes[n.id] = nod
-    return nodes
-
-def get_connected_nodes(id):
-    dictionary = get_node_dict()
-    return dictionary.get(id)
+        get_node_dict()

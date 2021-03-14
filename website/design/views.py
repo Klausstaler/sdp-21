@@ -2,7 +2,6 @@ from django.shortcuts import render,get_object_or_404,HttpResponseRedirect
 from .models import package,node,robot,shelf,hidden_package
 from .forms import packageCreateForm,packagePickForm
 from django.contrib import messages
-from .functions import get_node_list
 from .functions import package_request,sim_json
 from home.views import home_view
 import json
@@ -134,7 +133,7 @@ def package_request_view(request):
             pack = package.objects.get(pk=id)
             shelf = pack.shelf
             compartment = pack.shelf_compartment
-            p=hidden_package.objects.create(old_id=pack.id,shelf=pack.shelf,shelf_compartment=pack.shelf_compartment,weight=pack.weight,length=pack.length,width=pack.width,heigth=pack.heigth,details=pack.details)
+            p=hidden_package.objects.create(old_id=pack.id,shelf=pack.shelf,shelf_compartment=pack.shelf_compartment,weight=pack.weight,length=pack.length,width=pack.width,height=pack.height,details=pack.details)
             packs[p.id] = p
             pack.delete()
         package_request(packs)
