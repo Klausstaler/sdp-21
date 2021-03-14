@@ -2,9 +2,39 @@ from .models import package,robot,shelf,hidden_package
 from .models import task as tsk
 from .models import node as nd
 import asyncio
+# from warehouse_generator import create_world
 
 def sim_json(json):
-    pass
+    # floor_size = [4,4]
+
+    import sys
+    sys.path.insert(0, "../../Warehouse\ Generation/warehouse_generator.py")
+    sys.path.insert(0, "../../Warehouse\ Generation/json_parser.py")
+
+    import json_parser as js
+    import create_world
+
+    file = open("../../Warehouse\ Generation/json.txt", "w")
+    file.write(json)
+    file.close()
+
+    shelf_size = [1, 1, 1]
+    number_of_racks = 3
+    line_distance_from_shelf = 0.2
+    # grid_array = [
+    #     [2,2,2,5],
+    #     [5,5,5,5],
+    #     [5,6,6,5],
+    #     [6,6,6,6],
+    #     ]
+
+    floor_size = js.grid[1]  # gets values from json.txt
+    grid_array = js.grid[0]
+    print(floor_size)
+    print(grid_array)
+    create_world("warehouse.wbt", floor_size, shelf_size, number_of_racks, line_distance_from_shelf, grid_array)
+    print("World Successfully generated.")
+    # pass
 
 def package_request(packs):
     for id in packs:

@@ -120,13 +120,13 @@ def create_view(request):
 def map_gen_view(request):
     if request.POST:
         JSON = request.POST.get("data")
-        jsons = (JSON.split('||'))
+        jsons = JSON.split('||')
+        print(len(jsons))
         if importJSON(jsons[0]):
             print("Successfully Parsed!")
             messages.success(request, 'JSON Loaded')
         else:
             messages.success(request, 'Wrong JSON Format')
-        
         simjson = jsons[1]
         sim_json(simjson)
         return HttpResponseRedirect('/generator')
