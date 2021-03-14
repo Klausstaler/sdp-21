@@ -7,8 +7,11 @@ function post_data(json_str){
   var params = 'orem=ipsum&name=binny';
   http.open('POST', "/generator/", true);
   console.log(json_str)
+  
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  
   http.send("data=" + json_str);
-
+  }
 //  //Send the proper header information along with the request
 //  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 //
@@ -18,7 +21,7 @@ function post_data(json_str){
 //      }
 //  }
 //  http.send("data=" + json_str);
-  }
+  
   
   function connect_via_x(Node1, Node2, boxWidth){ // left to right
     // var start =

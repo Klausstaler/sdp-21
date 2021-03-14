@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} Map Generator {% endblock %}
 {% block body %}
     <h1>Warehouse Generator</h1>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<title>Page Title</title>
 <meta content="width=device-width,initial-scale=1" name="viewport">
-<link href="/static/css/style.css" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 <style>
 </style>
-<script src="/static/js/menu.js"></script>
+<script src="{% static '/js/menu.js' %}"></script>
 <body>
 
 <!-- <div id="main"></div> -->
@@ -96,7 +91,6 @@
 
 
 </body>
-</html>
 
 
 

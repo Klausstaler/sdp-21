@@ -16,6 +16,8 @@ def importJSON(text):
         dic = json.loads(text)
     except:
         return False
+    grid_dimensions = dic.get('dimensions')
+    dic = dic.get('nodes')
     nodes = {}
     for key in dic:
         nodes[key] = node.objects.create(id=key)
@@ -25,58 +27,31 @@ def importJSON(text):
         nb = item.get('neighbours')
         directions = nb.keys()
         if 'up' in directions:
-            obj.first_node = nodes.get(str(nb.get('up')[0]))
-            obj.first_node_distance = nb.get('up')[1]
-            if 'right' in directions:
-                obj.second_node = nodes.get(str(nb.get('right')[0]))
-                obj.second_node_distance = nb.get('right')[1]
-                if 'down' in directions:
-                    obj.third_node = nodes.get(str(nb.get('down')[0]))
-                    obj.third_node_distance = nb.get('down')[1]
-                    if 'left' in directions:
-                        obj.fourth_node = nodes.get(str(nb.get('left')[0]))
-                        obj.fourth_node_distance = nb.get('left')[1]
-                else:
-                    if 'left' in directions:
-                        obj.third_node = nodes.get(str(nb.get('left')[0]))
-                        obj.third_node_distance = nb.get('left')[1]
-            elif 'down' in directions:
-                obj.second_node = nodes.get(str(nb.get('down')[0]))
-                obj.second_node_distance = nb.get('down')[1]
-                if 'left' in directions:
-                    obj.third_node = nodes.get(str(nb.get('left')[0]))
-                    obj.third_node_distance = nb.get('left')[1]
-            else:
-                obj.second_node = nodes.get(str(nb.get('left')[0]))
-                obj.second_node_distance = nb.get('left')[1]
-        elif 'right' in directions:
-            obj.first_node = nodes.get(str(nb.get('right')[0]))
-            obj.first_node_distance = nb.get('right')[1]
-            if 'down' in directions:
-                obj.second_node = nodes.get(str(nb.get('down')[0]))
-                obj.second_node_distance = nb.get('down')[1]
-                if 'left' in directions:
-                    obj.third_node = nodes.get(str(nb.get('left')[0]))
-                    obj.third_node_distance = nb.get('left')[1]
-            else:
-                if 'left' in directions:
-                    obj.second_node = nodes.get(str(nb.get('left')[0]))
-                    obj.second_node_distance = nb.get('left')[1]
-        elif 'down' in directions:
-            obj.first_node = nodes.get(str(nb.get('down')[0]))
-            obj.first_node_distance = nb.get('down')[1]
-            if 'left' in directions:
-                obj.second_node = nodes.get(str(nb.get('left')[0]))
-                obj.second_node_distance = nb.get('left')[1]
-        elif 'left' in directions:
-            obj.first_node = nodes.get(str(nb.get('left')[0]))
-            obj.first_node_distance = nb.get('left')[1]
+            obj.up_node = nodes.get(str(nb.get('up')[0]))
+            obj.up_node_distance = nb.get('up')[1]
+            obj.up_node_direction = nb.get('up')[2]
+            obj.up_node_priority = nb.get('up')[3]
+        if 'right' in directions:
+            obj.right_node = nodes.get(str(nb.get('right')[0]))
+            obj.right_node_distance = nb.get('right')[1]
+            obj.right_node_direction = nb.get('right')[2]
+            obj.right_node_priority = nb.get('right')[3]
+        if 'down' in directions:
+            obj.down_node = nodes.get(str(nb.get('down')[0]))
+            obj.down_node_distance = nb.get('down')[1]
+            obj.down_node_direction = nb.get('down')[2]
+            obj.down_node_priority = nb.get('down')[3]
+        if 'left' in directions:
+            obj.left_node = nodes.get(str(nb.get('left')[0]))
+            obj.left_node_distance = nb.get('left')[1]
+            obj.left_node_direction = nb.get('left')[2]
+            obj.left_node_priority = nb.get('left')[3]
 
         obj.save()
 
         #if item.get('type') == 'Robot':
         #    robot.objects.create(ip=ip,node=obj)
-        if item.get('type') == 'Shelf':
+        if item.get('type') == 'shelf':
             shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
 
     return True
@@ -121,16 +96,20 @@ def map_gen_view(request):
     if request.POST:
         JSON = request.POST.get("data")
         jsons = JSON.split('||')
-        print(len(jsons))
-        if importJSON(jsons[0]):
-            print("Successfully Parsed!")
-            messages.success(request, 'JSON Loaded')
+        try:
+            simjson = jsons[1]
+            dbjson = jsons[0]
+        except:
+            pass
         else:
-            messages.success(request, 'Wrong JSON Format')
-        simjson = jsons[1]
-        sim_json(simjson)
-        return HttpResponseRedirect('/generator')
-        # print(JSON)
+            print(dbjson)
+            if importJSON(dbjson):
+                print("Successfully Parsed!")
+                messages.success(request, 'JSON Loaded')
+            else:
+                print('Parsing Failed!')
+                messages.success(request, 'Wrong JSON Format')
+            #sim_json(simjson)
     return render(request, "map_gen.html")
 
 def map_view(request):

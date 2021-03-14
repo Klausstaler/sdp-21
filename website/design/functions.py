@@ -6,6 +6,7 @@ import asyncio
 
 def sim_json(json):
     # floor_size = [4,4]
+    print('aaaa')
 
     import sys
     sys.path.insert(0, "../../Warehouse\ Generation/warehouse_generator.py")
