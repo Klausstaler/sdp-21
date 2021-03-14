@@ -49,12 +49,14 @@ class Graph:
         :param node_id:
         :return:
         """
-        print(node_id, priority)
         distances = []
         for connection in filter(lambda conn: conn.priority > priority, self.graph[node_id].outgoing_connections):
-            distances.append((connection.distance, connection.node_id))
-            print(connection.node_id)
+            num_incoming_connections = len(self.graph[connection.node_id].incoming_connections)
+            if num_incoming_connections > 1:  # only do check if we have a junction, otherwise it is not necessary
+                distances.append((connection.distance, connection.node_id))
         # distances = [(0, node_id)]
+        if distances:
+            print(node_id, priority)
         heapify(distances)
         unvisited = set(self.graph.keys())
         reverse_search = False
