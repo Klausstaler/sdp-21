@@ -1,6 +1,7 @@
 from controller import Robot
 
 from BasicNavigation import BasicNavigation
+from Lift import Lift
 
 
 class Navigation(BasicNavigation):

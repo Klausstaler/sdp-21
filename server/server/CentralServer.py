@@ -29,7 +29,8 @@ class CentralServer:
         """tasks = [
             Task(TaskType.REACH_NODE, {"node": "51"}),
             Task(TaskType.TURN_UNTIL, {"n": 3}),
-            Task(TaskType.REACH_NODE, {"node": "50"}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0.01}),
+            Task(TaskType.REACH_NODE, {"node": "50"}),    
             Task(TaskType.TURN_UNTIL, {"n": 2}),
             Task(TaskType.REACH_NODE, {"node": "43"}),
             Task(TaskType.REACH_NODE, {"node": "29"}),
