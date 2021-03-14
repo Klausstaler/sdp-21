@@ -118,6 +118,7 @@ class ArmController:
                 print("Dropoff Achieved")
                 self.suction_cup.unlock()
                 self.pickup_x = INITIAL_PICKUP_X
+                self.move_endeffector(-relative_target)
                 return True  # success
 
     def convert_relative(self, global_coord: np.array) -> np.array:
