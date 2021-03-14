@@ -1,6 +1,6 @@
 from collections import deque, defaultdict
 from typing import List, Dict, Set, Union
-
+from datetime import datetime
 from server.Robot import Robot
 from server.Task import Task, TaskType
 from server.routing.Graph import Graph
@@ -14,7 +14,7 @@ class Scheduler:
         self.free_robots: Set[Robot] = set()
         self.open_tasks: Dict[Robot, deque[Task]] = defaultdict(deque)
         self.graph = graph
-        self.DIST_THRESHOLD = 2
+        self.DIST_THRESHOLD = 3
 
     def add_free_robot(self, robot: Robot) -> None:
         self.graph.graph[robot.pos_id].occupying_robot = robot
@@ -50,10 +50,17 @@ class Scheduler:
         #        priority = connection.priority
         #        break
         dist_closest = self.graph.dist_closest_robot(robot_pos, priority)
-        if dist_closest <= self.DIST_THRESHOLD:
-            print(f"Robot {robot.id} is too close to another robot! Stopping...")
-            await asyncio.sleep(2)
+        graph = self.graph.graph
+        last_time_accessed = (datetime.now() - graph[node_id].last_accessed).seconds
+        print(f"{robot}, {node_id}, {dist_closest}")
+        if dist_closest <= self.DIST_THRESHOLD or (last_time_accessed < 3):
+            #print(f"Robot {robot.id} is too close to another robot! Stopping...")
+            if last_time_accessed < 3:
+                await asyncio.sleep(3 - last_time_accessed)
+            else:
+                await asyncio.sleep(2)
             await self.check_collisions(robot, node_id)
-        self.graph.graph[robot.pos_id].occupying_robot = None
-        self.graph.graph[node_id].occupying_robot = robot
+        graph[robot.pos_id].occupying_robot = None
+        graph[robot.pos_id].last_accessed = datetime.now()
+        graph[node_id].occupying_robot = robot
         robot.pos_id = node_id

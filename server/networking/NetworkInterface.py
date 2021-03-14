@@ -52,7 +52,6 @@ class NetworkInterface:
 
     async def send_request(self, robot: Robot, task: Task):
         connection = await self.resolve_connection(robot.id)
-        print("Sending task", task.task_type, "to", robot.id)
         await send_task(connection, robot.id, task)
         print("Robot", robot.id, "finished task", task.task_type)
 
@@ -61,5 +60,5 @@ class NetworkInterface:
             return self.open_connections[robot_id]
         else:
             await asyncio.sleep(2)
-            print(f"No connection with ID {robot_id} found! Sleeping 2 secs..")
+            #print(f"No connection with ID {robot_id} found! Sleeping 2 secs..")
             return await self.resolve_connection(robot_id)

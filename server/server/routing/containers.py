@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import List, NamedTuple, Union
+from datetime import datetime
 
 
 class Direction(Enum):
@@ -22,6 +23,7 @@ class Node:
         self.outgoing_connections = outgoing_connections
         self.incoming_connections: List[Connection] = []
         self.occupying_robot = occupying_robot
+        self.last_accessed = datetime.now()
 
     def calculate_lines_to_turn(self, prev_node_id: int, next_node_id: int) -> int:
         assert (len(self.all_connections) == 4)

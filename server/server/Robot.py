@@ -28,3 +28,6 @@ class Robot:
             Task(TaskType.RAISE_PLATFORM, {"height": 0}),
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
         ])
+
+    def __repr__(self):
+        return f"<Robot {self.id}>"

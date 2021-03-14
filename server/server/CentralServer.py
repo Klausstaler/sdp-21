@@ -39,11 +39,9 @@ class CentralServer:
                 Task(TaskType.TURN_UNTIL, {"n": lines_to_turn})
             )
         tasks.extend(self.scheduler.graph.get_commands(attached_node, 0)) # move back to some position
-        print(tasks)
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
         while self.scheduler.has_tasks(robot):
-            print(f"Robot currently at {robot.pos_id}")
             await self.network_interface.send_request(robot, await self.scheduler.get_next_task(robot))
 
 ################# For line following demo world.

@@ -51,15 +51,17 @@ class Graph:
         """
         distances = []
         for connection in filter(lambda conn: conn.priority > priority, self.graph[node_id].outgoing_connections):
-            num_incoming_connections = len(self.graph[connection.node_id].incoming_connections)
+            num_incoming_connections = 0
+            for conn in self.graph[connection.node_id].incoming_connections:
+                if conn.direction == Direction.INCOMING:
+                    num_incoming_connections += 1
             if num_incoming_connections > 1:  # only do check if we have a junction, otherwise it is not necessary
                 distances.append((connection.distance, connection.node_id))
-        # distances = [(0, node_id)]
+        #distances = [(0, node_id)]
         if distances:
             print(node_id, priority)
         heapify(distances)
         unvisited = set(self.graph.keys())
-        reverse_search = False
         while unvisited and distances:
             dist, curr_node_id = heappop(distances)
             if curr_node_id not in unvisited:
@@ -68,12 +70,10 @@ class Graph:
             if curr_node_id != node_id and self.graph[curr_node_id].occupying_robot:
                 return dist
             curr_node = self.graph[curr_node_id]
-            connections = curr_node.incoming_connections if reverse_search else curr_node.outgoing_connections
+            connections = curr_node.incoming_connections
             for connection in connections:
-                if connection.node_id in unvisited:
+                if connection.priority > priority and connection.node_id in unvisited:
                     heappush(distances, (connection.distance + dist, connection.node_id))
-                if connection.priority > priority:
-                    reverse_search = True
         return float("inf")  # no robot found, all good to go yeet
 
     def get_commands(self, start_location: int, end_location: int) -> List[Task]:
