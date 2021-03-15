@@ -41,6 +41,7 @@ class Lift:
             # bml.setPosition(delta_x)
             bmr.setPosition(-2 * delta_x)
             # Wait 2 secs just in case
+            print("Waiting")
             # self.robot.step(1280)
 
     def checkHeight(self,H):

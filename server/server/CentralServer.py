@@ -19,17 +19,17 @@ class CentralServer:
         # print(needed_height)
         tasks = self.scheduler.graph.get_commands(robot.curr_pos.node_id, parcel.location_id)
         tasks.extend([
-            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
-            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
-            Task(TaskType.PICKUP_PARCEL, {}),
-            Task(TaskType.RAISE_PLATFORM, {"height": 0}),
-            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
-            Task(TaskType.REACH_NODE, {"node": "47"}),
-            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 5, "speed": 5, "right": True}),
             Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height) + 0.05}),
+            Task(TaskType.PICKUP_PARCEL, {}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0.01}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 5, "speed": 5, "right": False}),
+            Task(TaskType.REACH_NODE, {"node": "47"}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 5, "speed": 5, "right": True}),
+            Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height) + 0.1}),
             Task(TaskType.DROPOFF_PARCEL, {}),
-            Task(TaskType.RAISE_PLATFORM, {"height": 0}),
-            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": False})
+            Task(TaskType.RAISE_PLATFORM, {"height": 0.01}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 5, "speed": 5, "right": False})
 
         ])
         tasks.extend(self.scheduler.graph.get_commands(37, 56))
