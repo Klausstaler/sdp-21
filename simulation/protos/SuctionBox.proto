@@ -794,7 +794,8 @@ PROTO SuctionBox [
     size IS size
   }
   physics Physics {
-    density 125
+    density -1
+    mass 2
   }
 }
 }
