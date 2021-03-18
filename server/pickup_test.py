@@ -16,7 +16,7 @@ async def main():
     my_shelf = Shelf(1, 2, 37)
     shelf_info = ShelfInfo(my_shelf, 1)
     parcel = Parcel(12., Size(.35, .35, .35), 37, shelf_info)
-    node = Node(0, [])
+    node = Node(17, [])
     sched.add_free_robot(Robot("1", robot_size, node))
     #sched.add_free_robot(Robot("2", robot_size, node))
     interface = NetworkInterface()

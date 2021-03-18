@@ -27,8 +27,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.662054908484918 0.6077806358555552 0.4385042723053495 1.65665296925949
-  position -0.6355184286977626 5.601068506344786 1.3688971559347145
+  orientation 0.9999450393492179 -0.008152221640205924 -0.006592386762034773 4.9231315613186615
+  position -1.3694422676770275 5.517841819632801 0.21237958995542283
 }
 TexturedBackground {
   skybox FALSE
@@ -38,13 +38,6 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
   texture "dusk"
-}
-DEF TRANSPORT MainRobot {
-  translation -4.46352 0.179555 -2.98967
-  rotation 0.9999802093056381 0.004693710982439616 0.004189280876857461 -1.570565307179586
-}
-SuctionBox {
-  translation -2.2386 1.21393 1
 }
 RectangleArena {
   floorSize 32 32
@@ -108,7 +101,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "GU6KKLO"
+  name "JJ2CSZ1"
 }
 NFCTag {
   translation -4 0.001 -2
@@ -124,7 +117,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "KSHQMU0"
+  name "ZSPWKNA"
 }
 NFCTag {
   translation -2 0.001 -2
@@ -148,7 +141,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "IJIYWM4"
+  name "7DTSV43"
 }
 NFCTag {
   translation -1 0.001 -2
@@ -164,7 +157,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "DMQEJ5G"
+  name "MQ00LFH"
 }
 NFCTag {
   translation 1 0.001 -2
@@ -188,7 +181,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "JSK6GQX"
+  name "5DXHRSB"
 }
 NFCTag {
   translation 2 0.001 -2
@@ -204,7 +197,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "LLVAWPD"
+  name "R4DBKBI"
 }
 NFCTag {
   translation 4 0.001 -2
@@ -236,7 +229,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "LHHWUNU"
+  name "9BGO7X9"
 }
 NFCTag {
   translation -4 0.001 -1
@@ -252,7 +245,14 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "78A9L5V"
+  name "IJJJ7VZ"
+}
+SuctionBox {
+  translation -2.24861 1.21385 1
+}
+DEF TRANSPORT MainRobot {
+  translation -1.50143 0.180506 -0.973207
+  rotation 0.5737851119632735 0.5791971130193229 0.5790521129910289 -2.099095307179586
 }
 NFCTag {
   translation -2 0.001 -1
@@ -276,7 +276,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "QSNB9X5"
+  name "R35CHVI"
 }
 NFCTag {
   translation -1 0.001 -1
@@ -292,7 +292,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "PC4GCKB"
+  name "O16U4KW"
 }
 NFCTag {
   translation 1 0.001 -1
@@ -316,7 +316,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "UDTZP1D"
+  name "5QLTBE9"
 }
 NFCTag {
   translation 2 0.001 -1
@@ -332,7 +332,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "34N8LCZ"
+  name "JEXO9NL"
 }
 NFCTag {
   translation 4 0.001 -1
@@ -364,7 +364,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "HYZPVD8"
+  name "2HNQQN9"
 }
 NFCTag {
   translation -4 0.001 0
@@ -380,7 +380,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "PPKJCGK"
+  name "XO9RTTJ"
 }
 NFCTag {
   translation -2 0.001 0
@@ -404,7 +404,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "ZRS1ZK3"
+  name "F5FJYFE"
 }
 NFCTag {
   translation -1 0.001 0
@@ -420,7 +420,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "1LG5NOR"
+  name "JOP48PO"
 }
 NFCTag {
   translation 1 0.001 0
@@ -444,7 +444,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "DDJDGBC"
+  name "MQDWAC3"
 }
 NFCTag {
   translation 2 0.001 0
@@ -460,7 +460,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "9OXMLW9"
+  name "OE83GXF"
 }
 NFCTag {
   translation 4 0.001 0
@@ -492,7 +492,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "V8JN6AM"
+  name "Y5EJ1LG"
 }
 NFCTag {
   translation -4 0.001 1
@@ -508,7 +508,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "CGJUH98"
+  name "PI7W6OZ"
 }
 NFCTag {
   translation -2 0.001 1
@@ -532,7 +532,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "U8LWYVI"
+  name "95P9DS6"
 }
 NFCTag {
   translation -1 0.001 1
@@ -548,7 +548,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "VJXMQAQ"
+  name "FGA26YQ"
 }
 NFCTag {
   translation 1 0.001 1
@@ -572,7 +572,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "CIX9S3P"
+  name "FTU1IJA"
 }
 NFCTag {
   translation 2 0.001 1
@@ -588,7 +588,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "HHZ1KP6"
+  name "HHMSX8W"
 }
 NFCTag {
   translation 4 0.001 1
@@ -620,7 +620,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "LOQPWYB"
+  name "WHQJOIY"
 }
 NFCTag {
   translation -4 0.001 2
@@ -636,7 +636,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "TELZUT5"
+  name "TP6RA01"
 }
 NFCTag {
   translation -2 0.001 2
@@ -660,7 +660,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "A2UEVYE"
+  name "T4HQWA5"
 }
 NFCTag {
   translation -1 0.001 2
@@ -676,7 +676,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "ZDQ9CNM"
+  name "V51YZS3"
 }
 NFCTag {
   translation 1 0.001 2
@@ -700,7 +700,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "BET7PYN"
+  name "ZLYAUP7"
 }
 NFCTag {
   translation 2 0.001 2
@@ -716,7 +716,7 @@ Shelf {
   numRacks 1 2 1
   baseDim 1 0.02 1
   legDim 0.05 1 0.05
-  name "03KTKMB"
+  name "FW1R80T"
 }
 NFCTag {
   translation 4 0.001 2
