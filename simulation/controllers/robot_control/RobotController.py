@@ -18,6 +18,7 @@ class RobotController(Robot):
 
         # Initialise scissor lift with measurements
         self.scissor_lift = Lift(self, 0.6, 4)
+        self.scissor_lift.raisePlatform("0.01")
 
         self.follow_line = True
         self.turning = False
