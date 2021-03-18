@@ -27,8 +27,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.9477594951635251 0.31230654944020203 0.06493503294936133 5.851264909669227
-  position -1.7526783425220223 1.693864650380169 1.6992921971455173
+  orientation 0.999525224120614 0.02774380171179756 0.013401783956347524 5.382813259241397
+  position -1.668456819087683 3.632417029992876 0.932277721508125
 }
 TexturedBackground {
   skybox FALSE
@@ -1145,7 +1145,7 @@ DEF TRANSPORT Robot {
                     ]
                     endPoint Solid {
                       translation -0.3 2.08677e-07 -0.09
-                      rotation -0.577350935856026 -0.5773499358561369 -0.5773499358561369 2.0943953071795858
+                      rotation -0.5773509358560261 -0.577349935856137 -0.577349935856137 2.0943953071795858
                       children [
                         Transform {
                           translation 0 -0.3 0
@@ -1580,7 +1580,7 @@ DEF TRANSPORT Robot {
           ]
           endPoint Solid {
             children [
-              DEF L Transform {
+              Solid {
                 translation -0.3 0 0
                 children [
                   DEF LEFT HingeJoint {
@@ -1595,10 +1595,10 @@ DEF TRANSPORT Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 0.3 -2.08677e-07 -0.09
-                      rotation -0.577350935856026 -0.5773499358561369 -0.5773499358561369 2.0943953071795858
+                      translation 0.29999999999999977 -2.086769999992688e-07 -0.08999999999999994
+                      rotation -0.577350935856026 -0.5773499358561369 -0.5773499358561369 2.094395307179585
                       children [
-                        Transform {
+                        Solid {
                           translation 0 0.3 0
                           children [
                             HingeJoint {
@@ -1613,10 +1613,10 @@ DEF TRANSPORT Robot {
                                 }
                               ]
                               endPoint Solid {
-                                translation 0 -0.3 0
+                                translation 0 -0.2999999999999997 0
                                 rotation -1 0 0 0
                                 children [
-                                  Transform {
+                                  Solid {
                                     translation 0 -0.3 0
                                     children [
                                       HingeJoint {
@@ -1630,10 +1630,10 @@ DEF TRANSPORT Robot {
                                           }
                                         ]
                                         endPoint Solid {
-                                          translation 0 0.3 0
+                                          translation 0 0.29999999999999993 0
                                           rotation 1 0 0 0
                                           children [
-                                            Transform {
+                                            Solid {
                                               translation 0 0.3 0
                                               children [
                                                 HingeJoint {
@@ -1648,10 +1648,10 @@ DEF TRANSPORT Robot {
                                                     }
                                                   ]
                                                   endPoint Solid {
-                                                    translation 0 -0.3 0
+                                                    translation 0 -0.29999999999999993 -2.7755575615628914e-17
                                                     rotation -1 0 0 0
                                                     children [
-                                                      Transform {
+                                                      Solid {
                                                         translation 0 -0.3 0
                                                         children [
                                                           HingeJoint {
@@ -1665,8 +1665,8 @@ DEF TRANSPORT Robot {
                                                               }
                                                             ]
                                                             endPoint Solid {
-                                                              translation -0.14999999999993638 0.302583999999968 0.016552199999998456
-                                                              rotation 0.5773509358554475 0.5773489358556719 0.5773509358554484 2.0943999999999714
+                                                              translation -0.14999999999993532 0.30258399999996927 0.016552199999998463
+                                                              rotation 0.5773509358554476 0.5773489358556712 0.577350935855449 2.094399999999972
                                                               children [
                                                                 Solid {
                                                                   translation 0 -0.02 0.25
@@ -1684,6 +1684,10 @@ DEF TRANSPORT Robot {
                                                                   ]
                                                                   name "solid(1)"
                                                                   boundingObject USE platform
+                                                                  physics Physics {
+                                                                    density -1
+                                                                    mass 0.001
+                                                                  }
                                                                 }
                                                                 DEF ARMSLIDER SliderJoint {
                                                                   jointParameters JointParameters {
@@ -1701,7 +1705,7 @@ DEF TRANSPORT Robot {
                                                                     }
                                                                   ]
                                                                   endPoint DEF ROBOT_ARM Solid {
-                                                                    translation 0 0 0.02000000000000013
+                                                                    translation 0 0 0.020000000000000184
                                                                     rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.09439
                                                                     children [
                                                                       Group {
@@ -2169,6 +2173,10 @@ DEF TRANSPORT Robot {
                                                             }
                                                           }
                                                         ]
+                                                        physics Physics {
+                                                          density -1
+                                                          mass 0.001
+                                                        }
                                                       }
                                                       DEF Scissor Group {
                                                         children [
@@ -2257,9 +2265,18 @@ DEF TRANSPORT Robot {
                                                         ]
                                                       }
                                                     ]
+                                                    physics Physics {
+                                                      density -1
+                                                      mass 0.001
+                                                    }
                                                   }
                                                 }
                                               ]
+                                              name "solid(6)"
+                                              physics Physics {
+                                                density -1
+                                                mass 0.001
+                                              }
                                             }
                                             DEF Scissor Group {
                                               children [
@@ -2348,9 +2365,18 @@ DEF TRANSPORT Robot {
                                               ]
                                             }
                                           ]
+                                          physics Physics {
+                                            density -1
+                                            mass 0.001
+                                          }
                                         }
                                       }
                                     ]
+                                    name "solid(6)"
+                                    physics Physics {
+                                      density -1
+                                      mass 0.001
+                                    }
                                   }
                                   DEF Scissor Group {
                                     children [
@@ -2439,9 +2465,18 @@ DEF TRANSPORT Robot {
                                     ]
                                   }
                                 ]
+                                physics Physics {
+                                  density -1
+                                  mass 0.001
+                                }
                               }
                             }
                           ]
+                          name "solid(6)"
+                          physics Physics {
+                            density -1
+                            mass 0.001
+                          }
                         }
                         DEF Scissor Group {
                           children [
@@ -2530,11 +2565,24 @@ DEF TRANSPORT Robot {
                           ]
                         }
                       ]
+                      physics Physics {
+                        density -1
+                        mass 0.001
+                      }
                     }
                   }
                 ]
+                name "solid(1)"
+                physics Physics {
+                  density -1
+                  mass 0.001
+                }
               }
             ]
+            physics Physics {
+              density -1
+              mass 0.001
+            }
           }
         }
       ]
