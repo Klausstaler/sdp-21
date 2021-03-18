@@ -22,7 +22,7 @@ class CentralServer:
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
             Task(TaskType.RAISE_PLATFORM, {"height": robot.calculate_raise(needed_height)}),
             Task(TaskType.PICKUP_PARCEL, {}),
-            Task(TaskType.RAISE_PLATFORM, {"height": 0}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0.05}),
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
         ])
         tasks.extend(self.scheduler.graph.get_commands(37, 56))
