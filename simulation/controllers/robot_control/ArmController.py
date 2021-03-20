@@ -121,6 +121,13 @@ class ArmController:
                 self.move_endeffector(-relative_target)
                 return True  # success
 
+    def move_arm(self):
+        # Move the arm a tiny bit
+        delta = np.array([0,0.001,0])
+        self.move_endeffector(delta)
+        return True
+
+
     def convert_relative(self, global_coord: np.array) -> np.array:
         """
         Converts a global coordinate to a relative coordinate in the frame of the robot.

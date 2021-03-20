@@ -9,6 +9,7 @@ class TaskType(Enum):
     NO_TASK = "NO_TASK"
     TURN_UNTIL = "turn_until"
     MOVEMENT = "movement"
+    MOVE_ARM = "move_arm"
 
 
 identity = lambda x: x
@@ -36,6 +37,10 @@ Tasks_dic = {
     TaskType.MOVEMENT: {
         "task_func": lambda controller: controller.nav.movement_wrapper,
         "completition_func": None,
+    },
+    TaskType.MOVE_ARM: {
+        "task_func": lambda controller: controller.arm.move_arm,
+        "completition_func": None,
     }
 }
 
@@ -53,7 +58,8 @@ def resolve_task(data: str) -> Task:
         "dropoff_parcel": TaskType.DROPOFF_PARCEL,
         "raise_platform": TaskType.RAISE_PLATFORM,
         "turn_until": TaskType.TURN_UNTIL,
-        "movement": TaskType.MOVEMENT
+        "movement": TaskType.MOVEMENT,
+        "move_arm": TaskType.MOVE_ARM
     }
     length, robot_id, function, *params = data.split(":")
     param_dict = dict()

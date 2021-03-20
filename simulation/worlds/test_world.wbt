@@ -45,7 +45,7 @@ DEF TRANSPORT MainRobot {
 }
 SuctionBox {
   translation -2.2386 1.21393 1
-  mass 4
+  mass 0.01
 }
 RectangleArena {
   floorSize 32 32

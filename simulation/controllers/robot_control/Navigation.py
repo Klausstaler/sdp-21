@@ -7,11 +7,13 @@ class Navigation(BasicNavigation):
     def __init__(self, robot: Robot, timestep=128):
         super().__init__(robot, timestep=128)
 
-    def movement_wrapper(self, func_name, time, total_time, new=False, speed=4, right=False, top=False, clock=False):
+    def movement_wrapper(self, func_name, time, total_time, new=False, speed=4, right=False, top=False, clock=False, move_random=False):
         time, speed, total_time = int(time), int(speed), int(total_time)
         right, clock, top = right == "True", clock == "True", top == "True"
 
         func = getattr(self, func_name)
+        if move_random:
+            self.robot.arm.move_arm()
 
         if new:
             self.time = time

@@ -10,6 +10,7 @@ class BasicNavigation:
         self.high_val = 142
         # IR sensors
         IR = {}
+        self.robot = robot
 
         for name in ["ds_left", "ds_right", "ds_mid"]:
             IR[name[3:]] = robot.getDevice(name)
@@ -65,7 +66,7 @@ class BasicNavigation:
         else:
             self.set_wheel_speeds(-1, speed, speed, -1)
 
-    def stop(self):
+    def stop(self, speed = 0, right=None, top=None, clock=None):
         self.set_wheel_speeds(0, 0, 0, 0)
 
     def strafe(self, speed, right, top=None, clock=None):
