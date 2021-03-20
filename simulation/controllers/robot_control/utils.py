@@ -1,5 +1,5 @@
-
-def create_header(zerobits, length): #returns the msg len header of the payload where len = len of msg and zerobits is number of padded zeros at the start
+def create_header(zerobits,
+                  length):  # returns the msg len header of the payload where len = len of msg and zerobits is number of padded zeros at the start
     string = ""
     for i in range(zerobits):
         string += "0"
@@ -7,20 +7,23 @@ def create_header(zerobits, length): #returns the msg len header of the payload 
     # print(string)
     return string
 
-def encode(string): # encodes a string in the format msglen:string\n where msglen is len of string
+
+def encode(string):  # encodes a string in the format msglen:string\n where msglen is len of string
     length = len(string)
     bitlen = len(str(length))
     zerobits = 5 - bitlen
-    head = create_header(zerobits,length)
+    head = create_header(zerobits, length)
     # print(f"{head}:{str}")
     return f"{head}:{string}\n".encode()
 
-def decode(String): # decodes and returns the string of a recieved msg
+
+def decode(String):  # decodes and returns the string of a recieved msg
     len, msg = String.split(":")
     # print
     return msg
 
-def recvall(connection): # handles the reception of packets and decodes the data
+
+def recvall(connection):  # handles the reception of packets and decodes the data
     data = b""
     while "\n" not in data.decode():
         data += connection.recv(8)

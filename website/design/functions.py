@@ -2,7 +2,17 @@ from .models import package,robot,shelf,hidden_package
 from .models import task
 from .models import node as nd
 import asyncio
-# from warehouse_generator import create_world
+
+from server.CentralServer import CentralServer
+from server.Robot import Robot, Size
+from server.Scheduler import Scheduler
+from networking.NetworkInterface import NetworkInterface
+from server.Parcel import Parcel
+from server.Shelf import Shelf, ShelfInfo
+from server.routing.Graph import Graph
+from server.sample_db_output import db_output
+from warehouse.server_setup import *
+#from warehouse_generator import create_world
 
 def sim_json(json):
     # floor_size = [4,4]
@@ -64,9 +74,11 @@ def create_task(r,p,h):
 def package_request(packs):
     for id in packs:
         pack = packs.get(id)
-        print('Parcel:{}'.format(pack.old_id))
-        print('Shelf:{}'.format(pack.shelf))
-        print('Node:{}'.format(pack.shelf.node))
+        #print('Parcel:{}'.format(pack.old_id))
+        #print('Shelf:{}'.format(pack.shelf))
+        #print('Node:{}'.format(pack.shelf.node))
         get_node_dict()
         rob = robot.objects.all()[0]
         create_task(rob,pack,False)
+    
+    asyncio.run(m.requestParcel())

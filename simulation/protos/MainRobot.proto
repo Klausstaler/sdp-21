@@ -10,7 +10,7 @@ PROTO MainRobot [
 	### Position of the robot
 	field SFVec3f translation -8.026056484007488e-05 0.18098904368168098 0.00018777016853499767
 	field SFRotation rotation -0.5808170217303981 0.575390021527355 0.5758280215437421 2.08942
-  
+
   ### Wheel positions
   field SFVec3f wheel_pos +0.328 -0.328 -0.115
   field SFFloat wheel_size 1.3
@@ -18,12 +18,18 @@ PROTO MainRobot [
 
   ### Distance sensor Details
   field SFVec3f Distance_sensor_pos 0.43 0 -0.12
-  field SFFloat Distance_apart 0.12
+  field SFFloat Distance_apart 0.13
   field SFInt32 numberOfRays 5
   field SFFloat aperture 1.3
 
   field SFString robot_id "1"
+
+  # Extends the robot with new nodes in the ground slot
+  field MFNode groundSensorsSlot[]
   
+  # Front Distance sensor Details (Measures distance from object in-front)
+  
+
   ### Reciever details
   # field SFInt32 RecievingChannel 0 #-1 for all channels
 
@@ -38,6 +44,35 @@ PROTO MainRobot [
   translation IS translation
   rotation IS rotation
   children [
+    %{ rotation = fields.Front_distance_sensor_rotation }%
+    DEF GROUND_SENSOR_SLOT Transform {
+      translation 0 0.0003 -0.03
+      rotation 0 0 1 0
+      children [
+        DEF ds_front DistanceSensor {
+          translation 0.4 0 0
+          rotation 0 1 0 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.5 0 0
+              }
+              geometry Box {
+                size 0.03 0.06 0.06
+              }
+            }
+          ]
+          numberOfRays 1
+          aperture IS aperture
+          name "ds_front"
+          lookupTable [
+            0 0 0
+            1 100 0
+            2 200 0
+          ]
+        }
+      ]
+    }
     DEF NFC Group {
       children [
         LED {
@@ -140,7 +175,7 @@ PROTO MainRobot [
     %{ wheel_size = fields.wheel_size.value }%
     DEF WHEELS Group {
       children [
-        
+
         DEF wheel_BR HingeJoint {
           %{ x = fields.wheel_pos.value.x }%
           %{ y = fields.wheel_pos.value.y }%
@@ -159,8 +194,8 @@ PROTO MainRobot [
             }
           ]
           endPoint DEF WHEEL_SOLID Solid {
-            
-            
+
+
             translation %{=x}% %{=y}% %{=z}%
             scale %{=wheel_size}% %{=wheel_size}% %{=wheel_size}%
             children [
@@ -357,7 +392,7 @@ PROTO MainRobot [
             }
           ]
           endPoint DEF WHEEL_SOLID Solid {
-            
+
             translation %{=x}% %{=y}% %{=z}%
             scale %{=wheel_size}% %{=wheel_size}% %{=wheel_size}%
             children [
@@ -750,7 +785,7 @@ PROTO MainRobot [
             }
           ]
           endPoint DEF WHEEL_SOLID Solid {
-            
+
             translation %{=x}% %{=y}% %{=z}%
             scale %{=wheel_size}% %{=wheel_size}% %{=wheel_size}%
             children [
@@ -1535,7 +1570,7 @@ PROTO MainRobot [
         }
       ]
     }
-    
+
   ]
   boundingObject Group {
     children [

@@ -1,14 +1,11 @@
 from typing import Union, NamedTuple
 
-from server.Location import Location
-
 
 class Shelf:
-    def __init__(self, compartment_size: float, num_compartments, location: Location):
+    def __init__(self, compartment_size: float, num_compartments, location_id: int):
         self.compartment_size = compartment_size
         self.num_compartments = num_compartments
-        self.location = location
-        self.compartments = [None for _ in range(num_compartments)]
+        self.location_id = location_id
 
     def get_compartment_height(self, compartment_number: int):
         """

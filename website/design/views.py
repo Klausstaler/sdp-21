@@ -7,9 +7,11 @@ from home.views import home_view
 import json
 
 
+
+
 def importJSON(text):
     node.objects.all().delete()
-    robot.objects.all().delete()
+    #robot.objects.all().delete()
     text = text.replace(" ","")
     try:
         dic = json.loads(text)

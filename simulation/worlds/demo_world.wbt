@@ -1,0 +1,862 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 0.2
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.9999969799365676 0.0018717861305694858 0.00159265012650478 4.87318232606935
+  position -1.5572379159327219 10.655178369827093 2.7893528456949364
+}
+TexturedBackground {
+  skybox FALSE
+  skyColor [
+    0.156863 0.247059 0.388235
+  ]
+}
+TexturedBackgroundLight {
+  texture "dusk"
+}
+RectangleArena {
+  floorSize 32 32
+  floorTileSize 32 32
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/demo_world.jpg"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+    }
+    roughness 0.2
+    metalness 0
+  }
+  wallHeight 1
+}
+SuctionBox {
+  translation -2.23867 1.22391 -2.01
+  mass 2
+}
+SuctionBox {
+  translation -0.779139 1.26445 -0.98
+  mass 2
+}
+DEF TRANSPORT MainRobot {
+  translation -1.47007 0.180254 -0.0128679
+  rotation -0.5737851119632735 -0.5791971130193229 -0.5790521129910289 2.0991
+}
+DEF TRANSPORT MainRobot {
+  translation -1.54597 0.179138 4.00657
+  robot_id "3"
+}
+DEF TRANSPORT MainRobot {
+  translation 1.52224 0.181223 2.00402
+  rotation -0.003318581792024336 0.7070133817851316 0.7071923818817912 3.13567
+  robot_id "2"
+}
+NFCTag {
+  translation -4.5 0.001 -4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "0"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 -4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "1"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 -4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "2"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 -4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "3"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "4"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -3.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "DS05IHX"
+}
+NFCTag {
+  translation -4 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "5"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "XYYT0VU"
+}
+NFCTag {
+  translation -2 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "6"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "7"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "B277PMB"
+}
+NFCTag {
+  translation -1 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "8"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 0.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "BETZ9S1"
+}
+NFCTag {
+  translation 1 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "9"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "10"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 2.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "99L26OD"
+}
+NFCTag {
+  translation 2 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "11"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 3.5 2 -3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "H3WB8ZS"
+}
+NFCTag {
+  translation 4 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "12"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 -3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "13"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "14"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -3.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "38ONYJ9"
+}
+NFCTag {
+  translation -4 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "15"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "1FXPAIM"
+}
+NFCTag {
+  translation -2 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "16"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "17"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "W8CEDX4"
+}
+NFCTag {
+  translation -1 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "18"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 0.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "1KR46XZ"
+}
+NFCTag {
+  translation 1 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "19"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "20"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 2.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "W3234QB"
+}
+NFCTag {
+  translation 2 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "21"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 3.5 2 -2
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "AFGHOWF"
+}
+NFCTag {
+  translation 4 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "22"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 -2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "23"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "24"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -3.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "JEMB5G1"
+}
+NFCTag {
+  translation -4 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "25"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "T3H10KZ"
+}
+NFCTag {
+  translation -2 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "26"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "27"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "S0AATA8"
+}
+NFCTag {
+  translation -1 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "28"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 0.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "8RL9K75"
+}
+NFCTag {
+  translation 1 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "29"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "30"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 2.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "B4CU5JU"
+}
+NFCTag {
+  translation 2 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "31"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 3.5 2 -1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "NGKLXAY"
+}
+NFCTag {
+  translation 4 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "32"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 -1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "33"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "34"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -3.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "WFHT2VS"
+}
+NFCTag {
+  translation -4 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "35"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "OI82GEH"
+}
+NFCTag {
+  translation -2 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "36"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "37"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "SOEKNOI"
+}
+NFCTag {
+  translation -1 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "38"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 0.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "PRY5U75"
+}
+NFCTag {
+  translation 1 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "39"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "40"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 2.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "6OGOEJ2"
+}
+NFCTag {
+  translation 2 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "41"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 3.5 2 0
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "2ILZCMW"
+}
+NFCTag {
+  translation 4 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "42"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 0
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "43"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "44"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -3.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "G9D3SO0"
+}
+NFCTag {
+  translation -4 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "45"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "OG54H6P"
+}
+NFCTag {
+  translation -2 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "46"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "47"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "2ICIFBE"
+}
+NFCTag {
+  translation -1 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "48"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 0.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "FVXELLC"
+}
+NFCTag {
+  translation 1 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "49"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "50"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 2.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "UDGOY5A"
+}
+NFCTag {
+  translation 2 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "51"
+  transmissionRange 0.2
+}
+Shelf {
+  translation 3.5 2 1
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "F300SSX"
+}
+NFCTag {
+  translation 4 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "52"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 1
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "53"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -4.5 0.001 2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "54"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "55"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 1.5 0.001 2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "56"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation 4.5 0.001 2
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "57"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "C88GIA1"
+}
+NFCTag {
+  translation -2 0.001 3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "58"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "59"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 3
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "U95NYJJ"
+}
+NFCTag {
+  translation -1 0.001 3
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "60"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -2.5 2 4
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "AKF2R9W"
+}
+NFCTag {
+  translation -2 0.001 4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "61"
+  transmissionRange 0.2
+}
+NFCTag {
+  translation -1.5 0.001 4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "62"
+  transmissionRange 0.2
+}
+Shelf {
+  translation -0.5 2 4
+  rotation 0 0 1 3.14159
+  numRacks 1 2 1
+  baseDim 1 0.02 1
+  legDim 0.05 1 0.05
+  name "9UNZGBR"
+}
+NFCTag {
+  translation -1 0.001 4
+  dimensions 0.02 0.01 0.02
+  baseColor 0 0 0
+  emissiveColor 0 0 0
+  informationSent "63"
+  transmissionRange 0.2
+}

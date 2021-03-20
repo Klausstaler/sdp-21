@@ -1,6 +1,8 @@
-import struct, math
-from controller import Robot, Receiver, LED
-from typing import Union
+import math
+import struct
+
+from controller import Robot, Receiver
+
 
 class NFCReader:
     def __init__(self, robot: Robot, timestep=128, led_present=False):
