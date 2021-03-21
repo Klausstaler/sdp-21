@@ -6,9 +6,17 @@ from controller import Robot
 class BasicNavigation:
     def __init__(self, robot: Robot, timestep=128):
         self.max_val = 150
-        self.low_val = 120
-        self.high_val = 142
-        # IR sensors
+        self.low_val = 123
+        self.high_val = 140
+
+        # Front distance sensor
+        self.ds_front = robot.getDevice('ds_front')
+        self.ds_front.enable(timestep)
+
+        #Specifys how far away the bot must be from the object infront of it in order to move forward (in CM)
+        self.safety_distance = 100
+
+        #IR sensors
         IR = {}
 
         for name in ["ds_left", "ds_right", "ds_mid"]:
@@ -24,6 +32,7 @@ class BasicNavigation:
             Wheels[name[6:]].setPosition(float('inf'))
             Wheels[name[6:]].setVelocity(0.0)
         self.wheels = SimpleNamespace(**Wheels)
+
 
     def sensor_value(self, name, value=None):
         if value is None:
@@ -46,6 +55,9 @@ class BasicNavigation:
         for i, name in enumerate(["left", "mid", "right"]):
             ans = ans and (self.sensor_value(name) in values[i])
         return ans
+
+    def get_front_distance_value(self):
+        return self.ds_front.getValue()
 
     def set_wheel_speeds(self, FL, FR, BL, BR):
         self.wheels.FL.setVelocity(FL)
@@ -88,7 +100,7 @@ class BasicNavigation:
             self.set_wheel_speeds(speed, 0., speed, 0.)
 
     def line_detected(self, strong=False):
-        #print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
+        print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
         if strong:
             if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5]):
                 return True

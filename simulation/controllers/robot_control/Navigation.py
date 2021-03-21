@@ -24,6 +24,13 @@ class Navigation(BasicNavigation):
 
     def follow_line(self, speed=3.5):
         nearLine = True
+        distance_sensor_reading = self.get_front_distance_value()
+        #Check for if something is within the bots "safety distance" if so stops
+        if(distance_sensor_reading <= self.safety_distance):
+            print("Object within safety distance pausing movement (Distance from object {})".format(distance_sensor_reading))
+            self.move_forward(0)
+            return nearLine
+
         case = "none"
 
         if self.sensors_values(left=[0, 0.5, 1], mid=[0, 0.5, 1], right=[0, 0.5, 1]):

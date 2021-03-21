@@ -4,6 +4,7 @@ PROTO SuctionBox [
 	field SFRotation rotation 0 0 1 1.578
 	field SFVec3f size 0.35 0.35 0.35
 	field SFString parcel_id "parcel_1"
+	field SFFloat mass 2.0
 ]
 {
 	Solid {
@@ -794,8 +795,8 @@ PROTO SuctionBox [
     size IS size
   }
   physics Physics {
+    mass IS mass
     density -1
-    mass 2
   }
 }
 }

@@ -47,6 +47,7 @@ class TaskCompletion():
 
         return self.completed
 
+
     def set_task(self, task_type: TaskType, init_params: dict, time=0):
 
         params = copy.deepcopy(init_params)
@@ -75,7 +76,7 @@ task_completion = TaskCompletion(robot_controller)
 time = 0
 while robot_controller.step(TIMESTEP) != -1:
     success, curr_task = False, net_interface.get_current_task()
-    if curr_task.task_type != TaskType.NO_TASK:
+    if curr_task.task_type!= TaskType.NO_TASK:
         task_completion.set_task(curr_task.task_type, curr_task.params, time=time)
         success = task_completion.next_step()
     if success:

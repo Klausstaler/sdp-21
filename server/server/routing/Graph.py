@@ -6,33 +6,12 @@ from server.Task import Task, TaskType
 from server.routing.containers import Connection, Node, Direction
 
 
-def __calc_lines_to_turn(prev_node: Node, curr_node: Node, next_node: Node) -> int:
-    prev_node_id, next_node_id = prev_node.node_id, next_node.node_id
-    connections = curr_node.all_connections
-    assert (len(connections) == 4)
-    prev_idx, next_idx = 0, 0
-    for i, connection in enumerate(connections):
-        if connection and connection.node_id == prev_node_id:
-            prev_idx = i
-        if connection and connection.node_id == next_node_id:
-            next_idx = i
-    facing_direction = (prev_idx + 2) % len(connections)
-    if facing_direction == next_idx:
-        return 0
-    lines_to_turn = 1
-    while facing_direction != next_idx:
-        if connections[facing_direction]:
-            lines_to_turn += 1
-        facing_direction = (facing_direction + 1) % len(connections)
-    return lines_to_turn
-
-
 def path_to_commands(path: List[Node]) -> List[Task]:
     # oh no this is impossible
     prev_node, res = None, []
     for curr_node, next_node in zip(path[:-1], path[1:]):
-        lines_to_turn = __calc_lines_to_turn(prev_node, curr_node,
-                                             next_node) if prev_node else 0  # what to do when we do not know the direction?
+        lines_to_turn = curr_node.calculate_lines_to_turn(prev_node.node_id,
+                                                          next_node.node_id) if prev_node else 0  # what to do when we do not know the direction?
         if lines_to_turn > 0:
             res.append(Task(TaskType.TURN_UNTIL, {"n": lines_to_turn}))
         res.append(Task(TaskType.REACH_NODE, {"node": f"{next_node.node_id}"}))
@@ -70,12 +49,20 @@ class Graph:
         :param node_id:
         :return:
         """
-        distances = [(float("inf"), node_id) for node_id in self.graph.keys()]
-        distances.append((0, node_id))
+        distances = []
+        for connection in filter(lambda conn: conn.priority > priority, self.graph[node_id].outgoing_connections):
+            num_incoming_connections = 0
+            for conn in self.graph[connection.node_id].incoming_connections:
+                if conn.direction == Direction.INCOMING:
+                    num_incoming_connections += 1
+            if num_incoming_connections > 1:  # only do check if we have a junction, otherwise it is not necessary
+                distances.append((connection.distance, connection.node_id))
+        #distances = [(0, node_id)]
+        if distances:
+            print(node_id, priority)
         heapify(distances)
         unvisited = set(self.graph.keys())
-        reverse_search = False
-        while unvisited:
+        while unvisited and distances:
             dist, curr_node_id = heappop(distances)
             if curr_node_id not in unvisited:
                 continue
@@ -83,12 +70,10 @@ class Graph:
             if curr_node_id != node_id and self.graph[curr_node_id].occupying_robot:
                 return dist
             curr_node = self.graph[curr_node_id]
-            connections = curr_node.incoming_connections if reverse_search else curr_node.outgoing_connections
+            connections = curr_node.incoming_connections
             for connection in connections:
-                if connection.node_id in unvisited:
+                if connection.priority > priority and connection.node_id in unvisited:
                     heappush(distances, (connection.distance + dist, connection.node_id))
-                if connection.priority > priority:
-                    reverse_search = True
         return float("inf")  # no robot found, all good to go yeet
 
     def get_commands(self, start_location: int, end_location: int) -> List[Task]:

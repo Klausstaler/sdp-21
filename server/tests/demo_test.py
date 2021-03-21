@@ -1,4 +1,13 @@
-from server.routing.containers import Connection, Direction
+import asyncio
+
+from server.CentralServer import CentralServer
+from server.Robot import Robot, Size
+from server.Scheduler import Scheduler
+from networking.NetworkInterface import NetworkInterface
+from server.Parcel import Parcel
+from server.Shelf import Shelf, ShelfInfo
+from server.routing.Graph import Graph, Connection, Direction, path_to_commands
+
 db_output = {
     0: [Connection(4, 3, 5, Direction.INCOMING), None, None, Connection(1, 3, 5, Direction.OUTGOING)],
     1: [Connection(0, 3, 5, Direction.INCOMING), None, Connection(2, 3, 5, Direction.OUTGOING),
@@ -57,14 +66,53 @@ db_output = {
     52: [Connection(53, 1, 1, Direction.BIDIRECTIONAL), None, None, None],
     53: [Connection(52, 1, 1, Direction.BIDIRECTIONAL), Connection(43, 1, 5, Direction.INCOMING), None, Connection(57, 1, 5, Direction.OUTGOING)],
     54: [Connection(44, 1, 5, Direction.OUTGOING), Connection(55, 3, 5, Direction.INCOMING), None, None],
-    55: [Connection(54, 3, 5, Direction.OUTGOING), Connection(47, 1, 5, Direction.INCOMING), Connection(56, 3, 5, Direction.INCOMING), None],
+    55: [Connection(54, 3, 5, Direction.OUTGOING), Connection(47, 1, 1, Direction.INCOMING), Connection(56, 3, 5, Direction.INCOMING), Connection(59, 1, 2, Direction.INCOMING)],
     56: [Connection(55, 3, 5, Direction.OUTGOING), Connection(50, 1, 5, Direction.INCOMING), Connection(57, 3, 5, Direction.INCOMING), None],
     57: [Connection(56, 3, 5, Direction.OUTGOING), Connection(53, 1, 5, Direction.INCOMING), None, None],
     58: [Connection(59, 1, 1, Direction.BIDIRECTIONAL)],
-    59: [Connection(62, 1, 1, Direction.INCOMING), Connection(58, 1, 1, Direction.BIDIRECTIONAL), Connection(55, 1, 5, Direction.OUTGOING), Connection(60, 1, 1, Direction.BIDIRECTIONAL)],
+    59: [Connection(62, 1, 2, Direction.INCOMING), Connection(58, 1, 2, Direction.BIDIRECTIONAL), Connection(55, 1, 5, Direction.OUTGOING), Connection(60, 1, 2, Direction.BIDIRECTIONAL)],
     60: [Connection(59, 1, 1, Direction.BIDIRECTIONAL)],
     61: [Connection(62, 1, 1, Direction.BIDIRECTIONAL)],
-    62: [None, Connection(61, 1, 1, Direction.BIDIRECTIONAL), Connection(59, 1, 1, Direction.OUTGOING), Connection(63, 1, 1, Direction.BIDIRECTIONAL)],
+    62: [None, Connection(61, 1, 1, Direction.BIDIRECTIONAL), Connection(59, 1, 5, Direction.OUTGOING), Connection(63, 1, 1, Direction.BIDIRECTIONAL)],
     63: [Connection(62, 1, 1, Direction.BIDIRECTIONAL)]
-
 }
+
+
+async def parcel_pickup():
+    sched = Scheduler(Graph(db_output))
+    my_shelf = Shelf(1, 2, 16)
+    shelf_info = ShelfInfo(my_shelf, 1)
+    parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
+    robot_size = Size(height=.25, length=.75, width=.7)
+    sched.add_free_robot(Robot("2", robot_size, 56))
+    sched.add_free_robot(Robot("1", robot_size, 37))
+    #sched.add_free_robot(Robot("3", robot_size, 62))
+    interface = NetworkInterface()
+    server = CentralServer(sched, interface)
+    task1 = asyncio.create_task(server.move_parcel(parcel, None))
+    # await asyncio.gather(task1)
+
+    my_shelf = Shelf(1, 2, 28)
+    shelf_info = ShelfInfo(my_shelf, 1)
+    parcel = Parcel(12., Size(.35, .35, .35), 28, shelf_info)
+    task2 = asyncio.create_task(server.move_parcel(parcel, None))
+    #task3 = asyncio.create_task(server.move_parcel(parcel, None))
+    #await asyncio.gather(task1, task2)
+    await asyncio.gather(task1, task2)
+
+async def robo_move():
+    sched = Scheduler(Graph(db_output))
+
+    robot_size = Size(height=.25, length=.75, width=.7)
+    robo_1, robo_2 = Robot("1", robot_size, 37), Robot("2", robot_size, 56),
+    sched.add_free_robot(robo_2)
+    sched.add_free_robot(robo_1)
+    interface = NetworkInterface()
+    server = CentralServer(sched, interface)
+    sched.add_tasks(robo_1, sched.graph.get_commands(robo_1.pos_id, 53))
+    sched.add_tasks(robo_1, sched.graph.get_commands(53, 50))
+    sched.add_tasks(robo_2, sched.graph.get_commands(robo_2.pos_id, 50))
+    sched.add_tasks(robo_2, sched.graph.get_commands(50, 57))
+    t1, t2 = asyncio.create_task(server.do_tasks(robo_2)), asyncio.create_task(server.do_tasks(robo_1))
+    await asyncio.gather(t1, t2)
+asyncio.run(robo_move())

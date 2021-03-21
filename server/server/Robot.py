@@ -1,12 +1,12 @@
 from collections import namedtuple
-
-from server.routing.containers import Node
-
+from typing import List
+from server.Task import Task, TaskType
 Size = namedtuple("Size", ["length", "width", "height"])
 
+
 class Robot:
-    def __init__(self, robot_id: str, size: Size, curr_pos: Node):
-        self.curr_pos = curr_pos
+    def __init__(self, robot_id: str, size: Size, pos_id: int):
+        self.pos_id = pos_id
         self.id = robot_id
         self.size = size
 
@@ -19,3 +19,15 @@ class Robot:
         """
         # EPSILON = 0.02 # we want to place the platform slightly below it!
         return height - self.size.height  # - EPSILON
+
+    def do_pickup(self, height: float) -> List[Task]:
+        return ([
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
+            Task(TaskType.RAISE_PLATFORM, {"height": self.calculate_raise(height)}),
+            Task(TaskType.PICKUP_PARCEL, {}),
+            Task(TaskType.RAISE_PLATFORM, {"height": 0.05}),
+            Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
+        ])
+
+    def __repr__(self):
+        return f"<Robot {self.id}>"
