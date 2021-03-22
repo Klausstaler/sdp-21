@@ -5,7 +5,7 @@ from RobotController import RobotController
 from Task import TaskType, Tasks_dic
 
 IKPY_MAX_ITERATIONS = 4
-TIMESTEP = 128
+TIMESTEP = 32
 
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)

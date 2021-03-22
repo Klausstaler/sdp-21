@@ -50,15 +50,25 @@ class Navigation(BasicNavigation):
                 self.move_diagonal(speed*1.5, right=True)
                 self.turn(speed, clock=True)
             else:
-                if self.sensors_values(left=[0.5], mid=[0, 0.5], right=[0], back=[1]):
+                if self.sensors_values(left=[0.5], mid=[0, 0.5], right=[0], back=[0, 0.5, 1]):
                     case = "turn left"
                     # self.turn(speed/4, clock=False)            
                     self.turn_on_wheel_axis(speed, right=True, top=False, clock=None)
 
-                elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5], back=[1]):
+                elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5], back=[0,0.5, 1]):
                     case = "turn right"
                     # self.turn(speed/4, clock=True)
                     self.turn_on_wheel_axis(speed, right=False, top=False, clock=None)
+
+                # elif self.sensors_values(left=[0.5], mid=[0, 0.5], right=[0], back=[1]):
+                #     case = "turn left"
+                #     # self.turn(speed/4, clock=False)            
+                #     self.turn_on_wheel_axis(speed, right=True, top=False, clock=None)
+
+                # elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5], back=[1]):
+                #     case = "turn right"
+                #     # self.turn(speed/4, clock=True)
+                #     self.turn_on_wheel_axis(speed, right=False, top=False, clock=None)
                 else:
                     if (self.sensors_values(left=[1], mid=[1], right=[0], back=[0, 0.5, 1]) or
                             self.sensors_values(left=[0], mid=[1], right=[1], back=[0, 0.5, 1])):
@@ -77,10 +87,10 @@ class Navigation(BasicNavigation):
             self.clock = clock
             if self.line_detected():
                 self.n_lines +=1
-                self.n_line_token = True
+                self.n_line_token = False
         print(self.n_lines, self.line_detected(strong=True))
 
-        if not (self.n_lines == 1 and self.line_detected()):
+        if not (self.n_lines <= 1 and self.line_detected()):
             self.turn(speed, clock=True)
             if self.line_detected(strong=True) and not self.n_line_token:
                 self.n_line_token = True
