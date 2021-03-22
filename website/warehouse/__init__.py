@@ -16,6 +16,3 @@ sys.path.append(warehouse_directory)
 
 import asyncio
 import time
-from .server_setup import *
-
-asyncio.run(m.main())

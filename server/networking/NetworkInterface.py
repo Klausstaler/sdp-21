@@ -1,6 +1,5 @@
 import socket, threading
 import time
-from asyncio import StreamReader, StreamWriter
 from typing import Dict, NamedTuple, Tuple
 
 from networking.utils import encode, decode, recvall
@@ -38,11 +37,11 @@ class NetworkInterface:
     """
 
     def __init__(self):
-        self.port, self.host = 12345, ""
+        self.port, self.host = 2000, "127.0.0.1"
         self.open_connections: Dict[str, Connection] = dict()
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
+        print("BINDING SOCKET")
         self.socket.bind((self.host, self.port))
         print("socket binded to port", self.port)
         self.socket.listen(5)
