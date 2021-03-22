@@ -16,7 +16,6 @@ from warehouse.server_setup import *
 
 def sim_json(json):
     # floor_size = [4,4]
-    print('aaaa')
 
     import sys
     sys.path.insert(0, "../../Warehouse\ Generation/warehouse_generator.py")
@@ -60,7 +59,6 @@ def get_node_dict():
         if n.up_node:
             data['up'] = [n.up_node.id,n.up_node_distance,n.up_node_direction,n.up_node_priority]
         nodes[n.id] = data
-        print(nodes)
     return nodes
 
 def get_connected_nodes(id):
@@ -72,13 +70,21 @@ def create_task(r,p,h):
 
 
 def package_request(packs):
+    m.addRobot()
     for id in packs:
         pack = packs.get(id)
         #print('Parcel:{}'.format(pack.old_id))
         #print('Shelf:{}'.format(pack.shelf))
         #print('Node:{}'.format(pack.shelf.node))
-        get_node_dict()
+        nodes = get_node_dict()
         rob = robot.objects.all()[0]
         create_task(rob,pack,False)
-    
-    asyncio.run(m.requestParcel())
+        #Get the shelf the node is in
+        shelf = pack.shelf
+        #Create shelf instance
+        my_shelf = Shelf(shelf.compartment_size, shelf.number_of_compartments, shelf.node.id)
+        #Shelf_info from the shelf
+        shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
+        #Create parcel instance from the package
+        parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
+        asyncio.run(m.requestParcel(parcel))

@@ -7,6 +7,7 @@ import sys
 import os
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 server_directory = os.path.abspath(os.path.join(BASE_DIR, 'server'))
 warehouse_directory = Path(__file__).resolve().parent
