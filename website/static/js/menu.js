@@ -7,16 +7,21 @@ function post_data(json_str){
   var params = 'orem=ipsum&name=binny';
   http.open('POST', "/generator/", true);
   console.log(json_str)
-  //Send the proper header information along with the request
+  
   http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   
-  http.onreadystatechange = function() {//Call a function when the state changes.
-      if(http.readyState == 4 && http.status == 200) {
-  //        alert(http.responseText);
-      }
-  }
   http.send("data=" + json_str);
   }
+//  //Send the proper header information along with the request
+//  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//
+//  http.onreadystatechange = function() {//Call a function when the state changes.
+//      if(http.readyState == 4 && http.status == 200) {
+//  //        alert(http.responseText);
+//      }
+//  }
+//  http.send("data=" + json_str);
+  
   
   function connect_via_x(Node1, Node2, boxWidth){ // left to right
     // var start =
@@ -42,6 +47,8 @@ function post_data(json_str){
     div.style.width = offset + "px";
     div.style.height = "0px";
     div.style.visibility = "visible";
+    hide_Nodes(Node1.id, Node2.id, "Horizontal");
+
     document.getElementsByClassName("connections")[0].appendChild(div);
   }
   
@@ -69,6 +76,7 @@ function post_data(json_str){
     div.style.width = "0px";
     div.style.height = offset + "px";
     div.style.visibility = "visible";
+    hide_Nodes(Node1.id, Node2.id, "Vertical");
     document.getElementsByClassName("connections")[0].appendChild(div);
   }
   
@@ -77,7 +85,7 @@ function post_data(json_str){
   //                                 "'2' : {'0':'', '1':'', '2':'', '3':''},"+
   //                                 "'3' : {'0':'', '1':'', '2':'', '3':''}}");
   
-  function add_neighbour(n1, n2, direction_n1_n2 ,Distance){
+  function add_neighbour(n1, n2, direction_n1_n2, Distance, direction, priority){
     Node1 = n1.getAttribute("id");
     Node2 = n2.getAttribute("id");
     directions = ["up", "right", "down", "left"];
@@ -90,51 +98,142 @@ function post_data(json_str){
       second = directions[second - 2];
     }
     console.log(second);
-  
+
+    var n_dir = "bi";
+    if(direction == "to"){
+        n_dir = "from";
+    }else if(direction == "from"){
+        n_dir = "to";
+    }/*else if(direction == "bi"){
+        n_dir == "bi";
+    }*/
+
+
+
+
     if(n1.hasAttribute("neighbours")){
-      n1.setAttribute("neighbours", n1.getAttribute("neighbours").slice(0, -1) + ",\"" + direction_n1_n2 + "\":[" + Node2 + "," + Distance + "]}");
+      n1.setAttribute("neighbours", n1.getAttribute("neighbours").slice(0, -1) + ",\"" + direction_n1_n2 + "\":[" + Node2 + "," + Distance + ",\"" + direction + "\"," + priority + "]}");
     }else{
-      n1.setAttribute("neighbours", "{\"" + direction_n1_n2 + "\":[" + Node2 + "," + Distance + "]}");
+      n1.setAttribute("neighbours", "{\"" + direction_n1_n2 + "\":[" + Node2 + "," + Distance + ",\"" + direction +"\"," + priority + "]}");
     }
   
     if(n2.hasAttribute("neighbours")){
-      n2.setAttribute("neighbours", n2.getAttribute("neighbours").slice(0, -1) + ",\"" + second + "\":[" + Node1 + "," + Distance + "]}");
+      n2.setAttribute("neighbours", n2.getAttribute("neighbours").slice(0, -1) + ",\"" + second + "\":[" + Node1 + "," + Distance + ",\"" + n_dir + "\"," + priority + "]}");
     }else{
-      n2.setAttribute("neighbours", "{\"" + second + "\":[" + Node1 + "," + Distance + "]}");
+      n2.setAttribute("neighbours", "{\"" + second + "\":[" + Node1 + "," + Distance + ",\"" + n_dir + "\"," + priority + "]}");
     }
   
     console.log(n1.neighbours);
   
   }
   
-  function getDistance() {
+  function getAttributes() {
+    var ret = "";
+    var dist = "";
+    var w = "";
+    var typo = "";
+
     var distance = prompt("Please enter the distance between these two nodes", "");
     if (distance != null) {
-      return distance;
+      dist = distance;
     }
+
+    var weight = prompt("Please Enter The Priority of this lane(0-100)", "");
+    if (weight != null) {
+      console.log(weight)
+      w = weight;
+    }
+
+    var tp = prompt("Please Enter The Connection Type(bi, to, from)", "");
+    if (tp != null) {
+      typo = tp;
+    }
+
+
+
+    return dist + "," + typo + "," + w + ",";
   }
-  
+
+  function get_node_by_coords(x,y){
+    nodes = document.getElementsByClassName("node");
+    for(var i = 0; i < nodes.length; i++){
+        if(nodes[i].getAttribute("coords") == "[" + x + "," + y + "]"){
+            console.log("Found node id! " + nodes[i].getAttribute("id"));
+            return nodes[i];
+        }
+    };
+  }
+
+  function hide_Nodes(start, end, direction){
+    var start = document.getElementsByClassName("node")[start];
+    var end = document.getElementsByClassName("node")[end];
+
+    if(direction == "Vertical"){
+        x = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[0]);
+        start_y = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[1]);
+        end_y = parseInt(end.getAttribute("coords").replace("]","").replace("[","").split(",")[1]);
+        difference = start_y - end_y;
+        console.log(start_y - end_y);
+        for(var i = 1; i < ((difference)**2)**0.5;i++){
+            if(Math.sign(difference) == -1){
+              console.log("hi");
+              var node = get_node_by_coords(x, start_y + i);
+              node.style.visibility = "hidden";
+            }else if(Math.sign(difference) == 1){
+              console.log("hi");
+              var node = get_node_by_coords(x, start_y - i);
+              node.style.visibility = "hidden";
+            }
+        }
+    }else if(direction == "Horizontal"){
+        y = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[1]);
+        start_x = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[0]);
+        end_x = parseInt(end.getAttribute("coords").replace("]","").replace("[","").split(",")[0]);
+        difference = start_x - end_x;
+        console.log(start_x - end_x);
+        for(var i = 1; i < ((difference)**2)**0.5;i++){
+            if(Math.sign(difference) == -1){
+              console.log("hi");
+              var node = get_node_by_coords(start_x + i, y);
+              node.style.visibility = "hidden";
+            }else if(Math.sign(difference) == 1){
+              console.log("hi");
+              var node = get_node_by_coords(start_x - i,y);
+              node.style.visibility = "hidden";
+            }
+        }
+    }
+
+
+  }
+
   function connect(Node1,Node2){
     var n1 = document.getElementById(Node1);
     var n2 = document.getElementById(Node2);
     console.log(get_coords(n1.getAttribute("coords")), get_coords(n2.getAttribute("coords")));
-    var Distance = getDistance();
+
+    var attributes = getAttributes().split(",");
+    var Distance = attributes[0];
+    var direction = attributes[1];
+    var priority = attributes[2];
+
+    console.log(Distance);
+    console.log(direction);
+    console.log(priority);
+
     if(get_coords(n1.getAttribute("coords"))[0] == get_coords(n2.getAttribute("coords"))[0]){
-      // if(){
-      // }
       connect_via_y(n1, n2, 50);
-  
       if(get_coords(n1.getAttribute("coords"))[1] > get_coords(n2.getAttribute("coords"))[1]){
-        add_neighbour(n1,n2,"up", Distance);
+        add_neighbour(n1,n2,"up", Distance, direction, priority);
       }else{
-        add_neighbour(n1,n2,"down", Distance);
+        add_neighbour(n1,n2,"down", Distance, direction, priority);
       }
     }else if(get_coords(n1.getAttribute("coords"))[1] == get_coords(n2.getAttribute("coords"))[1]){
       connect_via_x(n1, n2, 50);
       if(get_coords(n1.getAttribute("coords"))[0] > get_coords(n2.getAttribute("coords"))[0]){
-        add_neighbour(n1,n2,"left", Distance);
+        add_neighbour(n1,n2,"left", Distance, direction, priority);
       }else{
-        add_neighbour(n1,n2,"right", Distance);
+        add_neighbour(n1,n2,"right", Distance, direction, priority);
       }
     }else{
       console.log("sorry cannot link");
@@ -187,31 +286,99 @@ function post_data(json_str){
       const computedStyle = window.getComputedStyle(sourceNode);
       Array.from(computedStyle).forEach(key => targetNode.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key)))
     }
+
+
+
+  function get_coords(str){
+
+    const unbracket = String(str).replace(']','').replace('[','').split(",");
+    var x = unbracket[0];
+    var y = unbracket[1];
+    // console.log(x,y);
+    return unbracket;
+
+  }
+
+  var connecting = false;
+  var pair = [];
+  function connect_button(){
+    connecting = true;
+    console.log(connecting);
+  }
+
+    function add_connect_node(id){
+      if(pair.length < 2){
+      pair.push(id);
+      console.log(pair);
+    }
+
+    if(pair.length >= 2){
+      connect(pair[0],pair[1]);
+      connecting = false;
+      pair = [];
+    }}
+
   
-  function set_type(id,menu){
-    // console.log("here");
+  function node_options(id,menu){
+     console.log("here");
     // var menu = document.getElementsByClassName("item-selector")[0];
     // var selector = document.getElementById("selector");
     // menu.style.visibility = "visible";
-    var selector = menu.childNodes[3];
+    var selector = document.querySelector('input[name="group2"]:checked').value;
     var grid = document.getElementsByClassName("grid")[0];
     // var val = selector.value.valueOf();
-    document.getElementsByClassName("node")[id].type = selector.value;
+//    document.getElementsByClassName("node")[id].type = selector.value;
   
-    if(selector.value == "Robot"){
-      document.getElementById(id).style.background = "Blue";
+    if(selector == "connect"){
+//      document.getElementById(id).style.background = "Blue";
+        console.log("Connecting...")
+        connecting = true;
+        add_connect_node(id);
     }
-    if(selector.value == "RFID"){
-      document.getElementById(id).style.background = "Red";
+    if(selector == "delete"){
+      document.getElementById(id).style.background = "White";
+      document.getElementsByClassName("node")[id].type = "undefined";
     }
-    if(selector.value == "Shelf"){
-      document.getElementById(id).style.background = "Yellow";
-    }
+//    if(selector.value == "exit"){
+//      document.getElementById(id).style.background = "Yellow";
+//    }
   
     menu.style.visibility = "hidden";
     menu.remove();
     grid.style.visibility = "visible";
   
+  }
+
+    function set_type_radio(id){
+    // console.log("here");
+    // var menu = document.getElementsByClassName("item-selector")[0];
+    // var selector = document.getElementById("selector");
+    // menu.style.visibility = "visible";
+//    var selector = menu.childNodes[3];
+//    var selected = document.getElementById("group1").getAttribute("value");
+    // var val = selector.value.valueOf();
+    var selected = document.querySelector('input[name="group1"]:checked').value;
+    document.getElementsByClassName("node")[id].type = selected;
+
+    if(selected == "robot"){
+      document.getElementById(id).style.background = "Blue";
+    }
+    if(selected == "rfid"){
+      document.getElementById(id).style.background = "Red";
+    }
+    if(selected == "shelf"){
+      document.getElementById(id).style.background = "Yellow";
+    }
+    if(selected == "undefined"){
+          document.getElementById(id).style.background = "White";
+    }
+
+    console.log(String(document.getElementById(id).style.background))
+    console.log(String(selected))
+//    menu.style.visibility = "hidden";
+//    menu.remove();
+//    grid.style.visibility = "visible";
+
   }
   
   function add_node(id, coords, left, top){ // where modifier is last row, last colunm, bottom right or else
@@ -222,14 +389,22 @@ function post_data(json_str){
     div.setAttribute("coords",coords);
   
   // /  // div.style.position = "absolute";
-    div.style.left = String(192 + Number(left))+"px";
+    div.style.left = String(500 + Number(left))+"px";
     // div.style.right = "0px";
-    div.style.top = String(143 + Number(top))+"px";
+    div.style.top = String(200 + Number(top))+"px";
     document.getElementsByClassName("grid")[0].appendChild(div);
     document.getElementById(id).onclick = function() {
-  
+       console.log(connecting);
+
+      if(div.getAttribute("type") == "undefined" || document.querySelector('input[name="group1"]:checked').value == "undefined" ){
+            set_type_radio(id);
+      }else if(connecting == true){
+            console.log("Connecting");
+            add_connect_node(div.id);
+      }else{
+      console.log(div.getAttribute("type"));
       if(!connecting){
-  
+
         var menu = document.getElementsByClassName("item-selector")[0].cloneNode(true);
         menu.id = "temp";
         document.getElementsByClassName("temp-select")[0].appendChild(menu);
@@ -238,55 +413,32 @@ function post_data(json_str){
         grid.style.visibility = "hidden";
         console.log(menu.childNodes);
         menu.childNodes[5].addEventListener("click", function(){
-  
-          set_type(id,menu);
-  
+                node_options(id,menu);
         });
   
   
       }else{
-        if(pair.length < 2){
-          pair.push(div.id);
-          console.log(pair);
-  
-        }
-  
-        if(pair.length >= 2){
-          connect(pair[0],pair[1]);
-          connecting = false;
-          pair = [];
-        }
+
   
       }
   
   };
-  }
+  }}
+
+
   
-  function get_coords(str){
-  
-    const unbracket = String(str).replace(']','').replace('[','').split(",");
-    var x = unbracket[0];
-    var y = unbracket[1];
-    // console.log(x,y);
-    return unbracket;
-  
-  }
-  
-  var connecting = false;
-  var pair = [];
-  function connect_button(){
-    connecting = true;
-    console.log(connecting);
-  }
-  
-  
-  var rows = 9;
-  var colunms = 9;
-  var spacing = 50;
+  var rows;
+  var columns;
+  var spacing;
   
   function createGrid(){
     // clearDoc();
-  
+    document.getElementsByClassName("grid")[0].innerHTML = "";
+
+     rows = document.getElementById("dims").value.split(",")[0];
+     colunms = document.getElementById("dims").value.split(",")[1];;
+     spacing = 50;
+
     var nodes = 0;
   
     for(var i = 0; i < colunms; i++){
@@ -298,7 +450,7 @@ function post_data(json_str){
         // var y = column;
         var left = 50 * x + spacing;
         var top = 50 * i + spacing;
-        addBox(id, left, top);
+//        addBox(id, left, top);
   
   
         if(x == rows - 1|| i == colunms - 1){

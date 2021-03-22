@@ -1,46 +1,84 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} Map Generator {% endblock %}
 {% block body %}
     <h1>Warehouse Generator</h1>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<title>Page Title</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="/static/css/style.css">
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 <style>
 </style>
-<script src="/static/js/menu.js"></script>
+<script src="{% static '/js/menu.js' %}"></script>
 <body>
 
 <!-- <div id="main"></div> -->
-<input type = "button" onclick = "createGrid()" value = "Display">
-<input type = "button" onclick = "connect_button()" value = "Connect">
-<input type = "button" onclick = "toggle_grid()" value = "Toggle Grid">
-<input type = "button" onclick = "export_json()" value = "Export">
+<!--<input type = "button" onclick = "get_node_by_coords(3,6)" value = "Run Function">-->
 
+<input onclick = "hide_Nodes(2,8, 'Horizontal')" type = "button" value = "Run Function">
+<input onclick = "connect_button()" type = "button" value = "Connect">
+<input onclick = "toggle_grid()" type = "button" value = "Toggle Grid">
+<input onclick = "export_json()" type = "button" value = "Export">
+
+<a>Please Enter your grid dimensions in the format x,y. where x/y are metres.</a>
+<input type = "Text" id="dims">
+<input onclick = "createGrid()" type = "button" value = "Create Grid">
 
 
 <div class="grid"></div>
 
+<div class = "legend">
+    BLUE = Robot
+    RED = RFID
+    YELLOW = Shelf
+</div>
+
+
 <div class="item-selector">
-  <label for="">Please Select An Item You Would Like To Add.</label>
-  <select name="selector" id="selector">
-      <option value="Robot">Robot</option>
-      <option value="RFID">RFID</option>
-      <option value="Shelf">Shelf</option>
-      <!-- <option value="audi">Audi</option> -->
-  </select>
-  <input type = "button" id = "select_button" value = "Confirm">
+  <label for="">What would you like to do?</label>
+  <form>
+<!-- <a>Select the type of node you would like and click on a blank node to create.</a>-->
+  <fieldset id="group2">
+    <a>Connect</a>
+        <input name="group2" type="radio" value="connect">
+    <a>Delete</a>
+        <input name="group2" type="radio" value="delete">
+    <a>Exit</a>
+        <input name="group2" type="radio" value="exit">
+<!--    <a></a>-->
+<!--       <input name="group1" type="radio" value="undefined">-->
+  </fieldset>
+
+</form>
+  <input id = "select_button" type = "button" value = "Confirm">
 </div>
 
 <div class = "temp-select"></div>
 
 <div class = "connections"></div>
 
+<!--<div>-->
+<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
+<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
+<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
+
+<!--</div>-->
+
+<form>
+ <a>Select the type of node you would like and click on a blank node to create.</a>
+  <fieldset id="group1">
+    <a>Robot</a>
+        <input name="group1" type="radio" value="robot">
+    <a>RFID</a>
+        <input name="group1" type="radio" value="rfid">
+    <a>Shelf</a>
+        <input name="group1" type="radio" value="shelf">
+    <a>Clear</a>
+       <input name="group1" type="radio" value="undefined">
+  </fieldset>
+
+</form>
+
+<script>createGrid()</script>
 
 
 <!--
@@ -53,7 +91,6 @@
 
 
 </body>
-</html>
 
 
 
