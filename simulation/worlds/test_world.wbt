@@ -27,8 +27,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.9997279215858491 0.020242387920394494 0.011590018676364984 5.242950617517039
-  position -1.791338904413941 8.836423223193279 5.67370553601378
+  orientation 0.05141324802365349 -0.8487764166927033 -0.526246398936803 3.307061676787179
+  position -0.3586477643685322 8.844307297684146 -2.1611093047613674
   follow "1"
   followType "Mounted Shot"
 }
@@ -51,7 +51,7 @@ DEF TRANSPORT MainRobot {
   robot_id "2"
 }
 SuctionBox {
-  translation -2.2186 1.21407 0.98
+  translation -0.758605 1.22447 -0.98
 }
 SuctionBox {
   translation -0.780001 1.22035 1
@@ -265,7 +265,7 @@ Shelf {
   name "IJJJ7VZ"
 }
 SuctionBox {
-  translation -2.24861 1.21385 1
+  translation -2.22861 1.21399 0.97
 }
 NFCTag {
   translation -2 0.001 -1

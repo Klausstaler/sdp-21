@@ -23,7 +23,7 @@ class Robot:
     def do_pickup(self, height: float) -> List[Task]:
         return ([
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 3, "speed": 5, "right": True}),
-            Task(TaskType.RAISE_PLATFORM, {"height": self.calculate_raise(height)}),
+            Task(TaskType.RAISE_PLATFORM, {"height": self.calculate_raise(height)+0.1}),
             Task(TaskType.PICKUP_PARCEL, {}),
             Task(TaskType.RAISE_PLATFORM, {"height": 0.05}),
             Task(TaskType.MOVEMENT, {"func_name": "strafe", "total_time": 4, "speed": 5, "right": False}),
