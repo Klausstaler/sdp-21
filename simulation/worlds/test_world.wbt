@@ -27,8 +27,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.9505001845121204 -0.27632458457368403 -0.142106028030503 5.291287111945543
-  position -1.3680722253651383 3.673837111555696 2.6769850508870654
+  orientation 0.9997279215858491 0.020242387920394494 0.011590018676364984 5.242950617517039
+  position -1.7437054407862491 5.336088511622822 3.6196060282677
 }
 TexturedBackground {
   skybox FALSE
@@ -50,11 +50,9 @@ DEF TRANSPORT MainRobot {
 }
 SuctionBox {
   translation -2.2186 1.21407 0.98
-  mass 2
 }
 SuctionBox {
   translation -0.780001 1.22035 1
-  mass 2
 }
 RectangleArena {
   floorSize 32 32
@@ -266,10 +264,6 @@ Shelf {
 }
 SuctionBox {
   translation -2.24861 1.21385 1
-}
-DEF TRANSPORT MainRobot {
-  translation -1.50143 0.180506 -0.973207
-  rotation 0.5737851119632735 0.5791971130193229 0.5790521129910289 -2.099095307179586
 }
 NFCTag {
   translation -2 0.001 -1
