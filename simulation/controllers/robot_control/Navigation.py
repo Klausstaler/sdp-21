@@ -77,7 +77,7 @@ class Navigation(BasicNavigation):
             self.clock = clock
             if self.line_detected():
                 self.n_lines +=1
-                self.n_line_token = False
+                self.n_line_token = True
         print(self.n_lines, self.line_detected(strong=True))
 
         if not (self.n_lines == 1 and self.line_detected()):
