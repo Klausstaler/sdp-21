@@ -11,7 +11,7 @@ class CentralServer:
         self.scheduler = scheduler
         self.network_interface = network_interface
 
-    async def move_parcel(self, parcel: Parcel, final_location):
+    def move_parcel(self, parcel: Parcel, final_location):
         robot = self.scheduler.get_free_robot()
 
         tasks = []
@@ -42,11 +42,11 @@ class CentralServer:
         tasks.extend(self.scheduler.graph.get_commands(attached_node, 0)) # move back to some position
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
-        await self.do_tasks(robot)
+        self.do_tasks(robot)
 
-    async def do_tasks(self, robot: Robot):
+    def do_tasks(self, robot: Robot):
         while self.scheduler.has_tasks(robot):
-            await self.network_interface.send_request(robot, await self.scheduler.get_next_task(robot))
+            self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
 
 ################# For line following demo world.
 # Task(TaskType.REACH_NODE, {"node": "3"}),
