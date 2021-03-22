@@ -87,18 +87,20 @@ class Navigation(BasicNavigation):
             self.clock = clock
             if self.line_detected():
                 self.n_lines +=1
-                self.n_line_token = False
-        print(self.n_lines, self.line_detected(strong=True))
-
-        if not (self.n_lines <= 1 and self.line_detected()):
-            self.turn(speed, clock=True)
-            if self.line_detected(strong=True) and not self.n_line_token:
                 self.n_line_token = True
-            elif self.n_line_token and not self.line_detected(strong=True):
-                self.n_lines -= 1
-                self.n_line_token = False
-            return False
-        else:
+        print(self.n_lines, "line detected",self.line_detected(), self.n_line_token)
+
+        if self.n_lines==1 and self.line_detected():
             print("no line left")
             self.stop()
-            return True
+            return True    
+        else:
+        # if self.n_lines < 1: #):
+            self.turn(speed, clock=True)
+            if self.line_detected() and not self.n_line_token:
+                self.n_line_token = True
+            elif self.n_line_token and not self.line_detected():
+                self.n_lines -= 1
+                self.n_line_token = False
+                return True if self.n_lines <1 else False
+        
