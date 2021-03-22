@@ -6,7 +6,7 @@ from .models import node,shelf,package,robot,task,hidden_package
 
 
 class nodeAdmin(admin.ModelAdmin):
-
+    list_display = ['id','right_node','down_node','left_node','up_node']
     class Meta:
         model = node
 admin.site.register(node,nodeAdmin)

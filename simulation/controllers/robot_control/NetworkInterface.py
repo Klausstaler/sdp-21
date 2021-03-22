@@ -8,7 +8,7 @@ from Task import resolve_task, Task, TaskType
 
 class NetworkInterface:
     def __init__(self, robot_id: str):
-        self.host, self.port = '127.0.0.1', 12345
+        self.host, self.port = '127.0.0.1', 2000
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.curr_task: Task = Task(TaskType.NO_TASK, {})
         self.task_queue = queue.Queue()

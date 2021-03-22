@@ -2,18 +2,30 @@ from django.db import models
 
 # Create your models here.
 
+direction_choices = (
+    ('bi','bi'),
+    ('from','from'),
+    ('to','to')
+)
+
 class node(models.Model):
     id = models.AutoField(primary_key=True)
-    first_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="first",blank=True, null=True)
-    first_node_distance = models.IntegerField(verbose_name='distance_to_first',blank=True, null=True)
-    second_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="second",blank=True, null=True)
-    second_node_distance = models.IntegerField(verbose_name='distance_to_second',blank=True, null=True)
-    third_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="third",blank=True, null=True)
-    third_node_distance = models.IntegerField(verbose_name='distance_to_third',blank=True, null=True)
-    fourth_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="fourth",blank=True, null=True)
-    fourth_node_distance = models.IntegerField(verbose_name='distance_to_fourth',blank=True, null=True)
-    fifth_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="fifth",blank=True, null=True)
-    fifth_node_distance = models.IntegerField(verbose_name='distance_to_fifth',blank=True, null=True)
+    right_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="right",blank=True, null=True)
+    right_node_distance = models.IntegerField(verbose_name='Right node distance',blank=True, null=True)
+    right_node_direction = models.CharField(max_length=6,choices=direction_choices,blank=True, null=True)
+    right_node_priority = models.IntegerField(blank=True, null=True)
+    down_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="down",blank=True, null=True)
+    down_node_distance = models.IntegerField(verbose_name='Down node distance',blank=True, null=True)
+    down_node_direction = models.CharField(max_length=6,choices=direction_choices,blank=True, null=True)
+    down_node_priority = models.IntegerField(blank=True, null=True)
+    left_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="left",blank=True, null=True)
+    left_node_distance = models.IntegerField(verbose_name='Left node distance',blank=True, null=True)
+    left_node_direction = models.CharField(max_length=6,choices=direction_choices,blank=True, null=True)
+    left_node_priority = models.IntegerField(blank=True, null=True)
+    up_node = models.ForeignKey('self',on_delete=models.CASCADE, related_name="up",blank=True, null=True)
+    up_node_distance = models.IntegerField(verbose_name='Up node distance',blank=True, null=True)
+    up_node_direction = models.CharField(max_length=6,choices=direction_choices,blank=True, null=True)
+    up_node_priority = models.IntegerField(blank=True, null=True)
     def __str__(self):
         return str(self.id)
 class shelf(models.Model):
