@@ -50,12 +50,12 @@ class Navigation(BasicNavigation):
                 self.move_diagonal(speed*1.5, right=True)
                 self.turn(speed, clock=True)
             else:
-                if self.sensors_values(left=[0.5], mid=[0, 0.5], right=[0], back=[1]):
+                if self.sensors_values(left=[0.5,1], mid=[0, 0.5], right=[0], back=[1]):
                     case = "turn left"
                     # self.turn(speed/4, clock=False)            
                     self.turn_on_wheel_axis(speed, right=True, top=False, clock=None)
 
-                elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5], back=[1]):
+                elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5,1], back=[1]):
                     case = "turn right"
                     # self.turn(speed/4, clock=True)
                     self.turn_on_wheel_axis(speed, right=False, top=False, clock=None)
