@@ -147,7 +147,7 @@ PROTO MainRobot [
           type "infra-red"
         }
 
-        DEF ds_mid DistanceSensor {
+        DEF ds_back DistanceSensor {
           translation %{=xback}% %{=y}% %{=z}%
           rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
           children [
@@ -160,7 +160,7 @@ PROTO MainRobot [
               }
             }
           ]
-          name "ds_mid"
+          name "ds_back"
           lookupTable [
             0 0 0
             0.1 150 0

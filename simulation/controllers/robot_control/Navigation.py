@@ -41,11 +41,11 @@ class Navigation(BasicNavigation):
             case = "straight full speed!"
             self.move_forward(speed * 2)
         else:
-            if self.sensors_values(left=[0.5,1], mid=[1], right=[0], back=[1]):
+            if self.sensors_values(left=[0.5,1], mid=[0.5], right=[0], back=[0.5]):
                 case = "diagonal left"
                 self.move_diagonal(speed*1.5, right=False)
                 self.turn(speed, clock=False)
-            elif self.sensors_values(left=[0], mid=[1], right=[0.5, 1], back=[1]):
+            elif self.sensors_values(left=[0], mid=[0.5], right=[0.5, 1], back=[0.5]):
                 case = "diagonal right"
                 self.move_diagonal(speed*1.5, right=True)
                 self.turn(speed, clock=True)

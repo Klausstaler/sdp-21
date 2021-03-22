@@ -16,7 +16,7 @@ async def main():
     parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
     robot_size = Size(height=.25, length=.75, width=.7)
     # sched.add_free_robot(Robot("2", robot_size, 56))
-    sched.add_free_robot(Robot("1", robot_size, 7))
+    sched.add_free_robot(Robot("1", robot_size, 10))
     interface = NetworkInterface()
     server = CentralServer(sched, interface)
     task1 = asyncio.create_task(server.move_parcel(parcel, None))

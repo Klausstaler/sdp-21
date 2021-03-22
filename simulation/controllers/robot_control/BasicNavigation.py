@@ -103,7 +103,7 @@ class BasicNavigation:
 
     def line_detected(self, strong=False):
         print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
-        if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5], back=[0,0.5,1]):
+        if self.sensors_values(left=[0,0], mid=[1], right=[0,0], back=[0,0.5,1]):
             return True
         else:
             return False        
