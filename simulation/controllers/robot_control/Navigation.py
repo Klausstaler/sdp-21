@@ -70,7 +70,7 @@ class Navigation(BasicNavigation):
         return nearLine
 
     # n=1 is turn until the first line you see, 
-    def turn_until_line_n(self, n=1, new=False, speed=8, clock=True):
+    def turn_until_line_n(self, n=1, new=False, speed=7, clock=True):
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
