@@ -96,6 +96,7 @@ PROTO MainRobot [
     }
 
     %{ x = fields.Distance_sensor_pos.value.x }%
+    %{ xback = -fields.Distance_sensor_pos.value.x }%
     %{ z = fields.Distance_sensor_pos.value.z }%
     DEF IR Group {
       children [
@@ -125,6 +126,29 @@ PROTO MainRobot [
         %{ y = 0 }%
         DEF ds_mid DistanceSensor {
           translation %{=x}% %{=y}% %{=z}%
+          rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0.498039
+              }
+              geometry Box {
+                size 0.03 0.06 0.06
+              }
+            }
+          ]
+          name "ds_mid"
+          lookupTable [
+            0 0 0
+            0.1 150 0
+          ]
+          numberOfRays IS numberOfRays
+          aperture IS aperture
+          type "infra-red"
+        }
+
+        DEF ds_mid DistanceSensor {
+          translation %{=xback}% %{=y}% %{=z}%
           rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
           children [
             Shape {

@@ -72,7 +72,7 @@ PROTO NFCTag [
 					size IS dimensions
 				}
 				castShadows FALSE
-				isPickable TRUE
+				isPickable FALSE
 			}
 		]
 		name IS informationSent

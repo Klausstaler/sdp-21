@@ -6,7 +6,7 @@ from controller import Robot
 class BasicNavigation:
     def __init__(self, robot: Robot, timestep=128):
         self.max_val = 150
-        self.low_val = 123
+        self.low_val = 120
         self.high_val = 140
 
         # Front distance sensor
@@ -19,7 +19,7 @@ class BasicNavigation:
         #IR sensors
         IR = {}
 
-        for name in ["ds_left", "ds_right", "ds_mid"]:
+        for name in ["ds_left", "ds_right", "ds_mid","ds_back"]:
             IR[name[3:]] = robot.getDevice(name)
             IR[name[3:]].enable(timestep)
         self.IR = SimpleNamespace(**IR)
@@ -42,6 +42,8 @@ class BasicNavigation:
                 value = self.IR.right.getValue()
             elif name == "mid":
                 value = self.IR.mid.getValue()
+            elif name == "back":
+                value = self.IR.back.getValue()
         if value > 0 and value <= self.low_val:
             return 0
         elif value > self.low_val and value <= self.high_val:
@@ -49,10 +51,10 @@ class BasicNavigation:
         elif value > self.high_val:
             return 1
 
-    def sensors_values(self, left, mid, right):
-        values = [left, mid, right]
+    def sensors_values(self, left, mid, right, back):
+        values = [left, mid, right, back]
         ans = True
-        for i, name in enumerate(["left", "mid", "right"]):
+        for i, name in enumerate(["left", "mid", "right", "back"]):
             ans = ans and (self.sensor_value(name) in values[i])
         return ans
 
@@ -101,15 +103,19 @@ class BasicNavigation:
 
     def line_detected(self, strong=False):
         print("----",self.IR.left.getValue(), self.IR.mid.getValue(),self.IR.right.getValue())
-        if strong:
-            if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5]):
-                return True
-            else:
-                return False
+        if self.sensors_values(left=[0,0.5], mid=[1], right=[0,0.5], back=[0,0.5,1]):
+            return True
         else:
-            if self.sensors_values(left=[0, 0.5], mid=[1, 0.5], right=[0, 0.5]):
-                return True
-            elif self.sensor_value("left") == 1 or self.sensor_value("right") == 1:
-                return True
-            else:
-                return False
+            return False        
+        # if strong:
+        #     if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5]):
+        #         return True
+        #     else:
+        #         return False
+        # else:
+        #     if self.sensors_values(left=[0, 0.5], mid=[1, 0.5], right=[0, 0.5]):
+        #         return True
+        #     elif self.sensor_value("left") == 1 or self.sensor_value("right") == 1:
+        #         return True
+        #     else:
+        #         return False
