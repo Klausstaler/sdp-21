@@ -3,7 +3,7 @@ from controller import Robot
 from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
-
+from Lift import Lift
 
 class RobotController(Robot):
     def __init__(self, timestep=128, params=None):
@@ -16,9 +16,9 @@ class RobotController(Robot):
         self.nav = Navigation(self, timestep=timestep)
         # self.nav.turn_until_line_n(n=1, new=True)
 
-        self.lift_motor = self.getDevice("liftmot")
-        self.getDevice("liftpos").enable(timestep)
-        self.lift_motor.setPosition(0.0)
+        # Initialise scissor lift with measurements
+        self.scissor_lift = Lift(self, 0.6, 4)
+        self.scissor_lift.raisePlatform("0.01")
 
         self.follow_line = True
         self.turning = False
@@ -37,7 +37,8 @@ class RobotController(Robot):
         return node
 
     def check_reach_node(self, node_to_reach):
-        if message := self.nfc_reader.read():
+        message = self.nfc_reader.read()
+        if message:
             pass
             #print(message)
         if message == node_to_reach:
@@ -52,6 +53,7 @@ class RobotController(Robot):
         return True
 
     def raise_platform(self, height: str) -> bool:
-        height = float(height)
-        self.lift_motor.setPosition(height)
-        return abs(self.lift_motor.getPositionSensor().getValue() - height) < 0.005
+        self.scissor_lift.raisePlatform(height)
+        # return abs(self.lift_motor.getPositionSensor().getValue() - height) < 0.005
+        # STILL NEED TO IMPLEMENT POSITION CHECKING
+        return self.scissor_lift.checkHeight(height)

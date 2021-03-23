@@ -7,6 +7,12 @@ class packageCreateForm(forms.ModelForm):
         model = package
         fields =[
             'id',
+            'shelf',
+            'shelf_compartment',
+            'weight',
+            'length',
+            'width',
+            'height',
             'details',
         ]
 class packagePickForm(forms.Form):

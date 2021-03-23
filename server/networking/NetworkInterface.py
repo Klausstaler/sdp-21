@@ -1,15 +1,19 @@
-import asyncio
-from asyncio import StreamReader, StreamWriter
-from typing import Dict, NamedTuple
+import socket, threading
+import time
+from typing import Dict, NamedTuple, Tuple
 
-from networking.utils import encode, decode
-from server.Robot import Robot
+from networking.utils import encode, decode, recvall
+from server.Robot import Robot, Size
 from server.Task import Task
 
+from design.models import robot as rbt
+from design.models import node
+
+from random import randint
 
 class Connection(NamedTuple):
-    reader: StreamReader
-    writer: StreamWriter
+    socket: socket.socket
+    address: Tuple[str, int]
 
 
 def format_task(robot_id, task: Task) -> str:
@@ -22,12 +26,12 @@ def format_task(robot_id, task: Task) -> str:
     return ":".join(map(str, res))
 
 
-async def send_task(connection: Connection, robot_id, task: Task):
+# thread function
+def send_task(sock: socket.socket, robot_id, task: Task):
     cmd = encode(format_task(robot_id, task))
     # data received from client
-    connection.writer.write(cmd)
-    await connection.writer.drain()
-    response = (await connection.reader.readline()).decode()
+    sock.send(cmd)
+    response = recvall(sock)
     print(decode(response))
 
 
@@ -37,28 +41,47 @@ class NetworkInterface:
     """
 
     def __init__(self):
-        self.port, self.host = 12345, ""
+        self.port, self.host = 2000, "127.0.0.1"
         self.open_connections: Dict[str, Connection] = dict()
-        print("Setting up asyncio")
-        loop = asyncio.get_event_loop()
-        loop.create_task(asyncio.start_server(self.receive_new_connection, self.host, self.port))
-        print("Asyncio set up!")
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        print("BINDING SOCKET")
+        self.socket.bind((self.host, self.port))
+        print("socket binded to port", self.port)
+        self.socket.listen(5)
+        print("socket is listening")
+        threading.Thread(target=self.receive_new_connections, daemon=True).start()
 
-    async def receive_new_connection(self, reader: StreamReader, writer: StreamWriter):
-        connection = Connection(reader, writer)
-        robot_id = decode((await reader.readline()).decode())
-        self.open_connections[robot_id] = connection
-        print(f"Robot ID {robot_id}")
+    def __del__(self):
+        for k, connection in self.open_connections.items():
+            connection.socket.close()
+        self.socket.close()
 
-    async def send_request(self, robot: Robot, task: Task):
-        connection = await self.resolve_connection(robot.id)
-        await send_task(connection, robot.id, task)
-        print("Robot", robot.id, "finished task", task.task_type)
+    def receive_new_connections(self):
+        while True:
+            sock, addr = self.socket.accept()
+            connection = Connection(sock, addr)
+            robot_id, node_id = decode(recvall(sock)).split(";")
+            node_id = int(node_id)
+            height = .25; length = .75; width = .7
+            size = Size(height=height, length=length, width=width)
+            #Add robot to db
+            rbt.objects.create(name=str(robot_id),node_id=node.objects.get(pk=node_id),height=height, length=length, width=width)
+            #rbt.objects.create(name=str(robot_id),node_id=node.objects.all()[0],height=height, length=length, width=width)
+            print(robot_id, node_id, size)
+            self.open_connections[robot_id] = connection
+            print('Connected to :', connection.address[0], ':', connection.address[1])
+            print(f"Robot ID {robot_id}")
 
-    async def resolve_connection(self, robot_id) -> Connection:
+    def send_request(self, robot: Robot, task: Task):
+        connection = self.resolve_connection(robot.id)
+        send_task(connection.socket, robot.id, task)
+        #print("Robot", robot.id, "finished task", task.task_type)
+
+    def resolve_connection(self, robot_id) -> Connection:
         if robot_id in self.open_connections:
             return self.open_connections[robot_id]
         else:
-            await asyncio.sleep(2)
-            #print(f"No connection with ID {robot_id} found! Sleeping 2 secs..")
-            return await self.resolve_connection(robot_id)
+            time.sleep(2)
+            print(f"No connection with ID {robot_id} found! Sleeping 2 secs..")
+            return self.resolve_connection(robot_id)
