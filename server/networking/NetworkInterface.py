@@ -6,6 +6,7 @@ from networking.utils import encode, decode, recvall
 from server.Robot import Robot, Size
 from server.Task import Task
 
+from design.models import robot as rbt
 
 class Connection(NamedTuple):
     socket: socket.socket
@@ -59,7 +60,10 @@ class NetworkInterface:
             connection = Connection(sock, addr)
             robot_id, node_id = decode(recvall(sock)).split(";")
             node_id = int(node_id)
-            size = Size(height=.25, length=.75, width=.7)
+            height = .25; length = .75; width = .7
+            size = Size(height=height, length=length, width=width)
+            #Add robot to db
+            rbt.objects.create(name=str(robot_id),node_id=node_id,height=height, length=length, width=width)
             print(robot_id, node_id, size)
             self.open_connections[robot_id] = connection
             print('Connected to :', connection.address[0], ':', connection.address[1])

@@ -8,11 +8,11 @@ import os
 from pathlib import Path
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-server_directory = os.path.abspath(os.path.join(BASE_DIR, 'server'))
+BASE_DIR = Path(__file__).resolve().parent.parent
+server_directory = os.path.abspath(os.path.join(BASE_DIR.parent, 'server'))
 warehouse_directory = Path(__file__).resolve().parent
+design_directory = os.path.abspath(os.path.join(BASE_DIR, 'design'))
+
 sys.path.append(server_directory)
 sys.path.append(warehouse_directory)
-
-import asyncio
-import time
+sys.path.append(design_directory)
