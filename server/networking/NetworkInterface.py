@@ -9,6 +9,8 @@ from server.Task import Task
 from design.models import robot as rbt
 from design.models import node
 
+from random import randint
+
 class Connection(NamedTuple):
     socket: socket.socket
     address: Tuple[str, int]
@@ -56,6 +58,7 @@ class NetworkInterface:
         self.socket.close()
 
     def receive_new_connections(self):
+        a = []
         while True:
             sock, addr = self.socket.accept()
             connection = Connection(sock, addr)
@@ -63,7 +66,11 @@ class NetworkInterface:
             node_id = int(node_id)
             height = .25; length = .75; width = .7
             size = Size(height=height, length=length, width=width)
+            while robot_id in a:
+                robot_id = randint(0,100)
+            a.append(robot_id)
             #Add robot to db
+            #rbt.objects.create(name=str(robot_id),node_id=node.objects.get(pk=node_id),height=height, length=length, width=width)
             rbt.objects.create(name=str(robot_id),node_id=node.objects.all()[0],height=height, length=length, width=width)
             print(robot_id, node_id, size)
             self.open_connections[robot_id] = connection

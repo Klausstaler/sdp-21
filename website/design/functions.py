@@ -10,7 +10,7 @@ from server.Parcel import Parcel
 from server.Shelf import Shelf, ShelfInfo
 from server.routing.Graph import Graph
 from server.sample_db_output import db_output
-from warehouse.server_setup import requestParcel
+from warehouse.server_setup import requestParcel,addRobots
 import threading
 #from warehouse_generator import create_world
 
@@ -56,6 +56,7 @@ def create_task(r,p,h):
 def package_request(packs):
     testing = False
     if testing:
+        addRobots()
         my_shelf = Shelf(1, 2, 26)
         shelf_info = ShelfInfo(my_shelf, 1)
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
@@ -64,6 +65,7 @@ def package_request(packs):
         t = threading.Thread(target=requestParcel, args=(parcel,), daemon=True)
         t.start()
     else:
+        addRobots()
         for id in packs:
             pack = packs.get(id)
             #print('Parcel:{}'.format(pack.old_id))
