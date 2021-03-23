@@ -70,8 +70,8 @@ class NetworkInterface:
                 robot_id = randint(0,100)
             a.append(robot_id)
             #Add robot to db
-            #rbt.objects.create(name=str(robot_id),node_id=node.objects.get(pk=node_id),height=height, length=length, width=width)
-            rbt.objects.create(name=str(robot_id),node_id=node.objects.all()[0],height=height, length=length, width=width)
+            rbt.objects.create(name=str(robot_id),node_id=node.objects.get(pk=node_id),height=height, length=length, width=width)
+            #rbt.objects.create(name=str(robot_id),node_id=node.objects.all()[0],height=height, length=length, width=width)
             print(robot_id, node_id, size)
             self.open_connections[robot_id] = connection
             print('Connected to :', connection.address[0], ':', connection.address[1])
