@@ -12,6 +12,7 @@ from server.Shelf import Shelf, ShelfInfo
 from server.routing.Graph import Graph
 from server.sample_db_output import db_output
 from warehouse.server_setup import requestParcel, addRobot
+import threading
 #from warehouse_generator import create_world
 
 def sim_json(json):
@@ -78,7 +79,8 @@ def package_request(packs):
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
         # Create parcel instance from the package
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
-        requestParcel(parcel)
+        t = threading.Thread(target=requestParcel, args=(parcel,), daemon=True)
+        t.start()
     else:
         m.addRobot()
         for id in packs:
