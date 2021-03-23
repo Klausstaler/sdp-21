@@ -70,21 +70,31 @@ def create_task(r,p,h):
 
 
 def package_request(packs):
-    m.addRobot()
-    for id in packs:
-        pack = packs.get(id)
-        #print('Parcel:{}'.format(pack.old_id))
-        #print('Shelf:{}'.format(pack.shelf))
-        #print('Node:{}'.format(pack.shelf.node))
-        nodes = get_node_dict()
-        rob = robot.objects.all()[0]
-        create_task(rob,pack,False)
-        #Get the shelf the node is in
-        shelf = pack.shelf
-        #Create shelf instance
-        my_shelf = Shelf(shelf.compartment_size, shelf.number_of_compartments, shelf.node.id)
-        #Shelf_info from the shelf
-        shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
-        #Create parcel instance from the package
+    testing = True
+    if testing:
+        m.addRobot()
+        my_shelf = Shelf(1, 2, 26)
+        shelf_info = ShelfInfo(my_shelf, 1)
+        parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
+        # Create parcel instance from the package
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
         asyncio.run(m.requestParcel(parcel))
+    else:
+        m.addRobot()
+        for id in packs:
+            pack = packs.get(id)
+            #print('Parcel:{}'.format(pack.old_id))
+            #print('Shelf:{}'.format(pack.shelf))
+            #print('Node:{}'.format(pack.shelf.node))
+            nodes = get_node_dict()
+            rob = robot.objects.all()[0]
+            create_task(rob,pack,False)
+            #Get the shelf the node is in
+            shelf = pack.shelf
+            #Create shelf instance
+            my_shelf = Shelf(shelf.compartment_size, shelf.number_of_compartments, shelf.node.id)
+            #Shelf_info from the shelf
+            shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
+            # Create parcel instance from the package
+            parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
+            asyncio.run(m.requestParcel(parcel))
