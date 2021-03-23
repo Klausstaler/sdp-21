@@ -21,3 +21,10 @@ def decode(string: str) -> str:  # decodes and returns the string of a recieved 
     len, msg = string.split(":")
     # print
     return msg.strip()
+
+def recvall(connection) -> str: # handles the reception of packets and decodes the data
+    data = b""
+    while "\n" not in data.decode():
+        data += connection.recv(8)
+    # print(data.decode())
+    return data.decode()

@@ -11,7 +11,7 @@ from server.Parcel import Parcel
 from server.Shelf import Shelf, ShelfInfo
 from server.routing.Graph import Graph
 from server.sample_db_output import db_output
-from warehouse.server_setup import *
+from warehouse.server_setup import requestParcel, addRobot
 #from warehouse_generator import create_world
 
 def sim_json(json):
@@ -72,13 +72,13 @@ def create_task(r,p,h):
 def package_request(packs):
     testing = True
     if testing:
-        m.addRobot()
+        addRobot()
         my_shelf = Shelf(1, 2, 26)
         shelf_info = ShelfInfo(my_shelf, 1)
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
         # Create parcel instance from the package
         parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
-        asyncio.run(m.requestParcel(parcel))
+        requestParcel(parcel)
     else:
         m.addRobot()
         for id in packs:
@@ -97,4 +97,4 @@ def package_request(packs):
             shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
             # Create parcel instance from the package
             parcel = Parcel(12., Size(.35, .35, .35), 16, shelf_info)
-            asyncio.run(m.requestParcel(parcel))
+            requestParcel(parcel)
