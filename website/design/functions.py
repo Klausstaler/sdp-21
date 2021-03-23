@@ -25,7 +25,7 @@ def sim_json(json):
     import json_parser as js
     import create_world
 
-    file = open("../../Warehouse\ Generation/json.txt", "w")
+    file = open("../../Warehouse\ Generation/json.txt", "w+")
     file.write(json)
     file.close()
 
