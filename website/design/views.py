@@ -66,8 +66,8 @@ def packages_view(request):
     }
     return render(request,'packages/packages.html',context)
 
-def package_view(request,code):
-    package_object = get_object_or_404(package, code=code)
+def package_view(request,id):
+    package_object = get_object_or_404(package, id=id)
     form = packageCreateForm(request.POST or None,instance=package_object)
     if form.is_valid():
         form.save()
