@@ -3,7 +3,7 @@ import time
 from typing import Dict, NamedTuple, Tuple
 
 from networking.utils import encode, decode, recvall
-from server.Robot import Robot
+from server.Robot import Robot, Size
 from server.Task import Task
 
 
@@ -57,7 +57,10 @@ class NetworkInterface:
         while True:
             sock, addr = self.socket.accept()
             connection = Connection(sock, addr)
-            robot_id = decode(recvall(sock))
+            robot_id, node_id = decode(recvall(sock)).split(";")
+            node_id = int(node_id)
+            size = Size(height=.25, length=.75, width=.7)
+            print(robot_id, node_id, size)
             self.open_connections[robot_id] = connection
             print('Connected to :', connection.address[0], ':', connection.address[1])
             print(f"Robot ID {robot_id}")

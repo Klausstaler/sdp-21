@@ -9,9 +9,10 @@ TIMESTEP = 128
 
 # Initialize the Webots Supervisor.
 robot_controller = RobotController(timestep=TIMESTEP)
-
+robot_controller.step(TIMESTEP)
+curr_node_id = robot_controller.nfc_reader.read()
 # Init network interface
-net_interface = NetworkInterface(robot_controller.getName())
+net_interface = NetworkInterface(robot_controller.getName(), curr_node_id)
 
 
 class TaskCompletion():
