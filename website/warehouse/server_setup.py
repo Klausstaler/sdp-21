@@ -61,7 +61,8 @@ server = CentralServer(sched, interface)
 def addRobots():
     robots = robot.objects.all()
     for r in robots:
-        robot_size = Size(height=r.height, length=r.length, width=r.width)
-        sched.add_free_robot(Robot(r.name, robot_size, r.node_id))
-def requestParcel(parcel):
-    server.move_parcel(parcel, None)
+        if not r.status:
+            robot_size = Size(height=r.height, length=r.length, width=r.width)
+            sched.add_free_robot(Robot(r.name, robot_size, r.node_id))
+def requestParcel(id, parcel):
+    server.move_parcel(id, parcel, None)

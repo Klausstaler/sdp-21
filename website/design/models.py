@@ -71,4 +71,4 @@ class robot(models.Model):
 class task(models.Model):
     robot = models.ForeignKey(robot,on_delete=models.CASCADE, related_name="robot")
     package = models.ForeignKey(hidden_package,on_delete=models.CASCADE, related_name="package")
-    holding_package = models.BooleanField(blank=True)
+    #holding_package = models.IntegerField(blank=True)
