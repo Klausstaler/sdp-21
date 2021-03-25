@@ -22,42 +22,42 @@ def importJSON(text):
     dic = dic.get('nodes')
 
     nodes = {}
-    print(text)
-    if dic != None:
-        for key in dic:
-            nodes[key] = node.objects.create(id=key)
-        for key in dic:
-            item = dic.get(key)
-            obj = nodes.get(key)
-            nb = item.get('neighbours')
-            directions = nb.keys()
-            if 'up' in directions:
-                obj.up_node = nodes.get(str(nb.get('up')[0]))
-                obj.up_node_distance = nb.get('up')[1]
-                obj.up_node_direction = nb.get('up')[2]
-                obj.up_node_priority = nb.get('up')[3]
-            if 'right' in directions:
-                obj.right_node = nodes.get(str(nb.get('right')[0]))
-                obj.right_node_distance = nb.get('right')[1]
-                obj.right_node_direction = nb.get('right')[2]
-                obj.right_node_priority = nb.get('right')[3]
-            if 'down' in directions:
-                obj.down_node = nodes.get(str(nb.get('down')[0]))
-                obj.down_node_distance = nb.get('down')[1]
-                obj.down_node_direction = nb.get('down')[2]
-                obj.down_node_priority = nb.get('down')[3]
-            if 'left' in directions:
-                obj.left_node = nodes.get(str(nb.get('left')[0]))
-                obj.left_node_distance = nb.get('left')[1]
-                obj.left_node_direction = nb.get('left')[2]
-                obj.left_node_priority = nb.get('left')[3]
+    # print(text)
+    # if dic != None:
+    for key in dic:
+        nodes[key] = node.objects.create(id=key)
+    for key in dic:
+        item = dic.get(key)
+        obj = nodes.get(key)
+        nb = item.get('neighbours')
+        directions = nb.keys()
+        if 'up' in directions:
+            obj.up_node = nodes.get(str(nb.get('up')[0]))
+            obj.up_node_distance = nb.get('up')[1]
+            obj.up_node_direction = nb.get('up')[2]
+            obj.up_node_priority = nb.get('up')[3]
+        if 'right' in directions:
+            obj.right_node = nodes.get(str(nb.get('right')[0]))
+            obj.right_node_distance = nb.get('right')[1]
+            obj.right_node_direction = nb.get('right')[2]
+            obj.right_node_priority = nb.get('right')[3]
+        if 'down' in directions:
+            obj.down_node = nodes.get(str(nb.get('down')[0]))
+            obj.down_node_distance = nb.get('down')[1]
+            obj.down_node_direction = nb.get('down')[2]
+            obj.down_node_priority = nb.get('down')[3]
+        if 'left' in directions:
+            obj.left_node = nodes.get(str(nb.get('left')[0]))
+            obj.left_node_distance = nb.get('left')[1]
+            obj.left_node_direction = nb.get('left')[2]
+            obj.left_node_priority = nb.get('left')[3]
 
-            obj.save()
+        obj.save()
 
-        #if item.get('type') == 'Robot':
-        #    robot.objects.create(ip=ip,node=obj)
-            if item.get('type') == 'shelf':
-                shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+    #if item.get('type') == 'Robot':
+    #    robot.objects.create(ip=ip,node=obj)
+        if item.get('type') == 'shelf':
+            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
 
     return True
 
@@ -103,7 +103,7 @@ def map_gen_view(request):
         jsons = JSON.split('||')
         try:
             simjson = jsons[0]
-            dbjson = jsons[1]
+            dbjson = jsons[0]
             print(dbjson)
             # exit(0)
             sim_json(simjson)
