@@ -7,12 +7,33 @@
         
 
 
-        <h1>packages:</h1>
-        {% for package in packages %}
-            <a href= "/packages/{{package.id}}">{{package.id}}</a><br>
-        {%endfor%}
+<h1>Packages</h1><br>
+<a href="/packages/create">Create New Package</a>
+<br><br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Shelf ID</th>
+        <th scope="col">Shelf Compartment</th>
         
-        <br><br>
-        <a href="/packages/create">or create new package</a>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in packages %}
+      <tr>
+        <td>{{p.id}}</th>
+        <td>{{p.shelf}}</td>
+        <td>{{p.shelf_compartment}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {% if not packages %}
+  <h5 style=text-align:center>There are no packages</h5>
+  {% endif %}
+        
+    
 
 {% endblock %}
