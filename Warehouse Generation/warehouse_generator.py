@@ -109,8 +109,8 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     wbt_file_floor = (
         "RectangleArena {\n\
         translation 0 0 0\n\
-        floorSize " + f"{len(grid_ids[0])} {len(grid_ids)}" + "\n\
-        floorTileSize " + f"{len(grid_ids[0])} {len(grid_ids)}" + "\n\
+        floorSize 32 32\n\
+        floorTileSize 32 32\n\
         floorAppearance PBRAppearance {\n\
             baseColorMap ImageTexture {\n" +
             #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
@@ -260,7 +260,6 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
                 tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
-                node_num += 1
 
             #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
             elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
@@ -271,7 +270,6 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
                 tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
-                node_num += 1
 
             #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
             elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
@@ -285,8 +283,6 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                     #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
                     tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                     full_file_string += tag_obj
-                    node_num += 1
-
 
             webots_x += max(shelf_size)
         webots_x = -(j_conversion_x)
@@ -444,3 +440,26 @@ if True:
     #   name:
     #       String defining the 'name' of the shelf
     #
+
+
+if __name__ == "__main__":
+    floor_size = [2, 2]
+    shelf_size = [1, 1, 1]
+    number_of_racks = 2
+    line_distance_from_shelf = 0.2
+    grid_array = [[9, 9],
+                  [9, 9]]
+    """grid_array = [
+        [12,4,4,9,4,4,9,4,4,11],
+        [5,3,1,5,3,1,5,3,1,5],
+        [5,3,1,5,3,1,5,3,1,5],
+        [5,3,1,5,3,1,5,3,1,5],
+        [5,3,1,5,3,1,5,3,1,5],
+        [5,3,1,5,3,1,5,3,1,5],
+        [8,4,4,6,4,4,10,4,4,14],
+        [-1, -1, 1, 5, 3, -1, -1, -1 -1, -1],
+        [-1, -1, 1, 5, 3, -1, -1, -1 -1, -1]
+        ]"""
+
+    create_world("test_me.wbt", floor_size, shelf_size, number_of_racks, line_distance_from_shelf, grid_array, [[0, 1],
+                                                                                                                [2, 3]])
