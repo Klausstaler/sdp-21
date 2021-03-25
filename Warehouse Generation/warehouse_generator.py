@@ -4,14 +4,13 @@
 #PREVIOUS VERSION BY: REECE WALKER
 #CURRENT VERSION BY: REECE WALKER 15/02/2021
 
-
 #PROGRAM TO GENERATE A WEBOTS MAP FILE GIVIN ARGUMENTS PASSED TO IT
 
 from line_grid_generator import LineGridGenerator
 import math
 from PIL import Image
-
-
+import random
+import string
 
 #METHOD TO GENERATE WEBOTS WORLD FILE ACRODING TO INPUT
 #
@@ -47,98 +46,102 @@ from PIL import Image
 #          13) Right angle turn with exits north and east
 #          14) Right angle turn with exits north and west
 
-
 def create_world(world_name, room_size, shelf_size, number_of_racks,
-                line_distance_from_shelf, placement_grid):
+                line_distance_from_shelf, placement_grid, grid_ids):
 
     #CREATES FLOOR LINE IMAGE USING 'line_grid_generator.py'
     line_gen = LineGridGenerator()
 
     line_grid_image = line_gen.create_line_grid(
-    [int(shelf_size[0]*60),int(shelf_size[2]*60)],
-    int(round(60*line_distance_from_shelf)),
+    [int(shelf_size[0]*64),int(shelf_size[2]*64)],
+    int(round(64*line_distance_from_shelf)),
     placement_grid)
 
-
-    line_grid_image.save("../simulation/worlds/textures/warehouse_floor_grid.jpg")
+    line_grid_image.save(f"../simulation/worlds/textures/{world_name}.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
-    wbt_file_start = (
-"""#VRML_SIM R2021a utf8\n\
-WorldInfo {\n\
-  coordinateSystem \"NUE\"\n\
-    contactProperties [
-        ContactProperties {
-            material1 \"InteriorWheelMat\"\n\
-            coulombFriction [\n\
-                1.8, 0, 0.2\n\
-            ]\n\
-            frictionRotation -0.9648 0\n\
-            bounce 0\n\
-            forceDependentSlip [\n\
-                10, 0\n\
-            ]\n\
-        }
-        ContactProperties {\n\
-            material1 \"ExteriorWheelMat\"\n\
-            coulombFriction [\n\
-                1.8, 0, 0.2\n\
-            ]\n\
-            frictionRotation 0.9648 0\n\
-            bounce 0\n\
-            forceDependentSlip [\n\
-                10, 0\n\
-            ]\n\
-        }\n\
-  ]\n\
-}\n\
-Viewpoint {\n\
-  orientation -1 0 0 1\n\
-  position 0 4 3\n\
-}\n\
-TexturedBackground {\n\
-}\n\
-TexturedBackgroundLight {\n\
-}\n""")
 
+    wbt_file_start = (
+    """#VRML_SIM R2021a utf8\n\
+        WorldInfo {\n
+        coordinateSystem \"NUE\"\n\
+            contactProperties [
+                ContactProperties {
+                    material1 \"InteriorWheelMat\"\n\
+                    coulombFriction [\n\
+                        1.8, 0, 0.2\n\
+                    ]\n\
+                    frictionRotation -0.9648 0\n\
+                    bounce 0\n\
+                    forceDependentSlip [\n\
+                        10, 0\n\
+                    ]\n\
+                }
+                ContactProperties {\n\
+                    material1 \"ExteriorWheelMat\"\n\
+                    coulombFriction [\n\
+                        1.8, 0, 0.2\n\
+                    ]\n\
+                    frictionRotation 0.9648 0\n\
+                    bounce 0\n\
+                    forceDependentSlip [\n\
+                        10, 0\n\
+                    ]\n\
+                }\n\
+        ]\n\
+        }\n\
+        Viewpoint {\n\
+        orientation -1 0 0 1\n\
+        position 0 4 3\n\
+        }\n\
+        TexturedBackground {
+            skybox FALSE
+            skyColor [ 0.156863 0.247059 0.388235 ]
+        }     
+        TexturedBackgroundLight {
+        texture "dusk"
+        }
+        DEF TRANSPORT MainRobot {
+        }"""
+    )
 
     #DEFINES ARENA FOR THE WAREHOUSE FLOOR FROM ARGUMENTS GIVEN
     wbt_file_floor = (
-"RectangleArena {\n\
-  floorSize " + str(room_size[0]) + " " + str(room_size[1]) + "\n\
-  floorTileSize " + str(room_size[0]) + " " + str(room_size[1]) + "\n\
-  floorAppearance PBRAppearance {\n\
-    baseColorMap ImageTexture {\n" +
-    #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
-    #CHANGED TO THE LOCATION OF IMAGE WHEN MAP IS LOADED IN WEBOTS
-      "url [\n\
-        \"textures/warehouse_floor_grid.jpg\"\n\
-      ]\n\
-      repeatS FALSE\n\
-      repeatT FALSE\n\
-    }\n\
-    baseColor 1 1 1\n\
-    transparency 0\n\
-    roughness 0.2\n\
-    metalness 0\n\
-  }\n\
-  wallThickness " + str(0.01) + "\n\
-  wallHeight " + str(0.01) + "\n\
-}\n")
-
-
-    #DEFINES THE GEOMETRY FOR THE SHELFS (CURRENTLY USES SHAPE NODE WILL NEED
-    #TO CHANGE THIS SLIGHTLY ACORDING TO THE SHELF PROTONODE WHEN ITS DONE)
-#     box_geom_def = (
-# "    DEF BOX_GEOMETRY Shape {\n\
-#       appearance PBRAppearance {\n\
-#       }\n\
-#       geometry Box {\n\
-#         size " + str(1.0*shelf_size[0]) + " " +
-#         str(1.0*shelf_size[1]) + " " +
-#         str(1.0*shelf_size[2]) + "\n\
-#       }\n\
-#     }\n")
+        "RectangleArena {\n\
+        translation 0 0 0\n\
+        floorSize " + f"{len(grid_ids[0])} {len(grid_ids)}" + "\n\
+        floorTileSize " + f"{len(grid_ids[0])} {len(grid_ids)}" + "\n\
+        floorAppearance PBRAppearance {\n\
+            baseColorMap ImageTexture {\n" +
+            #URL WILL NEED TO BE CHANGED TO MATCH WHERE THE USER SAVES THE FILE OR
+            #CHANGED TO THE LOCATION OF IMAGE WHEN MAP IS LOADED IN WEBOTS
+            "url [\n\
+                \"textures/"+world_name+".jpg\"\n\
+            ]\n\
+            repeatS FALSE\n\
+            repeatT FALSE\n\
+            }\n\
+            baseColor 1 1 1\n\
+            transparency 0\n\
+            roughness 0.2\n\
+            metalness 0\n\
+        }\n\
+        wallThickness " + str(0.01) + "\n\
+        wallHeight " + str(1) + "\n\
+        }\n"
+    )
+        #DEFINES THE GEOMETRY FOR THE SHELFS (CURRENTLY USES SHAPE NODE WILL NEED
+        #TO CHANGE THIS SLIGHTLY ACORDING TO THE SHELF PROTONODE WHEN ITS DONE)
+    #     box_geom_def = (
+    # "    DEF BOX_GEOMETRY Shape {\n\
+    #       appearance PBRAppearance {\n\
+    #       }\n\
+    #       geometry Box {\n\
+    #         size " + str(1.0*shelf_size[0]) + " " +
+    #         str(1.0*shelf_size[1]) + " " +
+    #         str(1.0*shelf_size[2]) + "\n\
+    #       }\n\
+    #     }\n")
 
     #Appends both strings together into the string that will be outputted
     #as the world file
@@ -188,7 +191,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)/2)
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)-min(shelf_size))
 
                 #SETS VALUES FOR EAST FACING SHELF
@@ -200,7 +203,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (shelf_size[0])
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 #SETS VALUES FOR SOUTH FACING SHELF
@@ -212,7 +215,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)/2)
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (min(shelf_size))
 
                 #SETS VALUES FOR WEST FACING SHELF
@@ -224,7 +227,7 @@ TexturedBackgroundLight {\n\
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (max(shelf_size)-(min(shelf_size)))
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + (max(shelf_size)/2)
 
                 # #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
@@ -255,18 +258,18 @@ TexturedBackgroundLight {\n\
                 full_file_string += obj
 
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
                 node_num += 1
 
             #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
             elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
                 tag_x_coord = webots_x + ((shelf_size[0]/2))
-                tag_y_coord = 0
+                tag_y_coord = 0.001
                 tag_z_coord = webots_z + ((shelf_size[2]/2))
 
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
                 node_num += 1
 
@@ -276,11 +279,11 @@ TexturedBackgroundLight {\n\
                 #CHECHKS IF LINE IS ATTACHED TO A SHELF
                 if(connected_to_shelf(placement_grid,i,j)):
                     tag_x_coord = webots_x + ((shelf_size[0]/2))
-                    tag_y_coord = 0
+                    tag_y_coord = 0.001
                     tag_z_coord = webots_z + ((shelf_size[2]/2))
 
                     #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                     full_file_string += tag_obj
                     node_num += 1
 
@@ -296,94 +299,23 @@ TexturedBackgroundLight {\n\
 
     #WRITER TO OUTPUT 'full_file_string' TO FILE DENOTED BY 'world_name'
     #FORMAT OUTPUTTED AS THE FORM NEEDED BY WEBOTS
-    # writer = open(world_name, "wb")
-    # writer.write(full_file_string.encode('utf-8'))
-    # writer.close()
-
     writer = open("../simulation/worlds/" + world_name, "w")
     writer.write(full_file_string)
     writer.close()
 
-# #USED TO CREATE CODE DEFINING INSTANCE OF A BOX, WILL NEED TO BE CHANGED TO
-# #FIT FORMAT OF SHELF NODE
-# #
-# #@PARAM:
-# #   translation:
-# #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' coordinates
-# #
-# #   rotation:
-# #       List of size 4 where index '0,1,2,3' defines shelf's 'x,y,z,angle'
-# #       rotation values
-# #
-# #   scale:
-# #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' lengths in m
-# #
-# #   children:
-# #       String defining child nodes of shelf
-# #
-# #   boundingObject:
-# #       String defining the 'boundingObject' used by the shelf
-# #
-# #   name:
-# #       String defining the 'name' of the shelf
-# #
-# #
-# #@RETURNS:
-# #   String of code to create the shelf in webots
-# def create_box(translation, rotation, scale, children, boundingObject, name):
-#
-#     #CREATS STRING ACORDING TO ARGUMENTS
-#     obj = (
-# "Solid {\n\
-#   translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
-#   rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n"\
-#   + "scale 1 1 1\n\
-#   children [\n"\
-# + children + "\
-#   ]\n\
-#   name \"" + name + "\"\n\
-#   boundingObject " + boundingObject + "\n\
-#   physics Physics {\n\
-#     mass 1\n\
-#   }\n\
-#   linearVelocity 0.0 0.0 0.0\n\
-#   angularVelocity 0.0 0.0 0.0\n\
-# }\n")
-
-
-#USED TO CREATE CODE DEFINING INSTANCE OF A SHELF
-#
-#@PARAM:
-#   translation:
-#       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' coordinates
-#
-#   rotation:
-#       List of size 4 where index '0,1,2,3' defines shelf's 'x,y,z,angle'
-#       rotation values
-#
-#   scale:
-#       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' lengths in m
-#
-#   children:
-#       String defining child nodes of shelf
-#
-#   boundingObject:
-#       String defining the 'boundingObject' used by the shelf
-#
-#   name:
-#       String defining the 'name' of the shelf
-#
 def create_shelf(shelf_size, number_of_racks, translation, rotation):
 
     #CREATS STRING ACORDING TO ARGUMENTS
     obj = (
-"Shelf {\n\
-  translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
-  rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n\
-  numRacks 1 " + str(number_of_racks) + " 1\n\
-  baseDim " + str(shelf_size[0]) + " 0.02 " + str(shelf_size[2]) + "\n\
-  legDim 0.05 " + str(shelf_size[1]) + " 0.05\n\
-}\n")
+        "Shelf {\n\
+        translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+        rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n\
+        numRacks 1 " + str(number_of_racks) + " 1\n\
+        baseDim " + str(shelf_size[0]) + " 0.02 " + str(shelf_size[2]) + "\n\
+        legDim 0.05 " + str(shelf_size[1]) + " 0.05\n\
+        name \"" +''.join(random.choices(string.ascii_uppercase + string.digits, k=7))+ "\"\n\
+        }\n"
+    )
 
     #RETURNS STRING
     return obj
@@ -392,36 +324,36 @@ def create_tag(translation, information_sent):
 
     #CREATS STRING ACORDING TO ARGUMENTS
     obj = (
-"NFCTag {\n\
-  translation " + str(translation[0]) + " " + str(translation[1]+0.1) + " " + str(translation[2]) + "\n\
-  dimensions 0.03 0.01 0.03\n\
-  baseColor 0 0 0\n\
-  emissiveColor 0 0 0\n\
-  transmissionRange 0.15\n\
-  informationSent \"" + str(information_sent) + "\"\n\
-}\n")
+        "NFCTag {\n\
+        translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+        dimensions 0.02 0.01 0.02\n\
+        baseColor 0 0 0\n\
+        emissiveColor 0 0 0\n\
+        transmissionRange 0.20 \n\
+        informationSent \"" + str(information_sent) + "\"\n\
+        }\n"
+    )
 
     #RETURNS STRING
     return obj
 
-
-#USED TO CHECK IF A STRAIGHT LINE HAS A SHELF CONNECTED TO IT
-#
-#@PARAM:
-#   placement_grid:
-#       2D List where 'placement_grid[i][j]' refairs to node x=i, z=j
-#       Contains values from 0-14 detailing what is in that node position
-#       Check "create_world"'s comments for more information
-#
-#   index_i:
-#       Index i of the currently considered line
-#
-#   index_j:
-#       Index j of the currently considered line
-#
-#   @RETURNS:
-#       True if connected to a shelf False otherwise
 def connected_to_shelf(placement_grid, index_i, index_j):
+    #USED TO CHECK IF A STRAIGHT LINE HAS A SHELF CONNECTED TO IT
+    #
+    #@PARAM:
+    #   placement_grid:
+    #       2D List where 'placement_grid[i][j]' refairs to node x=i, z=j
+    #       Contains values from 0-14 detailing what is in that node position
+    #       Check "create_world"'s comments for more information
+    #
+    #   index_i:
+    #       Index i of the currently considered line
+    #
+    #   index_j:
+    #       Index j of the currently considered line
+    #
+    #   @RETURNS:
+    #       True if connected to a shelf False otherwise
     #CHECK NORTH FOR SOUTH FACING SHELF
     if index_i > 0 and placement_grid[index_i-1][index_j] == 2:
         return True
@@ -440,3 +372,75 @@ def connected_to_shelf(placement_grid, index_i, index_j):
 
     #RETURNS FALSE IF NO CONNECTED SHELFS WERE FOUND
     return False
+
+if True:
+    pass
+    # #USED TO CREATE CODE DEFINING INSTANCE OF A BOX, WILL NEED TO BE CHANGED TO
+    # #FIT FORMAT OF SHELF NODE
+    # #
+    # #@PARAM:
+    # #   translation:
+    # #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' coordinates
+    # #
+    # #   rotation:
+    # #       List of size 4 where index '0,1,2,3' defines shelf's 'x,y,z,angle'
+    # #       rotation values
+    # #
+    # #   scale:
+    # #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' lengths in m
+    # #
+    # #   children:
+    # #       String defining child nodes of shelf
+    # #
+    # #   boundingObject:
+    # #       String defining the 'boundingObject' used by the shelf
+    # #
+    # #   name:
+    # #       String defining the 'name' of the shelf
+    # #
+    # #
+    # #@RETURNS:
+    # #   String of code to create the shelf in webots
+    # def create_box(translation, rotation, scale, children, boundingObject, name):
+    #
+    #     #CREATS STRING ACORDING TO ARGUMENTS
+    #     obj = (
+    # "Solid {\n\
+    #   translation " + str(translation[0]) + " " + str(translation[1]) + " " + str(translation[2]) + "\n\
+    #   rotation " + str(rotation[0]) + " " + str(rotation[1]) + " " + str(rotation[2]) + " " + str(rotation[3]) + "\n"\
+    #   + "scale 1 1 1\n\
+    #   children [\n"\
+    # + children + "\
+    #   ]\n\
+    #   name \"" + name + "\"\n\
+    #   boundingObject " + boundingObject + "\n\
+    #   physics Physics {\n\
+    #     mass 1\n\
+    #   }\n\
+    #   linearVelocity 0.0 0.0 0.0\n\
+    #   angularVelocity 0.0 0.0 0.0\n\
+    # }\n")
+
+
+    #USED TO CREATE CODE DEFINING INSTANCE OF A SHELF
+    #
+    #@PARAM:
+    #   translation:
+    #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' coordinates
+    #
+    #   rotation:
+    #       List of size 4 where index '0,1,2,3' defines shelf's 'x,y,z,angle'
+    #       rotation values
+    #
+    #   scale:
+    #       List of size 3 where index '0,1,2' defines shelf's 'x,y,z' lengths in m
+    #
+    #   children:
+    #       String defining child nodes of shelf
+    #
+    #   boundingObject:
+    #       String defining the 'boundingObject' used by the shelf
+    #
+    #   name:
+    #       String defining the 'name' of the shelf
+    #

@@ -100,13 +100,13 @@ class Payload(object): # takes a raw json string and parses it into a list of no
     def get_nodes(self):
         nodes = []
         for i in self.__dict__["nodes"].keys():
+            # print("ID: " + i )
+            id = i
             type = self.__dict__["nodes"][i]["type"]
             coords = self.__dict__["nodes"][i]["coords"]
             neighbours = self.__dict__["nodes"][i]["neighbours"]
             nodes.append(Node(i,type,neighbours, coords))
         return nodes
-
-
 
 def get_coords(id, nodes): # returns a nodes coords given its id
     # print(id)
@@ -115,17 +115,28 @@ def get_coords(id, nodes): # returns a nodes coords given its id
             return i.coords
     return [0,0]
 
+# def get_id(id, coords): # returns a nodes coords given its id
+#     # print(id)
+#     for i in:
+#         if i.id == str(id):
+#             return i.coords
+#     return [0,0]
+
 def get_grid(dimensions, nodes): # creates a grid representation of a graph for texture/map generation.
     import numpy as np
     height = dimensions[0]
     width = dimensions[1]
-    grid = -np.ones([width,height])
+    grid_line = -np.ones([width,height])
+    grid_ids = -np.ones([width,height])
+
     # print(nodes)
     for node in nodes:
-        print(node.junction_type)
+        # print(node.junction_type)
         coords = node.coords
         type = node.junction_type
-        grid[coords[1]][coords[0]] = type
+        grid_line[coords[1]][coords[0]] = type
+        grid_ids[coords[1]][coords[0]] = node.id
+
 
         for neighbour in node.neighbours.keys():
             nodex, nodey = node.coords
@@ -133,19 +144,14 @@ def get_grid(dimensions, nodes): # creates a grid representation of a graph for 
 
             if nodex == neighbourx:
                 for i in range (nodey + 1, neighboury):
-                    grid[i][nodex] = 5
-
+                    grid_line[i][nodex] = 5
                 pass
-            elif  nodey == neighboury:
+            elif nodey == neighboury:
                 for i in range(nodex + 1, neighbourx):
-                    grid[nodey][i] = 4
-
+                    grid_line[nodey][i] = 4
                 pass
-
-    return grid, [width, height]
-
-# print("hi")
-
+    # print(grid_ids)
+    return grid_line, [width, height], grid_ids
 
 def grid():
     with open("../Warehouse Generation/json.txt", "r") as f:
@@ -153,4 +159,3 @@ def grid():
         # print(string)
         p = Payload(string)
     return get_grid(p.dimensions, p.nodes)
-# print(grid)

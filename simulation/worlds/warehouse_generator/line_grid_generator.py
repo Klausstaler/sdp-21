@@ -9,19 +9,20 @@ from PIL import Image, ImageDraw
 
 class LineGridGenerator():
 
+
+#CREATES THE BASE IMAGE FOR THE 4 WAY (+) JUNCTION
+#
+#@PARAM:
+#   size:
+#       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+#
+#   line_width:
+#       Int stating the number of pixels line should take up (think rn odd
+#       witdth will be out of line in some places)
+#
+#@RETURNS:
+#       Object of the Image class showing the junction
     def __create_p_junction(self, size, line_width):
-        #CREATES THE BASE IMAGE FOR THE 4 WAY (+) JUNCTION
-        #
-        #@PARAM:
-        #   size:
-        #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
-        #
-        #   line_width:
-        #       Int stating the number of pixels line should take up (think rn odd
-        #       witdth will be out of line in some places)
-        #
-        #@RETURNS:
-        #       Object of the Image class showing the junction
         img = Image.new("RGB", size, "white")
         drawer = ImageDraw.Draw(img)
 
@@ -35,21 +36,23 @@ class LineGridGenerator():
         drawer.line((x_mid_point,0, x_mid_point,size[1]), fill="black", width=line_width)
 
         return img
-    
+
+
+    #CREATES THE BASE IMAGE FOR THE 3 WAY (T) JUNCTION
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the base T-junctions
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_t_junction(self, size, line_width):
-        #CREATES THE BASE IMAGE FOR THE 3 WAY (T) JUNCTION
-        #
-        #@PARAM:
-        #   size:
-        #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
-        #
-        #   line_width:
-        #       Int stating the number of pixels line should take up (think rn odd
-        #       witdth will be out of line in some places)
-        #
-        #@RETURNS:
-        #       Tuple of Objects of the Image class showing the base T-junctions
-        #       (2 needed incase of x,y of the image not being equal)
+
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
 
@@ -66,20 +69,20 @@ class LineGridGenerator():
         return (img1, img2)
 
 
+    #CREATES THE BASE IMAGE FOR THE STRAIGHT LINE
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the 2 straight lines
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_line(self, size, line_width):
-        #CREATES THE BASE IMAGE FOR THE STRAIGHT LINE
-        #
-        #@PARAM:
-        #   size:
-        #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
-        #
-        #   line_width:
-        #       Int stating the number of pixels line should take up (think rn odd
-        #       witdth will be out of line in some places)
-        #
-        #@RETURNS:
-        #       Tuple of Objects of the Image class showing the 2 straight lines
-        #       (2 needed incase of x,y of the image not being equal)
 
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
@@ -122,20 +125,20 @@ class LineGridGenerator():
             return full_image
 
 
+    #CREATES THE BASE IMAGE FOR THE RIGHT ANGLE TURNS
+    #
+    #@PARAM:
+    #   size:
+    #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
+    #
+    #   line_width:
+    #       Int stating the number of pixels line should take up (think rn odd
+    #       witdth will be out of line in some places)
+    #
+    #@RETURNS:
+    #       Tuple of Objects of the Image class showing the base turns
+    #       (2 needed incase of x,y of the image not being equal)
     def __create_turn(self, size, line_width):
-        #CREATES THE BASE IMAGE FOR THE RIGHT ANGLE TURNS
-        #
-        #@PARAM:
-        #   size:
-        #       List of size 2 where index '0,1' define 'x,y' size of image respectivly
-        #
-        #   line_width:
-        #       Int stating the number of pixels line should take up (think rn odd
-        #       witdth will be out of line in some places)
-        #
-        #@RETURNS:
-        #       Tuple of Objects of the Image class showing the base turns
-        #       (2 needed incase of x,y of the image not being equal)
 
         x_mid_point = (size[0]/2)-1
         y_mid_point = (size[1]/2)-1
@@ -152,39 +155,40 @@ class LineGridGenerator():
 
         return (img1, img2)
 
+
+    #CREATES THE FULL FLOOR LINEGRID ACORDING TO THE ARGUMENTS
+    #
+    #@PARAM:
+    #   shelf_size:
+    #       List of form x,y which defines the x,y size of shelf in pixels
+    #
+    #   shelf_line_dist:
+    #       Int defining amount of pixels needed to be between shelf and it's
+    #       acces line (where 30 = 1m between shelf and line)
+    #
+    #   grid_array:
+    #       2D List where 'grid_array[i][j]' refairs to node x=i, z=j
+    #       Contains values from 0-14 detailing what is in that node position
+    #           0) Shelf with open side facing north
+    #           1) Shelf with open side facing east
+    #           2) Shelf with open side facing south
+    #           3) Shelf with open side facing west
+    #           4) Horizontal floor line
+    #           5) Vertical floor line
+    #           6) 4 way (+) floor junction
+    #           7) T junction (3 exits) with exits to the north, south and west
+    #           8) T junction (3 exits) with exits to the north, south and east
+    #           9) T junction (3 exits) with exits to the east, west and south
+    #          10) T junction (3 exits) with exits to the east, west and north
+    #          11) Right angle turn with exits south and west
+    #          12) Right angle turn with exits south and east
+    #          13) Right angle turn with exits north and east
+    #          14) Right angle turn with exits north and west
+    #
+    #
+    #@RETURNS:
+    #   Image object detailing the full floor grid
     def create_line_grid(self, shelf_size, shelf_line_dist, grid_array):
-        #CREATES THE FULL FLOOR LINEGRID ACORDING TO THE ARGUMENTS
-        #
-        #@PARAM:
-        #   shelf_size:
-        #       List of form x,y which defines the x,y size of shelf in pixels
-        #
-        #   shelf_line_dist:
-        #       Int defining amount of pixels needed to be between shelf and it's
-        #       acces line (where 30 = 1m between shelf and line)
-        #
-        #   grid_array:
-        #       2D List where 'grid_array[i][j]' refairs to node x=i, z=j
-        #       Contains values from 0-14 detailing what is in that node position
-        #           0) Shelf with open side facing north
-        #           1) Shelf with open side facing east
-        #           2) Shelf with open side facing south
-        #           3) Shelf with open side facing west
-        #           4) Horizontal floor line
-        #           5) Vertical floor line
-        #           6) 4 way (+) floor junction
-        #           7) T junction (3 exits) with exits to the north, south and west
-        #           8) T junction (3 exits) with exits to the north, south and east
-        #           9) T junction (3 exits) with exits to the east, west and south
-        #          10) T junction (3 exits) with exits to the east, west and north
-        #          11) Right angle turn with exits south and west
-        #          12) Right angle turn with exits south and east
-        #          13) Right angle turn with exits north and east
-        #          14) Right angle turn with exits north and west
-        #
-        #
-        #@RETURNS:
-        #   Image object detailing the full floor grid
 
         #DEFINES THE line_width (IN PIXELS), SHOULD BE EVEN AND IS HARD CODED
         #AS THE TAPE LINE WILL BE THE SAME SIZE REGUARDLESS OF WAREHOUSE SIZE
@@ -203,8 +207,6 @@ class LineGridGenerator():
         #AND CREATES A BLANK white IMAGE OF THIS SIZE
         total_width = size[0] * len(grid_array[0])
         total_height = size[1] * len(grid_array)
-        ##total_width = 2048
-        ##total_height = 2048
         full_image = Image.new("RGB", (total_width, total_height), "white")
 
         #NESTED LOOP TO LOOK THROUGH grid_array AND PLACE THE CORRECT GRID IMAGE
@@ -261,6 +263,21 @@ class LineGridGenerator():
                         (size[0]*j) + x_mid_point, (size[1]*(i+1)) - shelf_size[0]),
                         fill="black", width=line_width)
 
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*j)+(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i-1))+y_mid_point,
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))-(shelf_line_dist + shelf_size[0])),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i+1)-(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
+
+
                     elif grid_array[i][j] == 1:
                         x_mid_point = (size[0]/2)-1
                         y_mid_point = (size[1]/2)-1
@@ -269,6 +286,23 @@ class LineGridGenerator():
                         drawer.line(((size[0]*j) + shelf_size[0], ((size[1]*i) + y_mid_point),
                         (size[0]*(j+1)) + x_mid_point, ((size[1]*i) + y_mid_point)),
                         fill="black", width=line_width)
+
+
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*j)+(shelf_size[0] + shelf_line_dist), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+
+
 
                     elif grid_array[i][j] == 2:
                         x_mid_point = (size[0]/2)-1
@@ -279,6 +313,22 @@ class LineGridGenerator():
                         (size[0]*j) + x_mid_point, (size[1]*(i+1)) + y_mid_point)),
                         fill="black", width=line_width)
 
+                        #drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*j)+(shelf_line_dist/2),(size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist/2), ((size[1]*(i)+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (size[1]*(i+1))+y_mid_point),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*j)+(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0]))),
+                        # (size[0]*(j+1))-(shelf_line_dist/2), (((size[1]*(i))+(shelf_line_dist + shelf_size[0])))),
+                        # fill="black", width=line_width)
+
+
                     else:
                         x_mid_point = (size[0]/2)-1
                         y_mid_point = (size[1]/2)-1
@@ -288,13 +338,22 @@ class LineGridGenerator():
                         (size[0]*(j+1)) - shelf_size[0], (size[1]*i) + y_mid_point),
                         fill="black", width=line_width)
 
-        power_width = 2048
-        power_height = 2048
-        full_image_powered = Image.new("RGB", (power_width, power_height), "white")
-        offset = ((power_width - total_width) // 2, (power_height - total_height) // 2)
-        full_image_powered.paste(full_image, offset)
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*i)+(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j-1))+x_mid_point, (size[1]*(i+1))-(shelf_line_dist/2),
+                        # (size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+                        #
+                        # drawer = ImageDraw.Draw(full_image)
+                        # drawer.line(((size[0]*(j+1))-(shelf_line_dist + shelf_size[0]), (size[1]*i)+(shelf_line_dist/2),
+                        # ((size[0]*(j+1))-(shelf_line_dist + shelf_size[0])), (size[1]*(i+1))-(shelf_line_dist/2)),
+                        # fill="black", width=line_width)
+
 
 
 
         #RETURNS THE FULL IMAGE OF THE FLOOR GRID
-        return full_image_powered
+        return full_image
