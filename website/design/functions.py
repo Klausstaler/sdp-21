@@ -1,7 +1,9 @@
 from .models import package,robot,shelf,hidden_package
 from .models import task
 from .models import node as nd
+import sys
 
+sys.path.insert(0, "../Warehouse Generation/")
 from server.CentralServer import CentralServer
 from server.Robot import Robot, Size
 from server.Scheduler import Scheduler
@@ -13,20 +15,23 @@ from server.sample_db_output import db_output
 from warehouse.server_setup import requestParcel,addRobots
 import threading
 #from warehouse_generator import create_world
+import json_parser as js
+from warehouse_generator import create_world
 
 def sim_json(json):
     # floor_size = [4,4]
 
-    import sys
-    sys.path.insert(0, "../../Warehouse\ Generation/warehouse_generator.py")
-    sys.path.insert(0, "../../Warehouse\ Generation/json_parser.py")
+    # sys.path.insert(0, "../Warehouse Generation/json_parser.py")
 
-    import json_parser as js
-    import create_world
 
-    file = open("../../Warehouse\ Generation/json.txt", "w+")
+    print("Sim JSON")
+
+    file = open("../Warehouse Generation/json.txt", "w+")
     file.write(json)
     file.close()
+
+
+    print(1)
 
     shelf_size = [1, 1, 1]
     number_of_racks = 3
@@ -38,8 +43,8 @@ def sim_json(json):
     #     [6,6,6,6],
     #     ]
 
-    floor_size = js.grid[1]  # gets values from json.txt
-    grid_array = js.grid[0]
+    floor_size = js.grid()[1]  # gets values from json.txt
+    grid_array = js.grid()[0]
     print(floor_size)
     print(grid_array)
     create_world("warehouse.wbt", floor_size, shelf_size, number_of_racks, line_distance_from_shelf, grid_array)

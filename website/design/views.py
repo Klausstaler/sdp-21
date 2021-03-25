@@ -6,46 +6,7 @@ from .functions import package_request,sim_json
 from home.views import home_view
 import json
 
-from server.routing.Graph import Graph
-from server.routing.containers import Connection, Direction
-from warehouse.server_setup import *
-from server.Scheduler import Scheduler
 
-def getDirection(dir):
-    if dir == 'from':
-        direction = Direction.INCOMING
-    elif dir == 'to':
-        direction = Direction.OUTGOING
-    elif dir == 'bi':
-        direction = Direction.BIDIRECTIONAL
-    return direction
-
-def get_node_dict():
-    nodes = {}
-    for n in node.objects.all():
-        data = []
-        if n.right_node:
-            direction = getDirection(n.right_node_direction)
-            data.append(Connection(n.right_node.id,n.right_node_distance,n.right_node_priority,direction))
-        else:
-            data.append(None)
-        if n.down_node:
-            direction = getDirection(n.down_node_direction)
-            data.append(Connection(n.down_node.id,n.down_node_distance,n.down_node_priority,direction))
-        else:
-            data.append(None)
-        if n.left_node:
-            direction = getDirection(n.left_node_direction)
-            data.append(Connection(n.left_node.id,n.left_node_distance,n.left_node_priority,direction))
-        else:
-            data.append(None)
-        if n.up_node:
-            direction = getDirection(n.up_node_direction)
-            data.append(Connection(n.up_node.id,n.up_node_distance,n.up_node_priority,direction))
-        else:
-            data.append(None)
-        nodes[n.id] = data
-    return nodes
 
 
 def importJSON(text):
@@ -58,40 +19,45 @@ def importJSON(text):
         return False
     grid_dimensions = dic.get('dimensions')
     dic = dic.get('nodes')
+
     nodes = {}
-    for key in dic:
-        nodes[key] = node.objects.create(id=key)
-    for key in dic:
-        item = dic.get(key)
-        obj = nodes.get(key)
-        nb = item.get('neighbours')
-        directions = nb.keys()
-        if 'up' in directions:
-            obj.up_node = nodes.get(str(nb.get('up')[0]))
-            obj.up_node_distance = nb.get('up')[1]
-            obj.up_node_direction = nb.get('up')[2]
-            obj.up_node_priority = nb.get('up')[3]
-        if 'right' in directions:
-            obj.right_node = nodes.get(str(nb.get('right')[0]))
-            obj.right_node_distance = nb.get('right')[1]
-            obj.right_node_direction = nb.get('right')[2]
-            obj.right_node_priority = nb.get('right')[3]
-        if 'down' in directions:
-            obj.down_node = nodes.get(str(nb.get('down')[0]))
-            obj.down_node_distance = nb.get('down')[1]
-            obj.down_node_direction = nb.get('down')[2]
-            obj.down_node_priority = nb.get('down')[3]
-        if 'left' in directions:
-            obj.left_node = nodes.get(str(nb.get('left')[0]))
-            obj.left_node_distance = nb.get('left')[1]
-            obj.left_node_direction = nb.get('left')[2]
-            obj.left_node_priority = nb.get('left')[3]
+    print(text)
+    if dic != None:
+        for key in dic:
+            nodes[key] = node.objects.create(id=key)
+        for key in dic:
+            item = dic.get(key)
+            obj = nodes.get(key)
+            nb = item.get('neighbours')
+            directions = nb.keys()
+            if 'up' in directions:
+                obj.up_node = nodes.get(str(nb.get('up')[0]))
+                obj.up_node_distance = nb.get('up')[1]
+                obj.up_node_direction = nb.get('up')[2]
+                obj.up_node_priority = nb.get('up')[3]
+            if 'right' in directions:
+                obj.right_node = nodes.get(str(nb.get('right')[0]))
+                obj.right_node_distance = nb.get('right')[1]
+                obj.right_node_direction = nb.get('right')[2]
+                obj.right_node_priority = nb.get('right')[3]
+            if 'down' in directions:
+                obj.down_node = nodes.get(str(nb.get('down')[0]))
+                obj.down_node_distance = nb.get('down')[1]
+                obj.down_node_direction = nb.get('down')[2]
+                obj.down_node_priority = nb.get('down')[3]
+            if 'left' in directions:
+                obj.left_node = nodes.get(str(nb.get('left')[0]))
+                obj.left_node_distance = nb.get('left')[1]
+                obj.left_node_direction = nb.get('left')[2]
+                obj.left_node_priority = nb.get('left')[3]
 
-        obj.save()
+            obj.save()
 
-        if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=3)
-    sched = Scheduler(Graph(get_node_dict()))
+        #if item.get('type') == 'Robot':
+        #    robot.objects.create(ip=ip,node=obj)
+            if item.get('type') == 'shelf':
+                shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+
     return True
 
 # Create your views here.
@@ -135,19 +101,22 @@ def map_gen_view(request):
         JSON = request.POST.get("data")
         jsons = JSON.split('||')
         try:
-            simjson = jsons[1]
-            dbjson = jsons[0]
+            simjson = jsons[0]
+            dbjson = jsons[1]
+            print(dbjson)
+            # exit(0)
+            sim_json(simjson)
         except:
             pass
         else:
-            #print(dbjson)
+            print(dbjson)
             if importJSON(dbjson):
                 print("Successfully Parsed!")
                 messages.success(request, 'JSON Loaded')
+
             else:
                 print('Parsing Failed!')
                 messages.success(request, 'Wrong JSON Format')
-            #sim_json(simjson)
     return render(request, "map_gen.html")
 
 def map_view(request):
