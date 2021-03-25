@@ -84,5 +84,6 @@ def package_request(packs):
             shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
             # Create parcel instance from the package
             parcel = Parcel(pack.weight, Size(.35, .35, .35), shelf.node.id, shelf_info)
-            t = threading.Thread(target=requestParcel, args=(id, parcel,), daemon=True)
-            t.start()
+            #t = threading.Thread(target=requestParcel, args=(id, parcel,), daemon=True)
+            #t.start()
+            requestParcel(id,parcel)

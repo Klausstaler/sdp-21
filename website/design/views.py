@@ -5,6 +5,7 @@ from django.contrib import messages
 from .functions import package_request,sim_json
 from home.views import home_view
 import json
+import threading
 
 
 
@@ -144,7 +145,9 @@ def package_request_view(request):
             p=hidden_package.objects.create(old_id=pack.id,shelf=pack.shelf,shelf_compartment=pack.shelf_compartment,weight=pack.weight,length=pack.length,width=pack.width,height=pack.height,details=pack.details)
             packs[p.id] = p
             pack.delete()
-        package_request(packs)
+        #package_request(packs)
+        t = threading.Thread(target=package_request, args=(packs,), daemon=True)
+        t.start()
         messages.success(request, 'Packages Are On Their Way!')
         return HttpResponseRedirect('/get')
     context={

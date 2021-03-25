@@ -11,6 +11,7 @@ from design.models import package,robot,shelf,hidden_package
 from design.models import task
 from design.models import node as nd
 
+import time
 
 def getDirection(dir):
     if dir == 'from':
@@ -59,10 +60,19 @@ server = CentralServer(sched, interface)
 #sched.add_free_robot(Robot("1", robot_size, 27))
 
 def addRobots():
-    robots = robot.objects.all()
-    for r in robots:
-        if not r.status:
-            robot_size = Size(height=r.height, length=r.length, width=r.width)
-            sched.add_free_robot(Robot(r.name, robot_size, r.node_id))
+    while True:
+        robots = robot.objects.all()
+        added_robots = False
+        for r in robots:
+            if not r.status:
+                robot_size = Size(height=r.height, length=r.length, width=r.width)
+                sched.add_free_robot(Robot(r.name, robot_size, r.node_id))
+                added_robots = True
+        if added_robots:
+            break
+        else:
+            print('No free robots can be found.\nWaiting for a robot to become free...')
+            time.sleep(2)
+
 def requestParcel(id, parcel):
     server.move_parcel(id, parcel, None)
