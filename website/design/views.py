@@ -19,41 +19,44 @@ def importJSON(text):
         return False
     grid_dimensions = dic.get('dimensions')
     dic = dic.get('nodes')
-    nodes = {}
-    for key in dic:
-        nodes[key] = node.objects.create(id=key)
-    for key in dic:
-        item = dic.get(key)
-        obj = nodes.get(key)
-        nb = item.get('neighbours')
-        directions = nb.keys()
-        if 'up' in directions:
-            obj.up_node = nodes.get(str(nb.get('up')[0]))
-            obj.up_node_distance = nb.get('up')[1]
-            obj.up_node_direction = nb.get('up')[2]
-            obj.up_node_priority = nb.get('up')[3]
-        if 'right' in directions:
-            obj.right_node = nodes.get(str(nb.get('right')[0]))
-            obj.right_node_distance = nb.get('right')[1]
-            obj.right_node_direction = nb.get('right')[2]
-            obj.right_node_priority = nb.get('right')[3]
-        if 'down' in directions:
-            obj.down_node = nodes.get(str(nb.get('down')[0]))
-            obj.down_node_distance = nb.get('down')[1]
-            obj.down_node_direction = nb.get('down')[2]
-            obj.down_node_priority = nb.get('down')[3]
-        if 'left' in directions:
-            obj.left_node = nodes.get(str(nb.get('left')[0]))
-            obj.left_node_distance = nb.get('left')[1]
-            obj.left_node_direction = nb.get('left')[2]
-            obj.left_node_priority = nb.get('left')[3]
 
-        obj.save()
+    nodes = {}
+    print(text)
+    if dic != None:
+        for key in dic:
+            nodes[key] = node.objects.create(id=key)
+        for key in dic:
+            item = dic.get(key)
+            obj = nodes.get(key)
+            nb = item.get('neighbours')
+            directions = nb.keys()
+            if 'up' in directions:
+                obj.up_node = nodes.get(str(nb.get('up')[0]))
+                obj.up_node_distance = nb.get('up')[1]
+                obj.up_node_direction = nb.get('up')[2]
+                obj.up_node_priority = nb.get('up')[3]
+            if 'right' in directions:
+                obj.right_node = nodes.get(str(nb.get('right')[0]))
+                obj.right_node_distance = nb.get('right')[1]
+                obj.right_node_direction = nb.get('right')[2]
+                obj.right_node_priority = nb.get('right')[3]
+            if 'down' in directions:
+                obj.down_node = nodes.get(str(nb.get('down')[0]))
+                obj.down_node_distance = nb.get('down')[1]
+                obj.down_node_direction = nb.get('down')[2]
+                obj.down_node_priority = nb.get('down')[3]
+            if 'left' in directions:
+                obj.left_node = nodes.get(str(nb.get('left')[0]))
+                obj.left_node_distance = nb.get('left')[1]
+                obj.left_node_direction = nb.get('left')[2]
+                obj.left_node_priority = nb.get('left')[3]
+
+            obj.save()
 
         #if item.get('type') == 'Robot':
         #    robot.objects.create(ip=ip,node=obj)
-        if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+            if item.get('type') == 'shelf':
+                shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
 
     return True
 
@@ -66,8 +69,8 @@ def packages_view(request):
     }
     return render(request,'packages/packages.html',context)
 
-def package_view(request,code):
-    package_object = get_object_or_404(package, code=code)
+def package_view(request,id):
+    package_object = get_object_or_404(package, id=id)
     form = packageCreateForm(request.POST or None,instance=package_object)
     if form.is_valid():
         form.save()
@@ -98,8 +101,11 @@ def map_gen_view(request):
         JSON = request.POST.get("data")
         jsons = JSON.split('||')
         try:
-            simjson = jsons[1]
-            dbjson = jsons[0]
+            simjson = jsons[0]
+            dbjson = jsons[1]
+            print(dbjson)
+            # exit(0)
+            sim_json(simjson)
         except:
             pass
         else:
@@ -107,10 +113,10 @@ def map_gen_view(request):
             if importJSON(dbjson):
                 print("Successfully Parsed!")
                 messages.success(request, 'JSON Loaded')
+
             else:
                 print('Parsing Failed!')
                 messages.success(request, 'Wrong JSON Format')
-            #sim_json(simjson)
     return render(request, "map_gen.html")
 
 def map_view(request):
