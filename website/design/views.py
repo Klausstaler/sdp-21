@@ -90,7 +90,7 @@ def importJSON(text):
         obj.save()
 
         if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=3)
     sched = Scheduler(Graph(get_node_dict()))
     return True
 
