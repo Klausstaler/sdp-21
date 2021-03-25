@@ -1,4 +1,4 @@
-from .models import package,robot,shelf,hidden_package
+from .models import package,robot,shelf,hidden_package,drop_zone
 from .models import task
 from .models import node as nd
 import sys
@@ -74,6 +74,10 @@ def package_request(packs):
         t.start()
     else:
         addRobots()
+        #Get dropzone
+        for drop in drop_zone.objects.all():
+            drop_id = drop.node.id
+        drop_id = 1
         for id in packs:
             pack = packs.get(id)
             #print('Parcel:{}'.format(pack.old_id))
@@ -89,4 +93,4 @@ def package_request(packs):
             parcel = Parcel(pack.weight, Size(.35, .35, .35), shelf.node.id, shelf_info)
             #t = threading.Thread(target=requestParcel, args=(id, parcel,), daemon=True)
             #t.start()
-            requestParcel(id,parcel)
+            requestParcel(id,parcel,drop_id)

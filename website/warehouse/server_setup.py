@@ -74,5 +74,5 @@ def addRobots():
             print('No free robots can be found.\nWaiting for a robot to become free...')
             time.sleep(2)
 
-def requestParcel(id, parcel):
-    server.move_parcel(id, parcel, None)
+def requestParcel(id, parcel, drop_id):
+    server.move_parcel(id, parcel, None,drop_id)
