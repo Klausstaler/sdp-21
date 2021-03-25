@@ -4,6 +4,8 @@ from design.models import node,task,robot,shelf
 from .forms import jsonForm
 import json
 
+from warehouse.server_setup import *
+
 def getDirection(dir):
     if dir == 'from':
         direction = Direction.INCOMING
@@ -12,9 +14,10 @@ def getDirection(dir):
     elif dir == 'bi':
         direction = Direction.BIDIRECTIONAL
     return direction
+
 def get_node_dict():
     nodes = {}
-    for n in nd.objects.all():
+    for n in node.objects.all():
         data = []
         if n.right_node:
             direction = getDirection(n.right_node_direction)
@@ -105,6 +108,8 @@ def importJSON(text):
             obj.first_node_distance = nb.get('left')[1]
 
         obj.save()
+
+        sched = Scheduler(Graph(get_node_dict()))
 
         #if item.get('type') == 'Robot':
         #    robot.objects.create(ip=ip,node=obj)
