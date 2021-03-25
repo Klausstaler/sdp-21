@@ -72,3 +72,7 @@ class task(models.Model):
     robot = models.ForeignKey(robot,on_delete=models.CASCADE, related_name="robot")
     package = models.ForeignKey(hidden_package,on_delete=models.CASCADE, related_name="package")
     #holding_package = models.IntegerField(blank=True)
+
+class drop_zone(models.Model):
+    id = models.AutoField(verbose_name='id',primary_key=True)
+    node = models.ForeignKey(node,on_delete=models.CASCADE, related_name="DropNode")
