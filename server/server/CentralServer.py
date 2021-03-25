@@ -62,7 +62,8 @@ class CentralServer:
         r = rbt.objects.get(name=str(id))
         current_task = tsk.objects.get(robot=r)
         current_task.hidden_package.delete()
-        r.delete()
+        r.status = False
+        r.save()
 
 
 ################# For line following demo world.
