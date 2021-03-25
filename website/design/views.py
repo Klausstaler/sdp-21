@@ -6,7 +6,46 @@ from .functions import package_request,sim_json
 from home.views import home_view
 import json
 
+from server.routing.Graph import Graph
+from server.routing.containers import Connection, Direction
+from warehouse.server_setup import *
+from server.Scheduler import Scheduler
 
+def getDirection(dir):
+    if dir == 'from':
+        direction = Direction.INCOMING
+    elif dir == 'to':
+        direction = Direction.OUTGOING
+    elif dir == 'bi':
+        direction = Direction.BIDIRECTIONAL
+    return direction
+
+def get_node_dict():
+    nodes = {}
+    for n in node.objects.all():
+        data = []
+        if n.right_node:
+            direction = getDirection(n.right_node_direction)
+            data.append(Connection(n.right_node.id,n.right_node_distance,n.right_node_priority,direction))
+        else:
+            data.append(None)
+        if n.down_node:
+            direction = getDirection(n.down_node_direction)
+            data.append(Connection(n.down_node.id,n.down_node_distance,n.down_node_priority,direction))
+        else:
+            data.append(None)
+        if n.left_node:
+            direction = getDirection(n.left_node_direction)
+            data.append(Connection(n.left_node.id,n.left_node_distance,n.left_node_priority,direction))
+        else:
+            data.append(None)
+        if n.up_node:
+            direction = getDirection(n.up_node_direction)
+            data.append(Connection(n.up_node.id,n.up_node_distance,n.up_node_priority,direction))
+        else:
+            data.append(None)
+        nodes[n.id] = data
+    return nodes
 
 
 def importJSON(text):
@@ -50,11 +89,9 @@ def importJSON(text):
 
         obj.save()
 
-        #if item.get('type') == 'Robot':
-        #    robot.objects.create(ip=ip,node=obj)
         if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
-
+            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=3)
+    sched = Scheduler(Graph(get_node_dict()))
     return True
 
 # Create your views here.
@@ -103,7 +140,7 @@ def map_gen_view(request):
         except:
             pass
         else:
-            print(dbjson)
+            #print(dbjson)
             if importJSON(dbjson):
                 print("Successfully Parsed!")
                 messages.success(request, 'JSON Loaded')

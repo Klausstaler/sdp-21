@@ -5,18 +5,29 @@ from server.Task import Task, TaskType
 from server.Robot import Robot
 from server.routing.Graph import Graph, path_to_commands
 
+from design.models import task as tsk
+from design.models import robot as rbt
+from design.models import hidden_package as hp
 
 class CentralServer:
     def __init__(self, scheduler: Scheduler, network_interface: NetworkInterface):
         self.scheduler = scheduler
         self.network_interface = network_interface
 
-    def move_parcel(self, parcel: Parcel, final_location):
+    def move_parcel(self, id, parcel: Parcel, final_location):
         robot = self.scheduler.get_free_robot()
 
         tasks = []
         # this is really shitty encapsulation, but I do not have time to fix it ahhhh
         graph = self.scheduler.graph
+        #DB-Set robot busy
+        r = rbt.objects.get(name=str(robot.id))
+        r.status = True
+        r.save()
+        #DB-Create task
+        pack = hp.objects.get(pk=id)
+        current_task = tsk.objects.create(robot=r,package=pack)
+
         # Shelves are only assigned to one node. We grab the node id of that node and route our robot to there
         attached_node = graph.graph[parcel.location_id].all_connections[0].node_id
         path = graph.get_path(robot.pos_id, attached_node)
@@ -44,9 +55,15 @@ class CentralServer:
         print(f"Sending tasks to robot {robot.id}")
         self.do_tasks(robot)
 
-    def do_tasks(self, robot: Robot):
+    def do_tasks(self, robot: Robot,):
         while self.scheduler.has_tasks(robot):
             self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
+        #DB-Release robot, remove task
+        r = rbt.objects.get(name=str(id))
+        current_task = tsk.objects.get(robot=r)
+        current_task.hidden_package.delete()
+        r.delete()
+
 
 ################# For line following demo world.
 # Task(TaskType.REACH_NODE, {"node": "3"}),

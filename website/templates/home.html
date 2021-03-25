@@ -20,13 +20,6 @@
             <td>{{task.robot.name}}</th>
             <td>{{task.package.old_id}}</td>
             <td>{{task.package.details}}</td>
-            <td>{% if task.holding_package == 0 %}
-                Robot moving towards the package
-                {% endif %}
-                {% if task.holding_package == 1 %}
-                Package acquired. Robot moving towards drop zone
-                {% endif %}
-            </td>
           </tr>
           {% endfor %}
         </tbody>
