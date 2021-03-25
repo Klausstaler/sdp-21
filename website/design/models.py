@@ -36,7 +36,8 @@ class shelf(models.Model):
     class Meta:
         verbose_name_plural = 'Shelves'
     def __str__(self):
-        return str(self.id)
+        a = 'Shelf of node: '+str(self.node)
+        return a
 class package(models.Model):
     id = models.IntegerField(verbose_name='id',primary_key=True)
     shelf = models.ForeignKey(shelf,on_delete=models.CASCADE, related_name="Shelf")
