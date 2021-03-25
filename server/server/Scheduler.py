@@ -11,22 +11,23 @@ import time
 
 class Scheduler:
     def __init__(self, graph: Graph):
-        self.free_robots: Set[Robot] = set()
+        self.free_robots: Dict[int, Robot] = dict()
         self.open_tasks: Dict[Robot, deque[Task]] = defaultdict(deque)
         self.graph = graph
         self.DIST_THRESHOLD = 3
 
     def add_free_robot(self, robot: Robot) -> None:
-        self.graph.graph[robot.pos_id].occupying_robot = robot
-        self.free_robots.add(robot)
+        if robot.id not in self.free_robots:
+            self.graph.graph[robot.pos_id].occupying_robot = robot
+            self.free_robots[robot.id] = robot
 
     def get_free_robot(self) -> Robot:
-        return next(iter(self.free_robots))
+        return next(iter(self.free_robots.values()))
 
     def add_tasks(self, robot: Robot, tasks: List[Task]) -> None:
         self.open_tasks[robot].extend(tasks)
         if tasks and robot in self.free_robots:
-            self.free_robots.remove(robot)
+            del self.free_robots[robot.id]
 
     def has_tasks(self, robot: Robot) -> bool:
         return len(self.open_tasks[robot]) > 0
@@ -39,7 +40,7 @@ class Scheduler:
                 self.check_collisions(robot, int(next_task.params["node"]))
             return next_task
         # no tasks open, add to free robots
-        self.free_robots.add(robot)
+        self.free_robots[robot.id] = robot
         return None
 
     def check_collisions(self, robot: Robot, node_id: int) -> None:
