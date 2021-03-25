@@ -50,7 +50,7 @@ class CentralServer:
             tasks.append(
                 Task(TaskType.TURN_UNTIL, {"n": lines_to_turn})
             )
-        tasks.extend(self.scheduler.graph.get_commands(attached_node, 0)) # move back to some position
+        tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
         self.do_tasks(robot)
