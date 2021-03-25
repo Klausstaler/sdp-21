@@ -1,0 +1,1 @@
+{ "dimensions" : [10,10], "nodes" : {"27" :{"type":"rfid", "neighbours" : {"right":[31,2,"bi",2]},"coords" : [1,2]},"31" :{"type":"rfid", "neighbours" : {"left":[27,2,"bi",2]},"coords" : [5,2]}}}
