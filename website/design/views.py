@@ -7,6 +7,8 @@ from home.views import home_view
 import json
 import threading
 
+from warehouse.server_setup import *
+
 
 
 
@@ -53,7 +55,7 @@ def importJSON(text):
             obj.left_node_priority = nb.get('left')[3]
 
         obj.save()
-
+        sched = Scheduler(Graph(get_node_dict()))
     #if item.get('type') == 'Robot':
     #    robot.objects.create(ip=ip,node=obj)
         if item.get('type') == 'shelf':
