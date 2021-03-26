@@ -66,7 +66,7 @@ def addRobots():
         for r in robots:
             if not r.status:
                 robot_size = Size(height=r.height, length=r.length, width=r.width)
-                sched.add_free_robot(Robot(r.name, robot_size, r.node_id))
+                sched.add_free_robot(Robot(r.name, robot_size, r.node_id.id))
                 added_robots = True
         if added_robots:
             break
@@ -75,4 +75,4 @@ def addRobots():
             time.sleep(2)
 
 def requestParcel(id, parcel, drop_id):
-    server.move_parcel(id, parcel, None,drop_id)
+    server.move_parcel(id, parcel,drop_id)

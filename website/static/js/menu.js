@@ -3,6 +3,9 @@ console.log("This is the new JS!");
 var modal = document.getElementById("node_menu")
 var node_menu = M.Modal.getInstance(modal)
 node_menu.options.dismissible = false;
+var rows;
+var columns;
+var spacing;
 
 function post_data(json_str){
 
@@ -25,7 +28,6 @@ function post_data(json_str){
           var json_str = get_json_db(nodes[i]);
           //console.log(i + " " +nodes.length);
           str += json_str + ",";
-  
         }
       }
       str = str.slice(0,-1) + "}";
@@ -217,7 +219,7 @@ function post_data(json_str){
       console.log("Drawing Now!!")
       // Draw Distance
       dist.className = "dist-label";
-      dist.style.left = String(start - 25)+"px";
+      dist.style.left = String(start - 20)+"px";
       dist.style.top = String(mid)+"px";
   //    dist.style.width = offset + "px";
       dist.style.visibility = "visible";
@@ -662,13 +664,7 @@ function post_data(json_str){
         node_menu.close();
         console.log(pair);
     }
-  
-  
-    
-    var rows;
-    var columns;
-    var spacing;
-    
+
     function createGrid(){
         document.getElementById("dim-form").style.display = "none";
         document.getElementById("grid-builder").style.display = "block";
@@ -682,8 +678,8 @@ function post_data(json_str){
     
       var nodes = 0;
     
-      for(var i = 0; i < columns - 1; i++){
-        for(var x = 0; x < rows - 1; x++){
+      for(var i = 0; i < columns; i++){
+        for(var x = 0; x < rows; x++){
           var row = String(x);
           var colunm = String(i);
           var id = "[" + row + "," + colunm + "]";
@@ -694,7 +690,7 @@ function post_data(json_str){
     //        addBox(id, left, top);
     
     
-          if(x == rows - 1|| i == columns - 1){
+          if(x == rows || i == columns){
     
             add_node(nodes, id, left + spacing, top);
             nodes += 1;
@@ -709,10 +705,7 @@ function post_data(json_str){
             add_node(nodes, id, left, top);
             nodes += 1;
           }
-    
           // var box = document.getElementById(id);
-    
-    
         }
       }
     }

@@ -1,0 +1,141 @@
+#VRML_SIM R2021a utf8
+        WorldInfo {
+
+        coordinateSystem "NUE"
+            contactProperties [
+                ContactProperties {
+                    material1 "InteriorWheelMat"
+                    coulombFriction [
+                        1.8, 0, 0.2
+                    ]
+                    frictionRotation -0.9648 0
+                    bounce 0
+                    forceDependentSlip [
+                        10, 0
+                    ]
+                }
+                ContactProperties {
+                    material1 "ExteriorWheelMat"
+                    coulombFriction [
+                        1.8, 0, 0.2
+                    ]
+                    frictionRotation 0.9648 0
+                    bounce 0
+                    forceDependentSlip [
+                        10, 0
+                    ]
+                }
+        ]
+        }
+        Viewpoint {
+        orientation -1 0 0 1
+        position 0 4 3
+        }
+        TexturedBackground {
+            skybox FALSE
+            skyColor [ 0.156863 0.247059 0.388235 ]
+        }     
+        TexturedBackgroundLight {
+        texture "dusk"
+        }
+        DEF TRANSPORT MainRobot {
+        }RectangleArena {
+        translation 0 0 0
+        floorSize 32 32
+        floorTileSize 32 32
+        floorAppearance PBRAppearance {
+            baseColorMap ImageTexture {
+url [
+                "textures/warehouse.wbt.jpg"
+            ]
+            repeatS FALSE
+            repeatT FALSE
+            }
+            baseColor 1 1 1
+            transparency 0
+            roughness 0.2
+            metalness 0
+        }
+        wallThickness 0.01
+        wallHeight 1
+        }
+NFCTag {
+        translation -4.0 0.001 -3.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "63"
+        }
+Shelf {
+        translation -2.0 3 -3.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "Z3M9GUP"
+        }
+NFCTag {
+        translation -2.5 0.001 -3.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "65"
+        }
+NFCTag {
+        translation -7.0 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "90"
+        }
+NFCTag {
+        translation -4.0 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "93"
+        }
+Shelf {
+        translation -2.0 3 -1.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "1RP8C3T"
+        }
+NFCTag {
+        translation -2.5 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "95"
+        }
+NFCTag {
+        translation -4.0 0.001 1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "123"
+        }
+Shelf {
+        translation -2.0 3 1.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "30S2ULB"
+        }
+NFCTag {
+        translation -2.5 0.001 1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "125"
+        }
