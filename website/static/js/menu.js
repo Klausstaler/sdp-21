@@ -52,7 +52,9 @@ function post_data(json_str){
     }
 
     function export_js_gen(){
-      str = "{ \"dimensions\" : " + "[" + rows + "," + columns + "], \"nodes\" : {" ;
+      compartments = document.getElementById("numberCompartments").value;
+      height = document.getElementById("height").value;
+      str = "{ \"dimensions\" : " + "[" + String(rows) + "," + String(columns) + "], \"compartments\" : " + String(compartments) + ", \"shelveHeight\" : " + String(height) + ", \"nodes\" : {";
       var nodes = document.getElementsByClassName("node");
       for(var i = 0; i < nodes.length; i++){
         if(nodes[i].getAttribute("type") != "undefined"){
@@ -63,7 +65,7 @@ function post_data(json_str){
         }
       }
       str = str.slice(0,-1) + "}}";
-     // //console.log(str);
+      console.log(str);
       return str;
      }
    
@@ -639,8 +641,8 @@ function post_data(json_str){
     
       for(var i = 0; i < columns; i++){
         for(var x = 0; x < rows; x++){
-          var row = String(x + 1);
-          var colunm = String(i + 1);
+          var row = String(x);
+          var colunm = String(i);
           var id = "[" + row + "," + colunm + "]";
           // var x = row;
           // var y = column;

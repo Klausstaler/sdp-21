@@ -17,8 +17,9 @@ import threading
 #from warehouse_generator import create_world
 import json_parser as js
 from warehouse_generator import create_world
+import json
 
-def sim_json(json):
+def sim_json(json_str):
     # floor_size = [4,4]
 
     # sys.path.insert(0, "../Warehouse Generation/json_parser.py")
@@ -27,14 +28,17 @@ def sim_json(json):
     print("Sim JSON")
 
     file = open("../Warehouse Generation/json.txt", "w+")
-    file.write(json)
+    file.write(json_str)
     file.close()
+    dic = json.loads(json_str)
+    shelveHeight = dic.get('shelveHeight')
+    compartments = dic.get('compartments')
+    print(dic)
+    print(f"height: {shelveHeight}, compartments: {compartments}")
+    # print(1)
 
-
-    print(1)
-
-    shelf_size = [1, 1, 1]
-    number_of_racks = 3
+    shelf_size = [1, shelveHeight, 1]
+    number_of_racks = compartments
     line_distance_from_shelf = 0.2
     # grid_array = [
     #     [2,2,2,5],
@@ -48,6 +52,7 @@ def sim_json(json):
     grid_ids = js.grid()[2]
 
     print(grid_ids)
+    print(grid_array)
     create_world("warehouse.wbt", floor_size, shelf_size, number_of_racks, line_distance_from_shelf, grid_array, grid_ids)
     print("World Successfully generated.")
     # pass
