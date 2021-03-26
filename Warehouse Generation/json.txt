@@ -1,1 +1,1 @@
-{ "dimensions" : [1,1], "nodes" : {"0" :{"type":"rfid", "neighbours" : null,"coords" : [0,0]},"1" :{"type":"rfid", "neighbours" : null,"coords" : [0,0]},"2" :{"type":"rfid", "neighbours" : null,"coords" : [0,0]},"3" :{"type":"rfid", "neighbours" : null,"coords" : [0,0]}}}
+{ "dimensions" : [15,15], "nodes" : {"2" :{"type":"shelf", "neighbours" : {"right":[5,15,"to",50]},"coords" : [2,0]},"5" :{"type":"shelf", "neighbours" : {"left":[2,15,"from",50]},"coords" : [5,0]}}}
