@@ -127,7 +127,7 @@ function post_data(json_str){
   
       // Draw Distance
       dist.className = "dist-label";
-      dist.style.left = String(mid)+"px";
+      dist.style.left = String(mid -10)+"px";
       dist.style.top = String(end - 25)+"px";
   //    dist.style.width = offset + "px";
       dist.style.visibility = "visible";
@@ -155,9 +155,7 @@ function post_data(json_str){
     function connect_via_y(Node1, Node2, d,boxHeight){ //top to bottom
       var node1;
       var node2;
-  
-      var mid = end + (offset/2);
-  
+
       if(Number(get_coords(Node1.getAttribute("coords"))[1]) > Number(get_coords(Node2.getAttribute("coords"))[1])){
         node1 = Node2;
         node2 = Node1;
@@ -165,8 +163,8 @@ function post_data(json_str){
       }else{
         node1 = Node1;
         node2 = Node2;
-
       }
+
       var distance = Math.sqrt((get_coords(node2.getAttribute("coords"))[1] - get_coords(node1.getAttribute("coords"))[1])**2);
       var offset = boxHeight * distance;
       var start = Number(10 + Number(node1.style.left.slice(0,-2)));
@@ -177,8 +175,8 @@ function post_data(json_str){
       //console.log("Drawing Now!!")
       // Draw Distance
       dist.className = "dist-label";
-      dist.style.left = String(start - 20)+"px";
-      dist.style.top = String(mid)+"px";
+      dist.style.left = String(start - 15)+"px";
+      dist.style.top = String(end + (offset/2) - 10)+"px";
   //    dist.style.width = offset + "px";
       dist.style.visibility = "visible";
       dist.style.position = "absolute";
