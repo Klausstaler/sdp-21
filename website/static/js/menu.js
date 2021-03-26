@@ -3,6 +3,9 @@ console.log("This is the new JS!");
 var modal = document.getElementById("node_menu")
 var node_menu = M.Modal.getInstance(modal)
 node_menu.options.dismissible = false;
+var rows;
+var columns;
+var spacing;
 
 function post_data(json_str){
 
@@ -661,13 +664,7 @@ function post_data(json_str){
         node_menu.close();
         console.log(pair);
     }
-  
-  
-    
-    var rows;
-    var columns;
-    var spacing;
-    
+
     function createGrid(){
         document.getElementById("dim-form").style.display = "none";
         document.getElementById("grid-builder").style.display = "block";

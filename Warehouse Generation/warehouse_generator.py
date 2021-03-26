@@ -262,27 +262,27 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 full_file_string += tag_obj
 
             #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
-            elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
+            # elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
+            elif grid_ids[i][j] != -1:
                 tag_x_coord = webots_x + ((shelf_size[0]/2))
                 tag_y_coord = 0.001
                 tag_z_coord = webots_z + ((shelf_size[2]/2))
-
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
                 tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
 
-            #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
-            elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
-
-                #CHECHKS IF LINE IS ATTACHED TO A SHELF
-                if(connected_to_shelf(placement_grid,i,j)):
-                    tag_x_coord = webots_x + ((shelf_size[0]/2))
-                    tag_y_coord = 0.001
-                    tag_z_coord = webots_z + ((shelf_size[2]/2))
-
-                    #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
-                    full_file_string += tag_obj
+            # #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
+            # elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
+            #
+            #     #CHECHKS IF LINE IS ATTACHED TO A SHELF
+            #     if(connected_to_shelf(placement_grid,i,j)):
+            #         tag_x_coord = webots_x + ((shelf_size[0]/2))
+            #         tag_y_coord = 0.001
+            #         tag_z_coord = webots_z + ((shelf_size[2]/2))
+            #
+            #         #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
+            #         tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
+            #         full_file_string += tag_obj
 
             webots_x += max(shelf_size)
         webots_x = -(j_conversion_x)
