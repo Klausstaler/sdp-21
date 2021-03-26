@@ -1,4 +1,4 @@
-console.log("This is the new JS!");
+//console.log("This is the new JS!");
 // Setup node menu
 var modal = document.getElementById("node_menu")
 var node_menu = M.Modal.getInstance(modal)
@@ -13,7 +13,7 @@ function post_data(json_str){
     var url = 'get_data.php';
     var params = 'orem=ipsum&name=binny';
     http.open('POST', "/generator/", true);
-    console.log(json_str)
+    //console.log(json_str)
     
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
@@ -26,12 +26,12 @@ function post_data(json_str){
       for(var i = 0; i < nodes.length; i++){
         if(nodes[i].getAttribute("type") != "undefined"){
           var json_str = get_json_db(nodes[i]);
-          //console.log(i + " " +nodes.length);
+          ////console.log(i + " " +nodes.length);
           str += json_str + ",";
         }
       }
       str = str.slice(0,-1) + "}";
-      //console.log(str);
+      ////console.log(str);
       post_data(str)
       return str;
     }
@@ -40,14 +40,14 @@ function post_data(json_str){
     function export_json(){
          var str = export_js_gen() + "||" + export_js_db()
          post_data(str)
-         //console.log(str)
+         ////console.log(str)
         return str
     }
     function get_json_db(node){
       var id = node.id;
       var type = node.getAttribute("type");
       var neighbours = node.getAttribute("neighbours");
-    // console.log(str);
+    // //console.log(str);
        return "\"" + id + "\" :{" + "\"type\":\"" + type + "\", \"neighbours\" : " + neighbours + "}"
     }
 
@@ -57,13 +57,13 @@ function post_data(json_str){
       for(var i = 0; i < nodes.length; i++){
         if(nodes[i].getAttribute("type") != "undefined"){
           var json_str = get_json_gen(nodes[i]);
-     //     console.log(i + " " +nodes.length);
+     //     //console.log(i + " " +nodes.length);
           str += json_str + ",";
    
         }
       }
       str = str.slice(0,-1) + "}}";
-     // console.log(str);
+     // //console.log(str);
       return str;
      }
    
@@ -106,33 +106,16 @@ function post_data(json_str){
     function connect_via_x(Node1, Node2, d, boxWidth){ // left to right
       var node1;
       var node2;
-      if(get_coords(Node1.getAttribute("coords"))[0] > get_coords(Node2.getAttribute("coords"))[0]){
+      if(Number(get_coords(Node1.getAttribute("coords"))[0]) > Number(get_coords(Node2.getAttribute("coords"))[0])){
         node1 = Node2;
         node2 = Node1;
-  //    var arrow = document.createElement("div")
-  //    arrow.appendChild(create_arrow("left"))
-  ////    arrow.className = "arrow-down";
-  //    arrow.style.left = String(Number(10 + Number(node2.style.left.slice(0,-2))) - 4)+"px"
-  ////    console.log(end);
-  //    arrow.style.top = String(Number(6 + Number(node1.style.top.slice(0,-2))) - 6)+"px";
-  //    arrow.style.visibility = "visible";
-  //    arrow.style.position = "absolute";
-    
       }else{
         node1 = Node1;
         node2 = Node2;
-  //                var arrow = document.createElement("div")
-  //    arrow.appendChild(create_arrow("right"))
-  ////    arrow.className = "arrow-down";
-  //    arrow.style.left = String(Number(10 + Number(node1.style.left.slice(0,-2))) - 4)+"px"
-  ////    console.log(end);
-  //    arrow.style.top = String(Number(6 + Number(node1.style.top.slice(0,-2))) - 6)+"px";
-  //    arrow.style.visibility = "visible";
-  //    arrow.style.position = "absolute";
       }
       var distance = Math.sqrt((get_coords(node2.getAttribute("coords"))[0] - get_coords(node1.getAttribute("coords"))[0])**2);
       var offset = boxWidth * distance;
-      //console.log(String(distance));
+      ////console.log(String(distance));
     
       var line = document.createElement("div");
       var dist = document.createElement("div");
@@ -156,67 +139,42 @@ function post_data(json_str){
   
       line.style.left = String(start)+"px";
       line.style.top = String(end)+"px";
-      //console.log(line.style.top);
+      ////console.log(line.style.top);
       line.style.width = offset + "px";
       line.style.height = "0px";
       line.style.visibility = "visible";
-      hide_Nodes(Node1.id, Node2.id, "Horizontal");
       line.style.position = "absolute";
-  
-      console.log(mid);
-      console.log(dist.style.left);
+      //console.log(mid);
+      //console.log(dist.style.left);
+      hide_Nodes(Node1.id, Node2.id, "Horizontal");
       document.getElementsByClassName("connections")[0].appendChild(line);
       document.getElementsByClassName("connections")[0].appendChild(dist);
-      //    document.getElementsByClassName("connections")[0].appendChild(arrow);
-  
+
     }
     
-    function connect_via_y(Node1, Node2, d,boxHeight){ //top to bottm
+    function connect_via_y(Node1, Node2, d,boxHeight){ //top to bottom
       var node1;
       var node2;
   
       var mid = end + (offset/2);
   
-      if(get_coords(Node1.getAttribute("coords"))[1] > get_coords(Node2.getAttribute("coords"))[1]){
+      if(Number(get_coords(Node1.getAttribute("coords"))[1]) > Number(get_coords(Node2.getAttribute("coords"))[1])){
         node1 = Node2;
         node2 = Node1;
-  
-  //          var arrow = document.createElement("div")
-  //    arrow.appendChild(create_arrow("up"))
-  ////    arrow.className = "arrow-down";
-  //    arrow.style.left = String(Number(10 + Number(node1.style.left.slice(0,-2))) - 4)+"px"
-  ////    console.log(end);
-  //    arrow.style.top = String(Number(6 + Number(node1.style.top.slice(0,-2))) - 6)+"px";
-  //    arrow.style.visibility = "visible";
-  //    arrow.style.position = "absolute";
     
       }else{
         node1 = Node1;
         node2 = Node2;
-  
-  //                var arrow = document.createElement("div")
-  //    arrow.appendChild(create_arrow("down"))
-  ////    arrow.className = "arrow-down";
-  //    arrow.style.left = String(Number(10 + Number(node1.style.left.slice(0,-2))) - 4)+"px"
-  ////    console.log(end);
-  //    arrow.style.top = String(Number(6 + Number(node2.style.top.slice(0,-2))) - 6)+"px";
-  //    arrow.style.visibility = "visible";
-  //    arrow.style.position = "absolute";
+
       }
       var distance = Math.sqrt((get_coords(node2.getAttribute("coords"))[1] - get_coords(node1.getAttribute("coords"))[1])**2);
-  //    console.log(distance);
       var offset = boxHeight * distance;
-  
       var start = Number(10 + Number(node1.style.left.slice(0,-2)));
       var end = Number(6 + Number(node1.style.top.slice(0,-2)));
-  
       var line = document.createElement("div");
       var dist = document.createElement("div");
       dist.appendChild(document.createTextNode(d));
-  
-  
-  
-      console.log("Drawing Now!!")
+      //console.log("Drawing Now!!")
       // Draw Distance
       dist.className = "dist-label";
       dist.style.left = String(start - 20)+"px";
@@ -247,29 +205,29 @@ function post_data(json_str){
     function add_neighbour(n1, n2, direction_n1_n2, Distance, direction, priority){
       Node1 = n1.getAttribute("id");
       Node2 = n2.getAttribute("id");
+      //console.log("Node1 ID: " + Node1);
+      //console.log("Node2 ID: " + Node2);
+      //console.log(direction_n1_n2)
+
       directions = ["up", "right", "down", "left"];
       var second = directions.indexOf(direction_n1_n2);
-      console.log("direction "+direction_n1_n2);
-      console.log(second);
+      //console.log("direction "+direction_n1_n2);
+      //console.log(second);
       if(second <= 1){
         second = directions[second + 2];
       }else{
         second = directions[second - 2];
       }
-      console.log(second);
+      //console.log(second);
   
       var n_dir = "bi";
       if(direction == "to"){
           n_dir = "from";
       }else if(direction == "from"){
           n_dir = "to";
-      }/*else if(direction == "bi"){
-          n_dir == "bi";
-      }*/
-  
-  
-  
-  
+      }
+
+
       if(n1.hasAttribute("neighbours")){
         n1.setAttribute("neighbours", n1.getAttribute("neighbours").slice(0, -1) + ",\"" + direction_n1_n2 + "\":[" + Node2 + "," + Distance + ",\"" + direction + "\"," + priority + "]}");
       }else{
@@ -282,7 +240,7 @@ function post_data(json_str){
         n2.setAttribute("neighbours", "{\"" + second + "\":[" + Node1 + "," + Distance + ",\"" + n_dir + "\"," + priority + "]}");
       }
     
-      console.log(n1.neighbours);
+      //console.log(n1.neighbours);
     
     }
     
@@ -299,7 +257,7 @@ function post_data(json_str){
   
       var weight = prompt("Please Enter The Priority of this lane(0-100)", "");
       if (weight != null) {
-        console.log(weight)
+        //console.log(weight)
         w = weight;
       }
   
@@ -317,7 +275,7 @@ function post_data(json_str){
       nodes = document.getElementsByClassName("node");
       for(var i = 0; i < nodes.length; i++){
           if(nodes[i].getAttribute("coords") == "[" + x + "," + y + "]"){
-              console.log("Found node id! " + nodes[i].getAttribute("id"));
+              //console.log("Found node id! " + nodes[i].getAttribute("id"));
               return nodes[i];
           }
       };
@@ -332,14 +290,14 @@ function post_data(json_str){
           start_y = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[1]);
           end_y = parseInt(end.getAttribute("coords").replace("]","").replace("[","").split(",")[1]);
           difference = start_y - end_y;
-          console.log(start_y - end_y);
+          //console.log(start_y - end_y);
           for(var i = 1; i < ((difference)**2)**0.5;i++){
               if(Math.sign(difference) == -1){
-                console.log("hi");
+                //console.log("hi");
                 var node = get_node_by_coords(x, start_y + i);
                 node.style.visibility = "hidden";
               }else if(Math.sign(difference) == 1){
-                console.log("hi");
+                //console.log("hi");
                 var node = get_node_by_coords(x, start_y - i);
                 node.style.visibility = "hidden";
               }
@@ -349,14 +307,14 @@ function post_data(json_str){
           start_x = parseInt(start.getAttribute("coords").replace("]","").replace("[","").split(",")[0]);
           end_x = parseInt(end.getAttribute("coords").replace("]","").replace("[","").split(",")[0]);
           difference = start_x - end_x;
-          console.log(start_x - end_x);
+          //console.log(start_x - end_x);
           for(var i = 1; i < ((difference)**2)**0.5;i++){
               if(Math.sign(difference) == -1){
-                console.log("hi");
+                //console.log("hi");
                 var node = get_node_by_coords(start_x + i, y);
                 node.style.visibility = "hidden";
               }else if(Math.sign(difference) == 1){
-                console.log("hi");
+                //console.log("hi");
                 var node = get_node_by_coords(start_x - i,y);
                 node.style.visibility = "hidden";
               }
@@ -369,42 +327,45 @@ function post_data(json_str){
     function connect(Node1,Node2,attr){
       var n1 = document.getElementById(Node1);
       var n2 = document.getElementById(Node2);
-      console.log(get_coords(n1.getAttribute("coords")), get_coords(n2.getAttribute("coords")));
+      //console.log(get_coords(n1.getAttribute("coords")), get_coords(n2.getAttribute("coords")));
   
       var attributes = attr.split(",");
       var Distance = attributes[0];
-      var direction = attributes[1];
+      var connection_direction = attributes[1]; // bi
       var priority = attributes[2];
   
-      console.log(Distance);
-      console.log(direction);
-      console.log(priority);
+      //console.log(Distance);
+      //console.log(connection_direction);
+      //console.log(priority);
   
-      if(get_coords(n1.getAttribute("coords"))[0] == get_coords(n2.getAttribute("coords"))[0]){
+      if(Number(get_coords(n1.getAttribute("coords"))[0]) == Number(get_coords(n2.getAttribute("coords"))[0])){
         connect_via_y(n1, n2, Distance, 50);
-        if(get_coords(n1.getAttribute("coords"))[1] > get_coords(n2.getAttribute("coords"))[1]){
-          add_neighbour(n1,n2,"up", Distance, direction, priority);
+        if(Number(get_coords(n1.getAttribute("coords"))[1]) > Number(get_coords(n2.getAttribute("coords"))[1])){
+          add_neighbour(n1,n2,"up", Distance, connection_direction, priority);
         }else{
-          add_neighbour(n1,n2,"down", Distance, direction, priority);
+          add_neighbour(n1,n2,"down", Distance, connection_direction, priority);
         }
-      }else if(get_coords(n1.getAttribute("coords"))[1] == get_coords(n2.getAttribute("coords"))[1]){
+      }else if(Number(get_coords(n1.getAttribute("coords"))[1]) == Number(get_coords(n2.getAttribute("coords"))[1])){
         connect_via_x(n1, n2, Distance, 50);
-        if(get_coords(n1.getAttribute("coords"))[0] > get_coords(n2.getAttribute("coords"))[0]){
-          add_neighbour(n1,n2,"left", Distance, direction, priority);
+        console.log("FOR GOD DANM")
+        console.log(get_coords(n1.getAttribute("coords"))[0])
+        console.log(get_coords(n2.getAttribute("coords"))[0])
+        if(Number(get_coords(n1.getAttribute("coords"))[0]) > Number(get_coords(n2.getAttribute("coords"))[0])){
+          console.log("Selecting Left")
+          add_neighbour(n1,n2,"left", Distance, connection_direction, priority);
         }else{
-          add_neighbour(n1,n2,"right", Distance, direction, priority);
+          console.log("Selecting Right")
+          add_neighbour(n1,n2,"right", Distance, connection_direction, priority);
         }
       }else{
-        console.log("sorry cannot link");
+        //console.log("sorry cannot link");
       }
     
     
-      console.log("Connected.");
+      //console.log("Connected.");
       connecting = false;
-      console.log("WIPING PAIR");
+      //console.log("WIPING PAIR");
       pair = [];
-    
-    
       // document.getElementsByClassName("grid")[0].appendChild(div);
     
     }
@@ -423,7 +384,7 @@ function post_data(json_str){
       }
     
       for(var i=0; i < node.length; i++){
-        console.log(node[i].getAttribute("type"));
+        //console.log(node[i].getAttribute("type"));
         if(node[i].getAttribute("type") == "undefined" && node[i].style.visibility == "visible"){
           node[i].style.visibility = "hidden";
         }else if (node[i].getAttribute("type") == "undefined"){
@@ -456,7 +417,7 @@ function post_data(json_str){
       const unbracket = String(str).replace(']','').replace('[','').split(",");
       var x = unbracket[0];
       var y = unbracket[1];
-      // console.log(x,y);
+      // //console.log(x,y);
       return unbracket;
   
     }
@@ -465,13 +426,13 @@ function post_data(json_str){
     var pair = [];
     function connect_button(){
       connecting = true;
-      console.log(connecting);
+      //console.log(connecting);
     }
   
       function add_connect_node(id){
         if(pair.length < 2){
         pair.push(id);
-        console.log("I'm here");
+        //console.log("I'm here");
       }
   
       if(pair.length >= 2){
@@ -480,16 +441,16 @@ function post_data(json_str){
           // Show the form
           document.getElementById("lane_info").style.display = "block";
           // Set up submission
-          console.log("Opened connection menu");
+          //console.log("Opened connection menu");
           // Setup the submission button
-          console.log(pair);
+          //console.log(pair);
           const getLaneData = () => {
             // Parse the form data
                 const dir = document.querySelector('input[name="direction"]:checked').value;
                 const priority = document.getElementById("priority").value;
                 const dist = document.getElementById("distance").value;
                 var parsedStr = `${dist},${dir},${priority},`;
-                console.log(parsedStr);
+                //console.log("HERE!!!!!" + parsedStr);
                 connect(pair[0],pair[1],parsedStr);
                 node_menu.close();
                 // Show the buttons
@@ -504,7 +465,7 @@ function post_data(json_str){
   
     
     function node_options(id,menu){
-       console.log("here");
+       //console.log("here");
       // var menu = document.getElementsByClassName("item-selector")[0];
       // var selector = document.getElementById("selector");
       // menu.style.visibility = "visible";
@@ -515,7 +476,7 @@ function post_data(json_str){
     
       if(selector == "connect"){
   //      document.getElementById(id).style.background = "Blue";
-          console.log("Connecting...");
+          //console.log("Connecting...");
           connecting = true;
           add_connect_node(id);
       }
@@ -534,7 +495,7 @@ function post_data(json_str){
     }
   
       function set_type_radio(id){
-      // console.log("here");
+      // //console.log("here");
       // var menu = document.getElementsByClassName("item-selector")[0];
       // var selector = document.getElementById("selector");
       // menu.style.visibility = "visible";
@@ -557,8 +518,8 @@ function post_data(json_str){
             document.getElementById(id).style.background = "White";
       }
   
-      console.log(String(document.getElementById(id).style.background));
-      console.log(String(selected));
+      //console.log(String(document.getElementById(id).style.background));
+      //console.log(String(selected));
   //    menu.style.visibility = "hidden";
   //    menu.remove();
   //    grid.style.visibility = "visible";
@@ -579,19 +540,19 @@ function post_data(json_str){
       document.getElementsByClassName("grid")[0].appendChild(div);
       // What happens when you click a node
       document.getElementById(id).onclick = function() {
-         console.log(connecting);
+         //console.log(connecting);
   
         if(div.getAttribute("type") == "undefined" || document.getElementById("node_type").value == "" ){
-            console.log("Indeterminate state");
+            //console.log("Indeterminate state");
               set_type_radio(id);
         }else if(connecting == true){
-              console.log("Connecting");
+              //console.log("Connecting");
               add_connect_node(div.id);
         }else{
-        console.log(div.getAttribute("type"));
+        //console.log(div.getAttribute("type"));
         if(!connecting){
-            console.log("CLICK - not connecting");
-            console.log(pair);
+            //console.log("CLICK - not connecting");
+            //console.log(pair);
             // Display the menu (modal)
             node_menu.open();
         //   var menu = document.getElementsByClassName("item-selector")[0].cloneNode(true);
@@ -600,7 +561,7 @@ function post_data(json_str){
         //   var grid = document.getElementsByClassName("grid")[0];
         //   menu.style.visibility = "visible";
         //   grid.style.visibility = "hidden";
-        //   console.log(menu.childNodes);
+        //   //console.log(menu.childNodes);
         //   menu.childNodes[5].addEventListener("click", function(){
         //           node_options(id,menu);
         //   });
@@ -647,7 +608,7 @@ function post_data(json_str){
 }
 
     function connect_option(id){
-        console.log("Connecting...");
+        //console.log("Connecting...");
         connecting = true;
         add_connect_node(id);
         node_menu.close();
@@ -660,9 +621,9 @@ function post_data(json_str){
     }
 
     function cancel_option(id){
-        console.log("Cancelling");
+        //console.log("Cancelling");
         node_menu.close();
-        console.log(pair);
+        //console.log(pair);
     }
 
     function createGrid(){
@@ -680,8 +641,8 @@ function post_data(json_str){
     
       for(var i = 0; i < columns; i++){
         for(var x = 0; x < rows; x++){
-          var row = String(x);
-          var colunm = String(i);
+          var row = String(x + 1);
+          var colunm = String(i + 1);
           var id = "[" + row + "," + colunm + "]";
           // var x = row;
           // var y = column;

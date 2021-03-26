@@ -73,7 +73,7 @@ Shelf {
         numRacks 1 3 1
         baseDim 1 0.02 1
         legDim 0.05 1 0.05
-        name "Z3M9GUP"
+        name "A42QQA3"
         }
 NFCTag {
         translation -2.5 0.001 -3.0
@@ -82,6 +82,30 @@ NFCTag {
         emissiveColor 0 0 0
         transmissionRange 0.20 
         informationSent "65"
+        }
+Shelf {
+        translation -1.0 3 -3.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "T1KUDEN"
+        }
+NFCTag {
+        translation -0.5 0.001 -3.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "66"
+        }
+NFCTag {
+        translation 0.0 0.001 -3.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "67"
         }
 NFCTag {
         translation -7.0 0.001 -1.0
@@ -105,7 +129,7 @@ Shelf {
         numRacks 1 3 1
         baseDim 1 0.02 1
         legDim 0.05 1 0.05
-        name "1RP8C3T"
+        name "WSZ56QS"
         }
 NFCTag {
         translation -2.5 0.001 -1.0
@@ -114,6 +138,38 @@ NFCTag {
         emissiveColor 0 0 0
         transmissionRange 0.20 
         informationSent "95"
+        }
+Shelf {
+        translation -1.0 3 -1.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "3BHH4N0"
+        }
+NFCTag {
+        translation -0.5 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "96"
+        }
+NFCTag {
+        translation 0.0 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "97"
+        }
+NFCTag {
+        translation 3.0 0.001 -1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "100"
         }
 NFCTag {
         translation -4.0 0.001 1.0
@@ -129,7 +185,7 @@ Shelf {
         numRacks 1 3 1
         baseDim 1 0.02 1
         legDim 0.05 1 0.05
-        name "30S2ULB"
+        name "887VDXO"
         }
 NFCTag {
         translation -2.5 0.001 1.0
@@ -138,4 +194,52 @@ NFCTag {
         emissiveColor 0 0 0
         transmissionRange 0.20 
         informationSent "125"
+        }
+Shelf {
+        translation -1.0 3 1.0
+        rotation 0 0 1 3.14159
+        numRacks 1 3 1
+        baseDim 1 0.02 1
+        legDim 0.05 1 0.05
+        name "IEQQUCD"
+        }
+NFCTag {
+        translation -0.5 0.001 1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "126"
+        }
+NFCTag {
+        translation 0.0 0.001 1.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "127"
+        }
+NFCTag {
+        translation -7.0 0.001 4.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "165"
+        }
+NFCTag {
+        translation -2.0 0.001 4.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "170"
+        }
+NFCTag {
+        translation 3.0 0.001 4.0
+        dimensions 0.02 0.01 0.02
+        baseColor 0 0 0
+        emissiveColor 0 0 0
+        transmissionRange 0.20 
+        informationSent "175"
         }
