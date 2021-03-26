@@ -40,6 +40,10 @@ class Graph:
                                                  outgoing_connection.priority)
                 self.graph[to_id].incoming_connections.append(incoming_connection)
             """
+        print(self.graph)
+        for k, val in self.graph.items():
+            print(type(k), type(val), k, val)
+            break
         self.__compute_shortest_paths()
 
     def dist_closest_robot(self, node_id: int, priority: int) -> float:

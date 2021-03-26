@@ -61,4 +61,4 @@ class Node:
         return self.all_connections[((self.get_idx(prev_node_id) + length // 2) % length)].node_id
 
     def __repr__(self):
-        return f"<Node {self.node_id}, Occupying robot: {self.occupying_robot}>"
+        return f"<Node {self.node_id}, Occupying robot: {self.occupying_robot}, All Connections: {self.all_connections}>"
