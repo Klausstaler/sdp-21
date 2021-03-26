@@ -681,8 +681,8 @@ function post_data(json_str){
     
       var nodes = 0;
     
-      for(var i = 0; i < columns; i++){
-        for(var x = 0; x < rows; x++){
+      for(var i = 0; i < columns - 1; i++){
+        for(var x = 0; x < rows - 1; x++){
           var row = String(x);
           var colunm = String(i);
           var id = "[" + row + "," + colunm + "]";
