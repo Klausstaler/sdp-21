@@ -47,8 +47,6 @@ def sim_json(json):
     floor_size = js.grid()[1]  # gets values from json.txt
     grid_ids = js.grid()[2]
 
-    print(floor_size)
-    print(grid_array)
     print(grid_ids)
     create_world("warehouse.wbt", floor_size, shelf_size, number_of_racks, line_distance_from_shelf, grid_array, grid_ids)
     print("World Successfully generated.")

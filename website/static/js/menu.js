@@ -25,7 +25,6 @@ function post_data(json_str){
           var json_str = get_json_db(nodes[i]);
           //console.log(i + " " +nodes.length);
           str += json_str + ",";
-  
         }
       }
       str = str.slice(0,-1) + "}";
@@ -50,7 +49,7 @@ function post_data(json_str){
     }
 
     function export_js_gen(){
-      str = "{ \"dimensions\" : " + "[" + rows + "," + colunms + "], \"nodes\" : {" ;
+      str = "{ \"dimensions\" : " + "[" + rows + "," + columns + "], \"nodes\" : {" ;
       var nodes = document.getElementsByClassName("node");
       for(var i = 0; i < nodes.length; i++){
         if(nodes[i].getAttribute("type") != "undefined"){
@@ -676,9 +675,9 @@ function post_data(json_str){
       // Clear the grid
       document.getElementsByClassName("grid")[0].innerHTML = "";
     
-       var rows = document.getElementById("length").value;
-       var columns = document.getElementById("width").value;
-       var spacing = 50;
+       rows = document.getElementById("length").value;
+       columns = document.getElementById("width").value;
+       spacing = 50;
     
       var nodes = 0;
     
@@ -709,10 +708,7 @@ function post_data(json_str){
             add_node(nodes, id, left, top);
             nodes += 1;
           }
-    
           // var box = document.getElementById(id);
-    
-    
         }
       }
     }

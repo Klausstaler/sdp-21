@@ -29,7 +29,7 @@ class CentralServer:
         current_task = tsk.objects.create(robot=r,package=pack)
 
         # Shelves are only assigned to one node. We grab the node id of that node and route our robot to there
-        attached_node = graph.graph[parcel.location_id].all_connections[0].node_id
+        attached_node = next(filter(lambda x: x, graph.graph[parcel.location_id].all_connections)).node_id
         path = graph.get_path(robot.pos_id, attached_node)
         tasks.extend(path_to_commands(path))
 
@@ -53,6 +53,7 @@ class CentralServer:
         tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
         self.scheduler.add_tasks(robot, tasks)
         print(f"Sending tasks to robot {robot.id}")
+        print(self.scheduler.open_tasks[robot])
         self.do_tasks(robot)
 
     def do_tasks(self, robot: Robot,):
