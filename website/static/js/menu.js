@@ -633,9 +633,9 @@ function post_data(json_str){
       // Clear the grid
       document.getElementsByClassName("grid")[0].innerHTML = "";
     
-       rows = document.getElementById("length").value;
-       columns = document.getElementById("width").value;
-       spacing = 50;
+      rows = document.getElementById("length").value;
+      columns = document.getElementById("width").value;
+      spacing = 50;
     
       var nodes = 0;
     
