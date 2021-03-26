@@ -217,7 +217,7 @@ function post_data(json_str){
       console.log("Drawing Now!!")
       // Draw Distance
       dist.className = "dist-label";
-      dist.style.left = String(start - 25)+"px";
+      dist.style.left = String(start - 20)+"px";
       dist.style.top = String(mid)+"px";
   //    dist.style.width = offset + "px";
       dist.style.visibility = "visible";
@@ -682,8 +682,8 @@ function post_data(json_str){
     
       var nodes = 0;
     
-      for(var i = 0; i < columns - 1; i++){
-        for(var x = 0; x < rows - 1; x++){
+      for(var i = 0; i < columns; i++){
+        for(var x = 0; x < rows; x++){
           var row = String(x);
           var colunm = String(i);
           var id = "[" + row + "," + colunm + "]";
@@ -694,7 +694,7 @@ function post_data(json_str){
     //        addBox(id, left, top);
     
     
-          if(x == rows - 1|| i == columns - 1){
+          if(x == rows || i == columns){
     
             add_node(nodes, id, left + spacing, top);
             nodes += 1;
