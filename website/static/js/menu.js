@@ -175,7 +175,6 @@ function post_data(json_str){
       var node1;
       var node2;
   
-      var mid = end + (offset/2);
   
       if(get_coords(Node1.getAttribute("coords"))[1] > get_coords(Node2.getAttribute("coords"))[1]){
         node1 = Node2;
@@ -220,7 +219,7 @@ function post_data(json_str){
       // Draw Distance
       dist.className = "dist-label";
       dist.style.left = String(start - 20)+"px";
-      dist.style.top = String(mid)+"px";
+      dist.style.top = String(end + (offset/2))+"px";
   //    dist.style.width = offset + "px";
       dist.style.visibility = "visible";
       dist.style.position = "absolute";
