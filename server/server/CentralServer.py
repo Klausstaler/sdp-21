@@ -16,17 +16,10 @@ class CentralServer:
 
     def move_parcel(self, id, parcel: Parcel, final_location):
         robot = self.scheduler.get_free_robot()
-
+        self.scheduler.reserve_robot(robot)
         tasks = []
         # this is really shitty encapsulation, but I do not have time to fix it ahhhh
         graph = self.scheduler.graph
-        #DB-Set robot busy
-        r = rbt.objects.get(name=str(robot.id))
-        r.status = True
-        r.save()
-        #DB-Create task
-        pack = hp.objects.get(pk=id)
-        current_task = tsk.objects.create(robot=r,package=pack)
 
         # Shelves are only assigned to one node. We grab the node id of that node and route our robot to there
         attached_node = next(filter(lambda x: x, graph.graph[parcel.location_id].all_connections)).node_id
@@ -51,7 +44,7 @@ class CentralServer:
                 Task(TaskType.TURN_UNTIL, {"n": lines_to_turn})
             )
         tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
-        self.scheduler.add_tasks(robot, tasks)
+        self.scheduler.add_tasks(robot, tasks, id)
         print(f"Sending tasks to robot {robot.id}")
         print(self.scheduler.open_tasks[robot])
         self.do_tasks(robot)
@@ -59,12 +52,6 @@ class CentralServer:
     def do_tasks(self, robot: Robot,):
         while self.scheduler.has_tasks(robot):
             self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
-        #DB-Release robot, remove task
-        r = rbt.objects.get(name=str(id))
-        current_task = tsk.objects.get(robot=r)
-        current_task.hidden_package.delete()
-        r.status = False
-        r.save()
 
 
 ################# For line following demo world.

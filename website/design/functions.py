@@ -76,11 +76,11 @@ def package_request(packs):
         t = threading.Thread(target=requestParcel, args=(parcel,), daemon=True)
         t.start()
     else:
-        addRobots()
+        #addRobots()
         #Get dropzone
+        drop_id = 0
         for drop in drop_zone.objects.all():
             drop_id = drop.node.id
-        drop_id = 1
         for id in packs:
             pack = packs.get(id)
             #print('Parcel:{}'.format(pack.old_id))
@@ -94,6 +94,6 @@ def package_request(packs):
             shelf_info = ShelfInfo(my_shelf, pack.shelf_compartment)
             # Create parcel instance from the package
             parcel = Parcel(pack.weight, Size(.35, .35, .35), shelf.node.id, shelf_info)
-            #t = threading.Thread(target=requestParcel, args=(id, parcel,), daemon=True)
-            #t.start()
-            requestParcel(id,parcel,drop_id)
+            t = threading.Thread(target=requestParcel, args=(id, parcel, drop_id), daemon=True)
+            t.start()
+            #requestParcel(id,parcel,drop_id)
