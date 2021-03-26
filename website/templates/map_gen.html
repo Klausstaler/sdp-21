@@ -1,100 +1,187 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block title %} Map Generator {% endblock %}
 {% block body %}
-    <h1>Warehouse Generator</h1>
+<html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="{% static '/css/style.css' %}" rel="stylesheet">
 
-<meta content="width=device-width,initial-scale=1" name="viewport">
-<!--<style></style>-->
-<head>
-    <link href="{% static '/css/style.css' %}" rel="stylesheet">
-    <script src="{% static '/js/menu.js' %}"></script>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
 
-</head>
-<body>
+    <body>
 
-<!-- <div id="main"></div> -->
-<!--<input type = "button" onclick = "get_node_by_coords(3,6)" value = "Run Function">-->
+        <h2 class="center-align">Warehouse Generation</h2>
+        <div class="container valign-wrapper dimension-form" id="dim-form">
+            <div class="row" style="width: 100%;">
+                <div class="col card hoverable s12 m6 offset-m3 z-depth-2">
+                  <form>
+                    <div class="card-content">
+                      <span class="card-title">Enter grid dimensions</span>
+                      <div class="row">
+                        <div class="range-field col s12 l6">
+                          <label for="width">Grid width</label>
+                          <p class="range-field">
+                            <input class="orange-text" type="range" id="width" min="0" max="30" />
+                          </p>
+                        </div>
+                        <div class="range-field col s12 l6">
+                          <label for="length">Grid length</label>
+                          <p class="range-field">
+                            <input type="range" id="length" min="0" max="30" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-action right-align">
+                      <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
+                      <button class="btn waves-effect waves-light" type="button" onclick="createGrid()">Create
+                        <i class="material-icons right">create</i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+        </div>
 
-<!--<input onclick = "hide_Nodes(2,8, 'Horizontal')" type = "button" value = "Run Function">-->
-<!--<input onclick = "connect_button()" type = "button" value = "Connect">-->
-<!--<input onclick = "toggle_grid()" type = "button" value = "Toggle Grid">-->
-<input onclick = "export_json()" type = "button" value = "Export">
-<form>
- <a>Select the type of node you would like and click on a blank node to create.</a>
-  <fieldset id="group1">
-<!--    <a>Robot</a>-->
-<!--        <input name="group1" type="radio" value="robot">-->
-    <a>RFID</a>
-        <input name="group1" type="radio" value="rfid">
-    <a>Shelf</a>
-        <input name="group1" type="radio" value="shelf">
-    <a>Clear</a>
-       <input name="group1" type="radio" value="undefined">
-  </fieldset>
+        <div class="container center-align" style="display: none;" id="grid-builder">
+            <div class="row">
+                <div class="col s2 input-field">
+                    <select id="node_type">
+                        <option value="" selected>Choose type</option>
+                        <option value="rfid">RFID Tag</option>
+                        <option value="shelf">Shelf</option>
+                      </select>
+                      <label>Select node type</label>
+                </div>
+                <div class="col s6 offset-s1">
+                    <button class="btn waves-effect waves-light" type="button" onclick="export_json()">Export
+                        <i class="material-icons right">send</i>
+                    </button>    
+                </div>
+            </div>
 
-</form>
+            <div class="row">
+                <div class="col s6">
 
-<a>Please Enter your grid dimensions in the format x,y. where x/y are metres.</a>
-<input type = "Text" id="dims">
-<input onclick = "createGrid()" type = "button" value = "Create Grid">
+                      <div class = "temp-select"></div>
+                      
+                      <div class = "connections"></div>
+                </div>
+                <div class="col s6 grid"></div>
+            </div>
+        </div>
 
+  <div id="node_menu" class="modal bottom-sheet">
+      <div class="container">
+        <div class="modal-content">
+            <div id="node_buttons">
+                <div class="row">
+                    <div class="col s4 center-align">
+                        <button class="btn-floating btn-large teal waves-effect waves-light" id="connect">
+                            <i class="large material-icons">swap_calls</i>
+                          </button>
+                    </div>
+                    <div class="col s4 center-align">
+                        <button class="btn-floating btn-large orange waves-effect waves-light" id="cancel">
+                            <i class="large material-icons">cancel</i>
+                        </button>
+                    </div>
+                    <div class="col s4 center-align">
+                        <button class="btn-floating btn-large red waves-effect waves-light" id="delete">
+                            <i class="large material-icons">delete</i>
+                        </button>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col s4 center-align">
+                        <p>Connect</p>
+                    </div>
+                    <div class="col s4 center-align">
+                        <p>Cancel</p>
+                    </div>
+                    <div class="col s4 center-align">
+                        <p>Delete</p>
+                    </div>
+                </div>
+            </div>
+            <form id="lane_info" style="display: none;">
+                <div class="row">
+                    <div class="col s12 l6">
+                        <label for="distance">Lane length</label>
+                        <p class="range-field">
+                            <input class="orange-text" type="range" id="distance" min="0" max="30" />
+                        </p>
+                    </div>
+        
+                    <div class="col s12 l6">
+                        <label for="priority">Lane priority</label>
+                        <p class="range-field">
+                            <input class="orange-text" type="range" id="priority" min="0" max="100" />
+                        </p>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col s6 offset-s5">
+                        <p>
+                            <label>
+                              <input name="direction" type="radio" value = "to" checked/>
+                              <span>To</span>
+                            </label>
+                          </p>
+                          <p>
+                            <label>
+                              <input name="direction" type="radio" value="from"/>
+                              <span>From</span>
+                            </label>
+                          </p>
+                          <p>
+                            <label>
+                              <input name="direction" type="radio" value="bi"/>
+                              <span>Bi-directional</span>
+                            </label>
+                          </p>
+        
+                    </div>
 
-<div class="grid"></div>
+                </div>
 
-<div class = "legend">
-<!--    BLUE = Robot-->
-    RED = RFID
-    YELLOW = Shelf
-</div>
+                <div class="row">
+                    <div class="col s6 offset-s3 center-align">
+                        <button class="btn waves-effect waves-light" type="button" id="create_lane">Create Lane
+                            <i class="material-icons right">send</i>
+                        </button> 
+                    </div>
+                </div>
+            </form>
+            
+            
+    
+              
+    
+              
+        </div>
+      </div>
+    
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div> -->
+  </div>
 
+        
+        
 
-<div class="item-selector">
-  <label for="">What would you like to do?</label>
-  <form>
-<!-- <a>Select the type of node you would like and click on a blank node to create.</a>-->
-  <fieldset id="group2">
-    <a>Connect</a>
-        <input name="group2" type="radio" value="connect">
-    <a>Delete</a>
-        <input name="group2" type="radio" value="delete">
-    <a>Exit</a>
-        <input name="group2" type="radio" value="exit">
-<!--    <a></a>-->
-<!--       <input name="group1" type="radio" value="undefined">-->
-  </fieldset>
-
-</form>
-  <input id = "select_button" type = "button" value = "Confirm">
-</div>
-
-<div class = "temp-select"></div>
-
-<div class = "connections"></div>
-<div class = "dist"></div>
-
-<!--<div>-->
-<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
-<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
-<!--    <input type = "radio" onclick = "export_json()" value = "Export">-->
-
-<!--</div>-->
-
-
-
-<script>createGrid()</script>
-
-
-<!--
-<div class = "box1">hi</div>
-<div class = "box2"></div>
-<div class = "box3"></div>
-<div class = "box4"></div>
-<div class = "box5"></div>
-<div class = "box6"></div> -->
-
-
-</body>
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script>M.AutoInit();</script>
+      <script src="{% static '/js/menu.js' %}"></script>
+    </body>
+  </html>
 
 
 
