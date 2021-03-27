@@ -6,8 +6,7 @@
 
 #PROGRAM TO GENERATE A WEBOTS MAP FILE GIVIN ARGUMENTS PASSED TO IT
 
-#from warehouse_generator.line_grid_generator import LineGridGenerator
-from line_grid_generator import LineGridGenerator
+from warehouse_generator.line_grid_generator import LineGridGenerator
 import math
 from PIL import Image
 import random
