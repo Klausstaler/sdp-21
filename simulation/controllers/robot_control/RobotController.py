@@ -1,6 +1,6 @@
 from controller import Robot
 
-from ArmController import ArmController
+# from ArmController import ArmController
 from NFCReader import NFCReader
 from Navigation import Navigation
 from Lift import Lift
@@ -8,7 +8,7 @@ from Lift import Lift
 class RobotController(Robot):
     def __init__(self, timestep=128, params=None):
         super().__init__()
-        self.arm = ArmController(self, timestep=timestep)
+        # self.arm = ArmController(self, timestep=timestep)
         self.nfc_reader = NFCReader(self, timestep=timestep, led_present=False)
         self.nfc_reader.setChannel(-1)
 

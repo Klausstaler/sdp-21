@@ -21,15 +21,18 @@ def importJSON(text):
     except:
         return False
     grid_dimensions = dic.get('dimensions')
-    dic = dic.get('nodes')
+    shelveHeight = dic.get('shelveHeight')
+    compartments = dic.get('compartments')
+    dic_nodes = dic.get('nodes')
+
 
     nodes = {}
     # print(text)
     # if dic != None:
-    for key in dic:
+    for key in dic_nodes:
         nodes[key] = node.objects.create(id=key)
-    for key in dic:
-        item = dic.get(key)
+    for key in dic_nodes:
+        item = dic_nodes.get(key)
         obj = nodes.get(key)
         nb = item.get('neighbours')
         directions = nb.keys()
@@ -59,7 +62,9 @@ def importJSON(text):
     #if item.get('type') == 'Robot':
     #    robot.objects.create(ip=ip,node=obj)
         if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+
+            print(str(compartments) + "!!!!!!!!")
+            shelf.objects.create(node=obj,compartment_size=shelveHeight,number_of_compartments=compartments)
 
     return True
 
