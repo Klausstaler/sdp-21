@@ -52,6 +52,8 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
     #CREATES FLOOR LINE IMAGE USING 'line_grid_generator.py'
     line_gen = LineGridGenerator()
 
+    x_z_shelf_size = [shelf_size[0],shelf_size[2]];
+
     line_grid_image = line_gen.create_line_grid(
     [int(shelf_size[0]*64),int(shelf_size[2]*64)],
     int(round(64*line_distance_from_shelf)),
@@ -97,7 +99,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
         TexturedBackground {
             skybox FALSE
             skyColor [ 0.156863 0.247059 0.388235 ]
-        }     
+        }
         TexturedBackgroundLight {
         texture "dusk"
         }
@@ -184,51 +186,51 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
 
                 #SETS VALUES FOR NORTH FACING SHELF
                 if placement_grid[i][j] == 0:
-                    x_coord = webots_x + (max(shelf_size)/2)
+                    x_coord = webots_x + (max(x_z_shelf_size)/2)
                     y_coord = number_of_racks * shelf_size[1]
-                    z_coord = webots_z + (max(shelf_size)-(min(shelf_size)/2))
+                    z_coord = webots_z + (max(x_z_shelf_size)-(min(x_z_shelf_size)/2))
                     rotation = [1,0,1,3.14159]
 
                     #SETS VALUES FOR THE TAG
-                    tag_x_coord = webots_x + (max(shelf_size)/2)
+                    tag_x_coord = webots_x + (max(x_z_shelf_size)/2)
                     tag_y_coord = 0.001
-                    tag_z_coord = webots_z + (max(shelf_size)-min(shelf_size))
+                    tag_z_coord = webots_z + (max(x_z_shelf_size)-min(x_z_shelf_size))
 
                 #SETS VALUES FOR EAST FACING SHELF
                 elif placement_grid[i][j] == 1:
                     x_coord = webots_x + (shelf_size[0]/2)
                     y_coord = number_of_racks*shelf_size[1]
-                    z_coord = webots_z + (max(shelf_size)/2)
+                    z_coord = webots_z + (max(x_z_shelf_size)/2)
                     rotation = [0,0,1,3.14159]
 
                     #SETS VALUES FOR THE TAG
                     tag_x_coord = webots_x + (shelf_size[0])
                     tag_y_coord = 0.001
-                    tag_z_coord = webots_z + (max(shelf_size)/2)
+                    tag_z_coord = webots_z + (max(x_z_shelf_size)/2)
 
                 #SETS VALUES FOR SOUTH FACING SHELF
                 elif placement_grid[i][j] == 2:
-                    x_coord = webots_x + (max(shelf_size)/2)
+                    x_coord = webots_x + (max(x_z_shelf_size)/2)
                     y_coord = number_of_racks*shelf_size[1]
-                    z_coord = webots_z + (min(shelf_size)/2)
+                    z_coord = webots_z + (min(x_z_shelf_size)/2)
                     rotation = [1,0,1,3.14159]
 
                     #SETS VALUES FOR THE TAG
-                    tag_x_coord = webots_x + (max(shelf_size)/2)
+                    tag_x_coord = webots_x + (max(x_z_shelf_size)/2)
                     tag_y_coord = 0.001
-                    tag_z_coord = webots_z + (min(shelf_size))
+                    tag_z_coord = webots_z + (min(x_z_shelf_size))
 
                 #SETS VALUES FOR WEST FACING SHELF
                 else:
-                    x_coord = webots_x + (max(shelf_size)-(min(shelf_size)/2))
+                    x_coord = webots_x + (max(x_z_shelf_size)-(min(x_z_shelf_size)/2))
                     y_coord = number_of_racks*shelf_size[1]
-                    z_coord = webots_z + (max(shelf_size)/2)
+                    z_coord = webots_z + (max(x_z_shelf_size)/2)
                     rotation = [0,0,1,3.14159]
 
                     #SETS VALUES FOR THE TAG
-                    tag_x_coord = webots_x + (max(shelf_size)-(min(shelf_size)))
+                    tag_x_coord = webots_x + (max(x_z_shelf_size)-(min(x_z_shelf_size)))
                     tag_y_coord = 0.001
-                    tag_z_coord = webots_z + (max(shelf_size)/2)
+                    tag_z_coord = webots_z + (max(x_z_shelf_size)/2)
 
                 # #CHECKS IF THIS IS FIRST SHELF TO BE CREATED
                 # if not shelf_num:
@@ -262,27 +264,27 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 full_file_string += tag_obj
 
             #GETS VALUES FOR CREATING TAGS AT JUNCTIONS
-            # elif placement_grid[i][j] >= 6 and placement_grid[i][j] <= 14:
-            elif grid_ids[i][j] != -1:
+            elif placement_grid[i][j] > 3 and grid_ids[i][j] != -1:
                 tag_x_coord = webots_x + ((shelf_size[0]/2))
                 tag_y_coord = 0.001
                 tag_z_coord = webots_z + ((shelf_size[2]/2))
+
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
                 tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
 
-            # #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
-            # elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
-            #
-            #     #CHECHKS IF LINE IS ATTACHED TO A SHELF
-            #     if(connected_to_shelf(placement_grid,i,j)):
-            #         tag_x_coord = webots_x + ((shelf_size[0]/2))
-            #         tag_y_coord = 0.001
-            #         tag_z_coord = webots_z + ((shelf_size[2]/2))
-            #
-            #         #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-            #         tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
-            #         full_file_string += tag_obj
+            #GETS VALUES FOR TAGS OF SHELFS ATTATCHED TO STRAIGHT LINES
+            elif placement_grid[i][j] == 4 or placement_grid[i][j] == 5:
+
+                #CHECHKS IF LINE IS ATTACHED TO A SHELF
+                if(connected_to_shelf(placement_grid,i,j)):
+                    tag_x_coord = webots_x + ((shelf_size[0]/2))
+                    tag_y_coord = 0.001
+                    tag_z_coord = webots_z + ((shelf_size[2]/2))
+
+                    #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
+                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
+                    full_file_string += tag_obj
 
             webots_x += max(shelf_size)
         webots_x = -(j_conversion_x)
