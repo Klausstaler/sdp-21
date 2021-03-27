@@ -1,28 +1,23 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/" style="padding-left:1%">
-  <img src="{% static 'image/logo.png' %}" alt="TED" style="width:50px;">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/get">Request Packages</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/packages">Edit Packages</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/generator">Warehouse Generator</a>
-      </li>
-      <!--
-      <li class="nav-item">
-        <a class="nav-link" href="/map">Map</a>
-      </li>
-      -->
-    </ul>
+<nav>
+  <div class="nav-wrapper teal">
+    <div class="container">
+      <a href="/" class="brand-logo">
+        <img src="{% static 'image/logo.png' %}" alt="TransportED" style="width: 64px;">
+      </a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/get">Request Packages</a></li>
+        <li><a href="/packages">Edit Packages</a></li>
+        <li><a href="/generator">Warehouse Generator</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <li><a href="/">Dashboard</a></li>
+  <li><a href="/get">Request Packages</a></li>
+  <li><a href="/packages">Edit Packages</a></li>
+  <li><a href="/generator">Warehouse Generator</a></li>
+</ul>
