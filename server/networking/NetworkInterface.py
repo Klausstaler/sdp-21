@@ -63,7 +63,7 @@ class NetworkInterface:
             connection = Connection(sock, addr)
             robot_id, node_id = decode(recvall(sock)).split(";")
             node_id = int(node_id)
-            height = .25; length = .75; width = .7
+            height = .19; length = .75; width = .7
             size = Size(height=height, length=length, width=width)
             #Add robot to db
             rbt.objects.create(name=str(robot_id),node_id=node.objects.get(pk=node_id),height=height, length=length, width=width)
