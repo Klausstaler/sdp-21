@@ -109,7 +109,7 @@ def importJSON(text):
 
         obj.save()
 
-        sched = Scheduler(Graph(get_node_dict()))
+        sched.graph = Graph(get_node_dict())
 
         #if item.get('type') == 'Robot':
         #    robot.objects.create(ip=ip,node=obj)
