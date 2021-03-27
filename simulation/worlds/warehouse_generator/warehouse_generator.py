@@ -47,7 +47,7 @@ import string
 #          14) Right angle turn with exits north and west
 
 def create_world(world_name, room_size, shelf_size, number_of_racks,
-                line_distance_from_shelf, placement_grid):
+                line_distance_from_shelf, placement_grid, grid_ids):
 
     #CREATES FLOOR LINE IMAGE USING 'line_grid_generator.py'
     line_gen = LineGridGenerator()
@@ -59,7 +59,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
 
     x_z_shelf_size = [shelf_size[0],shelf_size[2]];
 
-    line_grid_image.save("textures/"+world_name+".jpg")
+    line_grid_image.save(f"../simulation/worlds/textures/{world_name}.jpg")
 
     #DEFINES START OF WORLD FILE AS STRING AS THIS WON'T CHANGE BETWEEN WORLDS
 
@@ -260,7 +260,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 full_file_string += obj
 
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
                 node_num += 1
 
@@ -271,7 +271,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                 tag_z_coord = webots_z + ((shelf_size[2]/2))
 
                 #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                 full_file_string += tag_obj
                 node_num += 1
 
@@ -285,7 +285,7 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
                     tag_z_coord = webots_z + ((shelf_size[2]/2))
 
                     #CREATES CODE TO PUT NFC TAG IN CORRECT LOCATON
-                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], node_num)
+                    tag_obj = create_tag([tag_x_coord, tag_y_coord, tag_z_coord], grid_ids[i][j])
                     full_file_string += tag_obj
                     node_num += 1
 
@@ -301,8 +301,8 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
 
     #WRITER TO OUTPUT 'full_file_string' TO FILE DENOTED BY 'world_name'
     #FORMAT OUTPUTTED AS THE FORM NEEDED BY WEBOTS
-    writer = open(world_name+".wbt", "wb")
-    writer.write(full_file_string.encode('utf-8'))
+    writer = open("../simulation/worlds/" + world_name, "w")
+    writer.write(full_file_string)
     writer.close()
 
 def create_shelf(shelf_size, number_of_racks, translation, rotation):
