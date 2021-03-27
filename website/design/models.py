@@ -27,12 +27,13 @@ class node(models.Model):
     up_node_direction = models.CharField(max_length=6,choices=direction_choices,blank=True, null=True)
     up_node_priority = models.IntegerField(blank=True, null=True)
     def __str__(self):
+    # def __str__(self):
         return str(self.id)
 class shelf(models.Model):
     id = models.AutoField(primary_key=True)
     node = models.ForeignKey(node,on_delete=models.CASCADE, related_name="Node")
     number_of_compartments = models.IntegerField(verbose_name='Compartments')
-    compartment_size = models.IntegerField(verbose_name='Compartment_size')
+    compartment_size = models.FloatField(verbose_name='Compartment_size')
     class Meta:
         verbose_name_plural = 'Shelves'
     def __str__(self):
