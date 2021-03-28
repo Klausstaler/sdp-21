@@ -101,6 +101,9 @@ def create_world(world_name, room_size, shelf_size, number_of_racks,
         TexturedBackgroundLight {
         texture "dusk"
         }
+        DirectionalLight {
+ 		 direction -1 -7 3
+		}
         DEF TRANSPORT MainRobot {
         }"""
     )
