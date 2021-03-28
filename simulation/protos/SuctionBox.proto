@@ -23,7 +23,8 @@ PROTO SuctionBox [
                 name "connector(%{=idx}%)"
                 model "suction"
                 type "passive"
-                snap FALSE
+                snap TRUE
+                distanceTolerance 0.02
             }
             %{idx= idx + 1}%
            %{end}%
@@ -41,7 +42,8 @@ PROTO SuctionBox [
                 name "connector(%{=idx}%)"
                 model "suction"
                 type "passive"
-                snap FALSE
+                snap TRUE
+                distanceTolerance 0.02
             }
             %{idx= idx + 1}%
            %{end}%
@@ -59,7 +61,8 @@ PROTO SuctionBox [
                 name "connector(%{=idx}%)"
                 model "suction"
                 type "passive"
-                snap FALSE
+                snap TRUE
+                distanceTolerance 0.02
             }
             %{idx= idx + 1}%
            %{end}%
@@ -76,7 +79,8 @@ PROTO SuctionBox [
                 name "connector(%{=idx}%)"
                 model "suction"
                 type "passive"
-                snap FALSE
+                snap TRUE
+                distanceTolerance 0.02
             }
             %{idx= idx + 1}%
            %{end}%
