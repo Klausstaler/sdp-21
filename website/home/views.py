@@ -123,6 +123,9 @@ def importJSON(text):
 # Create your views here.
 def home_view(request):
     tasks = task.objects.all()
+    free_robots = len(robot.objects.filter(status = True))
+    busy_robots = len(robot.objects.filter(status = False))
+
     if tasks:
         empty = False
     else:
@@ -130,5 +133,7 @@ def home_view(request):
     context={
         'tasks':tasks,
         'empty':empty,
+        'free_robots':free_robots,
+        'busy_robots': busy_robots
     }  
     return render(request, 'home.html', context)
