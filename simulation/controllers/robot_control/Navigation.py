@@ -34,65 +34,63 @@ class Navigation(BasicNavigation):
 
         case = "none"
 
-        if self.sensors_values(left=[0, 0.5, 1], mid=[0, 0.5, 1], right=[0, 0.5, 1]):
+        if self.sensors_values(left=[0, 0.5, 1], mid=[0, 0.5, 1], right=[0, 0.5, 1], back=[0,0.5,1]):
             case = "Lost, keep going"
             self.move_forward(speed)
 
-        if self.sensors_values(left=[0], mid=[1], right=[0]):
-            case = "straight"
+        if self.sensors_values(left=[0, 0.5], mid=[1], right=[0, 0.5], back=[1]) or self.sensors_values(left=[1], mid=[1], right=[1], back=[1]):
+            case = "straight full speed!"
             self.move_forward(speed * 2)
-        elif self.sensors_values(left=[0.5], mid=[0.5], right=[0]):
-            case = "slow diagonal left"
-            self.move_diagonal(speed, right=False)
-            self.turn(speed, clock=False)
-
-        elif self.sensors_values(left=[0], mid=[0.5], right=[0.5]):
-            case = "slow diagonal right"
-            self.move_diagonal(speed, right=True)
-            self.turn(speed, clock=True)
-
         else:
-            case = "slow straight"
-            self.move_forward(speed)
+            if self.sensors_values(left=[0.5,1], mid=[0.5], right=[0], back=[0.5]):
+                case = "diagonal left"
+                self.move_diagonal(speed*1.5, right=False)
+                self.turn(speed, clock=False)
+            elif self.sensors_values(left=[0], mid=[0.5], right=[0.5, 1], back=[0.5]):
+                case = "diagonal right"
+                self.move_diagonal(speed*1.5, right=True)
+                self.turn(speed, clock=True)
+            else:
+                if self.sensors_values(left=[0.5,1], mid=[0, 0.5], right=[0], back=[1]):
+                    case = "turn left"
+                    # self.turn(speed/4, clock=False)            
+                    self.turn_on_wheel_axis(speed, right=True, top=False, clock=None)
 
-        if self.sensors_values(left=[1], mid=[0, 0.5], right=[0, 0.5]):
-            case = "left"
-            self.turn(speed, clock=False)
+                elif self.sensors_values(left=[0], mid=[0, 0.5], right=[0.5,1], back=[1]):
+                    case = "turn right"
+                    # self.turn(speed/4, clock=True)
+                    self.turn_on_wheel_axis(speed, right=False, top=False, clock=None)
+                else:
+                    if (self.sensors_values(left=[1], mid=[1], right=[0], back=[0, 0.5, 1]) or
+                            self.sensors_values(left=[0], mid=[1], right=[1], back=[0, 0.5, 1])):
+                        case = "straight, but junction"
+                        self.move_forward(speed)
 
-        if self.sensors_values(left=[0, 0.5], mid=[0, 0.5], right=[1]):
-            case = "right"
-            self.turn(speed, clock=True)
-
-        if (self.sensors_values(left=[1], mid=[1], right=[0]) or
-                self.sensors_values(left=[0], mid=[1], right=[1])):
-            case = "straight, but junction"
-            self.move_forward(speed)
-
-        # print("case", case, "----", self.IR.left.getValue(), self.IR.mid.getValue(), self.IR.right.getValue())
+        print("case", case, "----", self.IR.left.getValue(), self.IR.mid.getValue(), self.IR.right.getValue(), self.IR.back.getValue())
 
         return nearLine
 
     # n=1 is turn until the first line you see, 
-    def turn_until_line_n(self, n=1, new=False, speed=10):
+    def turn_until_line_n(self, n=1, new=False, speed=7, clock=True):
         if new:
             self.n_lines = int(n)
             self.n_line_token = False
-        print(self.n_lines, self.line_detected(strong=True))
-        if self.n_lines > 1:
-            self.turn(speed, clock=True)
-            if self.line_detected(strong=True) and not self.n_line_token:
+            self.clock = clock
+            if self.line_detected():
+                self.n_lines +=1
                 self.n_line_token = True
-            elif self.n_line_token and not self.line_detected(strong=True):
-                self.n_lines -= 1
-                self.n_line_token = False
-            return False
-        elif self.n_lines == 1:
-            self.turn(speed, clock=True)
-            if self.line_detected(strong=True):
-                print("Yeet")
-                self.stop()
-                return True
-        else:
+        print(self.n_lines, "line detected",self.line_detected(), self.n_line_token)
+
+        if self.n_lines==1 and self.line_detected():
             print("no line left")
             self.stop()
-            return True
+            return True    
+        else:
+        # if self.n_lines < 1: #):
+            self.turn(speed, clock=True)
+            if self.line_detected() and not self.n_line_token:
+                self.n_line_token = True
+            elif self.n_line_token and not self.line_detected():
+                self.n_lines -= 1
+                self.n_line_token = False
+                return True if self.n_lines <1 else False

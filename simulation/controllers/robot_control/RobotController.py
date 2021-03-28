@@ -42,7 +42,7 @@ class RobotController(Robot):
             pass
             #print(message)
         if message == node_to_reach:
-            self.nav.stop()
+            # self.nav.stop()
             return True
 
     def time_completion(self, t, new=False):
