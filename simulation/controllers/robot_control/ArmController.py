@@ -32,8 +32,10 @@ class ArmController:
     def __init__(self, robot: Robot, timestep=128):
         # Initialize the arm motors and encoders.
         self.arm_chain = self.get_armchain()
-        self.suction_cup = robot.getDevice("robot_box_connector")
-        self.suction_cup.enablePresence(timestep)
+        self.suction_cups = [robot.getDevice("robot_box_connector(1)"), robot.getDevice("robot_box_connector(2)"),
+                             robot.getDevice("robot_box_connector(3)")]
+        for suction_cup in self.suction_cups:
+            suction_cup.enablePresence(timestep)
         self.motors = []
 
         for link in self.arm_chain.links:
@@ -96,11 +98,13 @@ class ArmController:
     def try_pickup(self):
         relative_target = np.array([self.pickup_x, .1678, 0.04])
         self.move_endeffector(relative_target)
-
-        is_present = self.suction_cup.getPresence()
-        is_locked = self.suction_cup.isLocked()
-        if is_present and not is_locked:
-            self.suction_cup.lock()
+        is_locked = False
+        for suction_cup in self.suction_cups:
+            is_present = suction_cup.getPresence()
+            is_locked = suction_cup.isLocked()
+            if is_present and not is_locked:
+                suction_cup.lock()
+                break
         if is_locked:
             self.park_parcel()
             if self.is_parked():
