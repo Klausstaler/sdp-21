@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load materializecss %}
 
 {% block title %} Packages {% endblock %}
 
@@ -12,7 +13,7 @@
         <div class="center-align">
             <form method="POST">
                 {% csrf_token %}
-                {{form.as_p}}
+                {{form|materializecss}}
                 <button class="btn waves-effect waves-light" type="submit" value="Get Packages">Get Packages</button>
             </form>
         </div>
