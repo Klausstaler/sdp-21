@@ -1,0 +1,4 @@
+django
+django-materialize-form
+django-materializecss-form
+numpy
