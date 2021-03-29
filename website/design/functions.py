@@ -78,9 +78,10 @@ def package_request(packs):
     else:
         #addRobots()
         #Get dropzone
-        drop_id = 0
         for drop in drop_zone.objects.all():
             drop_id = drop.node.id
+        #As long as we don't have dropzne in warehouse gen
+        drop_id = 0
         for id in packs:
             pack = packs.get(id)
             #print('Parcel:{}'.format(pack.old_id))
