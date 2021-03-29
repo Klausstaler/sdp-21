@@ -15,7 +15,9 @@ class CentralServer:
         self.network_interface = network_interface
 
     def move_parcel(self, id, parcel: Parcel, final_location):
+        
         robot = self.scheduler.get_free_robot()
+        final_location = robot.pos_id
         self.scheduler.reserve_robot(robot)
         tasks = []
         # this is really shitty encapsulation, but I do not have time to fix it ahhhh
@@ -43,7 +45,9 @@ class CentralServer:
             tasks.append(
                 Task(TaskType.TURN_UNTIL, {"n": lines_to_turn})
             )
-        tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
+        path_back = graph.get_path(attached_node, final_location)
+        tasks.extend(path_to_commands(path_back))
+        # tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
         self.scheduler.add_tasks(robot, tasks, id)
         print(f"Sending tasks to robot {robot.id}")
         print(self.scheduler.open_tasks[robot])
