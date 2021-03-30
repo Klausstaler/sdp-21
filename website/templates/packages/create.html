@@ -3,11 +3,15 @@
 {% block title %} Add Package {% endblock %}
 
 {% block body %}
-
+<div class="container">
+    <div class="section">
         <form method="POST">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Create package">
         </form>
+    </div>
+</div>
+        
         
 {% endblock %}

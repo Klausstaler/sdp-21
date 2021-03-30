@@ -7,7 +7,7 @@ from Task import resolve_task, Task, TaskType
 
 
 class NetworkInterface:
-    def __init__(self, robot_id: str):
+    def __init__(self, robot_id: str, curr_node_id: int):
         self.host, self.port = '127.0.0.1', 2000
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.curr_task: Task = Task(TaskType.NO_TASK, {})
@@ -15,7 +15,7 @@ class NetworkInterface:
 
         # Connect to server
         self.socket.connect((self.host, self.port))
-        self.socket.send(utils.encode(robot_id))  # send ID to server
+        self.socket.send(utils.encode(f"{robot_id};{curr_node_id}"))  # send ID to server
         print("Connected successfully!")
         threading.Thread(target=self.receive_messages, daemon=True).start()
 

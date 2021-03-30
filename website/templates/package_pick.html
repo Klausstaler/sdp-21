@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
+{% load materializecss %}
 
 {% block title %} Packages {% endblock %}
 
 {% block body %}
         
+<div class="container">
+    <div class="section">
+        <h2 class="center-align">Packages</h2>
+    </div>
+    <div class="section">
+        <div class="center-align">
+            <form method="POST">
+                {% csrf_token %}
+                {{form|materializecss}}
+                <button class="btn waves-effect waves-light" type="submit" value="Get Packages">Get Packages</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-
-        <h1>Packages</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <a style="padding-left: 1%;"></a><input type="submit" value="Get Packages">
-        </form>
+        
     
 {% endblock %}

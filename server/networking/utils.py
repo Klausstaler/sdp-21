@@ -18,6 +18,7 @@ def encode(string):  # encodes a string in the format msglen:string\n where msgl
 
 
 def decode(string: str) -> str:  # decodes and returns the string of a recieved msg
+    print(string)
     len, msg = string.split(":")
     # print
     return msg.strip()

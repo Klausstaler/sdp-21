@@ -37,11 +37,12 @@ class RobotController(Robot):
         return node
 
     def check_reach_node(self, node_to_reach):
-        if message := self.nfc_reader.read():
+        message = self.nfc_reader.read()
+        if message:
             pass
             #print(message)
         if message == node_to_reach:
-            self.nav.stop()
+            # self.nav.stop()
             return True
 
     def time_completion(self, t, new=False):

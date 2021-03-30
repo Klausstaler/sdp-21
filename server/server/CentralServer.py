@@ -5,20 +5,26 @@ from server.Task import Task, TaskType
 from server.Robot import Robot
 from server.routing.Graph import Graph, path_to_commands
 
+from design.models import task as tsk
+from design.models import robot as rbt
+from design.models import hidden_package as hp
 
 class CentralServer:
     def __init__(self, scheduler: Scheduler, network_interface: NetworkInterface):
         self.scheduler = scheduler
         self.network_interface = network_interface
 
-    def move_parcel(self, parcel: Parcel, final_location):
+    def move_parcel(self, id, parcel: Parcel, final_location):
+        
         robot = self.scheduler.get_free_robot()
-
+        final_location = robot.pos_id
+        self.scheduler.reserve_robot(robot)
         tasks = []
         # this is really shitty encapsulation, but I do not have time to fix it ahhhh
         graph = self.scheduler.graph
+
         # Shelves are only assigned to one node. We grab the node id of that node and route our robot to there
-        attached_node = graph.graph[parcel.location_id].all_connections[0].node_id
+        attached_node = next(filter(lambda x: x, graph.graph[parcel.location_id].all_connections)).node_id
         path = graph.get_path(robot.pos_id, attached_node)
         tasks.extend(path_to_commands(path))
 
@@ -39,14 +45,18 @@ class CentralServer:
             tasks.append(
                 Task(TaskType.TURN_UNTIL, {"n": lines_to_turn})
             )
-        tasks.extend(self.scheduler.graph.get_commands(attached_node, 0)) # move back to some position
-        self.scheduler.add_tasks(robot, tasks)
+        path_back = graph.get_path(attached_node, final_location)
+        tasks.extend(path_to_commands(path_back))
+        # tasks.extend(self.scheduler.graph.get_commands(attached_node, final_location))  # move back to some position
+        self.scheduler.add_tasks(robot, tasks, id)
         print(f"Sending tasks to robot {robot.id}")
+        print(self.scheduler.open_tasks[robot])
         self.do_tasks(robot)
 
-    def do_tasks(self, robot: Robot):
+    def do_tasks(self, robot: Robot,):
         while self.scheduler.has_tasks(robot):
             self.network_interface.send_request(robot, self.scheduler.get_next_task(robot))
+
 
 ################# For line following demo world.
 # Task(TaskType.REACH_NODE, {"node": "3"}),

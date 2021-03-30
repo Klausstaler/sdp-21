@@ -27,8 +27,10 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.9505001845121204 -0.27632458457368403 -0.142106028030503 5.291287111945543
-  position -1.3680722253651383 3.673837111555696 2.6769850508870654
+  orientation 0.05141324802365349 -0.8487764166927033 -0.526246398936803 3.307061676787179
+  position -0.3586477643685322 8.844307297684146 -2.1611093047613674
+  follow "1"
+  followType "Mounted Shot"
 }
 TexturedBackground {
   skybox FALSE
@@ -49,12 +51,10 @@ DEF TRANSPORT MainRobot {
   robot_id "2"
 }
 SuctionBox {
-  translation -2.2186 1.21407 0.98
-  mass 2
+  translation -0.758605 1.22447 -0.98
 }
 SuctionBox {
   translation -0.780001 1.22035 1
-  mass 2
 }
 RectangleArena {
   floorSize 32 32
@@ -265,11 +265,7 @@ Shelf {
   name "IJJJ7VZ"
 }
 SuctionBox {
-  translation -2.24861 1.21385 1
-}
-DEF TRANSPORT MainRobot {
-  translation -1.50143 0.180506 -0.973207
-  rotation 0.5737851119632735 0.5791971130193229 0.5790521129910289 -2.099095307179586
+  translation -2.22861 1.21399 0.97
 }
 NFCTag {
   translation -2 0.001 -1

@@ -7,6 +7,7 @@ PROTO SuctionBox [
 	field SFFloat mass 2.0
 ]
 {
+    %{idx=0}%
 	Solid {
       translation IS translation
       rotation IS rotation
@@ -14,728 +15,76 @@ PROTO SuctionBox [
     Transform {
       rotation 1 0 0 -1.5707953071795862
       children [
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(1)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(2)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(3)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(88)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(4)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(5)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(6)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0.02
-          rotation 1 0 0 1.5708
-          name "connector(87)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.04
-          rotation 1 0 0 1.578
-          name "connector(7)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.03
-          rotation 1 0 0 1.5708
-          name "connector(8)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.04
-          rotation -1 0 0 -1.578
-          name "connector(9)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.03
-          rotation 1 0 0 1.5708
-          name "connector(86)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(10)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(11)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(12)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(85)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(13)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(14)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(15)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(16)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(17)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(18)"
-          model "suction"
-          type "passive"
-          numberOfRotations 0
-          snap FALSE
-        }
+        %{for i = (-fields.size.value.x/2)*50, (fields.size.value.x/2)*50 do }%
+            %{for j = (-fields.size.value.y/2*50), (fields.size.value.y/2)*50 do }%
+            DEF CONNECTOR_BOX4 Connector {
+                translation %{=i/50}% %{=-fields.size.value.z/2}% %{=j/50}%
+                rotation 1 0 0 1.578
+                name "connector(%{=idx}%)"
+                model "suction"
+                type "passive"
+                snap TRUE
+                distanceTolerance 0.02
+            }
+            %{idx= idx + 1}%
+           %{end}%
+        %{end}%
       ]
     }
     Transform {
       rotation 1 0 0 -3.1415853071795863
       children [
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(19)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(20)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(21)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(84)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(22)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(23)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(24)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0.02
-          rotation 1 0 0 1.5708
-          name "connector(83)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.04
-          rotation 1 0 0 1.578
-          name "connector(25)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.03
-          rotation 1 0 0 1.5708
-          name "connector(26)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.04
-          rotation -1 0 0 -1.578
-          name "connector(27)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.03
-          rotation 1 0 0 1.5708
-          name "connector(82)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(28)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(29)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(30)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(81)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(31)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(32)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(33)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(34)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(35)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(36)"
-          model "suction"
-          type "passive"
-          numberOfRotations 0
-          snap FALSE
-        }
+        %{for i = (-fields.size.value.x/2)*50, (fields.size.value.x/2)*50 do }%
+            %{for j = (-fields.size.value.y/2*50), (fields.size.value.y/2)*50 do }%
+            DEF CONNECTOR_BOX4 Connector {
+                translation %{=i/50}% %{=-fields.size.value.y/2}% %{=j/50}%
+                rotation 1 0 0 1.578
+                name "connector(%{=idx}%)"
+                model "suction"
+                type "passive"
+                snap TRUE
+                distanceTolerance 0.02
+            }
+            %{idx= idx + 1}%
+           %{end}%
+        %{end}%
       ]
     }
     Transform {
       rotation 1 0 0 1.5708
       children [
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(37)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(38)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(39)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.z/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(80)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(40)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(41)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(42)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.z/2}% 0.02
-          rotation 1 0 0 1.5708
-          name "connector(79)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.04
-          rotation 1 0 0 1.578
-          name "connector(43)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.03
-          rotation 1 0 0 1.5708
-          name "connector(44)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.04
-          rotation -1 0 0 -1.578
-          name "connector(45)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.03
-          rotation 1 0 0 1.5708
-          name "connector(78)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(46)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(47)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(48)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.z/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(77)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(49)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(50)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.z/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(51)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(52)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(53)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.z/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(54)"
-          model "suction"
-          type "passive"
-          numberOfRotations 0
-          snap FALSE
-        }
+        %{for i = (-fields.size.value.x/2)*50, (fields.size.value.x/2)*50 do }%
+            %{for j = (-fields.size.value.y/2*50), (fields.size.value.y/2)*50 do }%
+            DEF CONNECTOR_BOX4 Connector {
+                translation %{=i/50}% %{=-fields.size.value.z/2}% %{=j/50}%
+                rotation 1 0 0 1.578
+                name "connector(%{=idx}%)"
+                model "suction"
+                type "passive"
+                snap TRUE
+                distanceTolerance 0.02
+            }
+            %{idx= idx + 1}%
+           %{end}%
+        %{end}%
       ]
     }
     Transform {
       children [
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(55)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(56)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(57)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.02 %{=-fields.size.value.y/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(76)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(58)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(59)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(60)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0.01 %{=-fields.size.value.y/2}% 0.02
-          rotation 1 0 0 1.5708
-          name "connector(75)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.04
-          rotation 1 0 0 1.578
-          name "connector(61)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.03
-          rotation 1 0 0 1.5708
-          name "connector(62)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.04
-          rotation -1 0 0 -1.578
-          name "connector(63)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.03
-          rotation 1 0 0 1.5708
-          name "connector(74)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation 0 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(64)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.01
-          rotation 1 0 0 1.5708
-          name "connector(65)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0
-          rotation -1 0 0 -1.578
-          name "connector(66)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX1 Connector {
-          translation 0 %{=-fields.size.value.y/2}% 0.0199993
-          rotation 1 0 0 1.5708
-          name "connector(73)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(67)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(68)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX4 Connector {
-          translation -0.01 %{=-fields.size.value.y/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(69)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -0.0100003
-          rotation 1 0 0 1.578
-          name "connector(70)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -0.02
-          rotation 1 0 0 1.578
-          name "connector(71)"
-          model "suction"
-          type "passive"
-          snap FALSE
-        }
-        DEF CONNECTOR_BOX3 Connector {
-          translation -0.02 %{=-fields.size.value.y/2}% -5.59463e-07
-          rotation 1 0 0 1.578
-          name "connector(72)"
-          model "suction"
-          type "passive"
-          numberOfRotations 0
-          snap FALSE
-        }
+        %{for i = (-fields.size.value.x/2)*50, (fields.size.value.x/2)*50 do }%
+            %{for j = (-fields.size.value.y/2*50), (fields.size.value.y/2)*50 do }%
+            DEF CONNECTOR_BOX4 Connector {
+                translation %{=i/50}% %{=-fields.size.value.y/2}% %{=j/50}%
+                rotation 1 0 0 1.578
+                name "connector(%{=idx}%)"
+                model "suction"
+                type "passive"
+                snap TRUE
+                distanceTolerance 0.02
+            }
+            %{idx= idx + 1}%
+           %{end}%
+        %{end}%
       ]
     }
     Transform {

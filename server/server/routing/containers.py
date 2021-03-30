@@ -34,9 +34,9 @@ class Node:
             if connection and connection.node_id == next_node_id:
                 next_idx = i
         facing_direction = (prev_idx + 2) % len(self.all_connections)
-        if facing_direction == next_idx:
-            return 0
-        lines_to_turn = 1
+        #if facing_direction == next_idx:
+        #    return 0
+        lines_to_turn = 0 if self.all_connections[facing_direction] else 1
         while facing_direction != next_idx:
             if self.all_connections[facing_direction]:
                 lines_to_turn += 1
@@ -61,4 +61,4 @@ class Node:
         return self.all_connections[((self.get_idx(prev_node_id) + length // 2) % length)].node_id
 
     def __repr__(self):
-        return f"<Node {self.node_id}, Occupying robot: {self.occupying_robot}>"
+        return f"<Node {self.node_id}, Occupying robot: {self.occupying_robot}, All Connections: {self.all_connections}>"

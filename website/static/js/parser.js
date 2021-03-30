@@ -8,7 +8,7 @@ export function export_js(){
     }
   }
   str += "}";
-  console.log(str);
+  //console.log(str);
   return str;
 }
 

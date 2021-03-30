@@ -5,6 +5,9 @@ from django.contrib import messages
 from .functions import package_request,sim_json
 from home.views import home_view
 import json
+import threading
+
+from warehouse.server_setup import *
 
 
 
@@ -18,12 +21,18 @@ def importJSON(text):
     except:
         return False
     grid_dimensions = dic.get('dimensions')
-    dic = dic.get('nodes')
+    shelveHeight = dic.get('shelveHeight')
+    compartments = dic.get('compartments')
+    dic_nodes = dic.get('nodes')
+
+
     nodes = {}
-    for key in dic:
+    # print(text)
+    # if dic != None:
+    for key in dic_nodes:
         nodes[key] = node.objects.create(id=key)
-    for key in dic:
-        item = dic.get(key)
+    for key in dic_nodes:
+        item = dic_nodes.get(key)
         obj = nodes.get(key)
         nb = item.get('neighbours')
         directions = nb.keys()
@@ -49,11 +58,13 @@ def importJSON(text):
             obj.left_node_priority = nb.get('left')[3]
 
         obj.save()
-
-        #if item.get('type') == 'Robot':
-        #    robot.objects.create(ip=ip,node=obj)
+        sched.graph = Graph(get_node_dict())
+    #if item.get('type') == 'Robot':
+    #    robot.objects.create(ip=ip,node=obj)
         if item.get('type') == 'shelf':
-            shelf.objects.create(node=obj,compartment_size=1,number_of_compartments=1)
+
+            print(str(compartments) + "!!!!!!!!")
+            shelf.objects.create(node=obj,compartment_size=shelveHeight,number_of_compartments=compartments)
 
     return True
 
@@ -66,8 +77,8 @@ def packages_view(request):
     }
     return render(request,'packages/packages.html',context)
 
-def package_view(request,code):
-    package_object = get_object_or_404(package, code=code)
+def package_view(request,id):
+    package_object = get_object_or_404(package, id=id)
     form = packageCreateForm(request.POST or None,instance=package_object)
     if form.is_valid():
         form.save()
@@ -98,8 +109,11 @@ def map_gen_view(request):
         JSON = request.POST.get("data")
         jsons = JSON.split('||')
         try:
-            simjson = jsons[1]
+            simjson = jsons[0]
             dbjson = jsons[0]
+            print(dbjson)
+            # exit(0)
+            sim_json(simjson)
         except:
             pass
         else:
@@ -107,10 +121,10 @@ def map_gen_view(request):
             if importJSON(dbjson):
                 print("Successfully Parsed!")
                 messages.success(request, 'JSON Loaded')
+
             else:
                 print('Parsing Failed!')
                 messages.success(request, 'Wrong JSON Format')
-            #sim_json(simjson)
     return render(request, "map_gen.html")
 
 def map_view(request):
@@ -138,7 +152,9 @@ def package_request_view(request):
             p=hidden_package.objects.create(old_id=pack.id,shelf=pack.shelf,shelf_compartment=pack.shelf_compartment,weight=pack.weight,length=pack.length,width=pack.width,height=pack.height,details=pack.details)
             packs[p.id] = p
             pack.delete()
-        package_request(packs)
+        #package_request(packs)
+        t = threading.Thread(target=package_request, args=(packs,), daemon=True)
+        t.start()
         messages.success(request, 'Packages Are On Their Way!')
         return HttpResponseRedirect('/get')
     context={

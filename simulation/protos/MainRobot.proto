@@ -24,6 +24,8 @@ PROTO MainRobot [
 
   field SFString robot_id "1"
 
+  field SFString controller "robot_control"
+
   # Extends the robot with new nodes in the ground slot
   field MFNode groundSensorsSlot[]
   
@@ -96,6 +98,7 @@ PROTO MainRobot [
     }
 
     %{ x = fields.Distance_sensor_pos.value.x }%
+    %{ xback = -fields.Distance_sensor_pos.value.x }%
     %{ z = fields.Distance_sensor_pos.value.z }%
     DEF IR Group {
       children [
@@ -137,6 +140,29 @@ PROTO MainRobot [
             }
           ]
           name "ds_mid"
+          lookupTable [
+            0 0 0
+            0.1 150 0
+          ]
+          numberOfRays IS numberOfRays
+          aperture IS aperture
+          type "infra-red"
+        }
+
+        DEF ds_back DistanceSensor {
+          translation %{=xback}% %{=y}% %{=z}%
+          rotation -0.5773482691869614 -0.57735126918836 0.57735126918836 -2.094395307179586
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0.498039
+              }
+              geometry Box {
+                size 0.03 0.06 0.06
+              }
+            }
+          ]
+          name "ds_back"
           lookupTable [
             0 0 0
             0.1 150 0
@@ -1889,7 +1915,23 @@ PROTO MainRobot [
                                                                                         rotation 0 0 1 0
                                                                                         children [
                                                                                           Connector {
-                                                                                            name "robot_box_connector"
+                                                                                            name "robot_box_connector(1)"
+                                                                                            model "suction"
+                                                                                            type "active"
+                                                                                            axisTolerance 0.1
+                                                                                            rotationTolerance 0.1
+                                                                                          }
+                                                                                          Connector {
+                                                                                            name "robot_box_connector(2)"
+                                                                                            translation 0.0 0.04 0.0
+                                                                                            model "suction"
+                                                                                            type "active"
+                                                                                            axisTolerance 0.1
+                                                                                            rotationTolerance 0.1
+                                                                                          }
+                                                                                          Connector {
+                                                                                            name "robot_box_connector(3)"
+                                                                                            translation 0.0 -0.04 0.0
                                                                                             model "suction"
                                                                                             type "active"
                                                                                             axisTolerance 0.1
@@ -2524,7 +2566,7 @@ PROTO MainRobot [
       0 0 0
     ]
   }
-  controller "robot_control"
+  controller IS controller
   supervisor TRUE
 }
 }
